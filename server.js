@@ -1,25 +1,93 @@
 'use strict';
 
+require('dotenv').config();
+
 const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
 const express = require('express');
+const session = require('express-session');
 const multer = require('multer');
+const ExcelJS = require('exceljs');
 
 const store = require('./lib/store');
 const { readLabel } = require('./lib/ocr');
+const auth = require('./lib/auth');
 
 const PORT = process.env.PORT || 3000;
-const STORAGE_DIR = path.join(__dirname, 'storage');
-const TMP_DIR = path.join(__dirname, 'data', 'tmp');
+const DATA_DIR = process.env.DATA_DIR || path.join(__dirname, 'data');
+const STORAGE_DIR = process.env.STORAGE_DIR || path.join(DATA_DIR, 'storage');
+const TMP_DIR = path.join(DATA_DIR, 'tmp');
+const PUBLIC_DIR = path.join(__dirname, 'public');
+const IS_PRODUCTION = process.env.NODE_ENV === 'production';
 
 for (const dir of [STORAGE_DIR, TMP_DIR]) {
   fs.mkdirSync(dir, { recursive: true });
 }
 
+if (!process.env.SESSION_SECRET) {
+  console.warn(
+    'Aviso: SESSION_SECRET nao definido - a usar um valor aleatorio gerado agora.\n' +
+      'As sessoes ficam invalidas sempre que o servidor reiniciar. Defina SESSION_SECRET\n' +
+      'nas variaveis de ambiente do seu hosting para evitar isso.'
+  );
+}
+const SESSION_SECRET = process.env.SESSION_SECRET || crypto.randomBytes(32).toString('hex');
+
 const app = express();
+app.set('trust proxy', 1);
 app.use(express.json());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(
+  session({
+    secret: SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      httpOnly: true,
+      sameSite: 'lax',
+      secure: IS_PRODUCTION,
+      maxAge: 30 * 24 * 60 * 60 * 1000,
+    },
+  })
+);
+
+// ---------------------------------------------------------------------------
+// Autenticacao
+// ---------------------------------------------------------------------------
+app.get('/login', (req, res) => res.sendFile(path.join(PUBLIC_DIR, 'login.html')));
+
+app.post('/api/login', async (req, res) => {
+  const ip = req.ip;
+  if (auth.isLocked(ip)) {
+    return res.status(429).json({ error: 'Demasiadas tentativas. Tente novamente dentro de 1 minuto.' });
+  }
+  const { username, password } = req.body || {};
+  const ok = await auth.checkCredentials(username, password);
+  if (!ok) {
+    auth.registerFailure(ip);
+    return res.status(401).json({ error: 'Utilizador ou senha incorretos.' });
+  }
+  auth.registerSuccess(ip);
+  req.session.authenticated = true;
+  req.session.username = username;
+  res.json({ ok: true });
+});
+
+app.post('/api/logout', (req, res) => {
+  req.session.destroy(() => res.json({ ok: true }));
+});
+
+// Ficheiros que a pagina de login precisa mesmo sem sessao (imagens/estilo).
+app.get('/style.css', (req, res) => res.sendFile(path.join(PUBLIC_DIR, 'style.css')));
+app.get('/logo.png', (req, res, next) => {
+  const logoPath = path.join(PUBLIC_DIR, 'logo.png');
+  if (fs.existsSync(logoPath)) return res.sendFile(logoPath);
+  next();
+});
+
+app.use(auth.requireAuth);
+
+app.use(express.static(PUBLIC_DIR));
 app.use('/storage', express.static(STORAGE_DIR));
 
 const upload = multer({
@@ -167,6 +235,64 @@ app.delete('/api/parts/:id', (req, res) => {
   const folder = path.join(STORAGE_DIR, path.dirname(Object.values(removed.images)[0] || ''));
   fs.rm(folder, { recursive: true, force: true }, () => {});
   res.json({ ok: true });
+});
+
+app.get('/api/export.xlsx', async (req, res) => {
+  try {
+    const parts = store.listParts();
+    const workbook = new ExcelJS.Workbook();
+    const sheet = workbook.addWorksheet('Catálogo de Peças');
+
+    sheet.columns = [
+      { header: 'Foto', key: 'foto', width: 14 },
+      { header: 'Tipo de peça', key: 'partType', width: 28 },
+      { header: 'Fabricante', key: 'manufacturer', width: 18 },
+      { header: 'Marca do veículo', key: 'brand', width: 18 },
+      { header: 'Modelo', key: 'model', width: 16 },
+      { header: 'Referência 1', key: 'ref1', width: 18 },
+      { header: 'Referência 2', key: 'ref2', width: 20 },
+      { header: 'Quantidade', key: 'quantity', width: 12 },
+      { header: 'Notas', key: 'notes', width: 24 },
+    ];
+    sheet.getRow(1).font = { bold: true };
+
+    for (let i = 0; i < parts.length; i++) {
+      const part = parts[i];
+      const rowIndex = i + 2;
+      sheet.addRow({
+        partType: part.partType,
+        manufacturer: part.manufacturer,
+        brand: part.brand,
+        model: part.model,
+        ref1: part.ref1,
+        ref2: part.ref2,
+        quantity: part.quantity,
+        notes: part.notes,
+      });
+      sheet.getRow(rowIndex).height = 70;
+
+      const frontPath = part.images && part.images.front ? path.join(STORAGE_DIR, part.images.front) : null;
+      if (frontPath && fs.existsSync(frontPath)) {
+        const ext = path.extname(frontPath).slice(1).toLowerCase();
+        const imageId = workbook.addImage({
+          buffer: fs.readFileSync(frontPath),
+          extension: ext === 'jpg' ? 'jpeg' : ext,
+        });
+        sheet.addImage(imageId, {
+          tl: { col: 0, row: rowIndex - 1 },
+          ext: { width: 90, height: 90 },
+        });
+      }
+    }
+
+    res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+    res.setHeader('Content-Disposition', `attachment; filename="catalogo-pecas-${new Date().toISOString().slice(0, 10)}.xlsx"`);
+    await workbook.xlsx.write(res);
+    res.end();
+  } catch (err) {
+    console.error('Erro ao gerar Excel:', err);
+    res.status(500).json({ error: 'Falha ao gerar o ficheiro Excel.' });
+  }
 });
 
 app.listen(PORT, () => {

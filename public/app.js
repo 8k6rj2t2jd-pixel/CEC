@@ -79,6 +79,16 @@ function stopCamera() {
   }
 }
 
+let ocrPromise = null;
+
+function runOcr(blob) {
+  const fd = new FormData();
+  fd.append('label', blob, 'label.jpg');
+  return fetch('/api/ocr', { method: 'POST', body: fd }).then((resp) =>
+    resp.json().then((data) => ({ ok: resp.ok, data }))
+  );
+}
+
 btnShoot.addEventListener('click', () => {
   const w = video.videoWidth || 1280;
   const h = video.videoHeight || 960;
@@ -94,6 +104,15 @@ btnShoot.addEventListener('click', () => {
       btnShoot.hidden = true;
       btnRetake.hidden = false;
       btnContinue.hidden = false;
+
+      // Já vai lendo a etiqueta em segundo plano assim que a foto é tirada,
+      // para o formulário aparecer pré-preenchido mais depressa a seguir.
+      if (STEP_LABELS[stepIndex] === 'label') {
+        ocrPromise = runOcr(blob).catch((err) => {
+          console.error(err);
+          return { ok: false, data: {} };
+        });
+      }
     },
     'image/jpeg',
     0.9
@@ -101,6 +120,7 @@ btnShoot.addEventListener('click', () => {
 });
 
 btnRetake.addEventListener('click', () => {
+  if (STEP_LABELS[stepIndex] === 'label') ocrPromise = null;
   startCamera();
 });
 
@@ -146,13 +166,14 @@ async function showForm() {
   ocrStatus.textContent = 'A ler a etiqueta… (pode demorar alguns segundos)';
 
   try {
-    const fd = new FormData();
-    fd.append('label', shots.label, 'label.jpg');
-    const resp = await fetch('/api/ocr', { method: 'POST', body: fd });
-    const data = await resp.json();
+    if (!ocrPromise) ocrPromise = runOcr(shots.label).catch((err) => {
+      console.error(err);
+      return { ok: false, data: {} };
+    });
+    const { ok, data } = await ocrPromise;
     ocrStatus.hidden = true;
 
-    if (resp.ok) {
+    if (ok) {
       if (data.rawText) {
         ocrResult.hidden = false;
         ocrRawText.textContent = data.rawText;
@@ -222,6 +243,7 @@ document.getElementById('btn-new-another').addEventListener('click', resetCaptur
 
 function resetCaptureFlow() {
   shots = {};
+  ocrPromise = null;
   stepIndex = 0;
   setStepUi();
   partForm.reset();
@@ -388,6 +410,18 @@ function openLightbox(src) {
   lightboxImg.src = src;
   lightbox.hidden = false;
 }
+
+// ---------------------------------------------------------------------------
+// Excel + logout
+// ---------------------------------------------------------------------------
+document.getElementById('btn-export-excel').addEventListener('click', () => {
+  window.location.href = '/api/export.xlsx';
+});
+
+document.getElementById('btn-logout').addEventListener('click', async () => {
+  await fetch('/api/logout', { method: 'POST' });
+  window.location.href = '/login';
+});
 
 // ---------------------------------------------------------------------------
 // Arranque

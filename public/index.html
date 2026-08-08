@@ -8,7 +8,10 @@
 </head>
 <body>
 <header class="topbar">
-  <h1>🔧 Catálogo de Peças</h1>
+  <div class="topbar-row">
+    <h1><img id="logo-img" src="/logo.png" alt="" onerror="this.remove()" />🔧 Catálogo de Peças</h1>
+    <button id="btn-logout" class="btn btn-logout">Sair</button>
+  </div>
   <nav class="tabs">
     <button class="tab-btn active" data-tab="novo">+ Nova peça</button>
     <button class="tab-btn" data-tab="catalogo">Catálogo</button>
@@ -142,6 +145,9 @@
       <input id="search-input" type="search" placeholder="Pesquisar por referência, fabricante, marca…" />
       <select id="filter-partType"><option value="">Todos os tipos</option></select>
       <select id="filter-manufacturer"><option value="">Todos os fabricantes</option></select>
+    </div>
+    <div class="backup-row">
+      <button id="btn-export-excel" class="btn">📊 Transformar catálogo em Excel</button>
     </div>
     <div id="parts-grid" class="parts-grid"></div>
     <p id="empty-state" class="hint" hidden>Ainda não há peças guardadas.</p>

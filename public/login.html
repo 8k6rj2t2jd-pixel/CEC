@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="pt-PT">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Entrar — Catálogo de Peças</title>
+<link rel="stylesheet" href="/style.css" />
+<style>
+  .login-wrap {
+    min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px;
+  }
+  .login-card {
+    background: var(--panel); border: 1px solid #2a3450; border-radius: var(--radius);
+    padding: 28px 24px; width: 100%; max-width: 340px;
+  }
+  .login-card h1 { font-size: 1.1rem; margin: 0 0 20px; text-align: center; }
+  .login-card img.logo { display: block; margin: 0 auto 16px; max-height: 60px; }
+  .login-card label { display: flex; flex-direction: column; gap: 6px; font-size: 0.85rem; color: var(--muted); margin-bottom: 14px; }
+  .login-card input {
+    background: #0f1420; border: 1px solid #364266; color: var(--text);
+    padding: 10px; border-radius: 8px; font-size: 0.95rem;
+  }
+  .login-card button { width: 100%; margin-top: 6px; }
+</style>
+</head>
+<body>
+<div class="login-wrap">
+  <form class="login-card" id="login-form">
+    <img class="logo" src="/logo.png" alt="Logótipo" onerror="this.remove()" />
+    <h1>🔧 Catálogo de Peças</h1>
+    <label>
+      Utilizador
+      <input id="username" name="username" autocomplete="username" required />
+    </label>
+    <label>
+      Senha
+      <input id="password" name="password" type="password" autocomplete="current-password" required />
+    </label>
+    <button type="submit" class="btn btn-primary">Entrar</button>
+    <p id="login-error" class="error" hidden></p>
+  </form>
+</div>
+<script>
+  const form = document.getElementById('login-form');
+  const errorEl = document.getElementById('login-error');
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    errorEl.hidden = true;
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+    try {
+      const resp = await fetch('/api/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password }),
+      });
+      const data = await resp.json();
+      if (!resp.ok) throw new Error(data.error || 'Erro ao entrar.');
+      window.location.href = '/';
+    } catch (err) {
+      errorEl.hidden = false;
+      errorEl.textContent = err.message;
+    }
+  });
+</script>
+</body>
+</html>
