@@ -1,10 +1,17 @@
 # Catálogo de Peças
 
 App para fotografar peças de eletrónica automóvel (centralinas, módulos, etc.),
-guardar as fotos organizadas em pastas e registar as referências, fabricante,
-marca/modelo do veículo e stock, com leitura automática da etiqueta por OCR.
+guardar as fotos e registar as referências, fabricante, marca/modelo do
+veículo e stock, com leitura automática da etiqueta por OCR.
 
-## Como funciona
+Há duas versões no mesmo projeto:
+
+- **`docs/`** — versão para usar diretamente no **telemóvel**, sem instalar
+  nada (nem Node, nem programas). É a versão recomendada para o dia a dia.
+- **`server.js` + `public/`** — versão que corre num computador com Node.js,
+  útil se preferir guardar as fotos como ficheiros normais numa pasta do PC.
+
+## Como funciona (as duas versões)
 
 Para cada peça tira-se **3 fotos**:
 
@@ -26,13 +33,58 @@ A **marca e modelo do veículo** e o **tipo de peça** ficam sempre à sua
 confirmação/edição no formulário, porque normalmente essa informação não vem
 impressa na etiqueta da peça (a etiqueta identifica a peça e o fabricante da
 peça, não o carro). Todos os campos sugeridos pelo OCR podem ser corrigidos
-antes de guardar.
+antes de guardar. Há também um catálogo com pesquisa, filtros e controlo de
+stock (+/-) por peça.
 
-As fotos e os dados de cada peça ficam organizados em pastas por
-fabricante / tipo de peça / marca-modelo, e há um catálogo com pesquisa,
-filtros e controlo de stock (+/-) por peça.
+---
 
-## Instalar e correr
+## Versão para telemóvel (`docs/`) — recomendada
+
+Esta versão fica publicada como uma página web através do **GitHub Pages**
+(gratuito, já incluído no seu repositório) e usa-se diretamente no browser do
+telemóvel — não instala nada. As fotos e os dados ficam guardados dentro do
+próprio telemóvel/browser (não vão para nenhum servidor nem para a internet).
+
+### Publicar a página (só precisa de fazer isto uma vez)
+
+1. No GitHub, abra o repositório e vá a **Settings** → **Pages**.
+2. Em "Source", escolha **"Deploy from a branch"**.
+3. Em "Branch", escolha o branch onde está este código e a pasta **`/docs`**,
+   depois clique **Save**.
+4. Ao fim de 1-2 minutos, o GitHub mostra o link da página (algo como
+   `https://<o-seu-utilizador>.github.io/<o-nome-do-repositorio>/`).
+
+### Usar no telemóvel
+
+1. Abra esse link no browser do telemóvel (Chrome no Android, Safari no
+   iPhone).
+2. Dê permissão de câmara quando for pedida.
+3. Opcional: no menu do browser escolha **"Adicionar ao ecrã principal"** —
+   fica com um ícone como se fosse uma app instalada.
+
+A primeira vez que usar a leitura da etiqueta, a app descarrega os ficheiros
+de OCR (uns 10 MB, uma única vez) — depois disso funciona sem internet.
+
+### Cópias de segurança
+
+No separador **Catálogo** há um botão **"Exportar cópia de segurança"** que
+transfere um ficheiro `.zip` com todas as fotos e os dados de todas as peças,
+organizados em pastas por fabricante/tipo/marca-modelo. Como os dados ficam
+só no telemóvel, é importante exportar esta cópia de vez em quando (ex: uma
+vez por semana) e guardá-la nalgum lado (email, Drive, computador).
+
+> **Importante:** use sempre o mesmo telemóvel e o mesmo browser para não
+> "perder de vista" peças guardadas — cada browser/telemóvel tem o seu
+> próprio catálogo. Se limpar os dados do browser (histórico/cache) sem
+> exportar primeiro, perde as peças guardadas.
+
+---
+
+## Versão para computador com Node.js (`server.js` + `public/`)
+
+Alternativa para quem prefere que as fotos fiquem como ficheiros normais
+numa pasta do computador (mais fácil de gerir com outros programas, backups
+automáticos, etc.), em vez de dentro do browser do telemóvel.
 
 Requisitos: [Node.js](https://nodejs.org) 18 ou superior.
 
@@ -42,35 +94,30 @@ npm start
 ```
 
 Depois abra `http://localhost:3000` no browser (no telemóvel, mesma rede
-Wi-Fi, usando o IP do computador em vez de `localhost`).
+Wi-Fi, usando o IP do computador em vez de `localhost` — note que a câmara só
+funciona em `localhost` ou HTTPS, por isso aceder de outro aparelho pode
+exigir um túnel como `ngrok`).
 
-> **Nota sobre a câmara:** os browsers só dão acesso à câmara em `localhost`
-> ou em ligações HTTPS. Para usar no telemóvel numa rede local sem HTTPS, ou
-> use um túnel (ex: `ngrok`, `cloudflared`) ou aceda via `localhost` num
-> computador com câmara/webcam.
-
-O OCR (leitura da etiqueta) funciona **offline** — os dados de idioma vêm
-incluídos nas dependências instaladas pelo `npm install`, não é preciso
-internet depois disso.
-
-## Onde ficam guardados os dados
+Onde ficam os dados:
 
 - `storage/` — as fotos, organizadas em pastas por fabricante / tipo de peça
   / marca-modelo / id da peça.
-- `data/pecas.json` — a ficha de cada peça (referências, fabricante, marca,
-  modelo, quantidade em stock, notas, caminho das fotos).
+- `data/pecas.json` — a ficha de cada peça.
 
 Ambas as pastas são criadas automaticamente e ficam fora do controlo de
 versões (`.gitignore`). Para fazer uma cópia de segurança, basta copiar as
 pastas `storage/` e `data/`.
 
+---
+
 ## Estrutura do projeto
 
 ```
-server.js       servidor Express (API + upload de fotos)
+docs/           versão para telemóvel (GitHub Pages), sem instalação
+server.js       servidor Express da versão para computador (API + upload)
 lib/store.js    leitura/escrita dos dados das peças (data/pecas.json)
 lib/ocr.js      leitura da etiqueta (OCR) e deteção de referências/fabricante
-public/         interface (captura de fotos, formulário, catálogo)
+public/         interface da versão para computador
 ```
 
 ## Limitações conhecidas
@@ -80,4 +127,7 @@ public/         interface (captura de fotos, formulário, catálogo)
   antes de guardar.
 - A deteção de fabricante e de tipo de peça baseia-se numa lista de nomes e
   prefixos comuns (Bosch, Denso, Continental, Delphi, Valeo, etc.); pode ser
-  facilmente alargada em `lib/ocr.js`.
+  facilmente alargada em `lib/ocr.js` (versão computador) ou `docs/app.js`
+  (versão telemóvel).
+- Na versão para telemóvel, os dados ficam guardados só naquele
+  telemóvel/browser — exporte cópias de segurança regularmente.

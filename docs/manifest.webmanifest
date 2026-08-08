@@ -1,0 +1,12 @@
+{
+  "name": "Catálogo de Peças",
+  "short_name": "Peças",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#0f1420",
+  "theme_color": "#0f1420",
+  "icons": [
+    { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}
