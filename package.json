@@ -1,0 +1,27 @@
+{
+  "name": "cec-catalogo-pecas",
+  "version": "1.0.0",
+  "description": "Catalogo fotografico de pecas de eletronica automovel com leitura automatica de etiquetas (OCR)",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/8k6rj2t2jd-pixel/CEC.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/8k6rj2t2jd-pixel/CEC/issues"
+  },
+  "homepage": "https://github.com/8k6rj2t2jd-pixel/CEC#readme",
+  "dependencies": {
+    "@tesseract.js-data/eng": "^1.0.0",
+    "express": "^5.2.1",
+    "multer": "^2.2.0",
+    "tesseract.js": "^7.0.0"
+  }
+}

@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="pt-PT">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Catálogo de Peças</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<header class="topbar">
+  <h1>🔧 Catálogo de Peças</h1>
+  <nav class="tabs">
+    <button class="tab-btn active" data-tab="novo">+ Nova peça</button>
+    <button class="tab-btn" data-tab="catalogo">Catálogo</button>
+  </nav>
+</header>
+
+<main>
+  <!-- ==================== NOVA PEÇA ==================== -->
+  <section id="tab-novo" class="tab-panel active">
+    <ol class="steps">
+      <li data-step="1" class="step active">1. Frente</li>
+      <li data-step="2" class="step">2. Trás</li>
+      <li data-step="3" class="step">3. Etiqueta</li>
+      <li data-step="4" class="step">4. Confirmar</li>
+    </ol>
+
+    <div id="capture-stage" class="capture-stage">
+      <video id="camera-video" autoplay playsinline muted></video>
+      <canvas id="camera-canvas" hidden></canvas>
+      <img id="shot-preview" class="shot-preview" hidden alt="Foto capturada" />
+
+      <div class="capture-actions">
+        <button id="btn-shoot" class="btn btn-primary">📸 Tirar foto</button>
+        <button id="btn-retake" class="btn" hidden>↺ Repetir</button>
+        <button id="btn-continue" class="btn btn-primary" hidden>Continuar →</button>
+      </div>
+      <p id="capture-hint" class="hint">Aponte à frente da peça e tire a foto.</p>
+      <p id="camera-error" class="error" hidden></p>
+    </div>
+
+    <!-- ==================== FORMULARIO (passo 4) ==================== -->
+    <form id="part-form" class="part-form" hidden>
+      <div id="ocr-status" class="ocr-status" hidden>A ler a etiqueta…</div>
+
+      <div id="ocr-result" class="ocr-result" hidden>
+        <strong>Texto lido na etiqueta:</strong>
+        <p id="ocr-raw-text" class="ocr-raw"></p>
+      </div>
+
+      <div class="thumbs">
+        <img id="thumb-front" alt="Frente" />
+        <img id="thumb-back" alt="Trás" />
+        <img id="thumb-label" alt="Etiqueta" />
+      </div>
+
+      <label>
+        Tipo de peça
+        <input list="part-types" id="field-partType" name="partType" placeholder="Ex: Centralina de injeção" required />
+        <datalist id="part-types">
+          <option value="Centralina de injeção"></option>
+          <option value="Centralina ABS/ESP"></option>
+          <option value="Centralina de airbag"></option>
+          <option value="Quadro de instrumentos"></option>
+          <option value="BSI / Caixa de fusíveis"></option>
+          <option value="Centralina de caixa de velocidades"></option>
+          <option value="Centralina de climatização"></option>
+          <option value="Módulo de direção assistida"></option>
+          <option value="Bobina de ignição"></option>
+          <option value="Sonda lambda"></option>
+        </datalist>
+      </label>
+
+      <label>
+        Fabricante (da peça)
+        <input list="manufacturers" id="field-manufacturer" name="manufacturer" placeholder="Ex: Bosch" required />
+        <datalist id="manufacturers">
+          <option value="Bosch"></option>
+          <option value="Denso"></option>
+          <option value="Continental"></option>
+          <option value="Siemens VDO"></option>
+          <option value="Delphi"></option>
+          <option value="Magneti Marelli"></option>
+          <option value="Valeo"></option>
+          <option value="Hitachi"></option>
+          <option value="Sagem"></option>
+          <option value="Hella"></option>
+        </datalist>
+      </label>
+
+      <div class="row">
+        <label>
+          Marca do veículo
+          <input id="field-brand" name="brand" placeholder="Ex: Mitsubishi" />
+        </label>
+        <label>
+          Modelo
+          <input id="field-model" name="model" placeholder="Ex: Colt" />
+        </label>
+      </div>
+
+      <div class="row">
+        <label>
+          Referência 1
+          <input id="field-ref1" name="ref1" placeholder="Ex: 0281010438" />
+        </label>
+        <label>
+          Referência 2
+          <input id="field-ref2" name="ref2" placeholder="Ex: HOM8200066001" />
+        </label>
+      </div>
+
+      <div id="ref-candidates" class="ref-candidates" hidden></div>
+
+      <div class="row">
+        <label>
+          Quantidade em stock
+          <input id="field-quantity" name="quantity" type="number" min="0" value="1" />
+        </label>
+        <label>
+          Notas
+          <input id="field-notes" name="notes" placeholder="Opcional" />
+        </label>
+      </div>
+
+      <div class="form-actions">
+        <button type="button" id="btn-cancel" class="btn">Cancelar</button>
+        <button type="submit" class="btn btn-primary">Guardar peça</button>
+      </div>
+      <p id="save-error" class="error" hidden></p>
+    </form>
+
+    <div id="save-success" class="success" hidden>
+      ✅ Peça guardada com sucesso.
+      <button id="btn-new-another" class="btn btn-primary">+ Adicionar outra peça</button>
+    </div>
+  </section>
+
+  <!-- ==================== CATALOGO ==================== -->
+  <section id="tab-catalogo" class="tab-panel">
+    <div class="filters">
+      <input id="search-input" type="search" placeholder="Pesquisar por referência, fabricante, marca…" />
+      <select id="filter-partType"><option value="">Todos os tipos</option></select>
+      <select id="filter-manufacturer"><option value="">Todos os fabricantes</option></select>
+    </div>
+    <div id="parts-grid" class="parts-grid"></div>
+    <p id="empty-state" class="hint" hidden>Ainda não há peças guardadas.</p>
+  </section>
+</main>
+
+<div id="lightbox" class="lightbox" hidden>
+  <button id="lightbox-close" class="btn lightbox-close">✕</button>
+  <img id="lightbox-img" alt="" />
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
