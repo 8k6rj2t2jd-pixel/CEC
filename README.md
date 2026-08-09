@@ -74,30 +74,32 @@ precisar dele já a seguir.
 
 Como esta versão tem um servidor a sério (para o login funcionar de verdade),
 precisa de ficar "ligada" nalgum lado — não pode só abrir um ficheiro no
-telemóvel. Sugestão: **[Render](https://render.com)** (tem plano gratuito
-para testar, e um plano pago simples com disco persistente para usar a
-sério, à volta de 7 USD/mês).
+telemóvel. O projeto já inclui um ficheiro `render.yaml` que configura tudo
+de uma vez em **[Render](https://render.com)** (plano pago simples com disco
+persistente, à volta de 7 USD/mês).
 
-1. Crie conta em render.com (pode entrar diretamente com o GitHub).
-2. **New +** → **Web Service** → escolha o repositório `CEC`.
-3. Configurações:
-   - **Build Command:** `npm install`
-   - **Start Command:** `npm start`
-4. Em **Environment**, adicione estas variáveis:
-   - `ADMIN_USER` → o nome de utilizador que quiser (ex: `admin`)
-   - `ADMIN_PASSWORD_HASH` → o valor gerado pelo `set-password.js`
-   - `SESSION_SECRET` → uma frase longa e aleatória à sua escolha (mantém-no
-     sempre com a mesma sessão iniciada mesmo que o servidor reinicie)
-   - `NODE_ENV` → `production`
-   - `DATA_DIR` → `/data`
-5. Em **Disks**, adicione um disco persistente montado em `/data` (é este
-   disco que guarda as fotos e o stock entre reinícios — sem ele, os dados
-   perdem-se sempre que o serviço reinicia).
-6. Clique **Create Web Service**. Ao fim de alguns minutos tem um link tipo
-   `https://o-nome-que-escolheu.onrender.com`.
+1. Antes de mais, gere a hash da senha de acesso, se ainda não o fez:
+   `node scripts/set-password.js "a-senha-que-quiser"` — guarde o resultado
+   (`ADMIN_PASSWORD_HASH=...`), vai precisar dele já a seguir.
+2. Crie conta em render.com (pode entrar diretamente com o GitHub).
+3. **New +** → **Blueprint** → escolha o repositório `CEC` e o branch onde
+   está este código. O Render lê o `render.yaml` sozinho e propõe criar o
+   serviço com o disco persistente já configurado.
+4. Quando pedir os valores em falta, preencha:
+   - `ADMIN_USER` → o nome de utilizador que quiser (ex: `admin.CEC`)
+   - `ADMIN_PASSWORD_HASH` → o valor gerado no passo 1
+   - (o `SESSION_SECRET` é gerado automaticamente, não precisa de mexer)
+5. Clique para criar/aplicar o Blueprint. Ao fim de alguns minutos tem um
+   link tipo `https://catalogo-pecas.onrender.com`.
 
 Abra esse link no telemóvel (ou em qualquer computador), entre com o
 utilizador/senha, e dê permissão de câmara quando pedida.
+
+> Prefere configurar à mão em vez do Blueprint? Também funciona: **New +** →
+> **Web Service**, Build Command `npm install`, Start Command `npm start`,
+> adicione as variáveis `ADMIN_USER`, `ADMIN_PASSWORD_HASH`, `SESSION_SECRET`,
+> `NODE_ENV=production` e `DATA_DIR=/data`, e um disco persistente montado em
+> `/data`.
 
 > Qualquer outro serviço parecido (Railway, Fly.io, um VPS próprio, etc.)
 > funciona da mesma forma — só precisa de correr `npm install` + `npm start`,
@@ -179,6 +181,7 @@ app.
 
 ```
 server.js             servidor Express (login, API, upload, export Excel)
+render.yaml           configuração de deploy automático no Render (Blueprint)
 lib/store.js          leitura/escrita dos dados das peças
 lib/ocr.js            leitura da etiqueta (OCR) e deteção de referências/fabricante
 lib/auth.js           login, sessão e bloqueio por tentativas erradas
