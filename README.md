@@ -41,6 +41,24 @@ antes de guardar. Há também um catálogo com pesquisa, filtros, controlo de
 stock (+/-) e um botão para **transformar o catálogo em Excel** (uma folha
 com nome da peça, fabricante, referências, quantidade e foto de cada uma).
 
+### Verificar peça (foto avulsa)
+
+Há um separador extra, **"🔍 Verificar peça"**, para quando já tem uma foto
+da etiqueta (tirada agora ou recebida de um cliente, por exemplo pelo
+WhatsApp) e só quer saber rapidamente o que fazer com ela — sem passar pelas
+3 fotos todas:
+
+1. Carregue ou tire a foto (o seletor do telemóvel dá as duas opções:
+   câmara ou galeria/ficheiros).
+2. A app lê a etiqueta e procura essa referência no catálogo.
+3. Se **já existir**, mostra a peça encontrada com um botão **"+1 ao
+   stock"** (soma uma unidade sem mais perguntas) e um atalho para a ver no
+   catálogo.
+4. Se **não existir**, oferece **"Adicionar como peça nova"** — passa
+   diretamente para o formulário de nova peça já com a etiqueta lida (só
+   falta fotografar a frente e a trás) — ou **"Procurar no catálogo"**
+   manualmente.
+
 ---
 
 ## Versão com login (`server.js` + `public/`) — recomendada

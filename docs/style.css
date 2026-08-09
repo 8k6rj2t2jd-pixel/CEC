@@ -113,6 +113,12 @@ main { padding: 16px; max-width: 720px; margin: 0 auto; }
 
 .backup-row { margin-bottom: 14px; }
 
+.check-results { display: flex; flex-direction: column; gap: 14px; margin-top: 16px; }
+.check-results .part-card { display: flex; flex-direction: row; }
+.check-results .part-card img { width: 110px; flex-shrink: 0; }
+.check-results .part-card .body { flex: 1; }
+.check-results .form-actions { justify-content: flex-start; }
+
 .filters { display: flex; gap: 8px; margin-bottom: 14px; flex-wrap: wrap; }
 .filters input, .filters select {
   background: var(--panel); border: 1px solid #364266; color: var(--text);
