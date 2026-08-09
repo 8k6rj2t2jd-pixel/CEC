@@ -14,6 +14,7 @@
   </div>
   <nav class="tabs">
     <button class="tab-btn active" data-tab="novo">+ Nova peça</button>
+    <button class="tab-btn" data-tab="verificar">🔍 Verificar peça</button>
     <button class="tab-btn" data-tab="catalogo">Catálogo</button>
   </nav>
 </header>
@@ -137,6 +138,21 @@
       ✅ Peça guardada com sucesso.
       <button id="btn-new-another" class="btn btn-primary">+ Adicionar outra peça</button>
     </div>
+  </section>
+
+  <!-- ==================== VERIFICAR PEÇA ==================== -->
+  <section id="tab-verificar" class="tab-panel">
+    <p class="hint">
+      Tire uma foto ou carregue uma foto já existente (ex: enviada por um
+      cliente) — a app lê a etiqueta e diz se a peça já está no catálogo.
+    </p>
+    <input type="file" id="check-photo-input" accept="image/*" hidden />
+    <div class="capture-actions">
+      <button id="btn-check-photo" class="btn btn-primary">📤 Escolher ou tirar foto</button>
+    </div>
+    <img id="check-preview" class="shot-preview" hidden alt="Foto para verificar" />
+    <p id="check-status" class="ocr-status" hidden>A ler a foto…</p>
+    <div id="check-results" class="check-results"></div>
   </section>
 
   <!-- ==================== CATALOGO ==================== -->

@@ -33,6 +33,12 @@ body {
 .btn-logout { font-size: 0.8rem; padding: 6px 12px; }
 .backup-row { margin-bottom: 14px; display: flex; gap: 8px; flex-wrap: wrap; }
 
+.check-results { display: flex; flex-direction: column; gap: 14px; margin-top: 16px; }
+.check-results .part-card { display: flex; flex-direction: row; }
+.check-results .part-card img { width: 110px; flex-shrink: 0; }
+.check-results .part-card .body { flex: 1; }
+.check-results .form-actions { justify-content: flex-start; }
+
 .tabs { display: flex; gap: 8px; border-bottom: 1px solid #2a3450; }
 .tab-btn {
   background: none; border: none; color: var(--muted);
