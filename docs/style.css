@@ -1,13 +1,14 @@
 :root {
-  --bg: #0f1420;
-  --panel: #1a2233;
-  --panel-2: #232d42;
-  --text: #e8ecf5;
-  --muted: #93a0b8;
-  --accent: #4f8cff;
-  --accent-2: #2f6fe0;
-  --danger: #ff5d6c;
-  --ok: #35c98a;
+  --bg: #f4f4f4;
+  --panel: #ffffff;
+  --panel-2: #e8e8e8;
+  --text: #1a1a1a;
+  --muted: #6e6e6e;
+  --accent: #262626;
+  --accent-2: #000000;
+  --danger: #1a1a1a;
+  --ok: #1a1a1a;
+  --border: #d5d5d5;
   --radius: 12px;
 }
 
@@ -30,7 +31,7 @@ body {
 .topbar h1 { font-size: 1.15rem; margin: 0 0 10px; display: flex; align-items: center; gap: 8px; }
 .topbar h1 img { height: 28px; width: auto; border-radius: 4px; }
 
-.tabs { display: flex; gap: 8px; border-bottom: 1px solid #2a3450; }
+.tabs { display: flex; gap: 8px; border-bottom: 1px solid var(--border); }
 .tab-btn {
   background: none; border: none; color: var(--muted);
   padding: 10px 12px; font-size: 0.95rem; cursor: pointer;
@@ -65,14 +66,14 @@ main { padding: 16px; max-width: 720px; margin: 0 auto; }
 }
 
 .btn {
-  background: var(--panel-2); color: var(--text); border: 1px solid #364266;
+  background: var(--panel-2); color: var(--text); border: 1px solid var(--border);
   padding: 10px 16px; border-radius: 10px; font-size: 0.95rem; cursor: pointer;
 }
 .btn:active { transform: scale(0.98); }
 .btn-primary { background: var(--accent); border-color: var(--accent-2); color: white; font-weight: 600; }
 
 .hint { color: var(--muted); font-size: 0.85rem; margin-top: 10px; }
-.error { color: var(--danger); font-size: 0.85rem; }
+.error { color: var(--danger); font-size: 0.85rem; font-weight: 600; }
 .success {
   background: var(--panel); border: 1px solid var(--ok); color: var(--ok);
   padding: 16px; border-radius: var(--radius); text-align: center;
@@ -86,7 +87,7 @@ main { padding: 16px; max-width: 720px; margin: 0 auto; }
   display: flex; flex-direction: column; gap: 6px; font-size: 0.85rem; color: var(--muted);
 }
 .part-form input, .part-form select {
-  background: var(--panel); border: 1px solid #364266; color: var(--text);
+  background: var(--panel); border: 1px solid var(--border); color: var(--text);
   padding: 10px; border-radius: 8px; font-size: 0.95rem;
 }
 .row { display: flex; gap: 10px; }
@@ -94,7 +95,7 @@ main { padding: 16px; max-width: 720px; margin: 0 auto; }
 
 .thumbs { display: flex; gap: 8px; }
 .thumbs img {
-  width: 33%; aspect-ratio: 4/3; object-fit: cover; border-radius: 8px; border: 1px solid #364266;
+  width: 33%; aspect-ratio: 4/3; object-fit: cover; border-radius: 8px; border: 1px solid var(--border);
 }
 
 .ocr-status { color: var(--accent); font-size: 0.9rem; }
@@ -105,7 +106,7 @@ main { padding: 16px; max-width: 720px; margin: 0 auto; }
 
 .ref-candidates { display: flex; flex-wrap: wrap; gap: 6px; }
 .ref-candidates button {
-  font-size: 0.8rem; background: var(--panel-2); border: 1px solid #364266; color: var(--text);
+  font-size: 0.8rem; background: var(--panel-2); border: 1px solid var(--border); color: var(--text);
   padding: 5px 10px; border-radius: 20px; cursor: pointer;
 }
 
@@ -121,14 +122,14 @@ main { padding: 16px; max-width: 720px; margin: 0 auto; }
 
 .filters { display: flex; gap: 8px; margin-bottom: 14px; flex-wrap: wrap; }
 .filters input, .filters select {
-  background: var(--panel); border: 1px solid #364266; color: var(--text);
+  background: var(--panel); border: 1px solid var(--border); color: var(--text);
   padding: 8px 10px; border-radius: 8px; font-size: 0.9rem;
 }
 .filters input { flex: 1; min-width: 180px; }
 
 .parts-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 12px; }
 .part-card {
-  background: var(--panel); border-radius: var(--radius); overflow: hidden; border: 1px solid #2a3450;
+  background: var(--panel); border-radius: var(--radius); overflow: hidden; border: 1px solid var(--border);
 }
 .part-card img { width: 100%; aspect-ratio: 4/3; object-fit: cover; cursor: zoom-in; }
 .part-card .body { padding: 10px; font-size: 0.82rem; }
@@ -137,12 +138,12 @@ main { padding: 16px; max-width: 720px; margin: 0 auto; }
 .part-card .refs { margin: 6px 0; word-break: break-word; }
 .qty-row { display: flex; align-items: center; gap: 8px; margin-top: 8px; }
 .qty-row button {
-  width: 28px; height: 28px; border-radius: 6px; border: 1px solid #364266;
+  width: 28px; height: 28px; border-radius: 6px; border: 1px solid var(--border);
   background: var(--panel-2); color: var(--text); cursor: pointer;
 }
 .qty-row .qty-val { flex: 1; text-align: center; font-weight: 700; }
 .card-actions { display: flex; justify-content: flex-end; margin-top: 8px; }
-.card-actions button { font-size: 0.75rem; color: var(--danger); background: none; border: none; cursor: pointer; }
+.card-actions button { font-size: 0.75rem; color: var(--danger); text-decoration: underline; background: none; border: none; cursor: pointer; }
 
 .lightbox {
   position: fixed; inset: 0; background: rgba(0,0,0,0.9);

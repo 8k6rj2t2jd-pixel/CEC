@@ -7,7 +7,7 @@
 //   aparece já na próxima vez que abrir com internet.
 // - ficheiros grandes do OCR (vendor/tesseract/*) -> nunca mudam, por isso
 //   usam cache primeiro (mais rápido e poupa dados móveis).
-const CACHE_NAME = 'cec-catalogo-v2';
+const CACHE_NAME = 'cec-catalogo-v4';
 const APP_SHELL = [
   './',
   './index.html',
