@@ -457,10 +457,10 @@ function renderPartCard(part) {
   card.className = 'part-card';
 
   const img = document.createElement('img');
-  img.src = URL.createObjectURL(part.images.front);
   img.alt = part.partType;
   img.addEventListener('click', () => openLightbox(img.src));
   card.appendChild(img);
+  loadImageInto(img, part.images.front);
 
   const body = document.createElement('div');
   body.className = 'body';
@@ -517,6 +517,17 @@ function escapeHtml(str) {
   return String(str || '').replace(/[&<>"']/g, (c) => ({
     '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;',
   }[c]));
+}
+
+// As fotos ficam no Google Drive (só um id de ficheiro, não o Blob), por
+// isso carregam-se de forma assíncrona em vez de já vir pronto na peça.
+async function loadImageInto(imgEl, fileId) {
+  try {
+    const blob = await window.PartsDB.fetchImageBlob(fileId);
+    imgEl.src = URL.createObjectURL(blob);
+  } catch (err) {
+    console.error('Falha ao carregar foto do Drive:', err);
+  }
 }
 
 searchInput.addEventListener('input', renderParts);
@@ -599,9 +610,9 @@ function renderCheckResults(file, data, matches) {
       card.className = 'part-card';
 
       const img = document.createElement('img');
-      img.src = URL.createObjectURL(part.images.front);
       img.alt = part.partType;
       card.appendChild(img);
+      loadImageInto(img, part.images.front);
 
       const body = document.createElement('div');
       body.className = 'body';
@@ -690,7 +701,8 @@ document.getElementById('btn-export').addEventListener('click', async () => {
       const folder = `${slugify(part.manufacturer)}/${slugify(part.partType)}/${slugify(`${part.brand}-${part.model}`)}/${part.id}`;
       const entry = { ...part, images: {} };
       for (const key of ['front', 'back', 'label']) {
-        const buf = new Uint8Array(await part.images[key].arrayBuffer());
+        const blob = await window.PartsDB.fetchImageBlob(part.images[key]);
+        const buf = new Uint8Array(await blob.arrayBuffer());
         const filename = `${folder}/${key}.jpg`;
         zip.addFile(filename, buf);
         entry.images[key] = filename;
@@ -739,11 +751,66 @@ function openLightbox(src) {
 }
 
 // ---------------------------------------------------------------------------
-// Arranque
+// Login com a conta Google (obrigatório para usar a app)
 // ---------------------------------------------------------------------------
+const signinGate = document.getElementById('signin-gate');
+const appTopbar = document.getElementById('app-topbar');
+const appMain = document.getElementById('app-main');
+const signinStatus = document.getElementById('signin-status');
+const btnSignin = document.getElementById('btn-signin');
+const signinError = document.getElementById('signin-error');
+
+let appStarted = false;
+
+function startApp() {
+  if (appStarted) return;
+  appStarted = true;
+  setStepUi();
+  startCamera();
+}
+
+function onAuthChange({ signedIn, error }) {
+  if (signedIn) {
+    signinGate.hidden = true;
+    appTopbar.hidden = false;
+    appMain.hidden = false;
+    startApp();
+    return;
+  }
+
+  stopCamera();
+  signinGate.hidden = false;
+  appTopbar.hidden = true;
+  appMain.hidden = true;
+  signinError.hidden = true;
+  btnSignin.hidden = true;
+
+  if (error === 'not-configured') {
+    signinStatus.textContent = 'Falta configurar o acesso ao Google Drive (ver docs/google-config.js).';
+  } else if (error === 'gis-not-loaded') {
+    signinStatus.textContent = 'Não foi possível carregar o login da Google. Verifique a ligação à internet e recarregue.';
+  } else {
+    signinStatus.textContent = 'Inicie sessão com a conta Google autorizada para usar o catálogo.';
+    btnSignin.hidden = false;
+  }
+}
+
+btnSignin.addEventListener('click', () => window.GoogleAuth.signIn());
+document.getElementById('btn-signout').addEventListener('click', () => window.GoogleAuth.signOut());
+
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('service-worker.js').catch(() => {});
 }
 
-setStepUi();
-startCamera();
+// O script de login da Google (accounts.google.com/gsi/client) carrega em
+// paralelo (async) e pode ainda não estar pronto quando este ficheiro corre
+// - espera um pouco antes de desistir e mostrar o erro a sério.
+function waitForGisAndInit(attemptsLeft) {
+  const gisReady = window.google && window.google.accounts && window.google.accounts.oauth2;
+  if (gisReady || attemptsLeft <= 0) {
+    window.GoogleAuth.initGoogleAuth(window.GOOGLE_CLIENT_ID, onAuthChange);
+    return;
+  }
+  setTimeout(() => waitForGisAndInit(attemptsLeft - 1), 200);
+}
+waitForGisAndInit(50);

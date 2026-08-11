@@ -11,9 +11,10 @@ Há duas versões no mesmo projeto:
   se mais do que uma pessoa/aparelho vai usar o catálogo, ou se quer que os
   dados não fiquem só num telemóvel. Precisa de um servidor (ver secção de
   hospedagem abaixo).
-- **`docs/`** — versão simples para um único telemóvel, publicada de graça no
-  GitHub Pages, sem servidor nem login (os dados ficam só nesse telemóvel).
-  Mais simples, mas sem proteção por senha nem partilha entre aparelhos.
+- **`docs/`** — versão publicada de graça no GitHub Pages, sem servidor
+  próprio, com **login com a conta Google** e o catálogo (dados + fotos)
+  guardado no **Google Drive** dessa conta — protegido pelo login da própria
+  Google, e partilhado entre todos os aparelhos que entrem com essa conta.
 
 ## Como funciona (ambas as versões)
 
@@ -143,13 +144,47 @@ acima).
 
 ---
 
-## Versão simples para um telemóvel (`docs/`)
+## Versão com Google Drive (`docs/`)
 
-Sem servidor, sem login, publicada de graça no GitHub Pages — ver
-instruções completas mais abaixo. Boa opção se for só uma pessoa a usar,
-num único telemóvel, e não precisar de senha.
+Publicada de graça no GitHub Pages, sem servidor próprio. Em vez de um
+utilizador/senha inventado por nós, usa o **login da própria Google** — só
+quem tiver a conta Google que autorizar consegue entrar, ponto final, é a
+Google a garantir isso. Os dados (fabricante, referências, stock) e as fotos
+ficam guardados numa pasta chamada **"CatalogoPecas"** dentro do Google
+Drive dessa conta — visível e pesquisável lá normalmente, e já com cópia de
+segurança automática (é o próprio Drive).
 
-### Publicar a página (só precisa de fazer isto uma vez)
+### Configurar o Google Drive (só precisa de fazer isto uma vez)
+
+1. Vá a **[console.cloud.google.com](https://console.cloud.google.com/)**
+   com a conta Google que quer usar para o catálogo, e crie um projeto novo
+   (nome sugerido: "Catálogo de Peças").
+2. No menu, vá a **APIs & Services → Library**, procure **"Google Drive
+   API"** e clique **Enable**.
+3. Vá a **APIs & Services → OAuth consent screen**:
+   - Tipo de utilizador: **External**.
+   - Preencha o nome da app e o seu email (nos campos obrigatórios).
+   - Em **Audience** / **Test users**, clique **Add users** e adicione o
+     seu próprio email Google — só os emails aqui listados conseguem entrar
+     na app, mesmo que alguém descubra o link.
+4. Vá a **APIs & Services → Credentials** → **Create Credentials** →
+   **OAuth client ID**:
+   - Tipo de aplicação: **Web application**.
+   - Em **Authorized JavaScript origins**, adicione:
+     `https://8k6rj2t2jd-pixel.github.io`
+   - Clique **Create**. A Google mostra um **Client ID** (uma linha longa a
+     terminar em `.apps.googleusercontent.com`) — copie-o.
+5. No repositório, abra `docs/google-config.js` e substitua a linha por:
+   ```js
+   window.GOOGLE_CLIENT_ID = 'o-client-id-que-copiou.apps.googleusercontent.com';
+   ```
+   Guarde, faça commit e push.
+
+> A app pede uma permissão bastante restrita (`drive.file`): só consegue ver
+> e alterar os ficheiros/pastas que ela própria cria (a pasta
+> "CatalogoPecas") — nunca o resto do seu Google Drive.
+
+### Publicar a página no GitHub Pages (só uma vez)
 
 1. No GitHub, abra o repositório e vá a **Settings** → **Pages**.
 2. Em "Source", escolha **"Deploy from a branch"**.
@@ -160,38 +195,36 @@ num único telemóvel, e não precisar de senha.
 
 > Nota: o GitHub só mostra a opção "Pages" em repositórios **privados** se
 > tiver um plano pago (Pro). Num repositório privado do plano gratuito, ou
-> torna o repositório público (o código fica visível, mas as fotos/stock
-> nunca passam pelo GitHub — ficam só no telemóvel), ou usa um serviço como
-> o Netlify/Vercel, que publicam repositórios privados de graça.
+> torna o repositório público (o código fica visível, mas os dados do
+> catálogo nunca passam pelo GitHub — ficam só no seu Google Drive), ou usa
+> um serviço como o Netlify/Vercel, que publicam repositórios privados de
+> graça.
 
 ### Usar no telemóvel
 
-1. Abra esse link no browser do telemóvel (Chrome no Android, Safari no
+1. Abra o link no browser do telemóvel (Chrome no Android, Safari no
    iPhone).
-2. Dê permissão de câmara quando for pedida.
-3. Opcional: no menu do browser escolha **"Adicionar ao ecrã principal"** —
+2. Toque em **"Entrar com a conta Google"** e escolha a conta autorizada.
+3. Dê permissão de câmara quando for pedida.
+4. Opcional: no menu do browser escolha **"Adicionar ao ecrã principal"** —
    fica com um ícone como se fosse uma app instalada.
 
 A primeira vez que usar a leitura da etiqueta, a app descarrega os ficheiros
-de OCR (uns 10 MB, uma única vez) — depois disso funciona sem internet.
+de OCR (uns 10 MB, uma única vez) — essa parte continua a funcionar sem
+internet depois disso, mas ver/guardar peças precisa sempre de internet
+(fala com o Google Drive).
 
 ### Cópias de segurança
 
-No separador **Catálogo** há um botão **"Exportar cópia de segurança"** que
-transfere um ficheiro `.zip` com todas as fotos e os dados de todas as peças.
-Como os dados ficam só no telemóvel, exporte esta cópia de vez em quando
-(ex: uma vez por semana) e guarde-a nalgum lado (email, Drive, computador).
+Como os dados já ficam no Google Drive, já têm a segurança normal do Drive
+(histórico de versões, não se perdem se limpar o telemóvel). Ainda assim, no
+separador **Catálogo** há um botão **"Exportar cópia de segurança"** que
+transfere um `.zip` extra com tudo, se preferir guardar uma cópia à parte.
 
-> **Importante:** use sempre o mesmo telemóvel e o mesmo browser — cada
-> browser/telemóvel tem o seu próprio catálogo, e limpar os dados do browser
-> sem exportar primeiro perde as peças guardadas. Esta versão não tem senha
-> nem login: qualquer pessoa com acesso físico ao telemóvel desbloqueado
-> consegue abrir a app.
-
-### Logótipo (versão telemóvel)
+### Logótipo (versão Google Drive)
 
 Coloque o ficheiro em `docs/logo.png` e aparece automaticamente no topo da
-app.
+app e no ecrã de login.
 
 ---
 
@@ -205,7 +238,10 @@ lib/ocr.js            leitura da etiqueta (OCR) e deteção de referências/fabr
 lib/auth.js           login, sessão e bloqueio por tentativas erradas
 scripts/set-password.js   gera a hash da senha de acesso
 public/               interface da versão com login (inclui public/logo.png)
-docs/                 versão simples para telemóvel (GitHub Pages, inclui docs/logo.png)
+docs/                 versão com Google Drive (GitHub Pages, inclui docs/logo.png)
+docs/google-config.js  o Client ID do Google (preencher, ver secção acima)
+docs/auth.js           login com a conta Google (Google Identity Services)
+docs/db.js             leitura/escrita das peças e fotos no Google Drive
 ```
 
 ## Limitações conhecidas
@@ -217,9 +253,11 @@ docs/                 versão simples para telemóvel (GitHub Pages, inclui docs
   prefixos comuns (Bosch, Denso, Continental, Delphi, Valeo, etc.); pode ser
   facilmente alargada em `lib/ocr.js` (versão com login) ou `docs/app.js`
   (versão telemóvel).
-- Na versão `docs/` (sem servidor), os dados ficam guardados só naquele
-  telemóvel/browser e não há senha — exporte cópias de segurança
-  regularmente e não use essa versão se quiser mesmo proteger o stock.
-- Na versão com login, o "utilizador" é único e partilhado (não há contas
-  separadas por funcionário) — suficiente para controlar quem entra, mas não
-  para distinguir quem fez o quê.
+- Na versão com login (servidor), o "utilizador" é único e partilhado (não
+  há contas separadas por funcionário) — suficiente para controlar quem
+  entra, mas não para distinguir quem fez o quê.
+- Na versão `docs/` (Google Drive), ver/guardar peças precisa sempre de
+  internet (só a leitura de etiquetas por OCR funciona sem rede). O acesso
+  é controlado pela lista de "test users" da Google Cloud Console — para
+  autorizar mais pessoas, adicione o email delas lá (ver secção "Configurar
+  o Google Drive").
