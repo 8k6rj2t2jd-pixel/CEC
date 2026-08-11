@@ -353,7 +353,7 @@ function renderPartCard(part) {
   card.className = 'part-card';
 
   const img = document.createElement('img');
-  img.src = `/storage/${part.images.front}`;
+  img.src = part.images.front.url;
   img.alt = part.partType;
   img.addEventListener('click', () => openLightbox(img.src));
   card.appendChild(img);
@@ -528,7 +528,7 @@ function renderCheckResults(file, data, matches) {
       card.className = 'part-card';
 
       const img = document.createElement('img');
-      img.src = `/storage/${part.images.front}`;
+      img.src = part.images.front.url;
       img.alt = part.partType;
       card.appendChild(img);
 
