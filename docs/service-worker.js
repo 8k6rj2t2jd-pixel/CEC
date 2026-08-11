@@ -7,7 +7,7 @@
 //   aparece já na próxima vez que abrir com internet.
 // - ficheiros grandes do OCR (vendor/tesseract/*) -> nunca mudam, por isso
 //   usam cache primeiro (mais rápido e poupa dados móveis).
-const CACHE_NAME = 'cec-catalogo-v3';
+const CACHE_NAME = 'cec-catalogo-v2';
 const APP_SHELL = [
   './',
   './index.html',
@@ -15,8 +15,6 @@ const APP_SHELL = [
   './app.js',
   './db.js',
   './zip.js',
-  './auth.js',
-  './google-config.js',
   './manifest.webmanifest',
   './icon.svg',
 ];
@@ -53,13 +51,6 @@ function isVendorAsset(url) {
 self.addEventListener('fetch', (event) => {
   if (event.request.method !== 'GET') return;
   const url = new URL(event.request.url);
-
-  // Login e API do Google (accounts.google.com, googleapis.com) seguem
-  // sempre direto à rede, sem intercetar nem guardar em cache - são pedidos
-  // autenticados e o conteúdo (stock, fotos) tem de estar sempre atualizado.
-  if (url.origin !== self.location.origin) {
-    return;
-  }
 
   if (isVendorAsset(url)) {
     // Cache-first: estes ficheiros são grandes e nunca mudam.

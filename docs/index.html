@@ -9,21 +9,8 @@
 <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-<div id="signin-gate" class="signin-gate">
-  <div class="signin-card">
-    <img id="signin-logo" src="logo.png" alt="" onerror="this.remove()" />
-    <h1>🔧 Catálogo de Peças</h1>
-    <p id="signin-status" class="hint">A verificar sessão…</p>
-    <button id="btn-signin" class="btn btn-primary" hidden>Entrar com a conta Google</button>
-    <p id="signin-error" class="error" hidden></p>
-  </div>
-</div>
-
-<header class="topbar" id="app-topbar" hidden>
-  <div class="topbar-row">
-    <h1><img id="logo-img" src="logo.png" alt="" onerror="this.remove()" />🔧 Catálogo de Peças</h1>
-    <button id="btn-signout" class="btn btn-logout">Sair</button>
-  </div>
+<header class="topbar">
+  <h1><img id="logo-img" src="logo.png" alt="" onerror="this.remove()" />🔧 Catálogo de Peças</h1>
   <nav class="tabs">
     <button class="tab-btn active" data-tab="novo">+ Nova peça</button>
     <button class="tab-btn" data-tab="verificar">🔍 Verificar peça</button>
@@ -31,7 +18,7 @@
   </nav>
 </header>
 
-<main id="app-main" hidden>
+<main>
   <!-- ==================== NOVA PEÇA ==================== -->
   <section id="tab-novo" class="tab-panel active">
     <ol class="steps">
@@ -188,9 +175,6 @@
 </div>
 
 <script src="vendor/tesseract/tesseract.min.js"></script>
-<script src="google-config.js"></script>
-<script src="https://accounts.google.com/gsi/client" async defer></script>
-<script src="auth.js"></script>
 <script src="db.js"></script>
 <script src="zip.js"></script>
 <script src="app.js"></script>
