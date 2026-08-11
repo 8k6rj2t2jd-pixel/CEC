@@ -26,12 +26,21 @@ function normalizeText(text) {
 function extractReferences(rawText) {
   const text = rawText.toUpperCase();
   const refs = new Set();
+
+  // Bosch: "0 281 010 438" (10 dígitos, comeca por 0, grupos de 3)
   const boschMatches = text.match(/\b0[\s.]?\d{3}[\s.]?\d{3}[\s.]?\d{3}\b/g) || [];
-  for (const m of boschMatches) refs.add(m.replace(/[\s.]/g, ' ').trim());
+  for (const m of boschMatches) refs.add(m.replace(/[\s.]+/g, ' ').trim());
+
+  // VAG/Audi/VW/Seat/Skoda: "038 906 018 BA" (3 grupos de 2-3 dígitos + sufixo de letras)
+  const vagMatches = text.match(/\b\d{2,3}[\s.]\d{3}[\s.]\d{3}(?:[\s.]?[A-Z]{1,2})?\b/g) || [];
+  for (const m of vagMatches) refs.add(m.replace(/[\s.]+/g, ' ').trim());
+
+  // OEM genérica: referência contínua tipo "HOM8200066001"
   const oemMatches = text.match(/\b[A-Z]{0,4}\d{7,13}\b/g) || [];
   for (const m of oemMatches) {
     if (!/^0\d{9}$/.test(m.replace(/\s/g, ''))) refs.add(m);
   }
+
   return Array.from(refs);
 }
 
@@ -51,11 +60,64 @@ function titleCase(str) {
   return str.replace(/\w\S*/g, (t) => t.charAt(0).toUpperCase() + t.substr(1).toLowerCase());
 }
 
+function loadImage(blob) {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.onload = () => resolve(img);
+    img.onerror = reject;
+    img.src = URL.createObjectURL(blob);
+  });
+}
+
+// Fotos reais de telemóvel são enormes e têm fundo metálico/riscado, o que
+// dificulta muito o OCR. Isto reduz o tamanho (mais rápido) e converte para
+// tons de cinzento com contraste esticado, o que ajuda bastante o Tesseract
+// a distinguir o texto da etiqueta do fundo.
+async function preprocessForOcr(blob) {
+  try {
+    const img = await loadImage(blob);
+    const maxDim = 1800;
+    const scale = Math.min(1, maxDim / Math.max(img.naturalWidth, img.naturalHeight));
+    const width = Math.max(1, Math.round(img.naturalWidth * scale));
+    const height = Math.max(1, Math.round(img.naturalHeight * scale));
+
+    const canvas = document.createElement('canvas');
+    canvas.width = width;
+    canvas.height = height;
+    const ctx = canvas.getContext('2d');
+    ctx.drawImage(img, 0, 0, width, height);
+    URL.revokeObjectURL(img.src);
+
+    const imageData = ctx.getImageData(0, 0, width, height);
+    const d = imageData.data;
+    let min = 255;
+    let max = 0;
+    for (let i = 0; i < d.length; i += 4) {
+      const gray = 0.299 * d[i] + 0.587 * d[i + 1] + 0.114 * d[i + 2];
+      d[i] = d[i + 1] = d[i + 2] = gray;
+      if (gray < min) min = gray;
+      if (gray > max) max = gray;
+    }
+    const range = Math.max(1, max - min);
+    for (let i = 0; i < d.length; i += 4) {
+      const v = ((d[i] - min) / range) * 255;
+      d[i] = d[i + 1] = d[i + 2] = v;
+    }
+    ctx.putImageData(imageData, 0, 0);
+
+    return await new Promise((resolve) => canvas.toBlob((b) => resolve(b || blob), 'image/jpeg', 0.92));
+  } catch (err) {
+    console.error('Falha ao preparar a foto para OCR, a usar a original:', err);
+    return blob;
+  }
+}
+
 // Lê a etiqueta com o Tesseract a correr localmente no telemóvel (os
 // ficheiros de OCR estão em vendor/tesseract/, servidos pelo mesmo site -
 // nada é enviado para a internet).
 async function readLabel(blob) {
-  const { data } = await Tesseract.recognize(blob, 'eng', {
+  const processed = await preprocessForOcr(blob);
+  const { data } = await Tesseract.recognize(processed, 'eng', {
     workerPath: 'vendor/tesseract/worker.min.js',
     corePath: 'vendor/tesseract/tesseract-core-lstm.wasm.js',
     langPath: 'vendor/tesseract/lang',
