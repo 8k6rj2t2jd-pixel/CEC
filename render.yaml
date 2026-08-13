@@ -2,21 +2,19 @@ services:
   - type: web
     name: catalogo-pecas
     runtime: node
-    plan: starter
+    plan: free
     buildCommand: npm install
     startCommand: npm start
-    disk:
-      name: dados-catalogo
-      mountPath: /data
-      sizeGB: 1
     envVars:
       - key: NODE_ENV
         value: production
-      - key: DATA_DIR
-        value: /data
       - key: ADMIN_USER
         sync: false
       - key: ADMIN_PASSWORD_HASH
         sync: false
       - key: SESSION_SECRET
         generateValue: true
+      - key: MONGODB_URI
+        sync: false
+      - key: CLOUDINARY_URL
+        sync: false

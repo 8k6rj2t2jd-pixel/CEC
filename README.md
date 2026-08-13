@@ -88,24 +88,56 @@ node scripts/set-password.js "a-senha-que-quiser"
 Isto imprime uma linha `ADMIN_PASSWORD_HASH=...` — copie esse valor, vai
 precisar dele já a seguir.
 
-### Pôr a app disponível na internet (hospedagem)
+### Pôr a app disponível na internet, de graça (hospedagem)
 
 Como esta versão tem um servidor a sério (para o login funcionar de verdade),
 precisa de ficar "ligada" nalgum lado — não pode só abrir um ficheiro no
-telemóvel. O projeto já inclui um ficheiro `render.yaml` que configura tudo
-de uma vez em **[Render](https://render.com)** (plano pago simples com disco
-persistente, à volta de 7 USD/mês).
+telemóvel. O projeto está pronto para o plano **gratuito** do
+**[Render](https://render.com)**. Esse plano não tem disco persistente nem
+fica sempre ligado (adormece depois de ~15 min sem visitas, e demora uns
+30-50 segundos a "acordar" no acesso seguinte — depois disso funciona
+normalmente), por isso as fotos e o catálogo ficam guardados em dois
+serviços à parte, também gratuitos para sempre neste tamanho de uso:
 
-1. Antes de mais, gere a hash da senha de acesso, se ainda não o fez:
+- **[MongoDB Atlas](https://www.mongodb.com/cloud/atlas/register)** — a
+  "ficha" de cada peça (tipo, fabricante, referências, stock).
+- **[Cloudinary](https://cloudinary.com/users/register/free)** — as fotos.
+
+#### 1. Criar a base de dados (MongoDB Atlas)
+
+1. Crie conta grátis em atlas.mongodb.com.
+2. Crie um cluster gratuito (opção "M0 Free" / "Shared").
+3. Em **Database Access**, crie um utilizador de base de dados (nome +
+   senha) — guarde a senha.
+4. Em **Network Access**, clique **Add IP Address** → **Allow access from
+   anywhere** (`0.0.0.0/0`) — o Render liga-se de IPs que mudam, por isso
+   precisa disto.
+5. Em **Database** → **Connect** → **Drivers**, copie o "connection string"
+   (algo como `mongodb+srv://utilizador:senha@cluster0....mongodb.net/`) —
+   troque `<password>` pela senha real do utilizador criado no passo 3. Isto
+   é o valor de `MONGODB_URI` que vai usar a seguir.
+
+#### 2. Criar o armazenamento de fotos (Cloudinary)
+
+1. Crie conta grátis em cloudinary.com.
+2. No **Dashboard**, copie o valor **API Environment variable** — começa
+   por `CLOUDINARY_URL=cloudinary://...`. É o valor a usar a seguir (copie
+   a parte depois do `=`, sem o `CLOUDINARY_URL=` à frente).
+
+#### 3. Publicar no Render
+
+1. Gere a hash da senha de acesso, se ainda não o fez:
    `node scripts/set-password.js "a-senha-que-quiser"` — guarde o resultado
-   (`ADMIN_PASSWORD_HASH=...`), vai precisar dele já a seguir.
+   (`ADMIN_PASSWORD_HASH=...`).
 2. Crie conta em render.com (pode entrar diretamente com o GitHub).
 3. **New +** → **Blueprint** → escolha o repositório `CEC` e o branch onde
    está este código. O Render lê o `render.yaml` sozinho e propõe criar o
-   serviço com o disco persistente já configurado.
+   serviço já no plano gratuito.
 4. Quando pedir os valores em falta, preencha:
    - `ADMIN_USER` → o nome de utilizador que quiser (ex: `admin.CEC`)
    - `ADMIN_PASSWORD_HASH` → o valor gerado no passo 1
+   - `MONGODB_URI` → o connection string do passo 1.5 (MongoDB Atlas)
+   - `CLOUDINARY_URL` → o valor do passo 2.2 (Cloudinary)
    - (o `SESSION_SECRET` é gerado automaticamente, não precisa de mexer)
 5. Clique para criar/aplicar o Blueprint. Ao fim de alguns minutos tem um
    link tipo `https://catalogo-pecas.onrender.com`.
@@ -114,15 +146,18 @@ Abra esse link no telemóvel (ou em qualquer computador), entre com o
 utilizador/senha, e dê permissão de câmara quando pedida.
 
 > Prefere configurar à mão em vez do Blueprint? Também funciona: **New +** →
-> **Web Service**, Build Command `npm install`, Start Command `npm start`,
-> adicione as variáveis `ADMIN_USER`, `ADMIN_PASSWORD_HASH`, `SESSION_SECRET`,
-> `NODE_ENV=production` e `DATA_DIR=/data`, e um disco persistente montado em
-> `/data`.
+> **Web Service**, plano **Free**, Build Command `npm install`, Start
+> Command `npm start`, e as mesmas variáveis de ambiente acima.
 
 > Qualquer outro serviço parecido (Railway, Fly.io, um VPS próprio, etc.)
-> funciona da mesma forma — só precisa de correr `npm install` + `npm start`,
-> das mesmas variáveis de ambiente, e de um disco que não se apague entre
-> reinícios.
+> funciona da mesma forma — só precisa de correr `npm install` + `npm start`
+> com as mesmas variáveis de ambiente.
+
+> Se preferir não usar Mongo/Cloudinary — por exemplo, se ficar a correr no
+> computador da loja em vez de um serviço online — basta não definir
+> `MONGODB_URI`/`CLOUDINARY_URL`: a app volta a guardar tudo num ficheiro
+> local e nas fotos em disco (ver secção seguinte), mas nesse caso precisa de
+> um disco que não se apague entre reinícios.
 
 ### Logótipo
 
@@ -133,13 +168,19 @@ sem precisar de mudar mais nada.
 
 ### Onde ficam os dados
 
+Com `MONGODB_URI` e `CLOUDINARY_URL` definidos (recomendado, ver secção de
+hospedagem acima): a ficha de cada peça fica na coleção `parts` do MongoDB
+Atlas, e as fotos ficam na conta Cloudinary, na pasta `cec-catalogo/`.
+
+Sem essas variáveis definidas (uso local, sem servidor online): tudo fica em
+disco, como antes —
+
 - `<DATA_DIR>/storage/` — as fotos, organizadas em pastas por fabricante /
   tipo de peça / marca-modelo / id da peça.
 - `<DATA_DIR>/pecas.json` — a ficha de cada peça.
 
 Em `localhost` sem configurar `DATA_DIR`, isto fica em `data/` dentro do
-projeto. Em produção, `DATA_DIR` deve apontar para o disco persistente (ver
-acima).
+projeto.
 
 ---
 

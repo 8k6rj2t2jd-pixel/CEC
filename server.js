@@ -11,6 +11,7 @@ const multer = require('multer');
 const ExcelJS = require('exceljs');
 
 const store = require('./lib/store');
+const images = require('./lib/images');
 const { readLabel } = require('./lib/ocr');
 const auth = require('./lib/auth');
 
@@ -127,9 +128,9 @@ app.post('/api/ocr', upload.single('label'), async (req, res) => {
   }
 });
 
-app.get('/api/parts', (req, res) => {
+app.get('/api/parts', async (req, res) => {
   const { q, partType, manufacturer, brand } = req.query;
-  let parts = store.listParts();
+  let parts = await store.listParts();
 
   if (partType) parts = parts.filter((p) => p.partType === partType);
   if (manufacturer) parts = parts.filter((p) => p.manufacturer.toLowerCase() === String(manufacturer).toLowerCase());
@@ -147,8 +148,8 @@ app.get('/api/parts', (req, res) => {
   res.json(parts);
 });
 
-app.get('/api/parts/:id', (req, res) => {
-  const part = store.getPart(req.params.id);
+app.get('/api/parts/:id', async (req, res) => {
+  const part = await store.getPart(req.params.id);
   if (!part) return res.status(404).json({ error: 'Peca nao encontrada.' });
   res.json(part);
 });
@@ -160,40 +161,52 @@ app.post(
     { name: 'back', maxCount: 1 },
     { name: 'label', maxCount: 1 },
   ]),
-  (req, res) => {
+  async (req, res) => {
     const files = req.files || {};
-    if (!files.front || !files.back || !files.label) {
+    const cleanupTmp = () => {
       for (const key of Object.keys(files)) {
         for (const f of files[key]) fs.unlink(f.path, () => {});
       }
+    };
+
+    if (!files.front || !files.back || !files.label) {
+      cleanupTmp();
       return res.status(400).json({ error: 'Sao precisas as 3 fotos: frente, tras e etiqueta.' });
     }
 
     const { partType, manufacturer, brand, model, ref1, ref2, quantity, notes } = req.body;
     if (!partType || !manufacturer) {
-      for (const key of Object.keys(files)) {
-        for (const f of files[key]) fs.unlink(f.path, () => {});
-      }
+      cleanupTmp();
       return res.status(400).json({ error: 'Tipo de peca e fabricante sao obrigatorios.' });
     }
 
     const id = crypto.randomUUID();
-    const folder = path.join(
-      STORAGE_DIR,
-      slugify(manufacturer),
-      slugify(partType),
-      slugify(`${brand || 'sem-marca'}-${model || 'sem-modelo'}`),
-      id
-    );
-    fs.mkdirSync(folder, { recursive: true });
+    const partImages = {};
 
-    const images = {};
-    for (const key of ['front', 'back', 'label']) {
-      const file = files[key][0];
-      const ext = path.extname(file.originalname) || '.jpg';
-      const destName = `${key}${ext}`;
-      fs.renameSync(file.path, path.join(folder, destName));
-      images[key] = path.relative(STORAGE_DIR, path.join(folder, destName)).split(path.sep).join('/');
+    if (images.useCloud) {
+      for (const key of ['front', 'back', 'label']) {
+        const file = files[key][0];
+        const uploaded = await images.uploadImage(file.path, id);
+        partImages[key] = { url: uploaded.url, publicId: uploaded.publicId };
+      }
+      cleanupTmp();
+    } else {
+      const folder = path.join(
+        STORAGE_DIR,
+        slugify(manufacturer),
+        slugify(partType),
+        slugify(`${brand || 'sem-marca'}-${model || 'sem-modelo'}`),
+        id
+      );
+      fs.mkdirSync(folder, { recursive: true });
+      for (const key of ['front', 'back', 'label']) {
+        const file = files[key][0];
+        const ext = path.extname(file.originalname) || '.jpg';
+        const destName = `${key}${ext}`;
+        fs.renameSync(file.path, path.join(folder, destName));
+        const rel = path.relative(STORAGE_DIR, path.join(folder, destName)).split(path.sep).join('/');
+        partImages[key] = { url: `/storage/${rel}`, publicId: null };
+      }
     }
 
     const part = {
@@ -206,16 +219,16 @@ app.post(
       ref2: ref2 || '',
       quantity: Number.isFinite(Number(quantity)) ? Math.max(0, Math.trunc(Number(quantity))) : 1,
       notes: notes || '',
-      images,
+      images: partImages,
       createdAt: new Date().toISOString(),
     };
 
-    store.createPart(part);
+    await store.createPart(part);
     res.status(201).json(part);
   }
 );
 
-app.patch('/api/parts/:id', (req, res) => {
+app.patch('/api/parts/:id', async (req, res) => {
   const allowed = ['partType', 'manufacturer', 'brand', 'model', 'ref1', 'ref2', 'quantity', 'notes'];
   const patch = {};
   for (const key of allowed) {
@@ -224,22 +237,33 @@ app.patch('/api/parts/:id', (req, res) => {
   if ('quantity' in patch) {
     patch.quantity = Math.max(0, Math.trunc(Number(patch.quantity) || 0));
   }
-  const updated = store.updatePart(req.params.id, patch);
+  const updated = await store.updatePart(req.params.id, patch);
   if (!updated) return res.status(404).json({ error: 'Peca nao encontrada.' });
   res.json(updated);
 });
 
-app.delete('/api/parts/:id', (req, res) => {
-  const removed = store.deletePart(req.params.id);
+app.delete('/api/parts/:id', async (req, res) => {
+  const removed = await store.deletePart(req.params.id);
   if (!removed) return res.status(404).json({ error: 'Peca nao encontrada.' });
-  const folder = path.join(STORAGE_DIR, path.dirname(Object.values(removed.images)[0] || ''));
-  fs.rm(folder, { recursive: true, force: true }, () => {});
+
+  const imgs = Object.values(removed.images || {});
+  if (images.useCloud) {
+    for (const img of imgs) {
+      if (img && img.publicId) await images.deleteImage(img.publicId);
+    }
+  } else {
+    const firstUrl = (imgs[0] && imgs[0].url) || '';
+    const rel = firstUrl.replace(/^\/storage\//, '');
+    const folder = path.join(STORAGE_DIR, path.dirname(rel));
+    fs.rm(folder, { recursive: true, force: true }, () => {});
+  }
+
   res.json({ ok: true });
 });
 
 app.get('/api/export.xlsx', async (req, res) => {
   try {
-    const parts = store.listParts();
+    const parts = await store.listParts();
     const workbook = new ExcelJS.Workbook();
     const sheet = workbook.addWorksheet('Catálogo de Peças');
 
@@ -271,17 +295,31 @@ app.get('/api/export.xlsx', async (req, res) => {
       });
       sheet.getRow(rowIndex).height = 70;
 
-      const frontPath = part.images && part.images.front ? path.join(STORAGE_DIR, part.images.front) : null;
-      if (frontPath && fs.existsSync(frontPath)) {
-        const ext = path.extname(frontPath).slice(1).toLowerCase();
-        const imageId = workbook.addImage({
-          buffer: fs.readFileSync(frontPath),
-          extension: ext === 'jpg' ? 'jpeg' : ext,
-        });
-        sheet.addImage(imageId, {
-          tl: { col: 0, row: rowIndex - 1 },
-          ext: { width: 90, height: 90 },
-        });
+      const front = part.images && part.images.front;
+      if (front && front.url) {
+        try {
+          let buffer = null;
+          let ext = 'jpeg';
+          if (front.publicId) {
+            const resp = await fetch(front.url);
+            if (resp.ok) buffer = Buffer.from(await resp.arrayBuffer());
+          } else {
+            const localPath = path.join(STORAGE_DIR, front.url.replace(/^\/storage\//, ''));
+            if (fs.existsSync(localPath)) {
+              buffer = fs.readFileSync(localPath);
+              ext = path.extname(localPath).slice(1).toLowerCase() || 'jpeg';
+            }
+          }
+          if (buffer) {
+            const imageId = workbook.addImage({ buffer, extension: ext === 'jpg' ? 'jpeg' : ext });
+            sheet.addImage(imageId, {
+              tl: { col: 0, row: rowIndex - 1 },
+              ext: { width: 90, height: 90 },
+            });
+          }
+        } catch (imgErr) {
+          console.error('Falha ao incluir foto no Excel:', imgErr);
+        }
       }
     }
 
