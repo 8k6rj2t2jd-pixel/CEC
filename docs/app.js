@@ -49,10 +49,12 @@ function extractReferences(rawText) {
   const vagMatches = text.match(/\b[0-9][0-9A-Z]{1,2}[\s.]\d{3}[\s.]\d{3}(?:[\s.]?[A-Z]{1,2})?\b/g) || [];
   for (const m of vagMatches) refs.add(m.replace(/[\s.]+/g, ' ').trim());
 
-  // Ford/GM: "AV21-12A650-GC" (grupos alfanuméricos separados por traços)
+  // Ford/GM: "AV21-12A650-GC" (grupos alfanuméricos separados por traços).
+  // Exige pelo menos uma letra para não apanhar datas tipo "11-01-20" (só
+  // números) que também têm 3 grupos separados por traços.
   const fordMatches = text.match(/\b[A-Z0-9]{2,6}-[A-Z0-9]{2,6}-[A-Z0-9]{2,6}\b/g) || [];
   for (const m of fordMatches) {
-    if (/\d/.test(m)) refs.add(m);
+    if (/\d/.test(m) && /[A-Z]/.test(m)) refs.add(m);
   }
 
   // Famílias de hardware: "EDC17C64", "SID803", "SIMOS18", etc.
