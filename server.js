@@ -7,6 +7,7 @@ const path = require('path');
 const crypto = require('crypto');
 const express = require('express');
 const session = require('express-session');
+const MongoStore = require('connect-mongo');
 const multer = require('multer');
 const ExcelJS = require('exceljs');
 
@@ -38,19 +39,30 @@ const SESSION_SECRET = process.env.SESSION_SECRET || crypto.randomBytes(32).toSt
 const app = express();
 app.set('trust proxy', 1);
 app.use(express.json());
-app.use(
-  session({
-    secret: SESSION_SECRET,
-    resave: false,
-    saveUninitialized: false,
-    cookie: {
-      httpOnly: true,
-      sameSite: 'lax',
-      secure: IS_PRODUCTION,
-      maxAge: 30 * 24 * 60 * 60 * 1000,
-    },
-  })
-);
+
+// Sem isto, as sessoes ficam so em memoria - qualquer reinicio do servidor
+// (ex: o plano gratuito do Render "adormece" com inatividade e acorda como
+// processo novo) apaga todas as sessoes, desligando quem tinha a sessao
+// iniciada a meio de uma tarefa. Com MONGODB_URI definido, as sessoes ficam
+// guardadas no Mongo e sobrevivem a reinicios.
+const sessionConfig = {
+  secret: SESSION_SECRET,
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    httpOnly: true,
+    sameSite: 'lax',
+    secure: IS_PRODUCTION,
+    maxAge: 30 * 24 * 60 * 60 * 1000,
+  },
+};
+if (process.env.MONGODB_URI) {
+  sessionConfig.store = MongoStore.create({
+    mongoUrl: process.env.MONGODB_URI,
+    collectionName: 'sessions',
+  });
+}
+app.use(session(sessionConfig));
 
 // ---------------------------------------------------------------------------
 // Autenticacao
