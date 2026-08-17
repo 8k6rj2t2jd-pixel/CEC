@@ -117,11 +117,18 @@ function slugify(value) {
 // porque normalmente nao vem impresso na etiqueta.
 app.post('/api/ocr', upload.single('label'), async (req, res) => {
   if (!req.file) return res.status(400).json({ error: 'Falta a foto da etiqueta.' });
+  const startedAt = Date.now();
+  console.log(`[OCR] a processar ${req.file.originalname} (${Math.round(req.file.size / 1024)}KB)...`);
   try {
     const result = await readLabel(req.file.path);
+    const ms = Date.now() - startedAt;
+    console.log(
+      `[OCR] concluido em ${ms}ms - fabricante=${result.manufacturer || '(nenhum)'} ` +
+        `referencias=${JSON.stringify(result.referenceCandidates)} textoBruto="${result.rawText.slice(0, 200)}"`
+    );
     res.json(result);
   } catch (err) {
-    console.error('Erro no OCR:', err);
+    console.error(`[OCR] falhou apos ${Date.now() - startedAt}ms:`, err);
     res.status(500).json({ error: 'Falha ao ler a etiqueta.' });
   } finally {
     fs.unlink(req.file.path, () => {});

@@ -176,6 +176,7 @@ async function showForm() {
   refCandidates.hidden = true;
   refCandidates.innerHTML = '';
   ocrStatus.hidden = false;
+  ocrStatus.classList.remove('error');
   ocrStatus.textContent = 'A ler a etiqueta… (pode demorar alguns segundos)';
 
   try {
@@ -184,37 +185,54 @@ async function showForm() {
       return { ok: false, data: {} };
     });
     const { ok, data } = await ocrPromise;
-    ocrStatus.hidden = true;
 
-    if (ok) {
-      if (data.rawText) {
-        ocrResult.hidden = false;
-        ocrRawText.textContent = data.rawText;
-      }
-      if (data.manufacturer) fieldManufacturer.value = titleCase(data.manufacturer);
-      if (data.partTypeHint) fieldPartType.value = data.partTypeHint;
-      if (Array.isArray(data.referenceCandidates) && data.referenceCandidates.length) {
-        const [first, second] = data.referenceCandidates;
-        if (first) fieldRef1.value = first.replace(/\s+/g, '');
-        if (second) fieldRef2.value = second;
+    if (!ok) {
+      ocrStatus.textContent = 'Não foi possível ler a etiqueta automaticamente. Preencha os campos à mão.';
+      ocrStatus.classList.add('error');
+      return;
+    }
 
-        refCandidates.hidden = false;
-        data.referenceCandidates.forEach((ref) => {
-          const b = document.createElement('button');
-          b.type = 'button';
-          b.textContent = ref;
-          b.addEventListener('click', () => {
-            if (!fieldRef1.value) fieldRef1.value = ref.replace(/\s+/g, '');
-            else if (!fieldRef2.value) fieldRef2.value = ref.replace(/\s+/g, '');
-            else fieldRef2.value = ref.replace(/\s+/g, '');
-          });
-          refCandidates.appendChild(b);
+    let foundSomething = false;
+
+    if (data.rawText) {
+      ocrResult.hidden = false;
+      ocrRawText.textContent = data.rawText;
+    }
+    if (data.manufacturer) {
+      fieldManufacturer.value = titleCase(data.manufacturer);
+      foundSomething = true;
+    }
+    if (data.partTypeHint) fieldPartType.value = data.partTypeHint;
+    if (Array.isArray(data.referenceCandidates) && data.referenceCandidates.length) {
+      foundSomething = true;
+      const [first, second] = data.referenceCandidates;
+      if (first) fieldRef1.value = first.replace(/\s+/g, '');
+      if (second) fieldRef2.value = second;
+
+      refCandidates.hidden = false;
+      data.referenceCandidates.forEach((ref) => {
+        const b = document.createElement('button');
+        b.type = 'button';
+        b.textContent = ref;
+        b.addEventListener('click', () => {
+          if (!fieldRef1.value) fieldRef1.value = ref.replace(/\s+/g, '');
+          else if (!fieldRef2.value) fieldRef2.value = ref.replace(/\s+/g, '');
+          else fieldRef2.value = ref.replace(/\s+/g, '');
         });
-      }
+        refCandidates.appendChild(b);
+      });
+    }
+
+    if (foundSomething) {
+      ocrStatus.hidden = true;
+    } else {
+      ocrStatus.textContent = 'Não foi possível identificar nada na etiqueta automaticamente. Preencha os campos à mão.';
+      ocrStatus.classList.add('error');
     }
   } catch (err) {
     console.error(err);
-    ocrStatus.hidden = true;
+    ocrStatus.textContent = 'Ocorreu um erro ao ler a etiqueta. Preencha os campos à mão.';
+    ocrStatus.classList.add('error');
   }
 }
 
