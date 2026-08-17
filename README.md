@@ -33,6 +33,12 @@ plano (OCR) e tenta preencher sozinha, por altura de rever/guardar a peça:
 - **Tipo de peça** — uma sugestão, quando o prefixo da referência Bosch é
   conhecido (ex: `0281…` → centralina de injeção diesel).
 
+> **Dica para melhores resultados:** aproxime-se bem da etiqueta ao tirar a
+> foto (o texto deve ocupar o máximo da imagem). Etiquetas em metal
+> riscado/gasto, ou fotos com muita carcaça à volta, são mais difíceis de
+> ler automaticamente — o texto lido aparece sempre visível no ecrã, e os
+> campos podem ser corrigidos à mão antes de guardar.
+
 A **marca e modelo do veículo** e o **tipo de peça** ficam sempre à sua
 confirmação/edição no formulário, porque normalmente essa informação não vem
 impressa na etiqueta da peça (a etiqueta identifica a peça e o fabricante da

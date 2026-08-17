@@ -23,7 +23,7 @@ const STEP_LABELS = ['front', 'back', 'label'];
 const STEP_HINTS = {
   front: 'Aponte à frente da peça e tire a foto.',
   back: 'Vire a peça e fotografe a parte de trás.',
-  label: 'Fotografe a etiqueta com as referências (a app vai tentar lê-la automaticamente).',
+  label: 'Aproxime-se bem da etiqueta, para o texto ocupar o máximo da foto (a app vai tentar lê-la automaticamente).',
 };
 
 const video = document.getElementById('camera-video');
