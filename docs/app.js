@@ -5,10 +5,11 @@
 // (mesma lógica da versão para servidor, adaptada para correr no browser).
 // ---------------------------------------------------------------------------
 const KNOWN_MANUFACTURERS = [
-  'BOSCH', 'DENSO', 'CONTINENTAL', 'SIEMENS', 'VDO', 'DELPHI', 'LUCAS',
-  'MAGNETI MARELLI', 'MARELLI', 'VALEO', 'HITACHI', 'SAGEM', 'HELLA',
-  'TEMIC', 'PANASONIC', 'MITSUBISHI ELECTRIC', 'VISTEON', 'KEIHIN',
-  'AISIN', 'JTEKT', 'TRW', 'MOTOROLA',
+  'BOSCH', 'DENSO', 'CONTINENTAL', 'VITESCO', 'SIEMENS', 'VDO', 'DELPHI',
+  'APTIV', 'LUCAS', 'MAGNETI MARELLI', 'MARELLI', 'VALEO', 'HITACHI',
+  'SAGEM', 'HELLA', 'TEMIC', 'PANASONIC', 'MITSUBISHI ELECTRIC', 'VISTEON',
+  'KEIHIN', 'AISIN', 'JTEKT', 'TRW', 'MOTOROLA', 'ZF', 'HYUNDAI MOBIS',
+  'MOBIS',
 ];
 
 const BOSCH_PREFIX_HINTS = [
@@ -30,6 +31,8 @@ const HARDWARE_FAMILY_PATTERNS = [
   { regex: /\bSIMOS\d*\b/g, label: 'Centralina de injeção (Siemens/Continental)' },
   { regex: /\bDDCR\d*(?:\.\d+)*\b/g, label: 'Centralina de injeção (Delphi/Lucas)' },
   { regex: /\bDCM\d+(?:\.\d+)?\b/g, label: 'Centralina de injeção (Delphi/Lucas)' },
+  { regex: /\bIAW\s?\d?[A-Z0-9.]*\b/g, label: 'Centralina de injeção (Magneti Marelli)' },
+  { regex: /\bMJD\s?\d?[A-Z0-9.]*\b/g, label: 'Centralina de injeção diesel (Magneti Marelli Multijet)' },
 ];
 
 function normalizeText(text) {
@@ -49,13 +52,22 @@ function extractReferences(rawText) {
   const vagMatches = text.match(/\b[0-9][0-9A-Z]{1,2}[\s.]\d{3}[\s.]\d{3}(?:[\s.]?[A-Z]{1,2})?\b/g) || [];
   for (const m of vagMatches) refs.add(m.replace(/[\s.]+/g, ' ').trim());
 
-  // Ford/GM: "AV21-12A650-GC" (grupos alfanuméricos separados por traços).
-  // Exige pelo menos uma letra para não apanhar datas tipo "11-01-20" (só
+  // Mercedes: "A 000 446 89 06" (comeca por "A", 4 grupos de dígitos)
+  const mercedesMatches = text.match(/\bA[\s.]?\d{3}[\s.]?\d{3}[\s.]?\d{2}[\s.]?\d{2}\b/g) || [];
+  for (const m of mercedesMatches) refs.add(m.replace(/[\s.]+/g, ' ').trim());
+
+  // Ford/GM: "AV21-12A650-GC" (3 grupos alfanuméricos com traços). Exige
+  // pelo menos uma letra para não apanhar datas tipo "11-01-20" (só
   // números) que também têm 3 grupos separados por traços.
   const fordMatches = text.match(/\b[A-Z0-9]{2,6}-[A-Z0-9]{2,6}-[A-Z0-9]{2,6}\b/g) || [];
   for (const m of fordMatches) {
     if (/\d/.test(m) && /[A-Z]/.test(m)) refs.add(m);
   }
+
+  // Toyota/Honda/Mazda: "89661-0D060" ou "90910-12252" (2 grupos, o
+  // primeiro com 5 dígitos)
+  const toyotaMatches = text.match(/\b\d{5}-[A-Z0-9]{4,6}\b/g) || [];
+  for (const m of toyotaMatches) refs.add(m);
 
   // Famílias de hardware: "EDC17C64", "SID803", "SIMOS18", etc.
   for (const { regex } of HARDWARE_FAMILY_PATTERNS) {
@@ -74,7 +86,12 @@ function extractReferences(rawText) {
 
 function extractManufacturer(rawText) {
   const text = rawText.toUpperCase();
-  for (const name of KNOWN_MANUFACTURERS) if (text.includes(name)) return name;
+  for (const name of KNOWN_MANUFACTURERS) {
+    // Limites de palavra (em vez de simples "includes") para nomes curtos
+    // como "ZF" ou "VDO" não acertarem por acaso dentro de ruído do OCR.
+    const pattern = new RegExp(`\\b${name.replace(/\s+/g, '\\s+')}\\b`);
+    if (pattern.test(text)) return name;
+  }
   return null;
 }
 
