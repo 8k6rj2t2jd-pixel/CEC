@@ -5,7 +5,7 @@
 // (mesma lógica da versão para servidor, adaptada para correr no browser).
 // ---------------------------------------------------------------------------
 const KNOWN_MANUFACTURERS = [
-  'BOSCH', 'DENSO', 'CONTINENTAL', 'SIEMENS', 'VDO', 'DELPHI',
+  'BOSCH', 'DENSO', 'CONTINENTAL', 'SIEMENS', 'VDO', 'DELPHI', 'LUCAS',
   'MAGNETI MARELLI', 'MARELLI', 'VALEO', 'HITACHI', 'SAGEM', 'HELLA',
   'TEMIC', 'PANASONIC', 'MITSUBISHI ELECTRIC', 'VISTEON', 'KEIHIN',
   'AISIN', 'JTEKT', 'TRW', 'MOTOROLA',
@@ -17,6 +17,19 @@ const BOSCH_PREFIX_HINTS = [
   { prefix: '0265', label: 'Centralina ABS/ESP' },
   { prefix: '0258', label: 'Sonda lambda' },
   { prefix: '0221', label: 'Bobina de ignição' },
+];
+
+// Nomes de código de famílias de hardware, impressos na etiqueta a par (ou
+// em vez) do fabricante/referência numérica - ex: "EDC17C64", "MED17.5.2",
+// "SID803", "SIMOS18".
+const HARDWARE_FAMILY_PATTERNS = [
+  { regex: /\bEDC1[5-7][A-Z]?\d*\b/g, label: 'Centralina de injeção (diesel common rail)' },
+  { regex: /\bMED1\d(?:\.\d+){0,2}\b/g, label: 'Centralina de injeção (gasolina direta)' },
+  { regex: /\bME7(?:\.\d+){0,2}\b/g, label: 'Centralina de injeção (gasolina indireta)' },
+  { regex: /\bSID\d{3}\b/g, label: 'Centralina de injeção (Siemens/Continental)' },
+  { regex: /\bSIMOS\d*\b/g, label: 'Centralina de injeção (Siemens/Continental)' },
+  { regex: /\bDDCR\d*(?:\.\d+)*\b/g, label: 'Centralina de injeção (Delphi/Lucas)' },
+  { regex: /\bDCM\d+(?:\.\d+)?\b/g, label: 'Centralina de injeção (Delphi/Lucas)' },
 ];
 
 function normalizeText(text) {
@@ -31,14 +44,21 @@ function extractReferences(rawText) {
   const boschMatches = text.match(/\b0[\s.]?\d{3}[\s.]?\d{3}[\s.]?\d{3}\b/g) || [];
   for (const m of boschMatches) refs.add(m.replace(/[\s.]+/g, ' ').trim());
 
-  // VAG/Audi/VW/Seat/Skoda: "038 906 018 BA" (3 grupos de 2-3 dígitos + sufixo de letras)
-  const vagMatches = text.match(/\b\d{2,3}[\s.]\d{3}[\s.]\d{3}(?:[\s.]?[A-Z]{1,2})?\b/g) || [];
+  // VAG/Audi/VW/Seat/Skoda: "038 906 018 BA" ou "03G 906 018" (1o grupo pode
+  // ter uma letra, ex: 1K0, 8V0)
+  const vagMatches = text.match(/\b[0-9][0-9A-Z]{1,2}[\s.]\d{3}[\s.]\d{3}(?:[\s.]?[A-Z]{1,2})?\b/g) || [];
   for (const m of vagMatches) refs.add(m.replace(/[\s.]+/g, ' ').trim());
 
   // Ford/GM: "AV21-12A650-GC" (grupos alfanuméricos separados por traços)
   const fordMatches = text.match(/\b[A-Z0-9]{2,6}-[A-Z0-9]{2,6}-[A-Z0-9]{2,6}\b/g) || [];
   for (const m of fordMatches) {
     if (/\d/.test(m)) refs.add(m);
+  }
+
+  // Famílias de hardware: "EDC17C64", "SID803", "SIMOS18", etc.
+  for (const { regex } of HARDWARE_FAMILY_PATTERNS) {
+    const matches = text.match(regex) || [];
+    for (const m of matches) refs.add(m);
   }
 
   // OEM genérica: referência contínua tipo "HOM8200066001"
@@ -59,6 +79,8 @@ function extractManufacturer(rawText) {
 function extractPartTypeHint(rawText) {
   const compact = rawText.replace(/[\s.]/g, '');
   for (const { prefix, label } of BOSCH_PREFIX_HINTS) if (compact.includes(prefix)) return label;
+  const text = rawText.toUpperCase();
+  for (const { regex, label } of HARDWARE_FAMILY_PATTERNS) if (text.match(regex)) return label;
   return null;
 }
 
