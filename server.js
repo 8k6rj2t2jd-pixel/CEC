@@ -7,7 +7,7 @@ const path = require('path');
 const crypto = require('crypto');
 const express = require('express');
 const session = require('express-session');
-const MongoStore = require('connect-mongo');
+const { MongoStore } = require('connect-mongo');
 const multer = require('multer');
 const ExcelJS = require('exceljs');
 
@@ -228,27 +228,32 @@ app.post(
           partImages[key] = { url: `/storage/${rel}`, publicId: null };
         }
       }
+    } catch (err) {
+      console.error('[parts] falha ao enviar as fotos:', err);
+      cleanupTmp();
+      return res.status(500).json({ error: `Falha ao guardar as fotos (${err.message || err}).` });
+    }
 
-      const part = {
-        id,
-        partType,
-        manufacturer,
-        brand: brand || '',
-        model: model || '',
-        ref1: ref1 || '',
-        ref2: ref2 || '',
-        quantity: Number.isFinite(Number(quantity)) ? Math.max(0, Math.trunc(Number(quantity))) : 1,
-        notes: notes || '',
-        images: partImages,
-        createdAt: new Date().toISOString(),
-      };
+    const part = {
+      id,
+      partType,
+      manufacturer,
+      brand: brand || '',
+      model: model || '',
+      ref1: ref1 || '',
+      ref2: ref2 || '',
+      quantity: Number.isFinite(Number(quantity)) ? Math.max(0, Math.trunc(Number(quantity))) : 1,
+      notes: notes || '',
+      images: partImages,
+      createdAt: new Date().toISOString(),
+    };
 
+    try {
       await store.createPart(part);
       res.status(201).json(part);
     } catch (err) {
-      console.error('[parts] falha ao guardar peca:', err);
-      cleanupTmp();
-      res.status(500).json({ error: 'Falha ao guardar a peca. Tente novamente.' });
+      console.error('[parts] falha ao gravar na base de dados:', err);
+      res.status(500).json({ error: `Falha ao gravar na base de dados (${err.message || err}).` });
     }
   }
 );
