@@ -35,6 +35,12 @@ function extractReferences(rawText) {
   const vagMatches = text.match(/\b\d{2,3}[\s.]\d{3}[\s.]\d{3}(?:[\s.]?[A-Z]{1,2})?\b/g) || [];
   for (const m of vagMatches) refs.add(m.replace(/[\s.]+/g, ' ').trim());
 
+  // Ford/GM: "AV21-12A650-GC" (grupos alfanuméricos separados por traços)
+  const fordMatches = text.match(/\b[A-Z0-9]{2,6}-[A-Z0-9]{2,6}-[A-Z0-9]{2,6}\b/g) || [];
+  for (const m of fordMatches) {
+    if (/\d/.test(m)) refs.add(m);
+  }
+
   // OEM genérica: referência contínua tipo "HOM8200066001"
   const oemMatches = text.match(/\b[A-Z]{0,4}\d{7,13}\b/g) || [];
   for (const m of oemMatches) {

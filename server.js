@@ -190,48 +190,54 @@ app.post(
     const id = crypto.randomUUID();
     const partImages = {};
 
-    if (images.useCloud) {
-      for (const key of ['front', 'back', 'label']) {
-        const file = files[key][0];
-        const uploaded = await images.uploadImage(file.path, id);
-        partImages[key] = { url: uploaded.url, publicId: uploaded.publicId };
+    try {
+      if (images.useCloud) {
+        for (const key of ['front', 'back', 'label']) {
+          const file = files[key][0];
+          const uploaded = await images.uploadImage(file.path, id);
+          partImages[key] = { url: uploaded.url, publicId: uploaded.publicId };
+        }
+        cleanupTmp();
+      } else {
+        const folder = path.join(
+          STORAGE_DIR,
+          slugify(manufacturer),
+          slugify(partType),
+          slugify(`${brand || 'sem-marca'}-${model || 'sem-modelo'}`),
+          id
+        );
+        fs.mkdirSync(folder, { recursive: true });
+        for (const key of ['front', 'back', 'label']) {
+          const file = files[key][0];
+          const ext = path.extname(file.originalname) || '.jpg';
+          const destName = `${key}${ext}`;
+          fs.renameSync(file.path, path.join(folder, destName));
+          const rel = path.relative(STORAGE_DIR, path.join(folder, destName)).split(path.sep).join('/');
+          partImages[key] = { url: `/storage/${rel}`, publicId: null };
+        }
       }
+
+      const part = {
+        id,
+        partType,
+        manufacturer,
+        brand: brand || '',
+        model: model || '',
+        ref1: ref1 || '',
+        ref2: ref2 || '',
+        quantity: Number.isFinite(Number(quantity)) ? Math.max(0, Math.trunc(Number(quantity))) : 1,
+        notes: notes || '',
+        images: partImages,
+        createdAt: new Date().toISOString(),
+      };
+
+      await store.createPart(part);
+      res.status(201).json(part);
+    } catch (err) {
+      console.error('[parts] falha ao guardar peca:', err);
       cleanupTmp();
-    } else {
-      const folder = path.join(
-        STORAGE_DIR,
-        slugify(manufacturer),
-        slugify(partType),
-        slugify(`${brand || 'sem-marca'}-${model || 'sem-modelo'}`),
-        id
-      );
-      fs.mkdirSync(folder, { recursive: true });
-      for (const key of ['front', 'back', 'label']) {
-        const file = files[key][0];
-        const ext = path.extname(file.originalname) || '.jpg';
-        const destName = `${key}${ext}`;
-        fs.renameSync(file.path, path.join(folder, destName));
-        const rel = path.relative(STORAGE_DIR, path.join(folder, destName)).split(path.sep).join('/');
-        partImages[key] = { url: `/storage/${rel}`, publicId: null };
-      }
+      res.status(500).json({ error: 'Falha ao guardar a peca. Tente novamente.' });
     }
-
-    const part = {
-      id,
-      partType,
-      manufacturer,
-      brand: brand || '',
-      model: model || '',
-      ref1: ref1 || '',
-      ref2: ref2 || '',
-      quantity: Number.isFinite(Number(quantity)) ? Math.max(0, Math.trunc(Number(quantity))) : 1,
-      notes: notes || '',
-      images: partImages,
-      createdAt: new Date().toISOString(),
-    };
-
-    await store.createPart(part);
-    res.status(201).json(part);
   }
 );
 
