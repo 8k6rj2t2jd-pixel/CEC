@@ -257,6 +257,47 @@ main { padding: 16px; max-width: 720px; margin: 0 auto; }
   font-size: 0.62rem; font-weight: 700; padding: 2px 6px; border-radius: 999px;
 }
 
+.label-template-check { display: flex; flex-direction: row; align-items: center; gap: 8px; }
+
+.label-group { margin-bottom: 28px; }
+.label-group-heading { margin: 0 0 10px; font-size: 1.05rem; }
+
+.label-template-box {
+  background: linear-gradient(180deg, #fff8e1, #fdecc4);
+  border: 1px solid #e8c565; border-radius: var(--radius);
+  padding: 12px; margin-bottom: 14px;
+}
+.label-template-heading { font-size: 0.85rem; font-weight: 700; color: #8a6d1d; margin-bottom: 8px; }
+.label-template-empty { margin: 0; font-size: 0.8rem; color: #8a6d1d; }
+.label-template-grid, .labels-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 10px;
+}
+
+.label-others-heading { font-size: 0.8rem; font-weight: 600; color: var(--muted); margin: 4px 0 8px; }
+
+.label-card {
+  position: relative; background: var(--panel); border: 1px solid var(--border);
+  border-radius: 10px; overflow: hidden;
+}
+.label-template-card { border-color: #e8c565; box-shadow: 0 0 0 1px #e8c565 inset; }
+.label-card a { display: block; }
+.label-card img {
+  width: 100%; aspect-ratio: 1/1; object-fit: cover; display: block;
+}
+.label-file-icon {
+  width: 100%; aspect-ratio: 1/1; display: flex; align-items: center; justify-content: center;
+  font-size: 2rem; background: var(--panel-2);
+}
+.label-caption {
+  padding: 6px 8px; font-size: 0.72rem; color: var(--text);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.label-delete {
+  position: absolute; top: 4px; right: 4px; width: 20px; height: 20px;
+  border-radius: 50%; border: none; background: rgba(0, 0, 0, 0.6); color: white;
+  font-size: 0.7rem; line-height: 20px; padding: 0; cursor: pointer;
+}
+
 /* Em ecrãs largos (computador/tablet), a barra do topo passa a barra
    lateral fixa. Em telemóvel (a maioria do uso real desta app) mantém-se
    como está - uma barra lateral fixa desperdiçaria espaço precioso num

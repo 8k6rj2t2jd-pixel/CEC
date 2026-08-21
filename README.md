@@ -80,6 +80,13 @@ WhatsApp) e só quer saber rapidamente o que fazer com ela — sem passar pelas
   ficheiro `.xlsx` com foto, tipo de peça, fabricante, referências,
   marca/modelo e quantidade de cada peça.
 - Espaço para o **logótipo da empresa** — ver secção "Logótipo" abaixo.
+- Aba **"Etiquetas"**: um repositório para guardar os modelos template e as
+  etiquetas já feitas no vosso software de etiquetas (fotos ou PDF),
+  organizados por fabricante — cada fabricante tem um espaço próprio
+  (destacado a dourado) para os modelos template, e por baixo ficam as
+  restantes etiquetas. Pesquise por referência ou fabricante para encontrar
+  rapidamente o que precisa, ou use o filtro "Indiferenciadas" para ver as
+  etiquetas que ainda não têm fabricante atribuído.
 
 ### Segurança
 

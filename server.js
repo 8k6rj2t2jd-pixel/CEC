@@ -198,6 +198,28 @@ function handleUpload(middleware) {
   };
 }
 
+// Ficheiros do repositorio de etiquetas: alem de fotos, tambem pode ser um
+// PDF exportado do software de criar etiquetas (um modelo/template, por
+// exemplo).
+const ALLOWED_LABEL_FILE_TYPES = new Set([...ALLOWED_IMAGE_TYPES, 'application/pdf']);
+
+const labelUpload = multer({
+  storage: multer.diskStorage({
+    destination: (req, file, cb) => cb(null, TMP_DIR),
+    filename: (req, file, cb) => {
+      const ext = path.extname(file.originalname) || '';
+      cb(null, `${crypto.randomUUID()}${ext}`);
+    },
+  }),
+  limits: { fileSize: 20 * 1024 * 1024 },
+  fileFilter: (req, file, cb) => {
+    if (!ALLOWED_LABEL_FILE_TYPES.has(file.mimetype)) {
+      return cb(new Error('Só são permitidos ficheiros de imagem ou PDF.'));
+    }
+    cb(null, true);
+  },
+});
+
 function slugify(value) {
   return String(value || 'diverso')
     .normalize('NFD')
@@ -478,6 +500,104 @@ app.post('/api/admin/import-stock', async (req, res) => {
     console.error('[import-stock] falha:', err);
     res.status(500).json({ error: 'Falha na importação. Tente novamente.' });
   }
+});
+
+// ---------------------------------------------------------------------------
+// Repositorio de etiquetas: fotos/PDFs de etiquetas ja feitas ou modelos
+// template, organizados por fabricante para se poder pesquisar por
+// referencia ou fabricante mais tarde. Uma etiqueta sem fabricante definido
+// fica "indiferenciada" ate ser classificada.
+// ---------------------------------------------------------------------------
+app.get('/api/labels', async (req, res) => {
+  const labels = await store.listLabels();
+  res.json(labels);
+});
+
+app.post('/api/labels', handleUpload(labelUpload.single('file')), async (req, res) => {
+  if (!req.file) return res.status(400).json({ error: 'Falta o ficheiro da etiqueta.' });
+  const cleanupTmp = () => fs.unlink(req.file.path, () => {});
+
+  const manufacturer = (req.body.manufacturer || '').trim();
+  const reference = (req.body.reference || '').trim();
+  const isTemplate = req.body.isTemplate === 'true' || req.body.isTemplate === 'on';
+
+  const id = crypto.randomUUID();
+  let fileUrl;
+  let publicId = null;
+  let resourceType = null;
+
+  try {
+    if (images.useCloud) {
+      const uploaded = await images.uploadLabelFile(req.file.path, id);
+      fileUrl = uploaded.url;
+      publicId = uploaded.publicId;
+      resourceType = uploaded.resourceType;
+      cleanupTmp();
+    } else {
+      const folder = path.join(STORAGE_DIR, 'etiquetas', slugify(manufacturer || 'indiferenciadas'), id);
+      fs.mkdirSync(folder, { recursive: true });
+      const ext = path.extname(req.file.originalname) || '';
+      const destName = `ficheiro${ext}`;
+      fs.renameSync(req.file.path, path.join(folder, destName));
+      const rel = path.relative(STORAGE_DIR, path.join(folder, destName)).split(path.sep).join('/');
+      fileUrl = `/storage/${rel}`;
+    }
+  } catch (err) {
+    console.error('[labels] falha ao guardar o ficheiro:', err);
+    cleanupTmp();
+    return res.status(500).json({ error: 'Falha ao guardar a etiqueta. Tente novamente.' });
+  }
+
+  const label = {
+    id,
+    manufacturer,
+    reference,
+    isTemplate,
+    fileUrl,
+    fileName: req.file.originalname,
+    fileType: req.file.mimetype,
+    publicId,
+    resourceType,
+    createdAt: new Date().toISOString(),
+  };
+
+  try {
+    await store.createLabel(label);
+    res.status(201).json(label);
+  } catch (err) {
+    console.error('[labels] falha ao gravar na base de dados:', err);
+    res.status(500).json({ error: 'Falha ao gravar a etiqueta. Tente novamente.' });
+  }
+});
+
+app.patch('/api/labels/:id', async (req, res) => {
+  const allowed = ['manufacturer', 'reference', 'isTemplate'];
+  const patch = {};
+  for (const key of allowed) {
+    if (key in req.body) patch[key] = req.body[key];
+  }
+  if ('isTemplate' in patch) patch.isTemplate = patch.isTemplate === true || patch.isTemplate === 'true';
+  const updated = await store.updateLabel(req.params.id, patch);
+  if (!updated) return res.status(404).json({ error: 'Etiqueta não encontrada.' });
+  res.json(updated);
+});
+
+app.delete('/api/labels/:id', async (req, res) => {
+  const removed = await store.deleteLabel(req.params.id);
+  if (!removed) return res.status(404).json({ error: 'Etiqueta não encontrada.' });
+
+  if (images.useCloud) {
+    if (removed.publicId) await images.deleteLabelFile(removed.publicId, removed.resourceType);
+  } else if (removed.fileUrl) {
+    // So apaga a pasta se houver mesmo um caminho local guardado (mesma
+    // proteção usada para as fotos das peças, para nunca apagar o
+    // repositorio inteiro por engano).
+    const rel = removed.fileUrl.replace(/^\/storage\//, '');
+    const folder = path.join(STORAGE_DIR, path.dirname(rel));
+    fs.rm(folder, { recursive: true, force: true }, () => {});
+  }
+
+  res.json({ ok: true });
 });
 
 // Evita que um valor guardado (referencia, notas, etc.) comecado por

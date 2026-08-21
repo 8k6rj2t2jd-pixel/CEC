@@ -18,6 +18,7 @@
       <button class="tab-btn active" data-tab="novo">➕ Nova peça</button>
       <button class="tab-btn" data-tab="verificar">🔍 Verificar peça</button>
       <button class="tab-btn" data-tab="catalogo">📦 Catálogo</button>
+      <button class="tab-btn" data-tab="etiquetas">🏷️ Etiquetas</button>
     </nav>
   </div>
   <button id="btn-logout" class="btn-logout">Sair</button>
@@ -227,7 +228,61 @@
     <div id="parts-grid" class="parts-grid"></div>
     <p id="empty-state" class="hint" hidden>Ainda não há peças guardadas.</p>
   </section>
+
+  <!-- ==================== REPOSITÓRIO DE ETIQUETAS ==================== -->
+  <section id="tab-etiquetas" class="tab-panel">
+    <p class="hint">
+      Guarde aqui os modelos template e as etiquetas já feitas no vosso
+      software de etiquetas, organizadas por fabricante, para as
+      encontrar depressa mais tarde por referência ou fabricante.
+    </p>
+    <div class="category-toggle" id="label-view-toggle">
+      <button type="button" class="category-btn active" data-category="fabricante">Por fabricante</button>
+      <button type="button" class="category-btn" data-category="indiferenciadas">Indiferenciadas</button>
+    </div>
+    <div class="filters">
+      <input id="label-search" type="search" placeholder="Pesquisar por referência ou fabricante…" />
+    </div>
+    <div class="backup-row">
+      <button type="button" id="btn-add-label" class="btn btn-primary">+ Adicionar etiqueta</button>
+    </div>
+    <div id="labels-results"></div>
+    <p id="labels-empty-state" class="hint" hidden>Sem etiquetas para mostrar.</p>
+  </section>
 </main>
+</div>
+
+<!-- ==================== ADICIONAR ETIQUETA ==================== -->
+<div id="label-upload-overlay" class="lightbox" hidden>
+  <form id="label-upload-form" class="edit-card">
+    <div class="edit-card-head">
+      <h2>Adicionar etiqueta</h2>
+      <button type="button" id="label-upload-close" class="btn lightbox-close-inline">✕</button>
+    </div>
+
+    <label>
+      Fabricante
+      <input list="manufacturers" id="label-field-manufacturer" placeholder="Deixe em branco se ainda não souber" />
+    </label>
+    <label>
+      Referência
+      <input id="label-field-reference" placeholder="Ex: 0281010438" />
+    </label>
+    <label class="label-template-check">
+      <input type="checkbox" id="label-field-template" />
+      É um modelo/template para este fabricante
+    </label>
+    <label>
+      Ficheiro (foto ou PDF)
+      <input type="file" id="label-file-input" accept="image/*,application/pdf" required />
+    </label>
+
+    <div class="form-actions">
+      <button type="button" id="label-upload-cancel" class="btn">Cancelar</button>
+      <button type="submit" class="btn btn-primary">Guardar</button>
+    </div>
+    <p id="label-upload-error" class="error" hidden></p>
+  </form>
 </div>
 
 <div id="lightbox" class="lightbox" hidden>

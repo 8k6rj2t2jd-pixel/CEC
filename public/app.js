@@ -13,6 +13,7 @@ function switchToTab(name) {
   tabButtons.forEach((b) => b.classList.toggle('active', b.dataset.tab === name));
   tabPanels.forEach((p) => p.classList.toggle('active', p.id === `tab-${name}`));
   if (name === 'catalogo') loadParts();
+  if (name === 'etiquetas') loadLabels();
 }
 
 tabButtons.forEach((btn) => {
@@ -953,6 +954,197 @@ document.getElementById('btn-import-stock').addEventListener('click', async () =
 document.getElementById('btn-logout').addEventListener('click', async () => {
   await fetch('/api/logout', { method: 'POST' });
   window.location.href = '/login';
+});
+
+// ---------------------------------------------------------------------------
+// Repositório de etiquetas
+// ---------------------------------------------------------------------------
+let allLabels = [];
+let labelViewMode = 'fabricante';
+
+const labelSearchInput = document.getElementById('label-search');
+const labelsResults = document.getElementById('labels-results');
+const labelsEmptyState = document.getElementById('labels-empty-state');
+const labelViewToggle = document.getElementById('label-view-toggle');
+
+wireCategoryToggle(labelViewToggle, (view) => {
+  labelViewMode = view;
+  renderLabels();
+});
+
+async function loadLabels() {
+  const resp = await fetch('/api/labels');
+  allLabels = await resp.json();
+  renderLabels();
+}
+
+function matchesLabelSearch(label, q) {
+  if (!q) return true;
+  return [label.manufacturer, label.reference, label.fileName]
+    .filter(Boolean)
+    .some((field) => field.toLowerCase().includes(q));
+}
+
+function renderLabels() {
+  const q = labelSearchInput.value.trim().toLowerCase();
+  labelsResults.innerHTML = '';
+
+  if (labelViewMode === 'indiferenciadas') {
+    const unassigned = allLabels.filter((l) => !l.manufacturer).filter((l) => matchesLabelSearch(l, q));
+    labelsEmptyState.hidden = unassigned.length > 0;
+    const grid = document.createElement('div');
+    grid.className = 'labels-grid';
+    unassigned.forEach((l) => grid.appendChild(renderLabelCard(l)));
+    labelsResults.appendChild(grid);
+    return;
+  }
+
+  const manufacturers = Array.from(new Set(allLabels.filter((l) => l.manufacturer).map((l) => l.manufacturer))).sort();
+  let anyShown = false;
+
+  manufacturers.forEach((manufacturer) => {
+    const labelsForManufacturer = allLabels.filter((l) => l.manufacturer === manufacturer);
+    const manufacturerMatches = !q || manufacturer.toLowerCase().includes(q);
+    const matchingLabels = labelsForManufacturer.filter((l) => matchesLabelSearch(l, q));
+    if (q && !manufacturerMatches && !matchingLabels.length) return;
+    anyShown = true;
+
+    const group = document.createElement('div');
+    group.className = 'label-group';
+
+    const heading = document.createElement('h3');
+    heading.className = 'label-group-heading';
+    heading.textContent = manufacturer;
+    group.appendChild(heading);
+
+    const templates = labelsForManufacturer.filter((l) => l.isTemplate);
+    const templateBox = document.createElement('div');
+    templateBox.className = 'label-template-box';
+    const templateHeading = document.createElement('div');
+    templateHeading.className = 'label-template-heading';
+    templateHeading.textContent = '⭐ Modelos template';
+    templateBox.appendChild(templateHeading);
+    if (templates.length) {
+      const templateGrid = document.createElement('div');
+      templateGrid.className = 'label-template-grid';
+      templates.forEach((l) => templateGrid.appendChild(renderLabelCard(l)));
+      templateBox.appendChild(templateGrid);
+    } else {
+      const empty = document.createElement('p');
+      empty.className = 'label-template-empty';
+      empty.textContent = 'Ainda sem modelo template.';
+      templateBox.appendChild(empty);
+    }
+    group.appendChild(templateBox);
+
+    const others = (manufacturerMatches ? labelsForManufacturer : matchingLabels).filter((l) => !l.isTemplate);
+    if (others.length) {
+      const othersHeading = document.createElement('div');
+      othersHeading.className = 'label-others-heading';
+      othersHeading.textContent = 'Outras etiquetas';
+      group.appendChild(othersHeading);
+      const grid = document.createElement('div');
+      grid.className = 'labels-grid';
+      others.forEach((l) => grid.appendChild(renderLabelCard(l)));
+      group.appendChild(grid);
+    }
+
+    labelsResults.appendChild(group);
+  });
+
+  labelsEmptyState.hidden = anyShown;
+}
+
+function renderLabelCard(label) {
+  const card = document.createElement('div');
+  card.className = label.isTemplate ? 'label-card label-template-card' : 'label-card';
+
+  const link = document.createElement('a');
+  link.href = label.fileUrl;
+  link.target = '_blank';
+  link.rel = 'noopener';
+
+  if (/^image\//.test(label.fileType || '')) {
+    const img = document.createElement('img');
+    img.src = label.fileUrl;
+    img.alt = label.fileName || '';
+    link.appendChild(img);
+  } else {
+    const icon = document.createElement('div');
+    icon.className = 'label-file-icon';
+    icon.textContent = '📄';
+    link.appendChild(icon);
+  }
+  card.appendChild(link);
+
+  const caption = document.createElement('div');
+  caption.className = 'label-caption';
+  caption.textContent = label.reference || label.fileName || '';
+  card.appendChild(caption);
+
+  const delBtn = document.createElement('button');
+  delBtn.type = 'button';
+  delBtn.className = 'label-delete';
+  delBtn.textContent = '✕';
+  delBtn.title = 'Eliminar etiqueta';
+  delBtn.addEventListener('click', async () => {
+    if (!confirm('Eliminar esta etiqueta?')) return;
+    const resp = await fetch(`/api/labels/${label.id}`, { method: 'DELETE' });
+    if (resp.ok) {
+      allLabels = allLabels.filter((l) => l.id !== label.id);
+      renderLabels();
+    }
+  });
+  card.appendChild(delBtn);
+
+  return card;
+}
+
+labelSearchInput.addEventListener('input', renderLabels);
+
+const labelUploadOverlay = document.getElementById('label-upload-overlay');
+const labelUploadForm = document.getElementById('label-upload-form');
+const labelUploadError = document.getElementById('label-upload-error');
+
+document.getElementById('btn-add-label').addEventListener('click', () => {
+  labelUploadForm.reset();
+  labelUploadError.hidden = true;
+  labelUploadOverlay.hidden = false;
+});
+function closeLabelUpload() {
+  labelUploadOverlay.hidden = true;
+}
+document.getElementById('label-upload-close').addEventListener('click', closeLabelUpload);
+document.getElementById('label-upload-cancel').addEventListener('click', closeLabelUpload);
+
+labelUploadForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  labelUploadError.hidden = true;
+
+  const fileInput = document.getElementById('label-file-input');
+  if (!fileInput.files[0]) {
+    labelUploadError.hidden = false;
+    labelUploadError.textContent = 'Escolha um ficheiro.';
+    return;
+  }
+
+  const fd = new FormData();
+  fd.append('file', fileInput.files[0]);
+  fd.append('manufacturer', document.getElementById('label-field-manufacturer').value.trim());
+  fd.append('reference', document.getElementById('label-field-reference').value.trim());
+  fd.append('isTemplate', document.getElementById('label-field-template').checked ? 'true' : 'false');
+
+  try {
+    const resp = await fetch('/api/labels', { method: 'POST', body: fd });
+    const data = await resp.json();
+    if (!resp.ok) throw new Error(data.error || 'Falha ao enviar a etiqueta.');
+    allLabels.unshift(data);
+    closeLabelUpload();
+    renderLabels();
+  } catch (err) {
+    labelUploadError.hidden = false;
+    labelUploadError.textContent = err.message;
+  }
 });
 
 // ---------------------------------------------------------------------------
