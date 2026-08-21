@@ -184,18 +184,14 @@ app.post(
   ]),
   async (req, res) => {
     const files = req.files || {};
+    const providedKeys = ['front', 'back', 'label'].filter((key) => files[key]);
     const cleanupTmp = () => {
       for (const key of Object.keys(files)) {
         for (const f of files[key]) fs.unlink(f.path, () => {});
       }
     };
 
-    if (!files.front || !files.back || !files.label) {
-      cleanupTmp();
-      return res.status(400).json({ error: 'Sao precisas as 3 fotos: frente, tras e etiqueta.' });
-    }
-
-    const { partType, manufacturer, brand, model, ref1, ref2, quantity, notes } = req.body;
+    const { category, partType, manufacturer, brand, model, ref1, ref2, quantity, notes } = req.body;
     if (!partType || !manufacturer) {
       cleanupTmp();
       return res.status(400).json({ error: 'Tipo de peca e fabricante sao obrigatorios.' });
@@ -206,13 +202,13 @@ app.post(
 
     try {
       if (images.useCloud) {
-        for (const key of ['front', 'back', 'label']) {
+        for (const key of providedKeys) {
           const file = files[key][0];
           const uploaded = await images.uploadImage(file.path, id);
           partImages[key] = { url: uploaded.url, publicId: uploaded.publicId };
         }
         cleanupTmp();
-      } else {
+      } else if (providedKeys.length) {
         const folder = path.join(
           STORAGE_DIR,
           slugify(manufacturer),
@@ -221,7 +217,7 @@ app.post(
           id
         );
         fs.mkdirSync(folder, { recursive: true });
-        for (const key of ['front', 'back', 'label']) {
+        for (const key of providedKeys) {
           const file = files[key][0];
           const ext = path.extname(file.originalname) || '.jpg';
           const destName = `${key}${ext}`;
@@ -238,6 +234,7 @@ app.post(
 
     const part = {
       id,
+      category: category === 'quadrante' ? 'quadrante' : 'centralina',
       partType,
       manufacturer,
       brand: brand || '',
@@ -261,7 +258,7 @@ app.post(
 );
 
 app.patch('/api/parts/:id', async (req, res) => {
-  const allowed = ['partType', 'manufacturer', 'brand', 'model', 'ref1', 'ref2', 'quantity', 'notes'];
+  const allowed = ['category', 'partType', 'manufacturer', 'brand', 'model', 'ref1', 'ref2', 'quantity', 'notes'];
   const patch = {};
   for (const key of allowed) {
     if (key in req.body) patch[key] = req.body[key];
@@ -285,9 +282,14 @@ app.delete('/api/parts/:id', async (req, res) => {
     }
   } else {
     const firstUrl = (imgs[0] && imgs[0].url) || '';
-    const rel = firstUrl.replace(/^\/storage\//, '');
-    const folder = path.join(STORAGE_DIR, path.dirname(rel));
-    fs.rm(folder, { recursive: true, force: true }, () => {});
+    // So tenta apagar a pasta se houver mesmo um caminho local guardado -
+    // sem isto, uma peca sem fotos fazia "rel" ficar vazio e apagava a
+    // pasta STORAGE_DIR inteira (todas as fotos de todas as pecas).
+    if (firstUrl) {
+      const rel = firstUrl.replace(/^\/storage\//, '');
+      const folder = path.join(STORAGE_DIR, path.dirname(rel));
+      fs.rm(folder, { recursive: true, force: true }, () => {});
+    }
   }
 
   res.json({ ok: true });

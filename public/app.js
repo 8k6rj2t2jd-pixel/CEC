@@ -17,6 +17,25 @@ tabButtons.forEach((btn) => {
 });
 
 // ---------------------------------------------------------------------------
+// Interruptor Centralina/Quadrante (reutilizado no formulario e no catalogo)
+// ---------------------------------------------------------------------------
+function wireCategoryToggle(container, onChange) {
+  const buttons = container.querySelectorAll('.category-btn');
+  buttons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      buttons.forEach((b) => b.classList.toggle('active', b === btn));
+      onChange(btn.dataset.category);
+    });
+  });
+}
+
+const categoryToggle = document.getElementById('category-toggle');
+const fieldCategory = document.getElementById('field-category');
+wireCategoryToggle(categoryToggle, (category) => {
+  fieldCategory.value = category;
+});
+
+// ---------------------------------------------------------------------------
 // Captura de fotos (frente, trás, etiqueta)
 // ---------------------------------------------------------------------------
 const STEP_LABELS = ['front', 'back', 'label'];
@@ -171,6 +190,12 @@ btnContinue.addEventListener('click', async () => {
   }
 });
 
+document.getElementById('btn-skip-photos').addEventListener('click', async () => {
+  stopCamera();
+  captureStage.hidden = true;
+  await showForm();
+});
+
 // ---------------------------------------------------------------------------
 // Formulário + OCR
 // ---------------------------------------------------------------------------
@@ -190,6 +215,12 @@ async function showForm() {
   ocrResult.hidden = true;
   refCandidates.hidden = true;
   refCandidates.innerHTML = '';
+
+  if (!shots.label) {
+    ocrStatus.hidden = true;
+    return;
+  }
+
   ocrStatus.hidden = false;
   ocrStatus.classList.remove('error');
   ocrStatus.textContent = 'A ler a etiqueta… (pode demorar alguns segundos)';
@@ -260,9 +291,10 @@ partForm.addEventListener('submit', async (e) => {
   saveError.hidden = true;
 
   const fd = new FormData();
-  fd.append('front', shots.front, 'front.jpg');
-  fd.append('back', shots.back, 'back.jpg');
-  fd.append('label', shots.label, 'label.jpg');
+  if (shots.front) fd.append('front', shots.front, 'front.jpg');
+  if (shots.back) fd.append('back', shots.back, 'back.jpg');
+  if (shots.label) fd.append('label', shots.label, 'label.jpg');
+  fd.append('category', fieldCategory.value);
   fd.append('partType', fieldPartType.value.trim());
   fd.append('manufacturer', fieldManufacturer.value.trim());
   fd.append('brand', document.getElementById('field-brand').value.trim());
@@ -295,6 +327,7 @@ function resetCaptureFlow() {
   clearThumbs();
   setStepUi();
   partForm.reset();
+  categoryToggle.querySelectorAll('.category-btn').forEach((b) => b.classList.toggle('active', b.dataset.category === 'centralina'));
   partForm.hidden = true;
   saveSuccess.hidden = true;
   captureStage.hidden = false;
@@ -327,6 +360,17 @@ const statManufacturers = document.getElementById('stat-manufacturers');
 const statTypes = document.getElementById('stat-types');
 
 let allParts = [];
+let categoryFilter = '';
+
+const catalogCategoryToggle = document.getElementById('catalog-category-toggle');
+wireCategoryToggle(catalogCategoryToggle, (category) => {
+  categoryFilter = category;
+  renderParts();
+});
+
+function partCategory(part) {
+  return part.category || 'centralina';
+}
 
 async function loadParts() {
   const resp = await fetch('/api/parts');
@@ -372,6 +416,7 @@ function renderParts() {
   const modelFilter = filterModel.value;
 
   const filtered = allParts.filter((p) => {
+    if (categoryFilter && partCategory(p) !== categoryFilter) return false;
     if (typeFilter && p.partType !== typeFilter) return false;
     if (manufacturerFilter && p.manufacturer !== manufacturerFilter) return false;
     if (modelFilter && p.model !== modelFilter) return false;

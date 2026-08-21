@@ -60,6 +60,9 @@
       </div>
       <p id="capture-hint" class="hint">Aponte à frente da peça e tire a foto.</p>
       <p id="camera-error" class="error" hidden></p>
+      <p class="skip-photos-row">
+        <button type="button" id="btn-skip-photos" class="btn-link">Continuar sem fotos →</button>
+      </p>
     </div>
 
     <!-- ==================== FORMULARIO (passo 4) ==================== -->
@@ -72,6 +75,12 @@
       </div>
 
 
+      <div class="category-toggle" id="category-toggle">
+        <button type="button" class="category-btn active" data-category="centralina">Centralina</button>
+        <button type="button" class="category-btn" data-category="quadrante">Quadrante</button>
+      </div>
+      <input type="hidden" id="field-category" name="category" value="centralina" />
+
       <label>
         Tipo de peça
         <input list="part-types" id="field-partType" name="partType" placeholder="Ex: Centralina de injeção" required />
@@ -80,6 +89,7 @@
           <option value="Centralina ABS/ESP"></option>
           <option value="Centralina de airbag"></option>
           <option value="Quadro de instrumentos"></option>
+          <option value="Quadrante"></option>
           <option value="BSI / Caixa de fusíveis"></option>
           <option value="Centralina de caixa de velocidades"></option>
           <option value="Centralina de climatização"></option>
@@ -190,6 +200,11 @@
         <span class="stat-value" id="stat-types">0</span>
         <span class="stat-label">Tipos de peça distintos</span>
       </div>
+    </div>
+    <div class="category-toggle" id="catalog-category-toggle">
+      <button type="button" class="category-btn active" data-category="">Todas</button>
+      <button type="button" class="category-btn" data-category="centralina">Centralinas</button>
+      <button type="button" class="category-btn" data-category="quadrante">Quadrantes</button>
     </div>
     <div class="filters">
       <input id="search-input" type="search" placeholder="Pesquisar por referência, fabricante, marca…" />
