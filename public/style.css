@@ -188,8 +188,12 @@ main { padding: 16px; max-width: 720px; margin: 0 auto; }
   background: var(--panel-2); color: var(--text); cursor: pointer;
 }
 .qty-row .qty-val { flex: 1; text-align: center; font-weight: 700; }
-.card-actions { display: flex; justify-content: flex-end; margin-top: 8px; }
-.card-actions button { font-size: 0.75rem; color: var(--danger); text-decoration: underline; background: none; border: none; cursor: pointer; }
+.card-actions { display: flex; justify-content: flex-end; gap: 12px; margin-top: 8px; }
+.card-actions button {
+  font-size: 0.75rem; color: var(--muted); text-decoration: underline;
+  background: none; border: none; cursor: pointer;
+}
+.card-actions button.card-delete { color: var(--danger); }
 
 .lightbox {
   position: fixed; inset: 0; background: rgba(0,0,0,0.9);
@@ -201,6 +205,20 @@ main { padding: 16px; max-width: 720px; margin: 0 auto; }
 .lightbox-close {
   position: absolute; top: 16px; right: 16px; font-size: 1.1rem;
 }
+
+.edit-card {
+  background: var(--panel); border-radius: var(--radius); padding: 20px;
+  width: 100%; max-width: 480px; max-height: 90vh; overflow-y: auto;
+  display: flex; flex-direction: column; gap: 14px;
+}
+.edit-card-head { display: flex; align-items: center; justify-content: space-between; }
+.edit-card-head h2 { margin: 0; font-size: 1.1rem; }
+.lightbox-close-inline { background: none; border: none; font-size: 1.1rem; cursor: pointer; }
+.edit-photo-inputs { display: flex; gap: 8px; margin-top: -8px; }
+.edit-photo-input {
+  flex: 1; font-size: 0.75rem; color: var(--muted); display: flex; flex-direction: column; gap: 4px;
+}
+.edit-photo-input input { font-size: 0.75rem; }
 
 /* Em ecrãs largos (computador/tablet), a barra do topo passa a barra
    lateral fixa. Em telemóvel (a maioria do uso real desta app) mantém-se

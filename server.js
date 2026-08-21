@@ -271,6 +271,76 @@ app.patch('/api/parts/:id', async (req, res) => {
   res.json(updated);
 });
 
+// Adiciona ou troca fotos numa peca ja existente (ex: peca guardada sem foto
+// na altura, e agora quer-se acrescentar). So mexe nos slots enviados -
+// front/back/label sao todos opcionais e os que ja existiam ficam tal como
+// estavam.
+app.post(
+  '/api/parts/:id/photos',
+  upload.fields([
+    { name: 'front', maxCount: 1 },
+    { name: 'back', maxCount: 1 },
+    { name: 'label', maxCount: 1 },
+  ]),
+  async (req, res) => {
+    const files = req.files || {};
+    const providedKeys = ['front', 'back', 'label'].filter((key) => files[key]);
+    const cleanupTmp = () => {
+      for (const key of Object.keys(files)) {
+        for (const f of files[key]) fs.unlink(f.path, () => {});
+      }
+    };
+
+    if (!providedKeys.length) {
+      cleanupTmp();
+      return res.status(400).json({ error: 'Nenhuma foto enviada.' });
+    }
+
+    const part = await store.getPart(req.params.id);
+    if (!part) {
+      cleanupTmp();
+      return res.status(404).json({ error: 'Peca nao encontrada.' });
+    }
+
+    const partImages = { ...(part.images || {}) };
+
+    try {
+      if (images.useCloud) {
+        for (const key of providedKeys) {
+          const file = files[key][0];
+          const uploaded = await images.uploadImage(file.path, part.id);
+          partImages[key] = { url: uploaded.url, publicId: uploaded.publicId };
+        }
+        cleanupTmp();
+      } else {
+        const folder = path.join(
+          STORAGE_DIR,
+          slugify(part.manufacturer),
+          slugify(part.partType),
+          slugify(`${part.brand || 'sem-marca'}-${part.model || 'sem-modelo'}`),
+          part.id
+        );
+        fs.mkdirSync(folder, { recursive: true });
+        for (const key of providedKeys) {
+          const file = files[key][0];
+          const ext = path.extname(file.originalname) || '.jpg';
+          const destName = `${key}${ext}`;
+          fs.renameSync(file.path, path.join(folder, destName));
+          const rel = path.relative(STORAGE_DIR, path.join(folder, destName)).split(path.sep).join('/');
+          partImages[key] = { url: `/storage/${rel}`, publicId: null };
+        }
+      }
+    } catch (err) {
+      console.error('[parts] falha ao enviar fotos adicionais:', err);
+      cleanupTmp();
+      return res.status(500).json({ error: `Falha ao guardar as fotos (${err.message || err}).` });
+    }
+
+    const updated = await store.updatePart(part.id, { images: partImages });
+    res.json(updated);
+  }
+);
+
 app.delete('/api/parts/:id', async (req, res) => {
   const removed = await store.deletePart(req.params.id);
   if (!removed) return res.status(404).json({ error: 'Peca nao encontrada.' });

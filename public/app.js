@@ -484,7 +484,12 @@ function renderPartCard(part) {
 
   const actions = document.createElement('div');
   actions.className = 'card-actions';
+  const editBtn = document.createElement('button');
+  editBtn.textContent = 'Editar';
+  editBtn.addEventListener('click', () => openEditModal(part));
+  actions.appendChild(editBtn);
   const delBtn = document.createElement('button');
+  delBtn.className = 'card-delete';
   delBtn.textContent = 'Eliminar';
   delBtn.addEventListener('click', () => deletePart(part.id));
   actions.appendChild(delBtn);
@@ -516,6 +521,121 @@ async function deletePart(id) {
     renderParts();
   }
 }
+
+// ---------------------------------------------------------------------------
+// Editar peça (dados + adicionar/trocar fotos)
+// ---------------------------------------------------------------------------
+const editOverlay = document.getElementById('edit-overlay');
+const editForm = document.getElementById('edit-form');
+const editError = document.getElementById('edit-error');
+const editCategoryToggle = document.getElementById('edit-category-toggle');
+const editFieldCategory = document.getElementById('edit-field-category');
+const editThumbs = {
+  front: document.getElementById('edit-thumb-front'),
+  back: document.getElementById('edit-thumb-back'),
+  label: document.getElementById('edit-thumb-label'),
+};
+const editFields = {
+  partType: document.getElementById('edit-field-partType'),
+  manufacturer: document.getElementById('edit-field-manufacturer'),
+  brand: document.getElementById('edit-field-brand'),
+  model: document.getElementById('edit-field-model'),
+  ref1: document.getElementById('edit-field-ref1'),
+  ref2: document.getElementById('edit-field-ref2'),
+  quantity: document.getElementById('edit-field-quantity'),
+  notes: document.getElementById('edit-field-notes'),
+};
+
+wireCategoryToggle(editCategoryToggle, (category) => {
+  editFieldCategory.value = category;
+});
+
+let editingPartId = null;
+
+function openEditModal(part) {
+  editingPartId = part.id;
+  editError.hidden = true;
+
+  editFields.partType.value = part.partType || '';
+  editFields.manufacturer.value = part.manufacturer || '';
+  editFields.brand.value = part.brand || '';
+  editFields.model.value = part.model || '';
+  editFields.ref1.value = part.ref1 || '';
+  editFields.ref2.value = part.ref2 || '';
+  editFields.quantity.value = part.quantity || 0;
+  editFields.notes.value = part.notes || '';
+
+  const category = partCategory(part);
+  editFieldCategory.value = category;
+  editCategoryToggle.querySelectorAll('.category-btn').forEach((b) => b.classList.toggle('active', b.dataset.category === category));
+
+  for (const key of ['front', 'back', 'label']) {
+    const url = part.images && part.images[key] && part.images[key].url;
+    const img = editThumbs[key];
+    if (url) {
+      img.src = url;
+      img.hidden = false;
+    } else {
+      img.src = '';
+      img.hidden = true;
+    }
+  }
+  editForm.querySelectorAll('input[type=file]').forEach((input) => {
+    input.value = '';
+  });
+
+  editOverlay.hidden = false;
+}
+
+function closeEditModal() {
+  editOverlay.hidden = true;
+  editingPartId = null;
+}
+
+document.getElementById('edit-close').addEventListener('click', closeEditModal);
+document.getElementById('edit-cancel').addEventListener('click', closeEditModal);
+
+editForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  editError.hidden = true;
+
+  const patch = {
+    category: editFieldCategory.value,
+    partType: editFields.partType.value.trim(),
+    manufacturer: editFields.manufacturer.value.trim(),
+    brand: editFields.brand.value.trim(),
+    model: editFields.model.value.trim(),
+    ref1: editFields.ref1.value.trim(),
+    ref2: editFields.ref2.value.trim(),
+    quantity: Number(editFields.quantity.value) || 0,
+    notes: editFields.notes.value.trim(),
+  };
+
+  try {
+    const resp = await fetch(`/api/parts/${editingPartId}`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(patch),
+    });
+    const data = await resp.json();
+    if (!resp.ok) throw new Error(data.error || 'Erro ao guardar alterações.');
+
+    const photoInputs = Array.from(editForm.querySelectorAll('input[type=file]')).filter((i) => i.files[0]);
+    if (photoInputs.length) {
+      const fd = new FormData();
+      photoInputs.forEach((input) => fd.append(input.dataset.slot, input.files[0]));
+      const photoResp = await fetch(`/api/parts/${editingPartId}/photos`, { method: 'POST', body: fd });
+      const photoData = await photoResp.json();
+      if (!photoResp.ok) throw new Error(photoData.error || 'Erro ao guardar as fotos.');
+    }
+
+    closeEditModal();
+    await loadParts();
+  } catch (err) {
+    editError.hidden = false;
+    editError.textContent = err.message;
+  }
+});
 
 function escapeHtml(str) {
   return String(str || '').replace(/[&<>"']/g, (c) => ({

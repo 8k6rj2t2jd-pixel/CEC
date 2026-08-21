@@ -228,6 +228,87 @@
   <img id="lightbox-img" alt="" />
 </div>
 
+<!-- ==================== EDITAR PEÇA ==================== -->
+<div id="edit-overlay" class="lightbox" hidden>
+  <form id="edit-form" class="edit-card">
+    <div class="edit-card-head">
+      <h2>Editar peça</h2>
+      <button type="button" id="edit-close" class="btn lightbox-close-inline">✕</button>
+    </div>
+
+    <div class="category-toggle" id="edit-category-toggle">
+      <button type="button" class="category-btn active" data-category="centralina">Centralina</button>
+      <button type="button" class="category-btn" data-category="quadrante">Quadrante</button>
+    </div>
+    <input type="hidden" id="edit-field-category" value="centralina" />
+
+    <div class="thumbs">
+      <div class="thumb-box">
+        <img id="edit-thumb-front" alt="Frente" hidden />
+        <span class="thumb-caption">Frente</span>
+      </div>
+      <div class="thumb-box">
+        <img id="edit-thumb-back" alt="Trás" hidden />
+        <span class="thumb-caption">Trás</span>
+      </div>
+      <div class="thumb-box">
+        <img id="edit-thumb-label" alt="Etiqueta" hidden />
+        <span class="thumb-caption">Etiqueta</span>
+      </div>
+    </div>
+    <div class="edit-photo-inputs">
+      <label class="edit-photo-input">Frente<input type="file" accept="image/*" capture="environment" data-slot="front" /></label>
+      <label class="edit-photo-input">Trás<input type="file" accept="image/*" capture="environment" data-slot="back" /></label>
+      <label class="edit-photo-input">Etiqueta<input type="file" accept="image/*" capture="environment" data-slot="label" /></label>
+    </div>
+
+    <label>
+      Tipo de peça
+      <input list="part-types" id="edit-field-partType" required />
+    </label>
+    <label>
+      Fabricante (da peça)
+      <input list="manufacturers" id="edit-field-manufacturer" required />
+    </label>
+    <div class="row">
+      <label>
+        Marca do veículo
+        <input id="edit-field-brand" />
+      </label>
+      <label>
+        Modelo
+        <input id="edit-field-model" />
+      </label>
+    </div>
+    <div class="row">
+      <label>
+        Referência 1
+        <input id="edit-field-ref1" />
+      </label>
+      <label>
+        Referência 2
+        <input id="edit-field-ref2" />
+      </label>
+    </div>
+    <div class="row">
+      <label>
+        Quantidade em stock
+        <input id="edit-field-quantity" type="number" min="0" />
+      </label>
+      <label>
+        Notas
+        <input id="edit-field-notes" />
+      </label>
+    </div>
+
+    <div class="form-actions">
+      <button type="button" id="edit-cancel" class="btn">Cancelar</button>
+      <button type="submit" class="btn btn-primary">Guardar alterações</button>
+    </div>
+    <p id="edit-error" class="error" hidden></p>
+  </form>
+</div>
+
 <script src="app.js"></script>
 </body>
 </html>
