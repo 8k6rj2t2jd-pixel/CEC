@@ -31,6 +31,23 @@
       <li data-step="4" class="step">4. Confirmar</li>
     </ol>
 
+    <!-- Vai-se preenchendo à medida que cada foto é tirada, para se ver o
+         progresso logo desde o passo 1. -->
+    <div class="thumbs">
+      <div class="thumb-box">
+        <img id="thumb-front" alt="Frente" hidden />
+        <span class="thumb-caption">Frente</span>
+      </div>
+      <div class="thumb-box">
+        <img id="thumb-back" alt="Trás" hidden />
+        <span class="thumb-caption">Trás</span>
+      </div>
+      <div class="thumb-box">
+        <img id="thumb-label" alt="Etiqueta" hidden />
+        <span class="thumb-caption">Etiqueta</span>
+      </div>
+    </div>
+
     <div id="capture-stage" class="capture-stage">
       <video id="camera-video" autoplay playsinline muted></video>
       <canvas id="camera-canvas" hidden></canvas>
@@ -54,11 +71,6 @@
         <p id="ocr-raw-text" class="ocr-raw"></p>
       </div>
 
-      <div class="thumbs">
-        <img id="thumb-front" alt="Frente" />
-        <img id="thumb-back" alt="Trás" />
-        <img id="thumb-label" alt="Etiqueta" />
-      </div>
 
       <label>
         Tipo de peça

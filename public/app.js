@@ -38,12 +38,30 @@ const captureStage = document.getElementById('capture-stage');
 const partForm = document.getElementById('part-form');
 const saveSuccess = document.getElementById('save-success');
 
+const thumbs = {
+  front: document.getElementById('thumb-front'),
+  back: document.getElementById('thumb-back'),
+  label: document.getElementById('thumb-label'),
+};
+
+function setThumb(step, blob) {
+  const img = thumbs[step];
+  if (!img) return;
+  img.src = URL.createObjectURL(blob);
+  img.hidden = false;
+}
+
+function clearThumbs() {
+  Object.values(thumbs).forEach((img) => {
+    img.src = '';
+    img.hidden = true;
+  });
+}
+
 let stream = null;
 let shots = {}; // { front: Blob, back: Blob, label: Blob }
 
-// Fotos que ainda faltam tirar com a câmara, por esta ordem. Normalmente as
-// 3; quando se vem da "Verificar peça" com a etiqueta já fotografada, fica
-// só ['front', 'back'].
+// Fotos que ainda faltam tirar com a câmara, por esta ordem.
 let cameraQueue = ['front', 'back', 'label'];
 let queuePos = 0;
 
@@ -112,6 +130,7 @@ btnShoot.addEventListener('click', () => {
     (blob) => {
       const step = currentCameraStep();
       shots[step] = blob;
+      setThumb(step, blob);
       shotPreview.src = URL.createObjectURL(blob);
       shotPreview.hidden = false;
       video.hidden = true;
@@ -166,10 +185,6 @@ const fieldRef2 = document.getElementById('field-ref2');
 const saveError = document.getElementById('save-error');
 
 async function showForm() {
-  document.getElementById('thumb-front').src = URL.createObjectURL(shots.front);
-  document.getElementById('thumb-back').src = URL.createObjectURL(shots.back);
-  document.getElementById('thumb-label').src = URL.createObjectURL(shots.label);
-
   partForm.hidden = false;
   saveError.hidden = true;
   ocrResult.hidden = true;
@@ -277,6 +292,7 @@ function resetCaptureFlow() {
   ocrPromise = null;
   cameraQueue = ['front', 'back', 'label'];
   queuePos = 0;
+  clearThumbs();
   setStepUi();
   partForm.reset();
   partForm.hidden = true;
@@ -285,21 +301,14 @@ function resetCaptureFlow() {
   startCamera();
 }
 
-// Chamado a partir da "Verificar peça" quando a etiqueta já foi lida por lá:
-// só falta fotografar a frente e a trás, o formulário já aparece pré-cheio
-// com o que o OCR já tinha encontrado.
-function startNewPartWithLabel(labelBlob, ocrData) {
-  shots = { label: labelBlob };
-  ocrPromise = Promise.resolve({ ok: true, data: ocrData || {} });
-  cameraQueue = ['front', 'back'];
-  queuePos = 0;
+// Chamado a partir da "Verificar peça" quando se quer adicionar como peça
+// nova. Começa sempre do zero (as 3 fotos, formulário em branco) - não
+// reaproveita a foto verificada nem os dados que o OCR tinha lido nessa
+// altura, para nunca assumir uma referência ou fabricante sem o
+// utilizador confirmar.
+function startNewPartFromCheck() {
   switchToTab('novo');
-  partForm.reset();
-  partForm.hidden = true;
-  saveSuccess.hidden = true;
-  captureStage.hidden = false;
-  setStepUi();
-  startCamera();
+  resetCaptureFlow();
 }
 
 // ---------------------------------------------------------------------------
@@ -625,7 +634,7 @@ function renderCheckResults(file, data, matches) {
   addNewBtn.type = 'button';
   addNewBtn.className = 'btn btn-primary';
   addNewBtn.textContent = '➕ Adicionar como peça nova';
-  addNewBtn.addEventListener('click', () => startNewPartWithLabel(file, data));
+  addNewBtn.addEventListener('click', () => startNewPartFromCheck());
 
   const searchBtn = document.createElement('button');
   searchBtn.type = 'button';

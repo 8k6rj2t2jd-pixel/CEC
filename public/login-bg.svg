@@ -17,14 +17,28 @@
     .pulse { animation: pulse 3.2s ease-in-out infinite; }
     .pulse-slow { animation: pulse 4.5s ease-in-out infinite; animation-delay: -1.5s; }
     .flow { stroke-dasharray: 14 10; animation: flow 2.4s linear infinite; }
+    .flow-slow { stroke-dasharray: 10 8; animation: flow 3.6s linear infinite; }
+    .flow-rev { stroke-dasharray: 12 9; animation: flow-rev 2.8s linear infinite; }
     .blink { animation: blink 2.6s ease-in-out infinite; }
     .blink-b { animation: blink 3.4s ease-in-out infinite; animation-delay: -1.2s; }
+    .blink-c { animation: blink 2.1s ease-in-out infinite; animation-delay: -0.6s; }
+    .spin { animation: spin 18s linear infinite; transform-origin: 500px 500px; }
+    .spin-rev { animation: spin-rev 24s linear infinite; transform-origin: 500px 500px; }
     @keyframes pulse { 0%, 100% { opacity: 0.85; } 50% { opacity: 0.4; } }
     @keyframes flow { to { stroke-dashoffset: -240; } }
-    @keyframes blink { 0%, 100% { opacity: 0.9; } 50% { opacity: 0.2; } }
+    @keyframes flow-rev { to { stroke-dashoffset: 240; } }
+    @keyframes blink { 0%, 100% { opacity: 0.9; } 50% { opacity: 0.15; } }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    @keyframes spin-rev { to { transform: rotate(-360deg); } }
   </style>
 
   <rect width="1000" height="1000" fill="url(#vignette)" />
+
+  <!-- anel rotativo tracejado à volta da moldura, para dar sensação de movimento -->
+  <circle class="spin" cx="500" cy="500" r="430" fill="none" stroke="#ff8a1e" stroke-width="1.5"
+    stroke-dasharray="2 14" opacity="0.35" />
+  <circle class="spin-rev" cx="500" cy="500" r="400" fill="none" stroke="#ff8a1e" stroke-width="1"
+    stroke-dasharray="1 22" opacity="0.25" />
 
   <!-- malha densa de traços ortogonais, estilo placa de circuito -->
   <g stroke="#ff8a1e" stroke-width="1.5" fill="none" opacity="0.3">
@@ -33,42 +47,55 @@
     <path d="M60,0 V50 H140 V0" /><path d="M860,0 V50 H940 V0" />
     <path d="M60,1000 V950 H140 V1000" /><path d="M860,1000 V950 H940 V1000" />
     <path d="M200,60 H320" /><path d="M680,60 H800" /><path d="M200,940 H320" /><path d="M680,940 H800" />
+    <path d="M0,450 H20 V550 H0" /><path d="M1000,450 H980 V550 H1000" />
+    <path class="flow-slow" d="M0,240 H90 V400" /><path class="flow-slow" d="M1000,240 H910 V400" />
+    <path class="flow-slow" d="M0,760 H90 V600" /><path class="flow-slow" d="M1000,760 H910 V600" />
   </g>
 
   <g stroke="#ff8a1e" stroke-width="2" fill="none" opacity="0.55" filter="url(#glow)">
     <!-- traços a irradiar da moldura para os cantos -->
     <path class="flow" d="M330,260 L330,120 L130,120" />
     <path d="M420,260 L420,60" />
-    <path class="flow" d="M500,260 L500,20" />
-    <path d="M670,260 L670,120 L870,120" />
+    <path class="flow-rev" d="M500,260 L500,20" />
+    <path class="flow" d="M670,260 L670,120 L870,120" />
     <path d="M580,260 L580,60" />
     <path class="flow" d="M260,360 L100,360 L100,180" />
-    <path d="M260,500 L30,500" />
+    <path class="flow-rev" d="M260,500 L30,500" />
     <path d="M260,640 L100,640 L100,850" />
     <path class="flow" d="M740,360 L900,360 L900,180" />
-    <path d="M740,500 L970,500" />
+    <path class="flow-rev" d="M740,500 L970,500" />
     <path d="M740,640 L900,640 L900,850" />
     <path d="M330,740 L330,880 L150,880" />
     <path class="flow" d="M500,740 L500,960" />
     <path d="M670,740 L670,880 L860,880" />
     <!-- diagonais nos cantos -->
-    <path d="M180,180 L60,60" /><path d="M820,180 L940,60" />
-    <path d="M180,820 L60,940" /><path d="M820,820 L940,940" />
+    <path class="flow-slow" d="M180,180 L60,60" /><path class="flow-slow" d="M820,180 L940,60" />
+    <path class="flow-slow" d="M180,820 L60,940" /><path class="flow-slow" d="M820,820 L940,940" />
+  </g>
+
+  <!-- pequenos impulsos a percorrer alguns traços, como corrente a passar -->
+  <g fill="#ffd199">
+    <circle r="4"><animateMotion dur="2.4s" repeatCount="indefinite" path="M330,260 L330,120 L130,120" /></circle>
+    <circle r="4"><animateMotion dur="2.8s" repeatCount="indefinite" path="M740,360 L900,360 L900,180" /></circle>
+    <circle r="3.5"><animateMotion dur="3.2s" repeatCount="indefinite" path="M500,740 L500,960" /></circle>
+    <circle r="3.5"><animateMotion dur="2.6s" repeatCount="indefinite" path="M260,360 L100,360 L100,180" /></circle>
+    <circle r="3"><animateMotion dur="3.6s" repeatCount="indefinite" path="M260,500 L30,500" /></circle>
+    <circle r="3"><animateMotion dur="3.4s" repeatCount="indefinite" path="M740,500 L970,500" /></circle>
   </g>
 
   <g fill="#ff8a1e" opacity="0.85">
     <circle class="blink" cx="130" cy="120" r="5" />
     <circle class="blink-b" cx="870" cy="120" r="5" />
-    <circle cx="100" cy="180" r="4" />
+    <circle class="blink-c" cx="100" cy="180" r="4" />
     <circle class="blink" cx="30" cy="500" r="5" />
     <circle class="blink-b" cx="970" cy="500" r="5" />
-    <circle cx="100" cy="850" r="4" />
-    <circle cx="150" cy="880" r="5" />
+    <circle class="blink-c" cx="100" cy="850" r="4" />
+    <circle class="blink-b" cx="150" cy="880" r="5" />
     <circle class="blink" cx="860" cy="880" r="5" />
-    <circle cx="500" cy="20" r="4" />
+    <circle class="blink-c" cx="500" cy="20" r="4" />
     <circle class="blink-b" cx="500" cy="960" r="4" />
-    <circle cx="60" cy="60" r="4" /><circle cx="940" cy="60" r="4" />
-    <circle cx="60" cy="940" r="4" /><circle cx="940" cy="940" r="4" />
+    <circle class="blink" cx="60" cy="60" r="4" /><circle class="blink-c" cx="940" cy="60" r="4" />
+    <circle class="blink-b" cx="60" cy="940" r="4" /><circle class="blink" cx="940" cy="940" r="4" />
   </g>
 
   <!-- pontos soltos, textura de placa de circuito -->
@@ -81,6 +108,10 @@
     <circle cx="380" cy="80" r="2" /><circle cx="620" cy="80" r="2" />
     <circle cx="220" cy="420" r="2" /><circle cx="220" cy="580" r="2" />
     <circle cx="780" cy="420" r="2" /><circle cx="780" cy="580" r="2" />
+    <circle cx="40" cy="420" r="2" /><circle cx="40" cy="580" r="2" />
+    <circle cx="960" cy="420" r="2" /><circle cx="960" cy="580" r="2" />
+    <circle cx="300" cy="30" r="1.5" /><circle cx="700" cy="30" r="1.5" />
+    <circle cx="300" cy="970" r="1.5" /><circle cx="700" cy="970" r="1.5" />
   </g>
 
   <!-- moldura octogonal central -->
@@ -104,10 +135,10 @@
     <line x1="182" y1="100" x2="218" y2="100" />
     <circle cx="130" cy="125" r="11" />
 
-    <circle cx="880" cy="140" r="12" />
+    <circle class="pulse" cx="880" cy="140" r="12" />
     <line x1="868" y1="140" x2="892" y2="140" />
 
-    <circle cx="120" cy="860" r="12" />
+    <circle class="pulse" cx="120" cy="860" r="12" />
     <line x1="108" y1="860" x2="132" y2="860" />
   </g>
 </svg>
