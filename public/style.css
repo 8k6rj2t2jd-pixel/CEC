@@ -156,6 +156,10 @@ main { padding: 16px; max-width: 720px; margin: 0 auto; }
   background: var(--panel); border-radius: var(--radius); overflow: hidden; border: 1px solid var(--border);
 }
 .part-card img { width: 100%; aspect-ratio: 4/3; object-fit: cover; cursor: zoom-in; }
+.no-photo {
+  width: 100%; aspect-ratio: 4/3; display: flex; align-items: center; justify-content: center;
+  background: var(--panel-2); color: var(--muted); font-size: 0.8rem;
+}
 .part-card .body { padding: 10px; font-size: 0.82rem; }
 .part-card .title { font-weight: 600; margin-bottom: 4px; }
 .part-card .muted { color: var(--muted); }

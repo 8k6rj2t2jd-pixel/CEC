@@ -397,11 +397,19 @@ function renderPartCard(part) {
   const card = document.createElement('div');
   card.className = 'part-card';
 
-  const img = document.createElement('img');
-  img.src = part.images.front.url;
-  img.alt = part.partType;
-  img.addEventListener('click', () => openLightbox(img.src));
-  card.appendChild(img);
+  const frontUrl = part.images && part.images.front && part.images.front.url;
+  if (frontUrl) {
+    const img = document.createElement('img');
+    img.src = frontUrl;
+    img.alt = part.partType;
+    img.addEventListener('click', () => openLightbox(img.src));
+    card.appendChild(img);
+  } else {
+    const placeholder = document.createElement('div');
+    placeholder.className = 'no-photo';
+    placeholder.textContent = 'Sem foto';
+    card.appendChild(placeholder);
+  }
 
   const body = document.createElement('div');
   body.className = 'body';
@@ -574,10 +582,18 @@ function renderCheckResults(file, data, matches) {
       const card = document.createElement('div');
       card.className = 'part-card';
 
-      const img = document.createElement('img');
-      img.src = part.images.front.url;
-      img.alt = part.partType;
-      card.appendChild(img);
+      const frontUrl = part.images && part.images.front && part.images.front.url;
+      if (frontUrl) {
+        const img = document.createElement('img');
+        img.src = frontUrl;
+        img.alt = part.partType;
+        card.appendChild(img);
+      } else {
+        const placeholder = document.createElement('div');
+        placeholder.className = 'no-photo';
+        placeholder.textContent = 'Sem foto';
+        card.appendChild(placeholder);
+      }
 
       const body = document.createElement('div');
       body.className = 'body';

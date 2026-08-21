@@ -1,0 +1,9335 @@
+[
+ {
+  "caixa": "1",
+  "numero": "2",
+  "tipo": "Centralina Injeção",
+  "marca": "Mitsubishi",
+  "ref1": "0281010438",
+  "ref2": "HOM8200066001",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "1",
+  "numero": "3",
+  "tipo": "Centralina Injeção",
+  "marca": "Suzuki",
+  "ref1": "33920-62J1",
+  "ref2": "MB112300-0393",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "1",
+  "numero": "4",
+  "tipo": "Centralina Injeção",
+  "marca": "Suzuki",
+  "ref1": "33920-62E3",
+  "ref2": "112000-1801",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "1",
+  "numero": "5",
+  "tipo": "Centralina Injeção",
+  "marca": "Honda",
+  "ref1": "37820-PHK-G21",
+  "ref2": "1279-123282",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "1",
+  "numero": "6",
+  "tipo": "Centralina Injeção",
+  "marca": "Nissan",
+  "ref1": "23710-60J01",
+  "ref2": "MEC5-A130",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "1",
+  "numero": "7",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0281011248",
+  "ref2": "9652183780 EDC15C2",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "1",
+  "numero": "8",
+  "tipo": "Centralina Injeção",
+  "marca": "Fiat",
+  "ref1": "0281011608",
+  "ref2": "9648577180  EDC15C2",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "1",
+  "numero": "9",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0281011779",
+  "ref2": "9659520280  EDC15C2",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "1",
+  "numero": "10",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0281010935",
+  "ref2": "9650221480  EDC15C2",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "1",
+  "numero": "11",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0281011188",
+  "ref2": "9648588880  EDC15C2",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "1",
+  "numero": "12",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0281011083",
+  "ref2": "9648394480  EDC15C2",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "1",
+  "numero": "13",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0281011031",
+  "ref2": "9646719080  EDC15C2",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "1",
+  "numero": "14",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0281010747",
+  "ref2": "9643524880  EDC15C2",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "1",
+  "numero": "16",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0281010251",
+  "ref2": "9636254880  EDC15C2",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "1",
+  "numero": "17",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0281010252",
+  "ref2": "9635158180  EDC15C2",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "1",
+  "numero": "18  19",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0281001782",
+  "ref2": "9634662880  EDC15C2",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "1",
+  "numero": "20   22",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0281010595",
+  "ref2": "9642014980  EDC15C2",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "1",
+  "numero": "23  24",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0281010594",
+  "ref2": "9642013980  EDC15C2",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "1",
+  "numero": "28",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0281011248",
+  "ref2": "9652183780  EDC15C2",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "2",
+  "numero": "29",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0281011342",
+  "ref2": "9651175080  EDC15C2",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "2",
+  "numero": "30",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "5WS40104C-T",
+  "ref2": "SW9651942480  HW9647423380  SID801A",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "2",
+  "numero": "31",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "5WS40168E-T",
+  "ref2": "9655941580  89661-YV010  SID804",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "2",
+  "numero": "32",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "5WS40068B-T",
+  "ref2": "SW9650529880  HW9648624280  SID804",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "2",
+  "numero": "34",
+  "tipo": "Centralina Injeção",
+  "marca": "Mitsubishi",
+  "ref1": "MD329098",
+  "ref2": "E2T63286",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "2",
+  "numero": "35",
+  "tipo": "Centralina Injeção",
+  "marca": "Mercedes",
+  "ref1": "0281011472",
+  "ref2": "A6121536979  CR2.14",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "2",
+  "numero": "36",
+  "tipo": "Centralina Injeção",
+  "marca": "BMW",
+  "ref1": "0281010205",
+  "ref2": "7786887",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "2",
+  "numero": "37",
+  "tipo": "Centralina Injeção",
+  "marca": "Hyundai",
+  "ref1": "K103300015C",
+  "ref2": "39100-22460  39110-22460",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "2",
+  "numero": "38",
+  "tipo": "Centralina Injeção",
+  "marca": "Hyundai",
+  "ref1": "39100-42210",
+  "ref2": "407913-1650",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "2",
+  "numero": "39",
+  "tipo": "Centralina Injeção",
+  "marca": "Hyundai",
+  "ref1": "K103300115B",
+  "ref2": "39100-22461  39110-22461",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "2",
+  "numero": "40",
+  "tipo": "Centralina Injeção",
+  "marca": "Nissan",
+  "ref1": "MEC37-320",
+  "ref2": "MEC37-320C15X05EG",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "2",
+  "numero": "41",
+  "tipo": "Centralina Injeção",
+  "marca": "Hyundai",
+  "ref1": "39100-42210",
+  "ref2": "407913-1651  D11",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "2",
+  "numero": "42",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0281011863",
+  "ref2": "9659342280  EDC16C34",
+  "quantidade": "0"
+ },
+ {
+  "caixa": "2",
+  "numero": "46",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "IAW4MP2.15",
+  "ref2": "SW9644777080  HW9646169280",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "2",
+  "numero": "48",
+  "tipo": "Centralina Injeção",
+  "marca": "Toyota",
+  "ref1": "0261208036",
+  "ref2": "89661-OD210",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "2",
+  "numero": "49",
+  "tipo": "Centralina Injeção",
+  "marca": "Toyota",
+  "ref1": "0281011651",
+  "ref2": "89661-OD171",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "2",
+  "numero": "50",
+  "tipo": "Centralina Injeção",
+  "marca": "Toyota",
+  "ref1": "0281011734",
+  "ref2": "89661-02A90",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "2",
+  "numero": "51",
+  "tipo": "Centralina Injeção",
+  "marca": "Toyota",
+  "ref1": "0261208702",
+  "ref2": "89661-OH022",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "2",
+  "numero": "52",
+  "tipo": "Centralina Injeção",
+  "marca": "Mitsubishi",
+  "ref1": "MR507742",
+  "ref2": "E2T71279H",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "2",
+  "numero": "53",
+  "tipo": "Centralina Injeção",
+  "marca": "Nissan",
+  "ref1": "237102N106",
+  "ref2": "407913-121  QY",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "2",
+  "numero": "54",
+  "tipo": "Centralina Injeção",
+  "marca": "Nissan",
+  "ref1": "237102N107",
+  "ref2": "407913-121  QY",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "2",
+  "numero": "56",
+  "tipo": "Centralina Injeção",
+  "marca": "Mazda",
+  "ref1": "407913-1332",
+  "ref2": "RF1H18880D",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "2",
+  "numero": "57",
+  "tipo": "Centralina Injeção",
+  "marca": "Fiat",
+  "ref1": "0281012303",
+  "ref2": "55200527",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "3",
+  "numero": "58",
+  "tipo": "Centralina Injeção",
+  "marca": "Nissan",
+  "ref1": "MEC11-210",
+  "ref2": "MEC11-210E20104  XU",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "3",
+  "numero": "59",
+  "tipo": "Centralina Injeção",
+  "marca": "Suzuki",
+  "ref1": "33920-64E2",
+  "ref2": "F1-023",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "3",
+  "numero": "60",
+  "tipo": "Centralina Injeção",
+  "marca": "Chevrolet",
+  "ref1": "5WY10E07E",
+  "ref2": "96435559",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "3",
+  "numero": "61",
+  "tipo": "Centralina Injeção",
+  "marca": "Nissan",
+  "ref1": "0261203984",
+  "ref2": "237100U400  4R",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "3",
+  "numero": "62",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "0281001736",
+  "ref2": "028906021HB",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "3",
+  "numero": "63",
+  "tipo": "Centralina Injeção",
+  "marca": "Audi",
+  "ref1": "0281001425/426",
+  "ref2": "028906021CE",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "3",
+  "numero": "64",
+  "tipo": "Centralina Injeção",
+  "marca": "Nissan",
+  "ref1": "0261204243",
+  "ref2": "237101U103  9X",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "3",
+  "numero": "71",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "0281001968",
+  "ref2": "028906021JK",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "3",
+  "numero": "72",
+  "tipo": "Centralina Injeção",
+  "marca": "Fiat",
+  "ref1": "R04010032D",
+  "ref2": "46763751  DC43F",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "3",
+  "numero": "73",
+  "tipo": "Centralina Injeção",
+  "marca": "Nissan",
+  "ref1": "DDCR80997A",
+  "ref2": "8200308217  HOM8200275921  M8",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "3",
+  "numero": "75",
+  "tipo": "Centralina Injeção",
+  "marca": "Fiat",
+  "ref1": "55186608",
+  "ref2": "MJD6JF.P3",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "3",
+  "numero": "77",
+  "tipo": "Centralina Injeção",
+  "marca": "Fiat",
+  "ref1": "55195817",
+  "ref2": "MJD6JF.P3",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "3",
+  "numero": "80",
+  "tipo": "Centralina Injeção",
+  "marca": "PSA",
+  "ref1": "IAW1AP.40",
+  "ref2": "9629044680",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "3",
+  "numero": "82",
+  "tipo": "Centralina Injeção",
+  "marca": "Daewoo",
+  "ref1": "K115000010F",
+  "ref2": "96259124",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "3",
+  "numero": "83",
+  "tipo": "Centralina Injeção",
+  "marca": "Hyundai",
+  "ref1": "9030930074F",
+  "ref2": "39110-22525",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "3",
+  "numero": "66  67  68  69  70",
+  "tipo": "Centralina Injeção",
+  "marca": "Audi",
+  "ref1": "0281001366/367",
+  "ref2": "028906021F",
+  "quantidade": "5"
+ },
+ {
+  "caixa": "4",
+  "numero": "84",
+  "tipo": "Centralina Injeção",
+  "marca": "Audi",
+  "ref1": "0261204897",
+  "ref2": "4B0906018K",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "4",
+  "numero": "85",
+  "tipo": "Centralina Injeção",
+  "marca": "Audi",
+  "ref1": "0281010158",
+  "ref2": "8D0907401P",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "4",
+  "numero": "87",
+  "tipo": "Centralina Injeção",
+  "marca": "Hyundai",
+  "ref1": "9030930184F",
+  "ref2": "39108-26741",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "4",
+  "numero": "88",
+  "tipo": "Centralina Injeção",
+  "marca": "Audi",
+  "ref1": "0281010151",
+  "ref2": "4B0907401Q",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "4",
+  "numero": "88",
+  "tipo": "Centralina Injeção",
+  "marca": "Audi",
+  "ref1": "0281001838",
+  "ref2": "8D0907401C",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "4",
+  "numero": "89",
+  "tipo": "Centralina Injeção",
+  "marca": "Audi",
+  "ref1": "0281010157",
+  "ref2": "4B0907401D",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "4",
+  "numero": "90",
+  "tipo": "Centralina Injeção",
+  "marca": "Audi",
+  "ref1": "0281010157",
+  "ref2": "8D0907401N",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "4",
+  "numero": "91",
+  "tipo": "Centralina Injeção",
+  "marca": "Audi",
+  "ref1": "0281011387",
+  "ref2": "8E0907401J  EDC15VM+",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "4",
+  "numero": "92",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "0281012708",
+  "ref2": "045906019  EDC15P+",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "4",
+  "numero": "94",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "0281011819",
+  "ref2": "038906019NC  EDC15P+",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "4",
+  "numero": "95",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "0281012195",
+  "ref2": "045906019CA  EDC15P+",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "4",
+  "numero": "96",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "0281010943",
+  "ref2": "038906019GK  EDC15P+",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "4",
+  "numero": "98",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "0281010111",
+  "ref2": "038906012K",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "4",
+  "numero": "99",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "0281012194",
+  "ref2": "045906019BP  EDC15P+",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "4",
+  "numero": "100",
+  "tipo": "Centralina Injeção",
+  "marca": "Audi",
+  "ref1": "0281010446",
+  "ref2": "8E0907401B  EDC15VM+",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "4",
+  "numero": "101",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "0281010218",
+  "ref2": "038906019CD",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "4",
+  "numero": "102",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "0281010309",
+  "ref2": "038906019CA  YM2112A650MA",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "4",
+  "numero": "103",
+  "tipo": "Centralina Injeção",
+  "marca": "Audi",
+  "ref1": "0281001965",
+  "ref2": "038906018FD",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "4",
+  "numero": "106",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "0281001170/171",
+  "ref2": "028906021C",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "4",
+  "numero": "107",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "0281010170",
+  "ref2": "03906018GA",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "4",
+  "numero": "108",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "0281010120",
+  "ref2": "038906012A",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "4",
+  "numero": "110",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "S110138000C",
+  "ref2": "8200059086  SIRIUS32N  8200044437",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "4",
+  "numero": "111",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "S110130116C",
+  "ref2": "8200111736  SIRIUS32N  8200044437",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "4",
+  "numero": "112",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "S110130112C",
+  "ref2": "8200102371  SIRIUS32N  8200044437",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "4",
+  "numero": "115",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "S110130238A",
+  "ref2": "8200059091  SIRIUS32N  8200044437",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "4",
+  "numero": "117",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "0281011217",
+  "ref2": "038906019LA  EDC15P+",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "4",
+  "numero": "118",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "0261207193",
+  "ref2": "036906032M  ME7.5.10",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "4",
+  "numero": "119",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "0261208754",
+  "ref2": "036906032AM  ME7.5.10",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "4",
+  "numero": "113  114",
+  "tipo": "Centralina Injeção",
+  "marca": "Seat",
+  "ref1": "5WP4019607",
+  "ref2": "03E906033P  SIMOS3PE",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "4",
+  "numero": "93  97",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "0281011412",
+  "ref2": "045906019BM  EDC15P+",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "5",
+  "numero": "120",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "5WP4016303",
+  "ref2": "03E906033  SIMOS3PE",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "5",
+  "numero": "121",
+  "tipo": "Centralina Injeção",
+  "marca": "Seat",
+  "ref1": "5WP4019605",
+  "ref2": "03E906033P  SIMOS3PE",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "5",
+  "numero": "124",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "0261203320",
+  "ref2": "1H0907311H",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "5",
+  "numero": "125",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "0261200750",
+  "ref2": "030906026K",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "5",
+  "numero": "126",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "0261200257",
+  "ref2": "030906026C",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "5",
+  "numero": "127",
+  "tipo": "Centralina Injeção",
+  "marca": "Audi",
+  "ref1": "0281001316/317",
+  "ref2": "028906021AP",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "5",
+  "numero": "128",
+  "tipo": "Centralina Injeção",
+  "marca": "Skoda",
+  "ref1": "0285007026",
+  "ref2": "441.0.4046-002.6",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "5",
+  "numero": "143",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "S115300202",
+  "ref2": "HOM7700875745  7700105980",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "5",
+  "numero": "146",
+  "tipo": "Centralina Injeção",
+  "marca": "PSA",
+  "ref1": "96641815780",
+  "ref2": "21645932-1  9643786680-01  HOM52000-1",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "5",
+  "numero": "147",
+  "tipo": "Centralina Injeção",
+  "marca": "PSA",
+  "ref1": "9643134280",
+  "ref2": "21646041-0  9637705980-06  HOM52000-21",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "5",
+  "numero": "148",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "8200154335",
+  "ref2": "8200045893  52000RPM  21646411-1",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "5",
+  "numero": "149",
+  "tipo": "Centralina Injeção",
+  "marca": "PSA",
+  "ref1": "9622047780",
+  "ref2": "215781274",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "5",
+  "numero": "122  123",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "0281001308/309",
+  "ref2": "028906021AF",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "5",
+  "numero": "129  130  131  132",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "7700114697",
+  "ref2": "HOM7700105560  SAFIR2  21654363-1",
+  "quantidade": "4"
+ },
+ {
+  "caixa": "5",
+  "numero": "133  134",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "7700115160",
+  "ref2": "HOM7700113511  SAFIR2  21654820-6",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "5",
+  "numero": "135  136",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "7700112873",
+  "ref2": "HOM7700105560  SAFIR2  21652595-1",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "5",
+  "numero": "137  138  139",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "7700109049",
+  "ref2": "HOM7700105560  SAFIR2  21649447-9",
+  "quantidade": "3"
+ },
+ {
+  "caixa": "5",
+  "numero": "140  141  142",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "8200023511",
+  "ref2": "HOM7700113510  SAFIR2  21656025-7",
+  "quantidade": "3"
+ },
+ {
+  "caixa": "5",
+  "numero": "150  151",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "7700112834",
+  "ref2": "HOM7700105560",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "5",
+  "numero": "152  153",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "7700114698",
+  "ref2": "HOM7700105560",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "6",
+  "numero": "154",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "S113726101B",
+  "ref2": "HOM7700868188  7700112805",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "6",
+  "numero": "156",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "S103717108B",
+  "ref2": "HOM7700863478  770086822",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "6",
+  "numero": "157",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "S103717115R",
+  "ref2": "7700864458  7700106184",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "6",
+  "numero": "158",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "S113717115D",
+  "ref2": "HOM7700108814  7700102294",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "6",
+  "numero": "164",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "S113721102D",
+  "ref2": "HOM7700868318  7700103799",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "6",
+  "numero": "166",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "S113725207A",
+  "ref2": "HOM7700112445  7700112606",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "6",
+  "numero": "167",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "S113717205D",
+  "ref2": "HOM7700863477  7700102299",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "6",
+  "numero": "168",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "0281010502",
+  "ref2": "HOM8200085921  8200199718  EDC15C3",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "6",
+  "numero": "171",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "0281010320",
+  "ref2": "HOM8200106111  EDC15C3",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "6",
+  "numero": "172",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "0281011324",
+  "ref2": "8200309316  EDC15C3",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "6",
+  "numero": "173",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "0281010637",
+  "ref2": "8200211711  EDC15C3",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "6",
+  "numero": "177",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "S115303105B",
+  "ref2": "HOM7700114575",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "6",
+  "numero": "178",
+  "tipo": "Centralina Injeção",
+  "marca": "Opel",
+  "ref1": "0281001633",
+  "ref2": "90508986",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "6",
+  "numero": "180",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "8200784572",
+  "ref2": "8200784565  CFC233R.11",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "6",
+  "numero": "181",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "616667000",
+  "ref2": "518000/35",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "6",
+  "numero": "182",
+  "tipo": "Centralina Injeção",
+  "marca": "Honda",
+  "ref1": "37820-P04-G00",
+  "ref2": "APR",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "6",
+  "numero": "155  165",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "S103716100B",
+  "ref2": "HOM7700860924  7700872650",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "6",
+  "numero": "159  162",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "S115301100C",
+  "ref2": "HOM7700108814  7700110258",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "6",
+  "numero": "160  161",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "S115301102C",
+  "ref2": "HOM7700110372  7700110935",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "6",
+  "numero": "169  170",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "0281010442",
+  "ref2": "HOM8200049306  8200199726  EDC15C3",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "6",
+  "numero": "174   175  176",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "0281010556",
+  "ref2": "8200153946  EDC15C3",
+  "quantidade": "3"
+ },
+ {
+  "caixa": "7",
+  "numero": "183",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "8200453261",
+  "ref2": "8200050919  8973804220  275800-3850",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "7",
+  "numero": "184",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "5120201109A",
+  "ref2": "8200473744  8200400246  SIM32",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "7",
+  "numero": "185",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "S180119103A",
+  "ref2": "237D40042R  237D40028R  EMS3180",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "7",
+  "numero": "186",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "PR180119101A",
+  "ref2": "237D40010R",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "7",
+  "numero": "189",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "S120200113A",
+  "ref2": "8200774747  8200700695  SIM32",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "7",
+  "numero": "190",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "S120205102A",
+  "ref2": "820117953  8201082039  SIM32",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "7",
+  "numero": "191",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "S180042156A",
+  "ref2": "237101505R  237101206R  EMS3110",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "7",
+  "numero": "192",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "S180119102A",
+  "ref2": "237D40029R  237D40028R  EMS3180",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "7",
+  "numero": "193",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "S180119147A",
+  "ref2": "237D40103R  237D40092R  EMS318",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "7",
+  "numero": "194",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "S180119162A",
+  "ref2": "237D40068R  237D40054R  EMS3180",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "7",
+  "numero": "195",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "S180119132A",
+  "ref2": "237D40026R  237D40025R  EMS3180",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "7",
+  "numero": "208",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "S118301110A",
+  "ref2": "8200164240  8200080285  SIRIUS34",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "7",
+  "numero": "209",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "S118301104B",
+  "ref2": "8200124318  8200080285  SIRIUS34",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "7",
+  "numero": "213",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "S122326108A",
+  "ref2": "8200565863  8200495479  SID301",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "7",
+  "numero": "216",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "21584029-7A",
+  "ref2": "8200283924  2333087809  8200242405  S3000",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "7",
+  "numero": "217",
+  "tipo": "Centralina Injeção",
+  "marca": "Fiat",
+  "ref1": "R04080003G",
+  "ref2": "46479139  80537J  DCN",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "7",
+  "numero": "218",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "21584913-3A",
+  "ref2": "8200376474  4176725407  8200411717  S3000",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "7",
+  "numero": "200  201",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "S110138000B",
+  "ref2": "8200059086  8200044437  SIRIUS32N",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "7",
+  "numero": "187  188",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "237D06355R",
+  "ref2": "EMS3180",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "7",
+  "numero": "202  203",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "S110138001A",
+  "ref2": "8200056873  8200044437  SIRIUS32N",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "7",
+  "numero": "204  205",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "S110030054A",
+  "ref2": "8200035891  7700110471  8200055730  SIRIUS32",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "7",
+  "numero": "206  207",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "S118301109A",
+  "ref2": "8200164131  8200080285  SIRIUS34",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "7",
+  "numero": "210  211  212",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "S122326109A",
+  "ref2": "8200565863  8200592611  SID301",
+  "quantidade": "3"
+ },
+ {
+  "caixa": "7",
+  "numero": "214  215",
+  "tipo": "Centralina Injeção",
+  "marca": "Fiat",
+  "ref1": "R04080003L",
+  "ref2": "46551222  80537N  DCN",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "8",
+  "numero": "219",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "21585412-6B",
+  "ref2": "8200461733  6014506854  8200504593  S3000",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "8",
+  "numero": "223",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "21584153-3B1",
+  "ref2": "8200298457  3218589171  8200298463  S3000",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "8",
+  "numero": "224",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "21647766-8A",
+  "ref2": "8200242405  2170005978  8200259803  S3000",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "8",
+  "numero": "225",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "21585421-2A",
+  "ref2": "8200509516  5315513824  8200509552",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "8",
+  "numero": "229",
+  "tipo": "Centralina Injeção",
+  "marca": "Opel",
+  "ref1": "0261206273",
+  "ref2": "09164459AK",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "8",
+  "numero": "235",
+  "tipo": "Centralina Injeção",
+  "marca": "Fiat",
+  "ref1": "0261204983",
+  "ref2": "00467778770",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "8",
+  "numero": "236",
+  "tipo": "Centralina Injeção",
+  "marca": "Fiat",
+  "ref1": "0261208032",
+  "ref2": "0055188600",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "8",
+  "numero": "237",
+  "tipo": "Centralina Injeção",
+  "marca": "Audi",
+  "ref1": "0261203554/555",
+  "ref2": "8D0907557B",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "8",
+  "numero": "238",
+  "tipo": "Centralina Injeção",
+  "marca": "Mercedes",
+  "ref1": "0281001621",
+  "ref2": "A0225453932  MSA25.2",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "8",
+  "numero": "239",
+  "tipo": "Centralina Injeção",
+  "marca": "Mercedes",
+  "ref1": "0281001494",
+  "ref2": "A0185453032  MSA25.2",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "8",
+  "numero": "240",
+  "tipo": "Centralina Injeção",
+  "marca": "BMW",
+  "ref1": "0281001373",
+  "ref2": "2247891",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "8",
+  "numero": "241",
+  "tipo": "Centralina Injeção",
+  "marca": "BMW",
+  "ref1": "0281001078",
+  "ref2": "2242212",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "8",
+  "numero": "242",
+  "tipo": "Centralina Injeção",
+  "marca": "BMW",
+  "ref1": "0281001183",
+  "ref2": "2244734",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "8",
+  "numero": "243",
+  "tipo": "Centralina Injeção",
+  "marca": "BMW",
+  "ref1": "0281001163",
+  "ref2": "2244734",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "8",
+  "numero": "244",
+  "tipo": "Centralina Injeção",
+  "marca": "Mercedes",
+  "ref1": "0281001753",
+  "ref2": "A0245451132  MSA25.1",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "8",
+  "numero": "245",
+  "tipo": "Centralina Injeção",
+  "marca": "Mercedes",
+  "ref1": "0281001199",
+  "ref2": "0145455332  MSA11",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "8",
+  "numero": "246",
+  "tipo": "Centralina Injeção",
+  "marca": "Mercedes",
+  "ref1": "0281001880",
+  "ref2": "A0255455532  MSA25.11",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "8",
+  "numero": "220  221  222",
+  "tipo": "Centralina Injeção",
+  "marca": "Fiat",
+  "ref1": "R04080003J",
+  "ref2": "46536333  80537L  DCN",
+  "quantidade": "3"
+ },
+ {
+  "caixa": "8",
+  "numero": "226  227  228",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "0281011776",
+  "ref2": "8200391966  8200386508",
+  "quantidade": "3"
+ },
+ {
+  "caixa": "8",
+  "numero": "230  231  232  233  234",
+  "tipo": "Centralina Injeção",
+  "marca": "Fiat",
+  "ref1": "0261203868",
+  "ref2": "00464558010120",
+  "quantidade": "5"
+ },
+ {
+  "caixa": "9",
+  "numero": "247",
+  "tipo": "Centralina Injeção",
+  "marca": "Mercedes",
+  "ref1": "A0195459432",
+  "ref2": "R04010012D",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "9",
+  "numero": "248",
+  "tipo": "Centralina Injeção",
+  "marca": "Mercedes",
+  "ref1": "0145455232",
+  "ref2": "R04010008D",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "9",
+  "numero": "249",
+  "tipo": "Centralina Injeção",
+  "marca": "Mercedes",
+  "ref1": "A0165457632",
+  "ref2": "R04010009B",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "9",
+  "numero": "250",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "0281011571",
+  "ref2": "8200309318  8200346254",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "9",
+  "numero": "251",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "0281011102",
+  "ref2": "8200222133  8200153945",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "9",
+  "numero": "252",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "0281010482",
+  "ref2": "HOM8200126462  8200121886",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "9",
+  "numero": "253",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "0281001997",
+  "ref2": "HOM7700106485  8200076092",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "9",
+  "numero": "254",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "0281010556",
+  "ref2": "8200153946  8200095416",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "9",
+  "numero": "255",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "0281010178",
+  "ref2": "HOM7700115492  8200095449",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "9",
+  "numero": "258",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "0281010483",
+  "ref2": "HOM8200039569  8200127078",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "9",
+  "numero": "259",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "0281011101",
+  "ref2": "8200163528  8200095416",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "9",
+  "numero": "272",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "0281011325",
+  "ref2": "8200309318  8200309329",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "9",
+  "numero": "273",
+  "tipo": "Centralina Injeção",
+  "marca": "Opel",
+  "ref1": "0281010269",
+  "ref2": "24417194",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "9",
+  "numero": "256  257",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "0281010819",
+  "ref2": "HOM8200039569  8200166362",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "9",
+  "numero": "260  261  262",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "0281001934",
+  "ref2": "HOM8200039569  8200078730",
+  "quantidade": "3"
+ },
+ {
+  "caixa": "9",
+  "numero": "263  264",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "0281011106",
+  "ref2": "HOM8200091428  8200243785",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "9",
+  "numero": "265  266",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "0281010297",
+  "ref2": "HOM8200048297  8200183768",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "9",
+  "numero": "267  268  269",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "0281010632",
+  "ref2": "HOM8200051608  8200118526",
+  "quantidade": "3"
+ },
+ {
+  "caixa": "9",
+  "numero": "270  271",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "0281001999",
+  "ref2": "HOM7700104407  7700114854",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "10",
+  "numero": "275",
+  "tipo": "Centralina Injeção",
+  "marca": "Opel",
+  "ref1": "09355929",
+  "ref2": "HSFI-C  DBKL",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "10",
+  "numero": "276",
+  "tipo": "Centralina Injeção",
+  "marca": "Opel",
+  "ref1": "16228919",
+  "ref2": "HSFI-C  CLJX",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "10",
+  "numero": "277",
+  "tipo": "Centralina Injeção",
+  "marca": "Honda",
+  "ref1": "37820-P1J-E13",
+  "ref2": "381272-8206",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "10",
+  "numero": "278",
+  "tipo": "Centralina Injeção",
+  "marca": "Ford",
+  "ref1": "IAW55F8.K2",
+  "ref2": "51843150",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "10",
+  "numero": "279",
+  "tipo": "Centralina Injeção",
+  "marca": "Opel",
+  "ref1": "0281010269",
+  "ref2": "24417194  PE",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "10",
+  "numero": "281",
+  "tipo": "Centralina Injeção",
+  "marca": "BMW",
+  "ref1": "5WK90329",
+  "ref2": "1430844  DME  MS42",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "10",
+  "numero": "282",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "0281011530",
+  "ref2": "HOM8200051609  8200391179",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "10",
+  "numero": "283",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "0281011549",
+  "ref2": "8200391966  8200370779",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "10",
+  "numero": "284",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "0281012082",
+  "ref2": "HOM8200236624  8200403358",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "10",
+  "numero": "285",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "0281010769",
+  "ref2": "8200263396",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "10",
+  "numero": "286",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "0281013364",
+  "ref2": "8200635663  8200839387",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "10",
+  "numero": "292",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "0281011148",
+  "ref2": "8200311539  8200303141",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "10",
+  "numero": "302",
+  "tipo": "Centralina Injeção",
+  "marca": "Opel",
+  "ref1": "0281010021",
+  "ref2": "09133269  CS",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "10",
+  "numero": "303",
+  "tipo": "Centralina Injeção",
+  "marca": "Opel",
+  "ref1": "0281001637",
+  "ref2": "90569337  LC",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "10",
+  "numero": "304",
+  "tipo": "Centralina Injeção",
+  "marca": "PSA",
+  "ref1": "0261206565",
+  "ref2": "9635673880  MP7.3",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "10",
+  "numero": "305",
+  "tipo": "Centralina Injeção",
+  "marca": "Opel",
+  "ref1": "0281001674",
+  "ref2": "90562574  LL",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "10",
+  "numero": "306",
+  "tipo": "Centralina Injeção",
+  "marca": "Fiat",
+  "ref1": "0281011499",
+  "ref2": "55191195",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "10",
+  "numero": "307",
+  "tipo": "Centralina Injeção",
+  "marca": "Fiat",
+  "ref1": "0281010332",
+  "ref2": "73501227",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "10",
+  "numero": "308",
+  "tipo": "Centralina Injeção",
+  "marca": "Alfa Romeo",
+  "ref1": "0281010335",
+  "ref2": "46761015",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "10",
+  "numero": "309",
+  "tipo": "Centralina Injeção",
+  "marca": "Opel",
+  "ref1": "16268377",
+  "ref2": "6237797  RAAC",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "10",
+  "numero": "289",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "0281011432",
+  "ref2": "8200311550  8200311553",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "10",
+  "numero": "294 ou 295",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "0281012058",
+  "ref2": "8200311550  8200441820",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "10",
+  "numero": "296  297",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "0281011275",
+  "ref2": "8200305678  8200269879",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "10",
+  "numero": "298  299  301",
+  "tipo": "Centralina Injeção",
+  "marca": "Fiat",
+  "ref1": "0281001955",
+  "ref2": "46789433",
+  "quantidade": "3"
+ },
+ {
+  "caixa": "11",
+  "numero": "310",
+  "tipo": "Centralina Injeção",
+  "marca": "Fiat",
+  "ref1": "0281011396",
+  "ref2": "55187569",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "11",
+  "numero": "311",
+  "tipo": "Centralina Injeção",
+  "marca": "Opel",
+  "ref1": "0281001791",
+  "ref2": "90589738",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "11",
+  "numero": "312",
+  "tipo": "Centralina Injeção",
+  "marca": "Opel",
+  "ref1": "0281001670",
+  "ref2": "90589736",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "11",
+  "numero": "315",
+  "tipo": "Centralina Injeção",
+  "marca": "PSA",
+  "ref1": "0261206943",
+  "ref2": "9647480580  ME7.4.4",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "11",
+  "numero": "316",
+  "tipo": "Centralina Injeção",
+  "marca": "Fiat",
+  "ref1": "0281010846",
+  "ref2": "46815965",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "11",
+  "numero": "319",
+  "tipo": "Centralina Injeção",
+  "marca": "PSA",
+  "ref1": "0261206942",
+  "ref2": "9638783480  ME7.4.4",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "11",
+  "numero": "320",
+  "tipo": "Centralina Injeção",
+  "marca": "Fiat",
+  "ref1": "0261204543",
+  "ref2": "0046474816",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "11",
+  "numero": "323",
+  "tipo": "Centralina Injeção",
+  "marca": "Land Rover",
+  "ref1": "0281001420",
+  "ref2": "MSB101070",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "11",
+  "numero": "324",
+  "tipo": "Centralina Injeção",
+  "marca": "Fiat",
+  "ref1": "0261200721",
+  "ref2": "7785228",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "11",
+  "numero": "325",
+  "tipo": "Centralina Injeção",
+  "marca": "PSA",
+  "ref1": "0281010248",
+  "ref2": "EDC15C2",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "11",
+  "numero": "326",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "7700867275",
+  "ref2": "R04080001H",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "11",
+  "numero": "331",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "0261200306",
+  "ref2": "030906022W  DIGIFANT",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "11",
+  "numero": "333",
+  "tipo": "Centralina Injeção",
+  "marca": "Opel",
+  "ref1": "0261206169",
+  "ref2": "09164450",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "11",
+  "numero": "338",
+  "tipo": "Centralina Injeção",
+  "marca": "Toyota",
+  "ref1": "0261508723",
+  "ref2": "89661-OH370",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "11",
+  "numero": "339",
+  "tipo": "Centralina Injeção",
+  "marca": "Toyota",
+  "ref1": "89661-2B230",
+  "ref2": "175700-3513",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "11",
+  "numero": "340",
+  "tipo": "Centralina Injeção",
+  "marca": "Toyota",
+  "ref1": "89551-20110",
+  "ref2": "215000-1280",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "11",
+  "numero": "343",
+  "tipo": "Centralina Injeção",
+  "marca": "Nissan",
+  "ref1": "0261200957",
+  "ref2": "2371099B00",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "11",
+  "numero": "313  314",
+  "tipo": "Centralina Injeção",
+  "marca": "PSA",
+  "ref1": "0261207477",
+  "ref2": "9643218980  ME7.4.4",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "11",
+  "numero": "317  318",
+  "tipo": "Centralina Injeção",
+  "marca": "Fiat",
+  "ref1": "0261204405",
+  "ref2": "0046467005",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "11",
+  "numero": "321  322",
+  "tipo": "Centralina Injeção",
+  "marca": "Opel",
+  "ref1": "0281001214",
+  "ref2": "90563173  K",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "11",
+  "numero": "327  328",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "7700868189",
+  "ref2": "R04080005F",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "11",
+  "numero": "329  330",
+  "tipo": "Centralina Injeção",
+  "marca": "Fiat",
+  "ref1": "0280000732",
+  "ref2": "",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "11",
+  "numero": "332  336",
+  "tipo": "Centralina Injeção",
+  "marca": "Opel",
+  "ref1": "0261204475",
+  "ref2": "90532610  RZ",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "11",
+  "numero": "334  335",
+  "tipo": "Centralina Injeção",
+  "marca": "Opel",
+  "ref1": "0261204058",
+  "ref2": "90532609",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "11",
+  "numero": "341  342",
+  "tipo": "Centralina Injeção",
+  "marca": "Toyota",
+  "ref1": "89661-1A770",
+  "ref2": "175800-1823",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "12",
+  "numero": "344",
+  "tipo": "Centralina Injeção",
+  "marca": "Toyota",
+  "ref1": "89661-05410",
+  "ref2": "MB175800-5022",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "12",
+  "numero": "345",
+  "tipo": "Centralina Injeção",
+  "marca": "Toyota",
+  "ref1": "89661-05420",
+  "ref2": "MB175800-5031",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "12",
+  "numero": "346",
+  "tipo": "Centralina Injeção",
+  "marca": "Toyota",
+  "ref1": "89666-02310",
+  "ref2": "MB175800-5311",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "12",
+  "numero": "347",
+  "tipo": "Centralina Injeção",
+  "marca": "Toyota",
+  "ref1": "89661-12880",
+  "ref2": "175700-4252",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "12",
+  "numero": "348",
+  "tipo": "Centralina Injeção",
+  "marca": "Toyota",
+  "ref1": "89661-2B570",
+  "ref2": "175700-4554",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "12",
+  "numero": "357",
+  "tipo": "Centralina Injeção",
+  "marca": "Toyota",
+  "ref1": "89661-1A410",
+  "ref2": "211000-3570",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "12",
+  "numero": "362",
+  "tipo": "Centralina Injeção",
+  "marca": "Ford",
+  "ref1": "3S7A-12A650-VC",
+  "ref2": "DPC664  4PDC",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "12",
+  "numero": "364",
+  "tipo": "Centralina Injeção",
+  "marca": "Ford",
+  "ref1": "3M51-12A650-LA",
+  "ref2": "DXCC12240250",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "12",
+  "numero": "365",
+  "tipo": "Centralina Injeção",
+  "marca": "Ford",
+  "ref1": "5WS40303K-T",
+  "ref2": "4M51-12A650-JL  SID202",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "12",
+  "numero": "366",
+  "tipo": "Centralina Injeção",
+  "marca": "Ford",
+  "ref1": "YS6F-12A650-FH",
+  "ref2": "DPC-638  HOBO",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "12",
+  "numero": "367",
+  "tipo": "Centralina Injeção",
+  "marca": "Ford",
+  "ref1": "YS4F-12A650-PA",
+  "ref2": "DPC-612  PANG",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "12",
+  "numero": "368",
+  "tipo": "Centralina Injeção",
+  "marca": "Ford",
+  "ref1": "2M5A-12A650-PC",
+  "ref2": "12220510  DUDU",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "12",
+  "numero": "369",
+  "tipo": "Centralina Injeção",
+  "marca": "Ford",
+  "ref1": "4T11-12A650-CB",
+  "ref2": "12249770  DZFN",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "12",
+  "numero": "370",
+  "tipo": "Centralina Injeção",
+  "marca": "Ford",
+  "ref1": "XS4F-12A650-FAB",
+  "ref2": "DPC-612  BAWL",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "12",
+  "numero": "371",
+  "tipo": "Centralina Injeção",
+  "marca": "Ford",
+  "ref1": "96FB-12A650-AAB",
+  "ref2": "LEE-107  ANEW",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "12",
+  "numero": "372",
+  "tipo": "Centralina Injeção",
+  "marca": "Ford",
+  "ref1": "3C1A-12A650-EC",
+  "ref2": "DPC-806  9CBB",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "12",
+  "numero": "373",
+  "tipo": "Centralina Injeção",
+  "marca": "Ford",
+  "ref1": "97FB-12A650-ARA",
+  "ref2": "LSS-107  RACY",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "12",
+  "numero": "349  350",
+  "tipo": "Centralina Injeção",
+  "marca": "Toyota",
+  "ref1": "211000-0870",
+  "ref2": "89661-1A080",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "12",
+  "numero": "351  352",
+  "tipo": "Centralina Injeção",
+  "marca": "Toyota",
+  "ref1": "89661-1A760",
+  "ref2": "21100-5200",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "12",
+  "numero": "353  354",
+  "tipo": "Centralina Injeção",
+  "marca": "Toyota",
+  "ref1": "89661-52060",
+  "ref2": "211000-7210",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "12",
+  "numero": "355  356",
+  "tipo": "Centralina Injeção",
+  "marca": "Toyota",
+  "ref1": "89661-10240",
+  "ref2": "211000-4550",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "12",
+  "numero": "358  359  360",
+  "tipo": "Centralina Injeção",
+  "marca": "Ford",
+  "ref1": "97BB-12A650-JB",
+  "ref2": "DPC530  DOCK",
+  "quantidade": "3"
+ },
+ {
+  "caixa": "12",
+  "numero": "361  363",
+  "tipo": "Centralina Injeção",
+  "marca": "Ford",
+  "ref1": "97BB-12A650-JC",
+  "ref2": "DPC530  DUNE",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "12",
+  "numero": "374  375  376",
+  "tipo": "Centralina Injeção",
+  "marca": "Ford",
+  "ref1": "94FB-12A650-FA",
+  "ref2": "CSD-201  GERM",
+  "quantidade": "3"
+ },
+ {
+  "caixa": "13",
+  "numero": "377",
+  "tipo": "Centralina Injeção",
+  "marca": "Ford",
+  "ref1": "96FB-12A650-AB",
+  "ref2": "LEE-101  KEEN",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "13",
+  "numero": "378",
+  "tipo": "Centralina Injeção",
+  "marca": "Ford",
+  "ref1": "2S4A-12A650-NB",
+  "ref2": "DPC-653  1XRA",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "13",
+  "numero": "379",
+  "tipo": "Centralina Injeção",
+  "marca": "Ford",
+  "ref1": "5WS540512A-T",
+  "ref2": "6M51-12A650-YA  SID202  4BKA",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "13",
+  "numero": "382",
+  "tipo": "Centralina Injeção",
+  "marca": "Ford",
+  "ref1": "94AB-12A650-BD",
+  "ref2": "SME105  ICON",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "13",
+  "numero": "385",
+  "tipo": "Centralina Injeção",
+  "marca": "Ford",
+  "ref1": "94FB-12A650-FB",
+  "ref2": "CSD-201 BARK",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "13",
+  "numero": "386",
+  "tipo": "Centralina Injeção",
+  "marca": "Ford",
+  "ref1": "97AB-12A650-AA",
+  "ref2": "DPC-510  TROT",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "13",
+  "numero": "387",
+  "tipo": "Centralina Injeção",
+  "marca": "Ford",
+  "ref1": "97AA-12A650-SD",
+  "ref2": "MLP-417  PERU",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "13",
+  "numero": "388",
+  "tipo": "Centralina Injeção",
+  "marca": "Ford",
+  "ref1": "92AB-12A650-GA",
+  "ref2": "CSD-201  2AGA",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "13",
+  "numero": "394",
+  "tipo": "Centralina Injeção",
+  "marca": "Rover",
+  "ref1": "MKC102370",
+  "ref2": "VA",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "13",
+  "numero": "395",
+  "tipo": "Centralina Injeção",
+  "marca": "Rover",
+  "ref1": "MKC101770",
+  "ref2": "-",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "13",
+  "numero": "396",
+  "tipo": "Centralina Injeção",
+  "marca": "Volvo",
+  "ref1": "MB079700-8831",
+  "ref2": "HN.2",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "13",
+  "numero": "397",
+  "tipo": "Centralina Injeção",
+  "marca": "Rover",
+  "ref1": "MN610012",
+  "ref2": "TK",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "13",
+  "numero": "398",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "030906032CE",
+  "ref2": "BENZIN  ME7.5.10  0261207184",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "13",
+  "numero": "399",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "0261206750",
+  "ref2": "030906032AM",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "13",
+  "numero": "400",
+  "tipo": "Centralina Injeção",
+  "marca": "Audi",
+  "ref1": "0281011222",
+  "ref2": "038906019LJ  EDC15P+",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "13",
+  "numero": "404",
+  "tipo": "Centralina Injeção",
+  "marca": "Rover",
+  "ref1": "NNN000160",
+  "ref2": "-",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "13",
+  "numero": "380  381",
+  "tipo": "Centralina Injeção",
+  "marca": "Ford",
+  "ref1": "98FB-12A650-PA",
+  "ref2": "LPE627  SLOB",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "13",
+  "numero": "383  384",
+  "tipo": "Centralina Injeção",
+  "marca": "Ford",
+  "ref1": "96FB-12A650-FC",
+  "ref2": "DPC520  SMOG",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "13",
+  "numero": "389  390",
+  "tipo": "Centralina Injeção",
+  "marca": "Rover",
+  "ref1": "MKC104021  FE",
+  "ref2": "-",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "13",
+  "numero": "391  392  393",
+  "tipo": "Centralina Injeção",
+  "marca": "Rover",
+  "ref1": "MKC101470",
+  "ref2": "VA",
+  "quantidade": "3"
+ },
+ {
+  "caixa": "13",
+  "numero": "401  402  403",
+  "tipo": "Centralina Injeção",
+  "marca": "Rover",
+  "ref1": "NNN100742",
+  "ref2": "HA",
+  "quantidade": "3"
+ },
+ {
+  "caixa": "14",
+  "numero": "416",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "S101729101P",
+  "ref2": "HOM7700864273  7700863561",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "14",
+  "numero": "417",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "S101729102G",
+  "ref2": "HOM77008541160",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "14",
+  "numero": "418",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "S101718102E",
+  "ref2": "HOM7700749946  7700864508",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "14",
+  "numero": "405  406  407  408  409",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "S102730101Q",
+  "ref2": "HOM7700861423 7700869732",
+  "quantidade": "5"
+ },
+ {
+  "caixa": "14",
+  "numero": "410  411",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "S101718103C",
+  "ref2": "HOM7700749946  7700864507",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "14",
+  "numero": "412  413",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "S101263101E",
+  "ref2": "HOM7700746044  7700744412",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "14",
+  "numero": "414  415",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "S101729102F",
+  "ref2": "HOM7700854160  7700863541",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "14",
+  "numero": "419  420  421",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "0281001809",
+  "ref2": "7700109621",
+  "quantidade": "3"
+ },
+ {
+  "caixa": "14",
+  "numero": "422  423  424  425",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "0281001810",
+  "ref2": "7700110646",
+  "quantidade": "4"
+ },
+ {
+  "caixa": "14",
+  "numero": "426  427",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0261203795",
+  "ref2": "9616546480  MP5.1.1",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "15",
+  "numero": "430",
+  "tipo": "Centralina Injeção",
+  "marca": "Rover",
+  "ref1": "MKC104022",
+  "ref2": "GE",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "15",
+  "numero": "431",
+  "tipo": "Centralina Injeção",
+  "marca": "Rover",
+  "ref1": "MSB100680",
+  "ref2": "AS",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "15",
+  "numero": "432",
+  "tipo": "Centralina Injeção",
+  "marca": "Ford",
+  "ref1": "5WS40027K-T",
+  "ref2": "2S6A-12A650-BL  1BSF  SID802",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "15",
+  "numero": "433",
+  "tipo": "Centralina Injeção",
+  "marca": "Ford",
+  "ref1": "5WS40632A-T",
+  "ref2": "7S61-12A650-EA  7TTA  SID804",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "15",
+  "numero": "434",
+  "tipo": "Centralina Injeção",
+  "marca": "Honda",
+  "ref1": "0281010419",
+  "ref2": "TF  37820PLZ00  8973155087",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "15",
+  "numero": "440",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0261206216",
+  "ref2": "MP7.2  9632693980",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "15",
+  "numero": "452",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0261204051",
+  "ref2": "MA3.0",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "15",
+  "numero": "453",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0261200778",
+  "ref2": "MA3.0",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "15",
+  "numero": "428  429",
+  "tipo": "Centralina Injeção",
+  "marca": "Rover",
+  "ref1": "MKC103510",
+  "ref2": "WK",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "15",
+  "numero": "435  436  437  438  439",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0281001839",
+  "ref2": "9630059880",
+  "quantidade": "5"
+ },
+ {
+  "caixa": "15",
+  "numero": "441  442",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0261204788",
+  "ref2": "MA3.1  9631528780",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "15",
+  "numero": "443  444  445",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0261204063",
+  "ref2": "MP5.1.1  9624518380",
+  "quantidade": "3"
+ },
+ {
+  "caixa": "15",
+  "numero": "446  447  448  449  450  451",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0261204625",
+  "ref2": "MA3.1",
+  "quantidade": "5"
+ },
+ {
+  "caixa": "16",
+  "numero": "461",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0261200694",
+  "ref2": "MP5.1.1  9619473280",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "16",
+  "numero": "462",
+  "tipo": "Centralina Injeção",
+  "marca": "Citroen",
+  "ref1": "G5.M0/0A03",
+  "ref2": "-",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "16",
+  "numero": "463",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "9624349980",
+  "ref2": "XUDLC01",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "16",
+  "numero": "466",
+  "tipo": "Centralina Injeção",
+  "marca": "Alfa Romeo",
+  "ref1": "0261200142",
+  "ref2": "-",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "16",
+  "numero": "467",
+  "tipo": "Centralina Injeção",
+  "marca": "Citroen",
+  "ref1": "0261203913",
+  "ref2": "MA3.1  9620398980",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "16",
+  "numero": "468",
+  "tipo": "Centralina Injeção",
+  "marca": "Citroen/Fiat",
+  "ref1": "0261200729",
+  "ref2": "00464699660",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "16",
+  "numero": "471",
+  "tipo": "Centralina Injeção",
+  "marca": "Citroen",
+  "ref1": "9624217180",
+  "ref2": "-",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "16",
+  "numero": "476",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "7700102990",
+  "ref2": "HOM7700868295",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "16",
+  "numero": "477",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0261204050",
+  "ref2": "MA3.0  9624936280",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "16",
+  "numero": "454  455  456",
+  "tipo": "Centralina Injeção",
+  "marca": "BMW",
+  "ref1": "0281001243",
+  "ref2": "2245541",
+  "quantidade": "3"
+ },
+ {
+  "caixa": "16",
+  "numero": "457  458",
+  "tipo": "Centralina Injeção",
+  "marca": "Citroen",
+  "ref1": "0261200707",
+  "ref2": "9613113880",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "16",
+  "numero": "459  460",
+  "tipo": "Centralina Injeção",
+  "marca": "Citroen",
+  "ref1": "9630509280",
+  "ref2": "XUDLC01",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "16",
+  "numero": "464  465",
+  "tipo": "Centralina Injeção",
+  "marca": "Citroen",
+  "ref1": "0261203913",
+  "ref2": "MP5.2  9623676380",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "16",
+  "numero": "469  470",
+  "tipo": "Centralina Injeção",
+  "marca": "Citroen",
+  "ref1": "9610493160",
+  "ref2": "-",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "16",
+  "numero": "472  473",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "S102730101Q",
+  "ref2": "HOM7700861423 7700869732",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "16",
+  "numero": "474  475",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "7700104483",
+  "ref2": "HOM7700868295",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "17",
+  "numero": "497",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "S101261102B",
+  "ref2": "HOM7700850369  77008503711",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "17",
+  "numero": "498",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "S101262101D",
+  "ref2": "HOM7700742850  7700744413",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "17",
+  "numero": "499",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "S101263101D",
+  "ref2": "HOM7700746044  7700744412",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "17",
+  "numero": "500",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "S101728112P",
+  "ref2": "HOM7700864276  7700864484",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "17",
+  "numero": "478  479  480  481  482   483  484  485",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "S101729102G",
+  "ref2": "HOM7700854160  7700864279",
+  "quantidade": "8"
+ },
+ {
+  "caixa": "17",
+  "numero": "488  490",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "S111730108C",
+  "ref2": "HOM7700864451  BVM  7700101920",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "17",
+  "numero": "491  492  493",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "S111730119B",
+  "ref2": "HOM7700861423  7700873360",
+  "quantidade": "3"
+ },
+ {
+  "caixa": "17",
+  "numero": "494  495  496",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "S101729101E",
+  "ref2": "HOM7700864273  7700863561",
+  "quantidade": "3"
+ },
+ {
+  "caixa": "17",
+  "numero": "501  502",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0281001262",
+  "ref2": "XUDBC02  9624519580",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "18",
+  "numero": "503",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "S100813101K",
+  "ref2": "HOM7700731801  7700864505",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "18",
+  "numero": "506",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "S101727104B",
+  "ref2": "HOM7700860316  7700864485",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "18",
+  "numero": "507",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "S101726204B",
+  "ref2": "HOM7700861419  7700867287",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "18",
+  "numero": "512",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "S101266101B",
+  "ref2": "HOM7700745990  7700744407",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "18",
+  "numero": "513",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "S101725111Q",
+  "ref2": "HOM7700860308  7700873465",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "18",
+  "numero": "517",
+  "tipo": "Centralina Injeção",
+  "marca": "Volvo",
+  "ref1": "S101705101D",
+  "ref2": "S101705101D  459143",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "18",
+  "numero": "518",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "S100800104",
+  "ref2": "HOM7700723126  7700726991",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "18",
+  "numero": "519",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "S101714104P",
+  "ref2": "HOM7700863409  7700868325",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "18",
+  "numero": "520",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "S100805101G",
+  "ref2": "HOM7700731803  7700733848",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "18",
+  "numero": "521",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "S101718103P",
+  "ref2": "HOM7700749946  7700864507",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "18",
+  "numero": "526",
+  "tipo": "Centralina Injeção",
+  "marca": "Hyundai",
+  "ref1": "39110-24320",
+  "ref2": "9010930005",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "18",
+  "numero": "508  509  510  511",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "S101718103B",
+  "ref2": "HOM7700749946  7700862148",
+  "quantidade": "4"
+ },
+ {
+  "caixa": "18",
+  "numero": "514  515  516",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "S101263102D",
+  "ref2": "HOM7700746044  7700852357",
+  "quantidade": "3"
+ },
+ {
+  "caixa": "18",
+  "numero": "522  523",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "S100813101H",
+  "ref2": "HOM7700731801  7700735140",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "18",
+  "numero": "524  525",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "S111730107C",
+  "ref2": "HOM7700864449  7700105812",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "18",
+  "numero": "527  528",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "S110030102B",
+  "ref2": "7700112538  7700110471",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "19",
+  "numero": "531",
+  "tipo": "Centralina Injeção",
+  "marca": "Volvo",
+  "ref1": "S101290101E",
+  "ref2": "436507",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "19",
+  "numero": "532",
+  "tipo": "Centralina Injeção",
+  "marca": "Volvo",
+  "ref1": "S111705113C",
+  "ref2": "473477/01",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "19",
+  "numero": "533",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "S100801-101",
+  "ref2": "EF8933002505",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "19",
+  "numero": "534",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "S102730101C",
+  "ref2": "HOM7700861423  7700869732",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "19",
+  "numero": "535",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "S101715101C",
+  "ref2": "HOM7700857526  7700860285",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "19",
+  "numero": "539",
+  "tipo": "Centralina Injeção",
+  "marca": "Rover",
+  "ref1": "MKC104031",
+  "ref2": "FG",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "19",
+  "numero": "540",
+  "tipo": "Centralina Injeção",
+  "marca": "Hyundai",
+  "ref1": "39110-24320",
+  "ref2": "9010930005",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "19",
+  "numero": "543",
+  "tipo": "Centralina Injeção",
+  "marca": "Volvo",
+  "ref1": "0261200023",
+  "ref2": "-",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "19",
+  "numero": "544",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot",
+  "ref1": "0261200780",
+  "ref2": "MA3.0  9617150080",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "19",
+  "numero": "545",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0261204066",
+  "ref2": "MP5.1.1  9624518180",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "19",
+  "numero": "546",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0261204016",
+  "ref2": "MA3.0  9622677480",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "19",
+  "numero": "547",
+  "tipo": "Centralina Injeção",
+  "marca": "Fiat",
+  "ref1": "IAW1AF.13",
+  "ref2": "46456554",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "19",
+  "numero": "548",
+  "tipo": "Centralina Injeção",
+  "marca": "Fiat",
+  "ref1": "IAW1AF.16",
+  "ref2": "46534303",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "19",
+  "numero": "549",
+  "tipo": "Centralina Injeção",
+  "marca": "Lancia",
+  "ref1": "IAW04U",
+  "ref2": "6160020000",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "19",
+  "numero": "550",
+  "tipo": "Centralina Injeção",
+  "marca": "Lancia",
+  "ref1": "WHD2.01/12S.79",
+  "ref2": "-",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "19",
+  "numero": "551",
+  "tipo": "Centralina Injeção",
+  "marca": "Alfa Romeo",
+  "ref1": "0261200536",
+  "ref2": "-",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "19",
+  "numero": "529  530",
+  "tipo": "Centralina Injeção",
+  "marca": "Volvo",
+  "ref1": "S101706102D",
+  "ref2": "452333/08  B18FP-460/480",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "19",
+  "numero": "536  537  538",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "S101729102P",
+  "ref2": "HOM7700854160  7700864279",
+  "quantidade": "3"
+ },
+ {
+  "caixa": "19",
+  "numero": "541  542",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot",
+  "ref1": "9627453880",
+  "ref2": "XUDLCO1",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "20",
+  "numero": "558",
+  "tipo": "Centralina Injeção",
+  "marca": "Opel",
+  "ref1": "16188269",
+  "ref2": "WC  BJSH",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "20",
+  "numero": "559",
+  "tipo": "Centralina Injeção",
+  "marca": "Opel",
+  "ref1": "16199550",
+  "ref2": "SS  BPHM",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "20",
+  "numero": "560",
+  "tipo": "Centralina Injeção",
+  "marca": "Opel",
+  "ref1": "16202319",
+  "ref2": "NL  BUFH",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "20",
+  "numero": "566",
+  "tipo": "Centralina Injeção",
+  "marca": "Opel",
+  "ref1": "16163409",
+  "ref2": "QT  AXZJ",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "20",
+  "numero": "569",
+  "tipo": "Centralina Injeção",
+  "marca": "Opel",
+  "ref1": "16178475",
+  "ref2": "SY  BBKY",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "20",
+  "numero": "570",
+  "tipo": "Centralina Injeção",
+  "marca": "Opel",
+  "ref1": "16246649",
+  "ref2": "1.6L  MAN  BYHR",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "20",
+  "numero": "571",
+  "tipo": "Centralina Injeção",
+  "marca": "Fiat",
+  "ref1": "16212199",
+  "ref2": "1591.58L  MAN  BNBN",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "20",
+  "numero": "572",
+  "tipo": "Centralina Injeção",
+  "marca": "Opel",
+  "ref1": "16149879",
+  "ref2": "YR  BFML",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "20",
+  "numero": "573",
+  "tipo": "Centralina Injeção",
+  "marca": "Opel",
+  "ref1": "16163449",
+  "ref2": "QX  BFZN",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "20",
+  "numero": "574",
+  "tipo": "Centralina Injeção",
+  "marca": "Opel",
+  "ref1": "16264869",
+  "ref2": "AW  CLAL",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "20",
+  "numero": "575",
+  "tipo": "Centralina Injeção",
+  "marca": "Opel",
+  "ref1": "16190529",
+  "ref2": "RA  BJRU",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "20",
+  "numero": "576",
+  "tipo": "Centralina Injeção",
+  "marca": "Honda",
+  "ref1": "37820-PM7-BO31",
+  "ref2": "-",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "20",
+  "numero": "577",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0261204082",
+  "ref2": "MP5.2  9622821580",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "20",
+  "numero": "578",
+  "tipo": "Centralina Injeção",
+  "marca": "Citroën",
+  "ref1": "0261203736",
+  "ref2": "MA3.1  9620398980",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "20",
+  "numero": "582",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "7700104718",
+  "ref2": "-",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "20",
+  "numero": "552  553  554  555  556  557",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "IAW6R.30",
+  "ref2": "HOM7700860324",
+  "quantidade": "6"
+ },
+ {
+  "caixa": "20",
+  "numero": "561  562  563",
+  "tipo": "Centralina Injeção",
+  "marca": "Opel",
+  "ref1": "16214239",
+  "ref2": "JS  BWJN",
+  "quantidade": "3"
+ },
+ {
+  "caixa": "20",
+  "numero": "564  565",
+  "tipo": "Centralina Injeção",
+  "marca": "Opel",
+  "ref1": "16202329",
+  "ref2": "NM  BWJR",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "20",
+  "numero": "567  568",
+  "tipo": "Centralina Injeção",
+  "marca": "Opel",
+  "ref1": "16204739",
+  "ref2": "HK  BPDD",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "20",
+  "numero": "579  580  581",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "7700104481",
+  "ref2": "-",
+  "quantidade": "3"
+ },
+ {
+  "caixa": "21",
+  "numero": "583",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "7700108452",
+  "ref2": "-",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "21",
+  "numero": "584",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "7700101909",
+  "ref2": "-",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "21",
+  "numero": "585",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "7700105559",
+  "ref2": "7700107251",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "21",
+  "numero": "588",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "7700110688",
+  "ref2": "-",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "21",
+  "numero": "589",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "7700107414",
+  "ref2": "-",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "21",
+  "numero": "590",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "8200250663",
+  "ref2": "HOM8200129109",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "21",
+  "numero": "591",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "8200180595",
+  "ref2": "HOM8200129063",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "21",
+  "numero": "592",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "8200176975",
+  "ref2": "HOM8200129063",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "21",
+  "numero": "593",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "8200303619",
+  "ref2": "HOM8200129063",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "21",
+  "numero": "595",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "8200259832",
+  "ref2": "8200308212",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "21",
+  "numero": "586  587",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "7700104483",
+  "ref2": "-",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "21",
+  "numero": "596  597  598  599  600",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "8200212348",
+  "ref2": "HOM8200222917",
+  "quantidade": "5"
+ },
+ {
+  "caixa": "21",
+  "numero": "601  603",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "8200206670",
+  "ref2": "HOM8200129063",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "21",
+  "numero": "604  605  606  607  608",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "8200250662",
+  "ref2": "HOM8200129063",
+  "quantidade": "5"
+ },
+ {
+  "caixa": "21",
+  "numero": "609  610",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "8200212351",
+  "ref2": "HOM8200129063",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "22",
+  "numero": "611",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "8200250662",
+  "ref2": "",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "22",
+  "numero": "612",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "8200123483",
+  "ref2": "HOM8200129063",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "22",
+  "numero": "613",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "8200284277",
+  "ref2": "HOM8200129063",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "22",
+  "numero": "618",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "8200254240",
+  "ref2": "HOM8200222917",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "22",
+  "numero": "619",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "8200123485",
+  "ref2": "HOM8200129109",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "22",
+  "numero": "620",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "8200212348",
+  "ref2": "HOM8200222917",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "22",
+  "numero": "625",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "8200303623",
+  "ref2": "HOM8200129109",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "22",
+  "numero": "626",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "8200200622",
+  "ref2": "HOM8200140058",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "22",
+  "numero": "631",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "8200331477",
+  "ref2": "8200374168",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "22",
+  "numero": "635",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "8200498188",
+  "ref2": "8200626634",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "22",
+  "numero": "636",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "8200331477",
+  "ref2": "8200469333",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "22",
+  "numero": "614  615  616",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "8200399038",
+  "ref2": "8200513163",
+  "quantidade": "3"
+ },
+ {
+  "caixa": "22",
+  "numero": "621   624",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "8200498185",
+  "ref2": "8200469333",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "22",
+  "numero": "628  629  630",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "8200498168",
+  "ref2": "8200469340",
+  "quantidade": "3"
+ },
+ {
+  "caixa": "23",
+  "numero": "651",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "8200253520",
+  "ref2": "HOM8200140057",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "23",
+  "numero": "652",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "8200331477",
+  "ref2": "8200254240",
+  "quantidade": "0"
+ },
+ {
+  "caixa": "23",
+  "numero": "659",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "8200334419",
+  "ref2": "8200374152",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "23",
+  "numero": "663",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "8200398934",
+  "ref2": "8200449080",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "23",
+  "numero": "637  638  640  641  642",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "8200399038",
+  "ref2": "8200619409",
+  "quantidade": "5"
+ },
+ {
+  "caixa": "23",
+  "numero": "644  645  647",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "8200911560",
+  "ref2": "8200909666",
+  "quantidade": "3"
+ },
+ {
+  "caixa": "23",
+  "numero": "648  649  650",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "8200911560",
+  "ref2": "8200619409",
+  "quantidade": "3"
+ },
+ {
+  "caixa": "23",
+  "numero": "654  655  656  657",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "8200399038",
+  "ref2": "8200619409",
+  "quantidade": "4"
+ },
+ {
+  "caixa": "24",
+  "numero": "665",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "8200331477",
+  "ref2": "8200374150",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "24",
+  "numero": "669",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "8200911562",
+  "ref2": "8200767242",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "24",
+  "numero": "670",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "8200331477",
+  "ref2": "8200355869",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "24",
+  "numero": "678  679  680  681  682  683  684  685",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "0281001766",
+  "ref2": "HOM7700105952  7700114354",
+  "quantidade": "8"
+ },
+ {
+  "caixa": "24",
+  "numero": "666  667",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "8200334419",
+  "ref2": "8200469340",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "24",
+  "numero": "671  672",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "S102730101C",
+  "ref2": "HOM7700861423  BVM",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "24",
+  "numero": "673  674  675  676  677",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "0281010077",
+  "ref2": "HOM7700111552",
+  "quantidade": "5"
+ },
+ {
+  "caixa": "24",
+  "numero": "686  687",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "0281001995",
+  "ref2": "HOM7700113281  7700113864",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "25",
+  "numero": "702",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "0281001809",
+  "ref2": "HOM7700105953",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "25",
+  "numero": "703",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "0281001878",
+  "ref2": "HOM7700109062",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "25",
+  "numero": "704",
+  "tipo": "Centralina Injeção",
+  "marca": "Chrysler",
+  "ref1": "0281010140",
+  "ref2": "P56041587AB",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "25",
+  "numero": "711",
+  "tipo": "Centralina Injeção",
+  "marca": "Fiat",
+  "ref1": "IAW6F.SN",
+  "ref2": "46421095",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "25",
+  "numero": "715",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "R04080025A",
+  "ref2": "DCN2  9839587680",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "25",
+  "numero": "716",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "R04080024D",
+  "ref2": "DCN2  9641390180",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "25",
+  "numero": "688  689  690  691  692  693  694  695  696",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "0261203932",
+  "ref2": "030906027E",
+  "quantidade": "9"
+ },
+ {
+  "caixa": "25",
+  "numero": "698  699  700  701",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "0281001969",
+  "ref2": "HOM7700111552",
+  "quantidade": "5"
+ },
+ {
+  "caixa": "25",
+  "numero": "705  706  707",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "0261203914/915",
+  "ref2": "030906027K",
+  "quantidade": "3"
+ },
+ {
+  "caixa": "25",
+  "numero": "708  709  710",
+  "tipo": "Centralina Injeção",
+  "marca": "Fiat",
+  "ref1": "IAW18F.B4",
+  "ref2": "46534755",
+  "quantidade": "3"
+ },
+ {
+  "caixa": "25",
+  "numero": "713  714",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "R04080028B",
+  "ref2": "DCN2  9641390180",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "26",
+  "numero": "719",
+  "tipo": "Centralina Injeção",
+  "marca": "Skoda",
+  "ref1": "047906030M",
+  "ref2": "5WP4327",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "26",
+  "numero": "720",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "7700111203",
+  "ref2": "-",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "26",
+  "numero": "721",
+  "tipo": "Centralina Injeção",
+  "marca": "Lancia",
+  "ref1": "IAW18FD.5Y",
+  "ref2": "4631215",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "26",
+  "numero": "727",
+  "tipo": "Centralina Injeção",
+  "marca": "Lancia",
+  "ref1": "IAW16F.ET",
+  "ref2": "-",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "26",
+  "numero": "728",
+  "tipo": "Centralina Injeção",
+  "marca": "Fiat",
+  "ref1": "IAW16FM.EC",
+  "ref2": "-",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "26",
+  "numero": "729",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "03E906023B",
+  "ref2": "VW  5WP40412",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "26",
+  "numero": "730",
+  "tipo": "Centralina Injeção",
+  "marca": "Seat",
+  "ref1": "0281001914",
+  "ref2": "038906018EC",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "26",
+  "numero": "731",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "IAW4AV.VO",
+  "ref2": "61600.346.11",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "26",
+  "numero": "732",
+  "tipo": "Centralina Injeção",
+  "marca": "Skoda",
+  "ref1": "IAW1AVM.SO",
+  "ref2": "61600.260.10",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "26",
+  "numero": "733",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "0261206030",
+  "ref2": "SK906032A",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "26",
+  "numero": "734",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "0281010503",
+  "ref2": "045906019AB",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "26",
+  "numero": "735",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "0261207179",
+  "ref2": "036906032P",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "26",
+  "numero": "736",
+  "tipo": "Centralina Injeção",
+  "marca": "Chrysler",
+  "ref1": "0281001768",
+  "ref2": "P04686662AB",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "26",
+  "numero": "739",
+  "tipo": "Centralina Injeção",
+  "marca": "Seat",
+  "ref1": "0261203340/341",
+  "ref2": "030906026T",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "26",
+  "numero": "740",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "0261203184/185",
+  "ref2": "8A0907311/H",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "26",
+  "numero": "741",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "0261203456/457",
+  "ref2": "030906026AJ",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "26",
+  "numero": "742",
+  "tipo": "Centralina Injeção",
+  "marca": "Seat",
+  "ref1": "0261204461/462",
+  "ref2": "1LO907311",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "26",
+  "numero": "743",
+  "tipo": "Centralina Injeção",
+  "marca": "Skoda",
+  "ref1": "0261203964",
+  "ref2": "411.0.4046-028.6",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "26",
+  "numero": "744",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "0261203744/745",
+  "ref2": "030906026AK",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "26",
+  "numero": "745",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "0261204794",
+  "ref2": "030906027AC",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "26",
+  "numero": "746",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "0261204844",
+  "ref2": "6KO906027AK",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "26",
+  "numero": "747",
+  "tipo": "Centralina Injeção",
+  "marca": "Seat",
+  "ref1": "0261203930",
+  "ref2": "030906027AK",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "26",
+  "numero": "717  718",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "0281010176",
+  "ref2": "038906019BJ",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "26",
+  "numero": "722  723",
+  "tipo": "Centralina Injeção",
+  "marca": "Fiat",
+  "ref1": "IAW16F.EB",
+  "ref2": "-",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "26",
+  "numero": "724  725",
+  "tipo": "Centralina Injeção",
+  "marca": "Fiat",
+  "ref1": "IAW16F.E3",
+  "ref2": "-",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "26",
+  "numero": "737  738",
+  "tipo": "Centralina Injeção",
+  "marca": "Seat",
+  "ref1": "0261203360/361",
+  "ref2": "6K5906026",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "27",
+  "numero": "757",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "IAW6R.20",
+  "ref2": "HOM7700856784",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "27",
+  "numero": "764",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "R04080030B",
+  "ref2": "DCN2  9641390180",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "27",
+  "numero": "765",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "R04080030F",
+  "ref2": "DCN2  9650359580",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "27",
+  "numero": "766",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "R04080025C",
+  "ref2": "DCN2  9641390180",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "27",
+  "numero": "767",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "R04080028C",
+  "ref2": "DCN2  9650359580",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "27",
+  "numero": "772",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "R04080027A",
+  "ref2": "DCN2  9839587680",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "27",
+  "numero": "775",
+  "tipo": "Centralina Injeção",
+  "marca": "Honda",
+  "ref1": "37820-PLR-G01",
+  "ref2": "-",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "27",
+  "numero": "776",
+  "tipo": "Centralina Injeção",
+  "marca": "Honda",
+  "ref1": "37820-PMH-E01",
+  "ref2": "-",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "27",
+  "numero": "777",
+  "tipo": "Centralina Injeção",
+  "marca": "Honda",
+  "ref1": "37820-PEL-G01",
+  "ref2": "-",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "27",
+  "numero": "778",
+  "tipo": "Centralina Injeção",
+  "marca": "Honda",
+  "ref1": "37820-RBA-G02",
+  "ref2": "-",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "27",
+  "numero": "779",
+  "tipo": "Centralina Injeção",
+  "marca": "Honda",
+  "ref1": "37700-P01-G02",
+  "ref2": "-",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "27",
+  "numero": "780",
+  "tipo": "Centralina Injeção",
+  "marca": "Ford",
+  "ref1": "XS6F-12A650-APB",
+  "ref2": "LPE-627  HINT",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "27",
+  "numero": "748  749  750  751  752  753  754  755  756",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "IAW6R.20",
+  "ref2": "HOM7700856784",
+  "quantidade": "9"
+ },
+ {
+  "caixa": "27",
+  "numero": "758  759",
+  "tipo": "Centralina Injeção",
+  "marca": "Kia",
+  "ref1": "39102-4X520",
+  "ref2": "CR-U",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "27",
+  "numero": "760  761",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "R04080015F",
+  "ref2": "DCN2  9639587680",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "27",
+  "numero": "762  763",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "R04080023D",
+  "ref2": "DCN2  9639587680",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "27",
+  "numero": "770  771",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "R04080015H",
+  "ref2": "DCN2  9641390180",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "27",
+  "numero": "773  774",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "R04080015G",
+  "ref2": "DCN2  9639587680",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "28",
+  "numero": "781",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "8200303619",
+  "ref2": "HOM8200129063",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "28",
+  "numero": "782",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "8200176975",
+  "ref2": "HOM8200129063",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "28",
+  "numero": "783",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "8200250662",
+  "ref2": "HOM820012906",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "28",
+  "numero": "787",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "8200911560",
+  "ref2": "8200909666",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "28",
+  "numero": "788",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "8200206670",
+  "ref2": "HOM8200129063",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "28",
+  "numero": "789",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "8200331477",
+  "ref2": "8200374150",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "28",
+  "numero": "790",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0281010962",
+  "ref2": "EDC15C2",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "28",
+  "numero": "791",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "0261206001",
+  "ref2": "030906032F",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "28",
+  "numero": "792",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "IAW6R.20",
+  "ref2": "HOM7700856784",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "28",
+  "numero": "797",
+  "tipo": "Centralina Injeção",
+  "marca": "Fiat",
+  "ref1": "IAW1AF.16",
+  "ref2": "46534303",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "28",
+  "numero": "784  785  786",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "8200212351",
+  "ref2": "HOM8200129063",
+  "quantidade": "3"
+ },
+ {
+  "caixa": "28",
+  "numero": "793  794",
+  "tipo": "Centralina Injeção",
+  "marca": "Fiat",
+  "ref1": "IAW16F.EB",
+  "ref2": "-",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "28",
+  "numero": "798  799  800  801  802  803  804",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "IAW6R.20",
+  "ref2": "HOM7700856784",
+  "quantidade": "7"
+ },
+ {
+  "caixa": "28",
+  "numero": "805  806",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "7700111201",
+  "ref2": "HOM7700868294",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "29",
+  "numero": "828",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0261200694",
+  "ref2": "MP5.1",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "29",
+  "numero": "832",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0261204050",
+  "ref2": "MA3.0",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "29",
+  "numero": "833",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0261204832",
+  "ref2": "MP5.2",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "29",
+  "numero": "807  808  809  810  811  812  813  814",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "IAW6R.20",
+  "ref2": "HOM7700856784",
+  "quantidade": "8"
+ },
+ {
+  "caixa": "29",
+  "numero": "815  816  817  818  819  820  821  822",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "IAW6R.20",
+  "ref2": "HOM7700856784",
+  "quantidade": "8"
+ },
+ {
+  "caixa": "29",
+  "numero": "823  824  825",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0261204049",
+  "ref2": "MA3.0",
+  "quantidade": "3"
+ },
+ {
+  "caixa": "29",
+  "numero": "826  827",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0261204622",
+  "ref2": "MA3.1",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "29",
+  "numero": "829  830  831",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0261200778",
+  "ref2": "MA3.0",
+  "quantidade": "3"
+ },
+ {
+  "caixa": "30",
+  "numero": "844",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0261203617",
+  "ref2": "MA3.0",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "30",
+  "numero": "860",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0261200779",
+  "ref2": "MA3.0",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "30",
+  "numero": "848  849  850  851  852  853  854  855  856  857",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0261204788",
+  "ref2": "MA3.1",
+  "quantidade": "10"
+ },
+ {
+  "caixa": "30",
+  "numero": "834  835  836  837  838",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0261200780",
+  "ref2": "MA3.0",
+  "quantidade": "5"
+ },
+ {
+  "caixa": "30",
+  "numero": "839  841  842  843",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0261204625",
+  "ref2": "MA3.1",
+  "quantidade": "4"
+ },
+ {
+  "caixa": "30",
+  "numero": "845  846  847",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0261204051",
+  "ref2": "MA3.0",
+  "quantidade": "3"
+ },
+ {
+  "caixa": "30",
+  "numero": "858  859",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0261203943",
+  "ref2": "MA3.1",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "31",
+  "numero": "875",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0261204624",
+  "ref2": "MA3.1",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "31",
+  "numero": "881",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0261200732",
+  "ref2": "9614467480",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "31",
+  "numero": "882",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0261200772",
+  "ref2": "9617149680",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "31",
+  "numero": "883",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0261200773",
+  "ref2": "MA3.0",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "31",
+  "numero": "884",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0261200708",
+  "ref2": "9613328680",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "31",
+  "numero": "862  863  864  865  866  867  868  869  870  871  872  873  874",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0261203736",
+  "ref2": "MA3.1",
+  "quantidade": "13"
+ },
+ {
+  "caixa": "31",
+  "numero": "876  877  878",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0261200203",
+  "ref2": "-",
+  "quantidade": "3"
+ },
+ {
+  "caixa": "31",
+  "numero": "879  880",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0261200664",
+  "ref2": "9615045880",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "32",
+  "numero": "900",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0261200218",
+  "ref2": "MA3.2  9613118680",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "32",
+  "numero": "901",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0261200218",
+  "ref2": "-",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "32",
+  "numero": "885  886  887  888",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0261200707",
+  "ref2": "9613113880",
+  "quantidade": "4"
+ },
+ {
+  "caixa": "32",
+  "numero": "889  890  891  892",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0261200780",
+  "ref2": "MA3.0  9617150080",
+  "quantidade": "4"
+ },
+ {
+  "caixa": "32",
+  "numero": "893  894  895",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0261200778",
+  "ref2": "MA3.0  9617149880",
+  "quantidade": "3"
+ },
+ {
+  "caixa": "32",
+  "numero": "896  897  898  899",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0261200780",
+  "ref2": "9617150080",
+  "quantidade": "4"
+ },
+ {
+  "caixa": "32",
+  "numero": "902  903",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0261200673",
+  "ref2": "MP5.1  9619719480",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "32",
+  "numero": "904  905",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0261200217",
+  "ref2": "-",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "33",
+  "numero": "906",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0261200160",
+  "ref2": "-",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "33",
+  "numero": "907",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0261200213",
+  "ref2": "-",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "33",
+  "numero": "908",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0261200162",
+  "ref2": "-",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "33",
+  "numero": "909",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0261200666",
+  "ref2": "9619719680",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "33",
+  "numero": "910",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0261200731",
+  "ref2": "9613657180",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "33",
+  "numero": "911",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0261200667",
+  "ref2": "-",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "33",
+  "numero": "912",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0281001589",
+  "ref2": "MSA11.L3",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "33",
+  "numero": "913",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0261200676",
+  "ref2": "MP5.1  96171614",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "33",
+  "numero": "914",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0261200778",
+  "ref2": "9617149880",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "33",
+  "numero": "924",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "021206943",
+  "ref2": "ME7.4.4  9638765680",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "33",
+  "numero": "925",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "9628903580",
+  "ref2": "XUDLC01",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "33",
+  "numero": "926",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "9634281380",
+  "ref2": "XUDLC01",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "33",
+  "numero": "927",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "9630466980",
+  "ref2": "XUDLC001",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "33",
+  "numero": "915  916",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0261200217",
+  "ref2": "MP3.1",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "33",
+  "numero": "917  923",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0280000751",
+  "ref2": "-",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "33",
+  "numero": "919  920  921",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0261206242",
+  "ref2": "M7.4.4  9637838780",
+  "quantidade": "3"
+ },
+ {
+  "caixa": "33",
+  "numero": "928  929  930",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "9630509280",
+  "ref2": "XUDLC01",
+  "quantidade": "3"
+ },
+ {
+  "caixa": "34",
+  "numero": "945",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "G6.12  OA00",
+  "ref2": "1611H.004",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "34",
+  "numero": "946",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "G6.12  OA01",
+  "ref2": "9615958880",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "34",
+  "numero": "931  932  933  934  935  936",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "9610191080",
+  "ref2": "G6.11OB01",
+  "quantidade": "6"
+ },
+ {
+  "caixa": "34",
+  "numero": "937  938",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "G6.11  OC01",
+  "ref2": "9621760680",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "34",
+  "numero": "939  940",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "G6.11  OB00",
+  "ref2": "9617827180",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "34",
+  "numero": "941  942  943  944",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "G6.14  OD02",
+  "ref2": "9623757180",
+  "quantidade": "4"
+ },
+ {
+  "caixa": "34",
+  "numero": "947  948  949  950  951",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "G6.11  OD04",
+  "ref2": "9625274380",
+  "quantidade": "5"
+ },
+ {
+  "caixa": "35",
+  "numero": "975",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "IAW8P.1A",
+  "ref2": "9629565480",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "35",
+  "numero": "952  953  954  955  956  957",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "G6.14  OD03",
+  "ref2": "9624999980",
+  "quantidade": "6"
+ },
+ {
+  "caixa": "35",
+  "numero": "958  959  960",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "G6.14  OD01",
+  "ref2": "9618087780",
+  "quantidade": "3"
+ },
+ {
+  "caixa": "35",
+  "numero": "961  962  963  964",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0281001839",
+  "ref2": "9630059880",
+  "quantidade": "4"
+ },
+ {
+  "caixa": "35",
+  "numero": "965  966",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0261206216",
+  "ref2": "MP7.2  9632693980",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "35",
+  "numero": "967  968  969",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0261204939",
+  "ref2": "MP7.2  9633184780",
+  "quantidade": "3"
+ },
+ {
+  "caixa": "35",
+  "numero": "970  971  972",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0281001262",
+  "ref2": "XUDBC02  9624519580",
+  "quantidade": "3"
+ },
+ {
+  "caixa": "35",
+  "numero": "977  978",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "IAW8P.40",
+  "ref2": "9625002780",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "36",
+  "numero": "981",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "9643782780",
+  "ref2": "S2000-22  9637706080-04  21645915-0",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "36",
+  "numero": "982",
+  "tipo": "Centralina Injeção",
+  "marca": "Ford",
+  "ref1": "96AB-12A650-HD",
+  "ref2": "DPC-510",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "36",
+  "numero": "983",
+  "tipo": "Centralina Injeção",
+  "marca": "Ford",
+  "ref1": "98FB-12A650-TB",
+  "ref2": "LPE-627",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "36",
+  "numero": "984",
+  "tipo": "Centralina Injeção",
+  "marca": "Seat",
+  "ref1": "03E906033P",
+  "ref2": "5WP4019605",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "36",
+  "numero": "985",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "S110030034",
+  "ref2": "7700115210  SIRIUS32",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "36",
+  "numero": "986",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "S110130018",
+  "ref2": "8200036523",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "36",
+  "numero": "987",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "9637705980-6",
+  "ref2": "21644838-6  S200-21",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "36",
+  "numero": "979  980",
+  "tipo": "Centralina Injeção",
+  "marca": "BMW",
+  "ref1": "0281010565",
+  "ref2": "DDE7791190",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "36",
+  "numero": "988  989  990  991  992  993  994  995  996",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "IAW8P.13",
+  "ref2": "9619467680  9621477380  9626314580",
+  "quantidade": "9"
+ },
+ {
+  "caixa": "36",
+  "numero": "997  998",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "IAW8P.20",
+  "ref2": "9618005380  9606444680",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "36",
+  "numero": "999  1000",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "IAW8P.10",
+  "ref2": "9624538180  9621213880",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "37",
+  "numero": "1003",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "IAW8P.16",
+  "ref2": "9630699180  9625347480",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "37",
+  "numero": "1005",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "IAW1AP.80",
+  "ref2": "9639907780  9635990980",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "37",
+  "numero": "1008",
+  "tipo": "Centralina Injeção",
+  "marca": "BMW",
+  "ref1": "DDE7  789572",
+  "ref2": "0281010565",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "37",
+  "numero": "1009",
+  "tipo": "Centralina Injeção",
+  "marca": "Rover",
+  "ref1": "MSB  100610",
+  "ref2": "EH",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "37",
+  "numero": "1010",
+  "tipo": "Centralina Injeção",
+  "marca": "Rover",
+  "ref1": "MKC  103020",
+  "ref2": "VC",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "37",
+  "numero": "1011",
+  "tipo": "Centralina Injeção",
+  "marca": "Rover",
+  "ref1": "MSB100680",
+  "ref2": "AS",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "37",
+  "numero": "1012",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "HOM7700864451",
+  "ref2": "S111730108",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "37",
+  "numero": "1013",
+  "tipo": "Centralina Injeção",
+  "marca": "Rover",
+  "ref1": "MKC104031",
+  "ref2": "FG",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "37",
+  "numero": "1014",
+  "tipo": "Centralina Injeção",
+  "marca": "Ford",
+  "ref1": "92FB-12A650-FB",
+  "ref2": "2FFB",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "37",
+  "numero": "1015",
+  "tipo": "Centralina Injeção",
+  "marca": "Ford",
+  "ref1": "91AB-12A650-FA",
+  "ref2": "1AFA",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "37",
+  "numero": "1016",
+  "tipo": "Centralina Injeção",
+  "marca": "Audi",
+  "ref1": "0261203905/906",
+  "ref2": "4DO907557A",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "37",
+  "numero": "1017",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "9658738780",
+  "ref2": "21585371-5A",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "37",
+  "numero": "1018",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "9643915380",
+  "ref2": "21646517-6",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "37",
+  "numero": "1019",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "9643134680",
+  "ref2": "21646087-4",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "37",
+  "numero": "1020",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "IAW48P2.32",
+  "ref2": "9645930480",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "37",
+  "numero": "1022",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "9644235280",
+  "ref2": "21646952-5",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "37",
+  "numero": "1023",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "9645715180",
+  "ref2": "21647484-9",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "37",
+  "numero": "1024",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "9643134580",
+  "ref2": "21646098-6",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "37",
+  "numero": "1025",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "9641815680",
+  "ref2": "21645557-1",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "37",
+  "numero": "1026",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "IAW48P2.7H",
+  "ref2": "SW9646570280",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "37",
+  "numero": "1027",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0261200125",
+  "ref2": "-",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "37",
+  "numero": "1028",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0280000359",
+  "ref2": "-",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "37",
+  "numero": "1029",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0280000575",
+  "ref2": "-",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "37",
+  "numero": "1030",
+  "tipo": "Centralina Injeção",
+  "marca": "Volvo",
+  "ref1": "0281001906",
+  "ref2": "HOM7700112630",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "38",
+  "numero": "1031",
+  "tipo": "Centralina Injeção",
+  "marca": "Ford",
+  "ref1": "5WS40632A-T",
+  "ref2": "7S61-12A650-EA  SID804",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "38",
+  "numero": "1032",
+  "tipo": "Centralina Injeção",
+  "marca": "Ford",
+  "ref1": "5WS40110C-T",
+  "ref2": "SW9653447480  SID884",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "38",
+  "numero": "1033",
+  "tipo": "Centralina Injeção",
+  "marca": "BMW",
+  "ref1": "0281010565",
+  "ref2": "DDE7792024",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "38",
+  "numero": "1034",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "8200911560",
+  "ref2": "8200619409  DELPHI",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "38",
+  "numero": "1035",
+  "tipo": "Centralina Injeção",
+  "marca": "Volvo",
+  "ref1": "0281001906",
+  "ref2": "HOM7700112630",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "38",
+  "numero": "1036",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "9650359580",
+  "ref2": "DWLC12  9650360280",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "38",
+  "numero": "1037",
+  "tipo": "Centralina Injeção",
+  "marca": "Opel",
+  "ref1": "0281011943",
+  "ref2": "ZH",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "38",
+  "numero": "1038",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0281011783",
+  "ref2": "9656709780",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "38",
+  "numero": "1039",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "9654305580",
+  "ref2": "DDCR R0411C023B",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "38",
+  "numero": "1042",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "HOM7700860925",
+  "ref2": "S103715202B",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "38",
+  "numero": "1047",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0261208901",
+  "ref2": "ME7.4.5  9662560580",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "38",
+  "numero": "1049",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "9647759580",
+  "ref2": "21584172-3",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "38",
+  "numero": "1050",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "S118058342A",
+  "ref2": "8200548381",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "38",
+  "numero": "1051",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0261206216",
+  "ref2": "MP72  9632693980",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "38",
+  "numero": "1054",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "HOM7700861415",
+  "ref2": "BFMC  7700861448",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "38",
+  "numero": "1055",
+  "tipo": "Centralina Injeção",
+  "marca": "Citroën",
+  "ref1": "IAW6LP.36",
+  "ref2": "9659179080",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "38",
+  "numero": "1056",
+  "tipo": "Centralina Injeção",
+  "marca": "Citroën",
+  "ref1": "0281010345",
+  "ref2": "9648608680  D2242",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "38",
+  "numero": "1057",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "5WS40068B-T",
+  "ref2": "SW9650529880  SID804",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "38",
+  "numero": "1058",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "5WS40285E-T",
+  "ref2": "9663483180  SID806",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "38",
+  "numero": "1040  1041",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "9648966680",
+  "ref2": "9654305780",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "38",
+  "numero": "1043  1044  1045",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "HOM7700864458",
+  "ref2": "S103717115B",
+  "quantidade": "3"
+ },
+ {
+  "caixa": "38",
+  "numero": "1052  1053",
+  "tipo": "Centralina Injeção",
+  "marca": "Volvo",
+  "ref1": "0227400156",
+  "ref2": "451129",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "39",
+  "numero": "1059",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "5WS40285C-T",
+  "ref2": "SW9660300280  SID806",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "39",
+  "numero": "1060",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "5WS40423C-T",
+  "ref2": "SW9663607080  SID803A",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "39",
+  "numero": "1061",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "5WS40117C-T",
+  "ref2": "SW9655151080  SID804",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "39",
+  "numero": "1065",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "S180123008",
+  "ref2": "HW9666681180  SID807EV0",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "39",
+  "numero": "1066",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "0281001766",
+  "ref2": "7700108382  HOM7700105952",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "39",
+  "numero": "1062  1063  1064",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "5WS40110C-T",
+  "ref2": "SW9653447480  SID804",
+  "quantidade": "3"
+ },
+ {
+  "caixa": "39",
+  "numero": "1067  1068  1069  1070  1071  1072  1073  1074  1075  1076",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "HOM7700868300",
+  "ref2": "R04080010E  7700111207",
+  "quantidade": "10"
+ },
+ {
+  "caixa": "39",
+  "numero": "1080  1081  1082  1083  1084  1085  1086  1087  1088  1088  1089  1090",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "HOM7700104956",
+  "ref2": "R04080012G  7700108570",
+  "quantidade": "11"
+ },
+ {
+  "caixa": "40",
+  "numero": "1096",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0261S06494",
+  "ref2": "MEV17.4.2  9678495980",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "40",
+  "numero": "1097",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0261B17782",
+  "ref2": "980238980",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "40",
+  "numero": "1098",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0281030544",
+  "ref2": "EDC17C60  9808535880",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "40",
+  "numero": "1099",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0281013666",
+  "ref2": "EDC16CP39  9666537680",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "40",
+  "numero": "1100",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0281017601",
+  "ref2": "EDC17C10  9677039280",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "40",
+  "numero": "1101",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0281018228",
+  "ref2": "EDC17C10  9678818280",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "40",
+  "numero": "1103",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0281011634",
+  "ref2": "EDC16C34  9662872280",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "40",
+  "numero": "1105",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0281011863",
+  "ref2": "EDC16C34  9661377280",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "40",
+  "numero": "1106",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0281012982",
+  "ref2": "EDC16C34  9663786880",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "40",
+  "numero": "1107",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0281012620",
+  "ref2": "EDC16C34  9661813780",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "40",
+  "numero": "1109",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0281013872",
+  "ref2": "ED46C34  9664843780",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "40",
+  "numero": "1111",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0281012468",
+  "ref2": "EDC16C34  9656161680",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "40",
+  "numero": "1112",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0281011627",
+  "ref2": "EDC16C34  9656161880",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "40",
+  "numero": "1115",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0281013871",
+  "ref2": "EDC16C34  9664618080",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "40",
+  "numero": "1116",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0281011089",
+  "ref2": "EDC16C3  9653202580",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "40",
+  "numero": "1118",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0281012625",
+  "ref2": "EDC16C34  9659728280",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "40",
+  "numero": "1119",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0281013332",
+  "ref2": "EDC16C34  9664257580",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "40",
+  "numero": "1121",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0281011633",
+  "ref2": "EDC16C34  96598945280",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "40",
+  "numero": "1122",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0281011785",
+  "ref2": "EDC16C34  9658556880",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "40",
+  "numero": "1123",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0281012619",
+  "ref2": "EDC16C34  9663943980",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "40",
+  "numero": "1091  1092  1093  1094  1095",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "HOM7700104956",
+  "ref2": "R04080012G  7700108570",
+  "quantidade": "5"
+ },
+ {
+  "caixa": "40",
+  "numero": "1113  1114",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0281010707",
+  "ref2": "EDC16C3  9647158080",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "41",
+  "numero": "1126",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0281012467",
+  "ref2": "EDC16C34  9662212480",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "41",
+  "numero": "1128",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0281011521",
+  "ref2": "EDC15C2  9651593480",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "41",
+  "numero": "1129",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0281011248",
+  "ref2": "EDC15C2  9652183780",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "41",
+  "numero": "1130",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0281010765",
+  "ref2": "EDC15C2  9644199680",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "41",
+  "numero": "1136",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0281011032",
+  "ref2": "EDC15C2  9646719180",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "41",
+  "numero": "1137",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0281011525",
+  "ref2": "EDC15C2  9654694380",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "41",
+  "numero": "1138",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0281011524",
+  "ref2": "EDC15C2  9652183880",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "41",
+  "numero": "1139",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0281010885",
+  "ref2": "EDC15C2  9645534880",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "41",
+  "numero": "1140",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0281010779",
+  "ref2": "EDC15C2  9644606180",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "41",
+  "numero": "1142",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0281011342",
+  "ref2": "EDC15C2  9659440280",
+  "quantidade": "0"
+ },
+ {
+  "caixa": "41",
+  "numero": "1143",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0281011084",
+  "ref2": "EDC15C2  9647693180",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "41",
+  "numero": "1144",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0281010767",
+  "ref2": "EDC15C2  9643524980",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "41",
+  "numero": "1145",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0281010252",
+  "ref2": "EDC15C2  9635158180",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "41",
+  "numero": "1146",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0281010138",
+  "ref2": "EDC15C2  9636255480",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "41",
+  "numero": "1147",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0281010359",
+  "ref2": "EDC15C2  9640324880",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "41",
+  "numero": "1148",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0281010135",
+  "ref2": "EDC15C2  9636254580",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "41",
+  "numero": "1149",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0281010358",
+  "ref2": "EDC15C2  9641607180",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "41",
+  "numero": "1150",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0281001782",
+  "ref2": "EDC15C2  9634662880",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "41",
+  "numero": "1151",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0281010747",
+  "ref2": "EDC15C2  9643524880",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "41",
+  "numero": "1152",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0281010363",
+  "ref2": "EDC15C2  9641608080",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "41",
+  "numero": "1124  1125",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0281013872",
+  "ref2": "EDC16C34  9664843780",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "41",
+  "numero": "1131  1132",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0281010808",
+  "ref2": "EDC15C2  9644721080",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "41",
+  "numero": "1133  1134  1135",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0281011081",
+  "ref2": "EDC15C2  9647472780",
+  "quantidade": "3"
+ },
+ {
+  "caixa": "42",
+  "numero": "1163",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "0281011356",
+  "ref2": "HOM8200091517",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "42",
+  "numero": "1164",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "0281011324",
+  "ref2": "82000309316",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "42",
+  "numero": "1167",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "0281011105",
+  "ref2": "HOM8200091432",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "42",
+  "numero": "1179",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "0281011325",
+  "ref2": "8200309318",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "42",
+  "numero": "1180",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "0281011324",
+  "ref2": "8200309316",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "42",
+  "numero": "1153  1154",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0281010500",
+  "ref2": "EDC15C2  9641606980",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "42",
+  "numero": "1155  1156",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0281010248",
+  "ref2": "EDC15C2  9635157080",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "42",
+  "numero": "1157  1158  1159  1160  1161  1162",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "0281010297",
+  "ref2": "HOM8200048297",
+  "quantidade": "6"
+ },
+ {
+  "caixa": "42",
+  "numero": "1165  1166",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "0281011102",
+  "ref2": "8200222133",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "42",
+  "numero": "1168    1170",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "0281010633",
+  "ref2": "HOM8200051609",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "42",
+  "numero": "1171  1172  1173  1174  1175  1176",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "0281001934",
+  "ref2": "HOM8200039569",
+  "quantidade": "6"
+ },
+ {
+  "caixa": "42",
+  "numero": "1177  1178",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "0281010637",
+  "ref2": "8200211711",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "43",
+  "numero": "1203",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "0281011549",
+  "ref2": "8200310863",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "43",
+  "numero": "1208",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "0281014546",
+  "ref2": "237100055R",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "43",
+  "numero": "1210",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "0281011549",
+  "ref2": "8200310863",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "43",
+  "numero": "1211",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "0281012769",
+  "ref2": "8200391966",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "43",
+  "numero": "1212",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "0281012588",
+  "ref2": "8200527713",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "43",
+  "numero": "1213",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "0281011148",
+  "ref2": "8200303141",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "43",
+  "numero": "1182  1183",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "0281010556",
+  "ref2": "8200153946",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "43",
+  "numero": "1184  1185",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "0281011101",
+  "ref2": "8200163528",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "43",
+  "numero": "1186  1187  1188",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "0281010819",
+  "ref2": "HOM8200039569",
+  "quantidade": "3"
+ },
+ {
+  "caixa": "43",
+  "numero": "1190  1191  1192",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "0281010632",
+  "ref2": "HOM8200051608",
+  "quantidade": "3"
+ },
+ {
+  "caixa": "43",
+  "numero": "1193  1194",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "0281010482",
+  "ref2": "HOM8200126462",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "43",
+  "numero": "1197  1198  1199",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "7700112763",
+  "ref2": "HOM7700868294  SAFIR2",
+  "quantidade": "3"
+ },
+ {
+  "caixa": "43",
+  "numero": "1201  1202",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "HOM7700868294",
+  "ref2": "7700112791  IY00T7CB",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "43",
+  "numero": "1204  1205  1206  1207",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "0281011529",
+  "ref2": "HOM8200051608",
+  "quantidade": "4"
+ },
+ {
+  "caixa": "44",
+  "numero": "1216",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "0281013907",
+  "ref2": "8200705747",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "44",
+  "numero": "1217",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "0281011276",
+  "ref2": "8200305678",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "44",
+  "numero": "1232",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "S110140201A",
+  "ref2": "8200326395  EMS3132",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "44",
+  "numero": "1233",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "S110301120",
+  "ref2": "8200272464  EMS3134",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "44",
+  "numero": "1234",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "S118301122A",
+  "ref2": "8200326741  EMS3134",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "44",
+  "numero": "1235",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "S120202116A",
+  "ref2": "8200851165  SIM32",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "44",
+  "numero": "1236",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "0281010501",
+  "ref2": "HOM8200049304",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "44",
+  "numero": "1237",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "0281010442",
+  "ref2": "HOM8200049306",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "44",
+  "numero": "1241",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "8200153837",
+  "ref2": "8200164728  21646548-6",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "44",
+  "numero": "1242",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "8200153834",
+  "ref2": "8200153840  2164633-5",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "44",
+  "numero": "1243",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "S115300120C",
+  "ref2": "HOM7700860319",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "44",
+  "numero": "1244",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "S115300120B",
+  "ref2": "HOM7700860319",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "44",
+  "numero": "1245",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "S105300104D",
+  "ref2": "HOM7700864454",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "44",
+  "numero": "1247",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "S115303102B",
+  "ref2": "HOM7700110372",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "44",
+  "numero": "1248",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "S103750005",
+  "ref2": "HOM7700874132",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "44",
+  "numero": "1214  1215",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "0281011275",
+  "ref2": "8200305678",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "44",
+  "numero": "1218  1219",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "0281011776",
+  "ref2": "8200391966",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "44",
+  "numero": "1220  1221  1222  1223",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "0281001766",
+  "ref2": "HOM7700105952",
+  "quantidade": "4"
+ },
+ {
+  "caixa": "44",
+  "numero": "1224  1226  1227  1228  1229",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "S120200105A",
+  "ref2": "8200522357  SIM32",
+  "quantidade": "5"
+ },
+ {
+  "caixa": "44",
+  "numero": "1230  1231",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "S12020011A",
+  "ref2": "8200774747  SIM32",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "44",
+  "numero": "1238  1239  1240",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "8200045893",
+  "ref2": "8200142883  21645977-2",
+  "quantidade": "3"
+ },
+ {
+  "caixa": "45",
+  "numero": "1249",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "0261206143",
+  "ref2": "HOM8200048214",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "45",
+  "numero": "1250",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "HOM7700868321",
+  "ref2": "R04080002D",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "45",
+  "numero": "1251",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "HOM7700868189",
+  "ref2": "R04080005F",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "45",
+  "numero": "1252",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "HOM7700867275",
+  "ref2": "R04080001G",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "45",
+  "numero": "1253",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "HOM7700111342",
+  "ref2": "R04080017C",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "45",
+  "numero": "1254",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "HOM7700104956",
+  "ref2": "R04080011C",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "45",
+  "numero": "1255",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "7700102990",
+  "ref2": "HOM7700868295",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "45",
+  "numero": "1256",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "7700104718",
+  "ref2": "HOM7700868295",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "45",
+  "numero": "1257",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "HOM7700868295",
+  "ref2": "-",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "45",
+  "numero": "1269",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "HOM7700861413",
+  "ref2": "BMUM  7700872545",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "45",
+  "numero": "1270",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "S122326107A",
+  "ref2": "SID381  8200542288",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "45",
+  "numero": "1271",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "S122320114A",
+  "ref2": "SID301  8200843713",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "45",
+  "numero": "1272",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "DCM3.4",
+  "ref2": "237100875R  237101293R",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "45",
+  "numero": "1273",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "DCM3.4",
+  "ref2": "237101989R  237101990R",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "45",
+  "numero": "1276",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "SID301",
+  "ref2": "S122326111A  8200766462",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "45",
+  "numero": "1277",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "SID301",
+  "ref2": "S122326109A  8200565863",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "45",
+  "numero": "1278",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "SID305",
+  "ref2": "S180067143A  237101478R",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "45",
+  "numero": "1281",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "SIRIUS34",
+  "ref2": "S118301104A  8200124318",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "45",
+  "numero": "1258  1259",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "7700107694",
+  "ref2": "HOM7700868295",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "45",
+  "numero": "1260  1261  1262  1263  1264  1265  1266",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "HOM7700861415",
+  "ref2": "BFMC  7700861448",
+  "quantidade": "7"
+ },
+ {
+  "caixa": "45",
+  "numero": "1267  1268",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "HOM7700861413",
+  "ref2": "BHXU  7700865809",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "45",
+  "numero": "1274  1275",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "SID301",
+  "ref2": "S122326113A  8200804775",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "45",
+  "numero": "1279  1280",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "SID305",
+  "ref2": "S180067106A  237100307R",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "46",
+  "numero": "1285",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "7700108487",
+  "ref2": "HOM7700868295",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "46",
+  "numero": "1288",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "7700102990",
+  "ref2": "HOM7700868295",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "46",
+  "numero": "1289",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "7700101909",
+  "ref2": "HOM7700868295",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "46",
+  "numero": "1290",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "8200384398",
+  "ref2": "8200390568  21584850-8A",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "46",
+  "numero": "1292",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "036906034GP",
+  "ref2": "IAW4MV.GP",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "46",
+  "numero": "1293",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "036906034GM",
+  "ref2": "IAWHMV.OM",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "46",
+  "numero": "1294",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "036906034CN",
+  "ref2": "IAWHMV.GC",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "46",
+  "numero": "1295",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "036906014AQ",
+  "ref2": "IAW4CV.SI",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "46",
+  "numero": "1314",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "0261203613/614",
+  "ref2": "030906027M",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "46",
+  "numero": "1282  1283  1284",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "7700104481",
+  "ref2": "HOM7700868295",
+  "quantidade": "3"
+ },
+ {
+  "caixa": "46",
+  "numero": "1286  1287",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "7700108455",
+  "ref2": "HOM7700868295",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "46",
+  "numero": "1296  1297  1298  1299",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "036906014",
+  "ref2": "IAW4AV.RO  IAW4AV.VO",
+  "quantidade": "4"
+ },
+ {
+  "caixa": "46",
+  "numero": "1300  1301  1302  1303  1304",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "0261203744/745",
+  "ref2": "030906026AK",
+  "quantidade": "5"
+ },
+ {
+  "caixa": "46",
+  "numero": "1305  1306",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "0261204844",
+  "ref2": "6K0906027J",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "46",
+  "numero": "1307  1308  1309",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "0261203647/648",
+  "ref2": "032906026G",
+  "quantidade": "3"
+ },
+ {
+  "caixa": "46",
+  "numero": "1310  1311",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "0261203750/751",
+  "ref2": "6K0906026B",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "46",
+  "numero": "1312  1313",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "0261203302/303",
+  "ref2": "030906026R",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "47",
+  "numero": "1315  1316  1317  1318  1319  1320  1321",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "0261203934",
+  "ref2": "6K0906027D",
+  "quantidade": "7"
+ },
+ {
+  "caixa": "47",
+  "numero": "1322  1323  1324  1325  1326",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "0261204054/055",
+  "ref2": "6K0906027A",
+  "quantidade": "5"
+ },
+ {
+  "caixa": "47",
+  "numero": "1327  1328  1329",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "0261204593",
+  "ref2": "6K0906027E",
+  "quantidade": "3"
+ },
+ {
+  "caixa": "47",
+  "numero": "1330  1331  1332  1333  1334",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "0261203746/747",
+  "ref2": "6K0906026A",
+  "quantidade": "5"
+ },
+ {
+  "caixa": "47",
+  "numero": "1335  1336  1337  1338",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "0261203744/745",
+  "ref2": "030906026AC",
+  "quantidade": "4"
+ },
+ {
+  "caixa": "47",
+  "numero": "1339  1340  1341  1342",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "0261203748/749",
+  "ref2": "6K5906026A",
+  "quantidade": "4"
+ },
+ {
+  "caixa": "47",
+  "numero": "1343  1344  1345",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "0261203914/915",
+  "ref2": "030906027K",
+  "quantidade": "3"
+ },
+ {
+  "caixa": "47",
+  "numero": "1346  1347  1348  1349",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "0261204616/617",
+  "ref2": "030906027AA",
+  "quantidade": "4"
+ },
+ {
+  "caixa": "48",
+  "numero": "1360",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "0261203456/457",
+  "ref2": "030906026AJ",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "48",
+  "numero": "1374",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "030906030D",
+  "ref2": "IAW1AV.V3",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "48",
+  "numero": "1375",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "0261203188/189",
+  "ref2": "8A0907311L",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "48",
+  "numero": "1350  1351  1352  1353  1354  1355  1356  1357  1358  1359",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "0261203932",
+  "ref2": "030906027E",
+  "quantidade": "10"
+ },
+ {
+  "caixa": "48",
+  "numero": "1361  1362  1363  1364  1365",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "0261203342/343",
+  "ref2": "030906026S",
+  "quantidade": "5"
+ },
+ {
+  "caixa": "48",
+  "numero": "1366  1367",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "0261203456/457",
+  "ref2": "030906026E",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "48",
+  "numero": "1368  1369  1370  1371  1372  1373",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "0261203340/341",
+  "ref2": "030906026T",
+  "quantidade": "6"
+ },
+ {
+  "caixa": "48",
+  "numero": "1376  1377  1378",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "0261203184/185",
+  "ref2": "8A0907311H",
+  "quantidade": "3"
+ },
+ {
+  "caixa": "48",
+  "numero": "1379  1380  1381",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "0261203302/303",
+  "ref2": "030906026R",
+  "quantidade": "3"
+ },
+ {
+  "caixa": "48",
+  "numero": "1382  1383  1384  1385",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "0261203360/361",
+  "ref2": "6K4906026",
+  "quantidade": "4"
+ },
+ {
+  "caixa": "49",
+  "numero": "1404",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "0261200714",
+  "ref2": "1H0907311C",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "49",
+  "numero": "1405",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "0261203318",
+  "ref2": "1H0907311L",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "49",
+  "numero": "1406",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "0261200784",
+  "ref2": "1H0907311H",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "49",
+  "numero": "1407",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "0261200734",
+  "ref2": "441.0.4046-006.6",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "49",
+  "numero": "1408",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "0261200774/775",
+  "ref2": "030906026F",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "49",
+  "numero": "1409",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "0261200495",
+  "ref2": "021906258A",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "49",
+  "numero": "1410",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "61600.261.14",
+  "ref2": "030906030D",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "49",
+  "numero": "1386  1387  1388  1389",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "0261200776",
+  "ref2": "030906026G",
+  "quantidade": "4"
+ },
+ {
+  "caixa": "49",
+  "numero": "1390  1391  1392  1393  1394  1395  1396  1397  1398  1399  1400  1401  1402  1403",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "0261200750",
+  "ref2": "030906026K",
+  "quantidade": "14"
+ },
+ {
+  "caixa": "50",
+  "numero": "1348",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "0261204753",
+  "ref2": "071906018",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "50",
+  "numero": "1418",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "036906014AN",
+  "ref2": "IAW4CV.VO",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "50",
+  "numero": "1419",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "038906018EC",
+  "ref2": "0281001914",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "50",
+  "numero": "1420",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0281013332",
+  "ref2": "EDC16C34  9664257580",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "50",
+  "numero": "1421",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "8200153837",
+  "ref2": "21646251-8",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "50",
+  "numero": "1422",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0261010567",
+  "ref2": "EDC15C2  9641188180",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "50",
+  "numero": "1423",
+  "tipo": "Centralina Injeção",
+  "marca": "Audi",
+  "ref1": "0261203554/555",
+  "ref2": "8D0907557B",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "50",
+  "numero": "1424",
+  "tipo": "Centralina Injeção",
+  "marca": "Audi",
+  "ref1": "02611203941",
+  "ref2": "8D0907557HX",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "50",
+  "numero": "1425",
+  "tipo": "Centralina Injeção",
+  "marca": "Audi",
+  "ref1": "0261203552/553",
+  "ref2": "8D0907557A",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "50",
+  "numero": "1435",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "06A906018R",
+  "ref2": "0261204673",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "50",
+  "numero": "1435",
+  "tipo": "Centralina Injeção",
+  "marca": "Skoda",
+  "ref1": "0285007026",
+  "ref2": "441.0.4046-002.6",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "50",
+  "numero": "1437",
+  "tipo": "Centralina Injeção",
+  "marca": "Audi",
+  "ref1": "0261204127",
+  "ref2": "06A906018C",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "50",
+  "numero": "1439",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "0261207369",
+  "ref2": "06A906032GF",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "50",
+  "numero": "1411  1412  1413  1414  1415  1416  1417",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "0261200257",
+  "ref2": "030906026C",
+  "quantidade": "7"
+ },
+ {
+  "caixa": "50",
+  "numero": "1426  1427",
+  "tipo": "Centralina Injeção",
+  "marca": "Audi",
+  "ref1": "0261203938/939",
+  "ref2": "8D0907557C",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "50",
+  "numero": "1428  1429  1430  1431  1432  1433  1434",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "03E906033L",
+  "ref2": "5WP4430108  SIMOS3PE5325",
+  "quantidade": "7"
+ },
+ {
+  "caixa": "50",
+  "numero": "1440  1441",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "036906014CG",
+  "ref2": "IAW4AV.VO",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "51",
+  "numero": "1442",
+  "tipo": "Centralina Injeção",
+  "marca": "Audi",
+  "ref1": "4A0906266",
+  "ref2": "-",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "51",
+  "numero": "1443",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "0261203360/361",
+  "ref2": "6K5906026",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "51",
+  "numero": "1451",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "0261200306",
+  "ref2": "030906022N",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "51",
+  "numero": "1454",
+  "tipo": "Centralina Injeção",
+  "marca": "Audi",
+  "ref1": "0280000736",
+  "ref2": "443907403E",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "51",
+  "numero": "1455",
+  "tipo": "Centralina Injeção",
+  "marca": "Audi",
+  "ref1": "0280000739",
+  "ref2": "443907403G",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "51",
+  "numero": "1456",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "0261200259",
+  "ref2": "030906026B",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "51",
+  "numero": "1457",
+  "tipo": "Centralina Injeção",
+  "marca": "Audi",
+  "ref1": "0281000759",
+  "ref2": "-",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "51",
+  "numero": "1458",
+  "tipo": "Centralina Injeção",
+  "marca": "Audi",
+  "ref1": "0261200273",
+  "ref2": "443907311C",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "51",
+  "numero": "1459",
+  "tipo": "Centralina Injeção",
+  "marca": "Audi/Volkswagen",
+  "ref1": "037906022AD",
+  "ref2": "5WPP4001",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "51",
+  "numero": "1460",
+  "tipo": "Centralina Injeção",
+  "marca": "Audi/Volkswagen",
+  "ref1": "0261200240",
+  "ref2": "4A0907404A",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "51",
+  "numero": "1461",
+  "tipo": "Centralina Injeção",
+  "marca": "Audi/Volkswagen",
+  "ref1": "0280800398",
+  "ref2": "4A0906264",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "51",
+  "numero": "1462",
+  "tipo": "Centralina Injeção",
+  "marca": "Audi/Volkswagen",
+  "ref1": "0280000701",
+  "ref2": "855907403",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "51",
+  "numero": "1463",
+  "tipo": "Centralina Injeção",
+  "marca": "Audi/Volkswagen",
+  "ref1": "0285007061",
+  "ref2": "-",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "51",
+  "numero": "1464",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "030906022J",
+  "ref2": "-",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "51",
+  "numero": "1465",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "0261203932",
+  "ref2": "030906027E",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "51",
+  "numero": "1471",
+  "tipo": "Centralina Injeção",
+  "marca": "Skoda",
+  "ref1": "032906014E",
+  "ref2": "IAW1AVM.SQ",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "51",
+  "numero": "1444  1445  1446  1447  1448  1449  1450",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "036906014AN",
+  "ref2": "IAW4CV.VO",
+  "quantidade": "7"
+ },
+ {
+  "caixa": "51",
+  "numero": "1452  1453",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "030906022B",
+  "ref2": "0261200574",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "51",
+  "numero": "1466  1467",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "038906013E",
+  "ref2": "0281001689",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "51",
+  "numero": "1468  1469  1470",
+  "tipo": "Centralina Injeção",
+  "marca": "Audi",
+  "ref1": "038906018S",
+  "ref2": "0261001721",
+  "quantidade": "3"
+ },
+ {
+  "caixa": "51",
+  "numero": "1472  1473  1474  1475",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "038906018BL",
+  "ref2": "0281001845",
+  "quantidade": "4"
+ },
+ {
+  "caixa": "52",
+  "numero": "194",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "06A906019BQ",
+  "ref2": "5WP442502",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "52",
+  "numero": "1476",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "038906013AN",
+  "ref2": "0281010007",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "52",
+  "numero": "1477",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "038906013K",
+  "ref2": "0281001749",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "52",
+  "numero": "1478",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "36906014AK",
+  "ref2": "IAW4AV.V8",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "52",
+  "numero": "1479",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "038906013",
+  "ref2": "0281001759",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "52",
+  "numero": "1480",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "036906034HA",
+  "ref2": "IAW4TV.HA",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "52",
+  "numero": "1481",
+  "tipo": "Centralina Injeção",
+  "marca": "Skoda",
+  "ref1": "5WP4352",
+  "ref2": "047906030N",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "52",
+  "numero": "1482",
+  "tipo": "Centralina Injeção",
+  "marca": "Skoda",
+  "ref1": "5WP4208",
+  "ref2": "047906030C",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "52",
+  "numero": "1483",
+  "tipo": "Centralina Injeção",
+  "marca": "Skoda",
+  "ref1": "5WP4326",
+  "ref2": "047906030N",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "52",
+  "numero": "1484",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "03D906023",
+  "ref2": "5WP4041404",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "52",
+  "numero": "1485",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "03D906023M",
+  "ref2": "5WP4091105",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "52",
+  "numero": "1486",
+  "tipo": "Centralina Injeção",
+  "marca": "Seat",
+  "ref1": "03E906033D",
+  "ref2": "5WP4012105",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "52",
+  "numero": "1487",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "036906032M",
+  "ref2": "0261207193",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "52",
+  "numero": "1488",
+  "tipo": "Centralina Injeção",
+  "marca": "Audi",
+  "ref1": "8D0906018Q",
+  "ref2": "0261206318",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "52",
+  "numero": "1489",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "06A906019",
+  "ref2": "5WP419003",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "52",
+  "numero": "1490",
+  "tipo": "Centralina Injeção",
+  "marca": "Audi",
+  "ref1": "06A906019AM",
+  "ref2": "5WP438004",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "52",
+  "numero": "1491",
+  "tipo": "Centralina Injeção",
+  "marca": "Audi/Volkswagen",
+  "ref1": "0261204182/183",
+  "ref2": "8D09075575",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "52",
+  "numero": "1492",
+  "tipo": "Centralina Injeção",
+  "marca": "Audi",
+  "ref1": "4B0907552C",
+  "ref2": "0261204767",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "52",
+  "numero": "1493",
+  "tipo": "Centralina Injeção",
+  "marca": "Audi",
+  "ref1": "5WP4193",
+  "ref2": "06A906019D",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "52",
+  "numero": "1504",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "6K0906032AC",
+  "ref2": "0261207228",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "52",
+  "numero": "1505",
+  "tipo": "Centralina Injeção",
+  "marca": "Audi",
+  "ref1": "022906032LA",
+  "ref2": "0261201868",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "52",
+  "numero": "1506",
+  "tipo": "Centralina Injeção",
+  "marca": "Audi",
+  "ref1": "8N0906018A",
+  "ref2": "0261204898",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "52",
+  "numero": "1507",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "6K0906032J",
+  "ref2": "0261206959",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "52",
+  "numero": "1508",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "036906032H",
+  "ref2": "0261207191",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "52",
+  "numero": "1509",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "030906032CF",
+  "ref2": "0261207177",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "52",
+  "numero": "1510",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "030906032AP",
+  "ref2": "0261206751",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "52",
+  "numero": "1511",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "030906032CG",
+  "ref2": "0261207178",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "52",
+  "numero": "1514",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "03C906024CN",
+  "ref2": "-",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "52",
+  "numero": "1515",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "06A906033",
+  "ref2": "5WP4001905",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "52",
+  "numero": "1517",
+  "tipo": "Centralina Injeção",
+  "marca": "Skoda",
+  "ref1": "047906033A",
+  "ref2": "5WP4419307",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "52",
+  "numero": "1495  1496  1497",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "6K0906032A",
+  "ref2": "0261206030",
+  "quantidade": "3"
+ },
+ {
+  "caixa": "52",
+  "numero": "1498  1499  1500  1501",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "036906032P",
+  "ref2": "0261207179",
+  "quantidade": "4"
+ },
+ {
+  "caixa": "52",
+  "numero": "1502  1503",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "030906032AM",
+  "ref2": "0261206750",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "53",
+  "numero": "1519",
+  "tipo": "Centralina Injeção",
+  "marca": "Porsche",
+  "ref1": "0261206579",
+  "ref2": "996.618.604.00",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "53",
+  "numero": "1520",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "5WP4350",
+  "ref2": "3B0907557",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "53",
+  "numero": "1521",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "036906034DF",
+  "ref2": "IAW4MV.DF",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "53",
+  "numero": "1522",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "03C906027F",
+  "ref2": "0261504347",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "53",
+  "numero": "1525",
+  "tipo": "Centralina Injeção",
+  "marca": "Seat",
+  "ref1": "03E906033",
+  "ref2": "5WP4012104",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "53",
+  "numero": "1531",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "038906018FG",
+  "ref2": "0281010063",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "53",
+  "numero": "1532",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "038906018BC",
+  "ref2": "0281001755",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "53",
+  "numero": "1534",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "038906018BM",
+  "ref2": "0281001846",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "53",
+  "numero": "1535",
+  "tipo": "Centralina Injeção",
+  "marca": "Audi",
+  "ref1": "038906018R",
+  "ref2": "0281001726",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "53",
+  "numero": "1536",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "038906018DQ",
+  "ref2": "0281001864",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "53",
+  "numero": "1537",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "038906018D",
+  "ref2": "0281001720",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "53",
+  "numero": "1538",
+  "tipo": "Centralina Injeção",
+  "marca": "Audi",
+  "ref1": "038906018FD",
+  "ref2": "0281001966",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "53",
+  "numero": "1539",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "038906018BT",
+  "ref2": "0281001926",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "53",
+  "numero": "1540",
+  "tipo": "Centralina Injeção",
+  "marca": "Audi",
+  "ref1": "038906018BA",
+  "ref2": "0281001756",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "53",
+  "numero": "1541",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "038906018FQ",
+  "ref2": "0281010172",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "53",
+  "numero": "1542",
+  "tipo": "Centralina Injeção",
+  "marca": "Audi",
+  "ref1": "038906018BP",
+  "ref2": "0281001848",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "53",
+  "numero": "1547",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "038906018EC",
+  "ref2": "0281001914",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "53",
+  "numero": "1548",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "038906012EL",
+  "ref2": "0281010660",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "53",
+  "numero": "1549",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "038906012EM",
+  "ref2": "0281010690",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "53",
+  "numero": "1550",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "038906012FB",
+  "ref2": "0281010651",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "53",
+  "numero": "1552",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "038906012CA",
+  "ref2": "0281010230",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "53",
+  "numero": "1523  1524",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "03E906033",
+  "ref2": "5WP4016304  5WP4018905",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "53",
+  "numero": "1526  1527",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "6K0906032L",
+  "ref2": "0261206958",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "53",
+  "numero": "1528  1530",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "03E906023D",
+  "ref2": "5WP4050204",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "53",
+  "numero": "1543  1544  1545",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "038906018N",
+  "ref2": "0281001727",
+  "quantidade": "3"
+ },
+ {
+  "caixa": "53",
+  "numero": "1553  1554",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "038906012CT",
+  "ref2": "0281010377",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "53",
+  "numero": "1555  1556  1557",
+  "tipo": "Centralina Injeção",
+  "marca": "Audi",
+  "ref1": "038906012AH",
+  "ref2": "0281010200",
+  "quantidade": "3"
+ },
+ {
+  "caixa": "54",
+  "numero": "1558",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "038906012FJ",
+  "ref2": "0281010682",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "54",
+  "numero": "1560",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "038906012HL",
+  "ref2": "0281011319",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "54",
+  "numero": "1561",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "038906012HA",
+  "ref2": "0281011309",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "54",
+  "numero": "1562",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "038906012CD",
+  "ref2": "0281010688",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "54",
+  "numero": "1566",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "038906012JJ",
+  "ref2": "0281011997",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "54",
+  "numero": "1580",
+  "tipo": "Centralina Injeção",
+  "marca": "Audi",
+  "ref1": "4B0907401L",
+  "ref2": "0281001932",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "54",
+  "numero": "1581",
+  "tipo": "Centralina Injeção",
+  "marca": "Audi",
+  "ref1": "8D0907401H",
+  "ref2": "0281001834",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "54",
+  "numero": "1582",
+  "tipo": "Centralina Injeção",
+  "marca": "Audi",
+  "ref1": "8D0907401F",
+  "ref2": "0281001945",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "54",
+  "numero": "1583",
+  "tipo": "Centralina Injeção",
+  "marca": "Audi",
+  "ref1": "8D0907401E",
+  "ref2": "0281001834",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "54",
+  "numero": "1584",
+  "tipo": "Centralina Injeção",
+  "marca": "Audi",
+  "ref1": "4B0907401B",
+  "ref2": "0281001836",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "54",
+  "numero": "1585",
+  "tipo": "Centralina Injeção",
+  "marca": "Audi",
+  "ref1": "4D0907401B",
+  "ref2": "0281001832",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "54",
+  "numero": "1592",
+  "tipo": "Centralina Injeção",
+  "marca": "Audi",
+  "ref1": "8E0907401D",
+  "ref2": "0281011241",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "54",
+  "numero": "1595",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "045906019BB",
+  "ref2": "0281011074",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "54",
+  "numero": "1596",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "045906019BM",
+  "ref2": "0281011412",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "54",
+  "numero": "1563  1564",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "038906012HP",
+  "ref2": "0281011320",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "54",
+  "numero": "1567  1568",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "038906012FA",
+  "ref2": "0281010650",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "54",
+  "numero": "1569  1570",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "038906012H",
+  "ref2": "0281010129",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "54",
+  "numero": "1571  1572",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "038906012AP",
+  "ref2": "0281010126",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "54",
+  "numero": "1573  1574  1575  1576  1577  1578  1579",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "038906013AB",
+  "ref2": "0281001911",
+  "quantidade": "7"
+ },
+ {
+  "caixa": "54",
+  "numero": "1586  1587",
+  "tipo": "Centralina Injeção",
+  "marca": "Audi",
+  "ref1": "3B0907401J",
+  "ref2": "0281010147",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "54",
+  "numero": "1588  1589",
+  "tipo": "Centralina Injeção",
+  "marca": "Audi",
+  "ref1": "4Z7907401A",
+  "ref2": "0281010445",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "54",
+  "numero": "1590  1591",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "045906019BF",
+  "ref2": "0281011241",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "55",
+  "numero": "1598",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "038906019CJ",
+  "ref2": "0281010302",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "55",
+  "numero": "1599",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "038906019DD",
+  "ref2": "0281011065",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "55",
+  "numero": "1600",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "038906012HP",
+  "ref2": "0281011320  EDC15VM+",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "55",
+  "numero": "1604",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "045906019AB",
+  "ref2": "0281010503  EDC15P+",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "55",
+  "numero": "1605",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "045906019BP",
+  "ref2": "0281012194  EDC15P+",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "55",
+  "numero": "1606",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "045906019BR",
+  "ref2": "0281012318  EDC15P+",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "55",
+  "numero": "1607",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "038906019NC",
+  "ref2": "0281012276  EDC15P+",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "55",
+  "numero": "1608",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "038906019HT",
+  "ref2": "0281010947  EDC15P+",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "55",
+  "numero": "1609",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "038906019CD",
+  "ref2": "0281010218",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "55",
+  "numero": "1610",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "038906019ER",
+  "ref2": "0281010704  EDC15P+",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "55",
+  "numero": "1611",
+  "tipo": "Centralina Injeção",
+  "marca": "Audi",
+  "ref1": "038906019FP",
+  "ref2": "028010729  EDC15P+",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "55",
+  "numero": "1612",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "038906019KG",
+  "ref2": "0281011193  EDC15P+",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "55",
+  "numero": "1613",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "038906019HJ",
+  "ref2": "0281010977  EDC15P+",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "55",
+  "numero": "1615",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "038906019EA",
+  "ref2": "0281010554  EDC15P+",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "55",
+  "numero": "1616",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "038906019GL",
+  "ref2": "0281010944  EDC15P+",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "55",
+  "numero": "1618",
+  "tipo": "Centralina Injeção",
+  "marca": "Audi",
+  "ref1": "038906019CG",
+  "ref2": "0281010406  EDC15P+",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "55",
+  "numero": "1619",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "038906019BK",
+  "ref2": "0281010305",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "55",
+  "numero": "1620",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "038906019J",
+  "ref2": "0281010216",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "55",
+  "numero": "1621",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "038906019DS",
+  "ref2": "0281010543  EDC15P+",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "55",
+  "numero": "1622",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "038906019BK",
+  "ref2": "0281010305",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "55",
+  "numero": "1623",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "038906019GQ",
+  "ref2": "0281010941  EDC15P+",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "55",
+  "numero": "1624  1625",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "038906019KT",
+  "ref2": "0281011219  EDC15P+",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "55",
+  "numero": "1626  1627",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "038906019AF",
+  "ref2": "0281010289  EDC15P+",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "55",
+  "numero": "1628  1629",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "038906019KE",
+  "ref2": "0281011201  EDC15P+",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "55",
+  "numero": "1630  1631  1632",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "038906019AM",
+  "ref2": "0281010091",
+  "quantidade": "3"
+ },
+ {
+  "caixa": "55",
+  "numero": "1633  1634  1635",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "038906019BJ",
+  "ref2": "0281010176",
+  "quantidade": "3"
+ },
+ {
+  "caixa": "56",
+  "numero": "1568",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "0281001532/533",
+  "ref2": "028906021EJ",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "56",
+  "numero": "1639",
+  "tipo": "Centralina Injeção",
+  "marca": "Citroen",
+  "ref1": "0280000158",
+  "ref2": "",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "56",
+  "numero": "1640",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "811907384",
+  "ref2": "5DA005155-00",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "56",
+  "numero": "1641",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "0280800180",
+  "ref2": "811906264F",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "56",
+  "numero": "1642",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "0280800104",
+  "ref2": "811906264",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "56",
+  "numero": "1645",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "076906022N",
+  "ref2": "0281010821  EDC17CP28-2.39",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "56",
+  "numero": "1648",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "03G906021LR",
+  "ref2": "0281013260  EDC16U34",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "56",
+  "numero": "1649",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "03G906013K",
+  "ref2": "0281014883  EDC17",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "56",
+  "numero": "1650",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "03G906021KH",
+  "ref2": "0281013226  EDC16U34",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "56",
+  "numero": "1651",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "03G906021LL",
+  "ref2": "0281013280  EDC16U34",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "56",
+  "numero": "1652",
+  "tipo": "Centralina Injeção",
+  "marca": "Audi",
+  "ref1": "03G906016JD",
+  "ref2": "0281012654  EDC16U31",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "56",
+  "numero": "1653",
+  "tipo": "Centralina Injeção",
+  "marca": "Audi",
+  "ref1": "03G906016BF",
+  "ref2": "0281011850  EDC16U31",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "56",
+  "numero": "1654",
+  "tipo": "Centralina Injeção",
+  "marca": "Audi",
+  "ref1": "03G90606GC",
+  "ref2": "0281012169  EDC16U31",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "56",
+  "numero": "1655",
+  "tipo": "Centralina Injeção",
+  "marca": "Audi",
+  "ref1": "4D0907409C",
+  "ref2": "0281010900",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "56",
+  "numero": "1656",
+  "tipo": "Centralina Injeção",
+  "marca": "Audi",
+  "ref1": "4D0907409D",
+  "ref2": "0281010901",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "56",
+  "numero": "1657",
+  "tipo": "Centralina Injeção",
+  "marca": "Audi",
+  "ref1": "0281001657/658",
+  "ref2": "028906021GM",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "56",
+  "numero": "1659",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "074906021AG",
+  "ref2": "0281010088",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "56",
+  "numero": "1660",
+  "tipo": "Centralina Injeção",
+  "marca": "Audi",
+  "ref1": "0281001438/439",
+  "ref2": "028906021BD",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "56",
+  "numero": "1661",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "0281001555/556",
+  "ref2": "028906021DT",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "56",
+  "numero": "1636  1637  1638",
+  "tipo": "Centralina Injeção",
+  "marca": "Audi",
+  "ref1": "0281001185",
+  "ref2": "8AO907401B",
+  "quantidade": "3"
+ },
+ {
+  "caixa": "57",
+  "numero": "1662",
+  "tipo": "Centralina Injeção",
+  "marca": "Audi",
+  "ref1": "028906021GN",
+  "ref2": "028001660",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "57",
+  "numero": "1663",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "0281001651/652",
+  "ref2": "028906021GH",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "57",
+  "numero": "1664",
+  "tipo": "Centralina Injeção",
+  "marca": "Audi",
+  "ref1": "028906021GN",
+  "ref2": "0281001660",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "57",
+  "numero": "1667",
+  "tipo": "Centralina Injeção",
+  "marca": "Audi",
+  "ref1": "028906021J",
+  "ref2": "0281001258/259",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "57",
+  "numero": "1668",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "0281001354/355",
+  "ref2": "028906021BT",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "57",
+  "numero": "1674",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "03G906018FB",
+  "ref2": "5WP45571AB  SIMOS PPD1.2",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "57",
+  "numero": "1675",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "03G906018CE",
+  "ref2": "5WP45610AE  SIMOS PPD1.5",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "57",
+  "numero": "1676",
+  "tipo": "Centralina Injeção",
+  "marca": "Audi",
+  "ref1": "8T0907559D",
+  "ref2": "SIMOS 8.20",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "57",
+  "numero": "1678",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "03L906023AH",
+  "ref2": "5WP42846AA  SIMOS PCR21",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "57",
+  "numero": "1679",
+  "tipo": "Centralina Injeção",
+  "marca": "Seat",
+  "ref1": "03L906023T",
+  "ref2": "5WP42875AA  SIMOS PCR21",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "57",
+  "numero": "1684",
+  "tipo": "Centralina Injeção",
+  "marca": "Citroen",
+  "ref1": "73812102",
+  "ref2": "96228499280",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "57",
+  "numero": "1685",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "S105280015",
+  "ref2": "7700111209  7700110261",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "57",
+  "numero": "1686",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "S118047803B",
+  "ref2": "9645631880  BVA",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "57",
+  "numero": "1687",
+  "tipo": "Centralina Injeção",
+  "marca": "Toyota",
+  "ref1": "89661-0F101",
+  "ref2": "MB175800-9440",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "57",
+  "numero": "1670  1671",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "0281001411/412",
+  "ref2": "028906021DD",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "57",
+  "numero": "1672  1673",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "0281001172/173",
+  "ref2": "028906021B",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "57",
+  "numero": "1680  1681  1682  1683",
+  "tipo": "Centralina Injeção",
+  "marca": "Citroen",
+  "ref1": "73810802",
+  "ref2": "9610493180",
+  "quantidade": "4"
+ },
+ {
+  "caixa": "58",
+  "numero": "1693",
+  "tipo": "Centralina Injeção",
+  "marca": "Toyota",
+  "ref1": "89661-20340",
+  "ref2": "3S-G",
+  "quantidade": "1"
+ },
+ {
+  "caixa": "58",
+  "numero": "1688  1689",
+  "tipo": "Centralina Injeção",
+  "marca": "Toyota",
+  "ref1": "89661-05690",
+  "ref2": "MB175800-6323",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "58",
+  "numero": "1690  1691  1692",
+  "tipo": "Centralina Injeção",
+  "marca": "Toyota",
+  "ref1": "89661-52062",
+  "ref2": "1SZ-FE  .06M",
+  "quantidade": "3"
+ },
+ {
+  "caixa": "58",
+  "numero": "1694  1695",
+  "tipo": "Centralina Injeção",
+  "marca": "Toyota",
+  "ref1": "89661-05311",
+  "ref2": "MB175800-2650  2C-TE",
+  "quantidade": "2"
+ },
+ {
+  "caixa": "59",
+  "numero": "1077  1078  1079",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "HOM77001044956",
+  "ref2": "7700108570  R04080012G",
+  "quantidade": "3"
+ },
+ {
+  "caixa": "-",
+  "numero": "-",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "S110030030B",
+  "ref2": "8200035702  SIRIUS32  7700110471",
+  "quantidade": "0"
+ },
+ {
+  "caixa": "-",
+  "numero": "-",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "R04080025D",
+  "ref2": "DCN2  9641390180",
+  "quantidade": "0"
+ },
+ {
+  "caixa": "-",
+  "numero": "-",
+  "tipo": "Centralina Injeção",
+  "marca": "Fiat",
+  "ref1": "R04010036G",
+  "ref2": "55199895  DC43F",
+  "quantidade": "0"
+ },
+ {
+  "caixa": "-",
+  "numero": "-",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "IAW8P.14",
+  "ref2": "962694780  9636839580",
+  "quantidade": "0"
+ },
+ {
+  "caixa": "-",
+  "numero": "-",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "IAW48P2.7H",
+  "ref2": "9646570280",
+  "quantidade": "0"
+ },
+ {
+  "caixa": "-",
+  "numero": "-",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "IAW1AP.80",
+  "ref2": "9632559380",
+  "quantidade": "0"
+ },
+ {
+  "caixa": "-",
+  "numero": "-",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "IAW1AP.40",
+  "ref2": "9629244680",
+  "quantidade": "0"
+ },
+ {
+  "caixa": "-",
+  "numero": "-",
+  "tipo": "Centralina Injeção",
+  "marca": "Fiat",
+  "ref1": "IAW16F.EC",
+  "ref2": "-",
+  "quantidade": "0"
+ },
+ {
+  "caixa": "-",
+  "numero": "-",
+  "tipo": "Centralina Injeção",
+  "marca": "Ford",
+  "ref1": "5WS40031E-T",
+  "ref2": "2N1A-12A650-AE  SID802  4AGD",
+  "quantidade": "0"
+ },
+ {
+  "caixa": "-",
+  "numero": "-",
+  "tipo": "Centralina Injeção",
+  "marca": "Ford",
+  "ref1": "5WS40027G-T",
+  "ref2": "256A-12A650  SID802  1BSB",
+  "quantidade": "0"
+ },
+ {
+  "caixa": "-",
+  "numero": "-",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "21585768-5",
+  "ref2": "J34P-AAE",
+  "quantidade": "0"
+ },
+ {
+  "caixa": "-",
+  "numero": "-",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "0281013016",
+  "ref2": "8200570596  8200603117",
+  "quantidade": "0"
+ },
+ {
+  "caixa": "-",
+  "numero": "-",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0281012528",
+  "ref2": "9659341880  EDC16C34",
+  "quantidade": "0"
+ },
+ {
+  "caixa": "-",
+  "numero": "-",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0281012526",
+  "ref2": "9666579080  EDC16C34",
+  "quantidade": "0"
+ },
+ {
+  "caixa": "-",
+  "numero": "-",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0281012525",
+  "ref2": "9661376380  EDC16C34",
+  "quantidade": "0"
+ },
+ {
+  "caixa": "-",
+  "numero": "-",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0281011861",
+  "ref2": "EDC16C34  9657061180",
+  "quantidade": "0"
+ },
+ {
+  "caixa": "-",
+  "numero": "-",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "0281011824",
+  "ref2": "038906019NE  EDC15P+",
+  "quantidade": "0"
+ },
+ {
+  "caixa": "-",
+  "numero": "-",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "0281011723",
+  "ref2": "8200311539  8200376187",
+  "quantidade": "0"
+ },
+ {
+  "caixa": "-",
+  "numero": "-",
+  "tipo": "Centralina Injeção",
+  "marca": "Toyota",
+  "ref1": "0281011649",
+  "ref2": "89661-52891",
+  "quantidade": "0"
+ },
+ {
+  "caixa": "-",
+  "numero": "-",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0281010138",
+  "ref2": "9636255480  EDC15C2",
+  "quantidade": "0"
+ },
+ {
+  "caixa": "-",
+  "numero": "-",
+  "tipo": "Centralina Injeção",
+  "marca": "Citroën",
+  "ref1": "0261208908",
+  "ref2": "ME7.4.5  9662467480",
+  "quantidade": "0"
+ },
+ {
+  "caixa": "-",
+  "numero": "-",
+  "tipo": "Centralina Injeção",
+  "marca": "Nissan",
+  "ref1": "0261206499",
+  "ref2": "237101F700  1M",
+  "quantidade": "0"
+ },
+ {
+  "caixa": "-",
+  "numero": "-",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "9643782480",
+  "ref2": "21645920-6",
+  "quantidade": "0"
+ },
+ {
+  "caixa": "-",
+  "numero": "-",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "9643134280",
+  "ref2": "S2000-21",
+  "quantidade": "0"
+ },
+ {
+  "caixa": "-",
+  "numero": "-",
+  "tipo": "Centralina Injeção",
+  "marca": "PSA",
+  "ref1": "9637798480",
+  "ref2": "2165647-2  SL96-3",
+  "quantidade": "0"
+ },
+ {
+  "caixa": "-",
+  "numero": "-",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "9629372780",
+  "ref2": "SL96  21626034-9",
+  "quantidade": "0"
+ },
+ {
+  "caixa": "-",
+  "numero": "-",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "8200513076",
+  "ref2": "8200582518",
+  "quantidade": "0"
+ },
+ {
+  "caixa": "-",
+  "numero": "-",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "8200334177",
+  "ref2": "8200374174",
+  "quantidade": "0"
+ },
+ {
+  "caixa": "-",
+  "numero": "-",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "8200331477",
+  "ref2": "8200412258",
+  "quantidade": "0"
+ },
+ {
+  "caixa": "-",
+  "numero": "-",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "8200259832",
+  "ref2": "8200264698",
+  "quantidade": "0"
+ },
+ {
+  "caixa": "-",
+  "numero": "-",
+  "tipo": "Centralina Injeção",
+  "marca": "Fiat",
+  "ref1": "51862574",
+  "ref2": "M1D6F.G1",
+  "quantidade": "0"
+ },
+ {
+  "caixa": "-",
+  "numero": "-",
+  "tipo": "Centralina Injeção",
+  "marca": "Fiat",
+  "ref1": "51825024",
+  "ref2": "MJD6F3.P7",
+  "quantidade": "0"
+ },
+ {
+  "caixa": "-",
+  "numero": "-",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0281011540",
+  "ref2": "EDC16C3  9653202780",
+  "quantidade": "0"
+ },
+ {
+  "caixa": "-",
+  "numero": "-",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0281013868",
+  "ref2": "EDC16C34  9663755480",
+  "quantidade": "0"
+ },
+ {
+  "caixa": "-",
+  "numero": "-",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0281012523",
+  "ref2": "EDC16C34  9664843480",
+  "quantidade": "0"
+ },
+ {
+  "caixa": "-",
+  "numero": "-",
+  "tipo": "Centralina Injeção",
+  "marca": "Peugeot/Citroën",
+  "ref1": "0261S04009",
+  "ref2": "MEV17.4  9665291180",
+  "quantidade": "0"
+ },
+ {
+  "caixa": "-",
+  "numero": "-",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "0281001997",
+  "ref2": "HOM7700106485",
+  "quantidade": "0"
+ },
+ {
+  "caixa": "-",
+  "numero": "-",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "7700115160",
+  "ref2": "HOM7700113511  SAFIR2",
+  "quantidade": "0"
+ },
+ {
+  "caixa": "-",
+  "numero": "-",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "0281011724",
+  "ref2": "8200311550",
+  "quantidade": "0"
+ },
+ {
+  "caixa": "-",
+  "numero": "-",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "S105300103C",
+  "ref2": "HOM7700860319",
+  "quantidade": "0"
+ },
+ {
+  "caixa": "-",
+  "numero": "-",
+  "tipo": "Centralina Injeção",
+  "marca": "Renault",
+  "ref1": "0281014648",
+  "ref2": "8200666516",
+  "quantidade": "0"
+ },
+ {
+  "caixa": "-",
+  "numero": "-",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "030906032CE",
+  "ref2": "0261207184",
+  "quantidade": "0"
+ },
+ {
+  "caixa": "-",
+  "numero": "-",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "03C906024AK",
+  "ref2": "-",
+  "quantidade": "0"
+ },
+ {
+  "caixa": "-",
+  "numero": "-",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "03E906033AN",
+  "ref2": "5WP4423403",
+  "quantidade": "0"
+ },
+ {
+  "caixa": "-",
+  "numero": "-",
+  "tipo": "Centralina Injeção",
+  "marca": "Skoda",
+  "ref1": "03D906032A",
+  "ref2": "5WP4006006",
+  "quantidade": "0"
+ },
+ {
+  "caixa": "-",
+  "numero": "-",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "038906018EE",
+  "ref2": "0281001916",
+  "quantidade": "0"
+ },
+ {
+  "caixa": "-",
+  "numero": "-",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "038906012L",
+  "ref2": "0281010112",
+  "quantidade": "0"
+ },
+ {
+  "caixa": "-",
+  "numero": "-",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "038906012K",
+  "ref2": "0281010111",
+  "quantidade": "0"
+ },
+ {
+  "caixa": "-",
+  "numero": "-",
+  "tipo": "Centralina Injeção",
+  "marca": "Audi",
+  "ref1": "038906019GC",
+  "ref2": "0281010892  EDC15P+",
+  "quantidade": "0"
+ },
+ {
+  "caixa": "-",
+  "numero": "-",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "038906019FG",
+  "ref2": "0281010702  EDC15P+",
+  "quantidade": "0"
+ },
+ {
+  "caixa": "-",
+  "numero": "-",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "03L907309",
+  "ref2": "0281015029  EDC17CP14",
+  "quantidade": "0"
+ },
+ {
+  "caixa": "-",
+  "numero": "-",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "074906032AN",
+  "ref2": "0281014149  EDC16CP34-4.4",
+  "quantidade": "0"
+ },
+ {
+  "caixa": "-",
+  "numero": "-",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "03G906021KK",
+  "ref2": "0281013228  EDC16V34",
+  "quantidade": "0"
+ },
+ {
+  "caixa": "-",
+  "numero": "-",
+  "tipo": "Centralina Injeção",
+  "marca": "Audi",
+  "ref1": "03L906018AB",
+  "ref2": "0281016306  EDC17C46",
+  "quantidade": "0"
+ },
+ {
+  "caixa": "-",
+  "numero": "-",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "028906021GT",
+  "ref2": "0281001735",
+  "quantidade": "0"
+ },
+ {
+  "caixa": "-",
+  "numero": "-",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "0281001407/408",
+  "ref2": "028906021CQ",
+  "quantidade": "0"
+ },
+ {
+  "caixa": "-",
+  "numero": "-",
+  "tipo": "Centralina Injeção",
+  "marca": "Volkswagen",
+  "ref1": "03L906023MM",
+  "ref2": "5WP42692AA  SIMOSPCR21",
+  "quantidade": "0"
+ },
+ {
+  "caixa": "-",
+  "numero": "-",
+  "tipo": "Centralina Injeção",
+  "marca": "Kia",
+  "ref1": "K04R18881D",
+  "ref2": "407913-1742",
+  "quantidade": "0"
+ },
+ {
+  "caixa": "-",
+  "numero": "-",
+  "tipo": "Centralina Injeção",
+  "marca": "Nissan",
+  "ref1": "23710VK562",
+  "ref2": "407917-0722  HK",
+  "quantidade": "0"
+ }
+]
