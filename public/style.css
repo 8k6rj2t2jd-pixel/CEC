@@ -121,6 +121,14 @@ main { padding: 16px; max-width: 720px; margin: 0 auto; }
 
 .form-actions { display: flex; justify-content: flex-end; gap: 10px; }
 
+.stats-strip { display: flex; gap: 10px; margin-bottom: 16px; flex-wrap: wrap; }
+.stat-card {
+  flex: 1; min-width: 130px; background: var(--panel); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 12px 14px; display: flex; flex-direction: column; gap: 2px;
+}
+.stat-value { font-size: 1.5rem; font-weight: 700; }
+.stat-label { font-size: 0.75rem; color: var(--muted); }
+
 .filters { display: flex; gap: 8px; margin-bottom: 14px; flex-wrap: wrap; }
 .filters input, .filters select {
   background: var(--panel); border: 1px solid var(--border); color: var(--text);
@@ -155,4 +163,35 @@ main { padding: 16px; max-width: 720px; margin: 0 auto; }
 .lightbox img { max-width: 92vw; max-height: 92vh; border-radius: 8px; }
 .lightbox-close {
   position: absolute; top: 16px; right: 16px; font-size: 1.1rem;
+}
+
+/* Em ecrãs largos (computador/tablet), a barra do topo passa a barra
+   lateral fixa. Em telemóvel (a maioria do uso real desta app) mantém-se
+   como está - uma barra lateral fixa desperdiçaria espaço precioso num
+   ecrã estreito. */
+@media (min-width: 720px) {
+  .app-shell { display: flex; align-items: flex-start; }
+  .topbar {
+    position: sticky;
+    top: 0;
+    align-self: flex-start;
+    width: 230px;
+    flex: 0 0 230px;
+    height: 100vh;
+    overflow-y: auto;
+    padding: 20px 16px;
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  .topbar-row { flex-direction: column; align-items: flex-start; gap: 12px; margin-bottom: 0; }
+  .btn-logout { width: 100%; }
+  .tabs { flex-direction: column; border-bottom: none; gap: 4px; }
+  .tab-btn {
+    text-align: left; border-bottom: none; border-radius: 8px;
+    border-left: 3px solid transparent; padding: 10px 12px;
+  }
+  .tab-btn.active { background: var(--panel-2); border-left-color: var(--accent); }
+  main { flex: 1; }
 }

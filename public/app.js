@@ -310,6 +310,12 @@ const emptyState = document.getElementById('empty-state');
 const searchInput = document.getElementById('search-input');
 const filterPartType = document.getElementById('filter-partType');
 const filterManufacturer = document.getElementById('filter-manufacturer');
+const filterModel = document.getElementById('filter-model');
+
+const statTotal = document.getElementById('stat-total');
+const statStock = document.getElementById('stat-stock');
+const statManufacturers = document.getElementById('stat-manufacturers');
+const statTypes = document.getElementById('stat-types');
 
 let allParts = [];
 
@@ -317,15 +323,25 @@ async function loadParts() {
   const resp = await fetch('/api/parts');
   allParts = await resp.json();
   populateFilterOptions();
+  updateStats();
   renderParts();
+}
+
+function updateStats() {
+  statTotal.textContent = allParts.length;
+  statStock.textContent = allParts.reduce((sum, p) => sum + (Number(p.quantity) || 0), 0);
+  statManufacturers.textContent = new Set(allParts.map((p) => p.manufacturer).filter(Boolean)).size;
+  statTypes.textContent = new Set(allParts.map((p) => p.partType).filter(Boolean)).size;
 }
 
 function populateFilterOptions() {
   const types = Array.from(new Set(allParts.map((p) => p.partType).filter(Boolean))).sort();
   const manufacturers = Array.from(new Set(allParts.map((p) => p.manufacturer).filter(Boolean))).sort();
+  const models = Array.from(new Set(allParts.map((p) => p.model).filter(Boolean))).sort();
 
   fillSelect(filterPartType, types, 'Todos os tipos');
   fillSelect(filterManufacturer, manufacturers, 'Todos os fabricantes');
+  fillSelect(filterModel, models, 'Todos os modelos');
 }
 
 function fillSelect(select, values, placeholder) {
@@ -344,10 +360,12 @@ function renderParts() {
   const q = searchInput.value.trim().toLowerCase();
   const typeFilter = filterPartType.value;
   const manufacturerFilter = filterManufacturer.value;
+  const modelFilter = filterModel.value;
 
   const filtered = allParts.filter((p) => {
     if (typeFilter && p.partType !== typeFilter) return false;
     if (manufacturerFilter && p.manufacturer !== manufacturerFilter) return false;
+    if (modelFilter && p.model !== modelFilter) return false;
     if (q) {
       const haystack = [p.ref1, p.ref2, p.manufacturer, p.brand, p.model, p.partType, p.notes]
         .filter(Boolean)
@@ -432,6 +450,7 @@ async function deletePart(id) {
   const resp = await fetch(`/api/parts/${id}`, { method: 'DELETE' });
   if (resp.ok) {
     allParts = allParts.filter((p) => p.id !== id);
+    updateStats();
     renderParts();
   }
 }
@@ -445,6 +464,7 @@ function escapeHtml(str) {
 searchInput.addEventListener('input', renderParts);
 filterPartType.addEventListener('change', renderParts);
 filterManufacturer.addEventListener('change', renderParts);
+filterModel.addEventListener('change', renderParts);
 
 // ---------------------------------------------------------------------------
 // Lightbox
