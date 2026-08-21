@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000">
+  <defs>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="5" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+    <radialGradient id="vignette" cx="50%" cy="48%" r="70%">
+      <stop offset="0%" stop-color="#181818" />
+      <stop offset="100%" stop-color="#050505" />
+    </radialGradient>
+  </defs>
+
+  <rect width="1000" height="1000" fill="url(#vignette)" />
+
+  <g stroke="#ff8a1e" stroke-width="2" fill="none" opacity="0.55" filter="url(#glow)">
+    <!-- traços a irradiar da moldura para os cantos, estilo placa de circuito -->
+    <path d="M330,260 L330,120 L130,120" />
+    <path d="M420,260 L420,60" />
+    <path d="M500,260 L500,20" />
+    <path d="M670,260 L670,120 L870,120" />
+    <path d="M580,260 L580,60" />
+    <path d="M260,360 L100,360 L100,180" />
+    <path d="M260,500 L30,500" />
+    <path d="M260,640 L100,640 L100,850" />
+    <path d="M740,360 L900,360 L900,180" />
+    <path d="M740,500 L970,500" />
+    <path d="M740,640 L900,640 L900,850" />
+    <path d="M330,740 L330,880 L150,880" />
+    <path d="M500,740 L500,960" />
+    <path d="M670,740 L670,880 L860,880" />
+  </g>
+
+  <g fill="#ff8a1e" opacity="0.85">
+    <circle cx="130" cy="120" r="5" />
+    <circle cx="870" cy="120" r="5" />
+    <circle cx="100" cy="180" r="4" />
+    <circle cx="30" cy="500" r="5" />
+    <circle cx="970" cy="500" r="5" />
+    <circle cx="100" cy="850" r="4" />
+    <circle cx="150" cy="880" r="5" />
+    <circle cx="860" cy="880" r="5" />
+    <circle cx="500" cy="20" r="4" />
+    <circle cx="500" cy="960" r="4" />
+  </g>
+
+  <!-- pontos soltos, textura de placa de circuito -->
+  <g fill="#ff8a1e" opacity="0.35">
+    <circle cx="70" cy="260" r="2.5" /><circle cx="110" cy="290" r="2" /><circle cx="150" cy="240" r="2.5" />
+    <circle cx="930" cy="260" r="2.5" /><circle cx="890" cy="290" r="2" /><circle cx="850" cy="240" r="2.5" />
+    <circle cx="70" cy="720" r="2.5" /><circle cx="120" cy="750" r="2" />
+    <circle cx="930" cy="720" r="2.5" /><circle cx="880" cy="750" r="2" />
+    <circle cx="380" cy="920" r="2" /><circle cx="620" cy="920" r="2" />
+  </g>
+
+  <!-- moldura octogonal central -->
+  <path
+    d="M330,260 L670,260 L740,330 L740,670 L670,740 L330,740 L260,670 L260,330 Z"
+    stroke="#ff9d33" stroke-width="5" fill="none" opacity="0.9" filter="url(#glow)"
+  />
+  <path
+    d="M330,260 L670,260 L740,330 L740,670 L670,740 L330,740 L260,670 L260,330 Z"
+    stroke="#3a1f08" stroke-width="16" fill="none" opacity="0.4"
+  />
+
+  <!-- pequenos "componentes" decorativos no canto inferior direito -->
+  <g stroke="#ff8a1e" stroke-width="2.5" fill="none" opacity="0.7" filter="url(#glow)">
+    <circle cx="800" cy="900" r="22" />
+    <line x1="778" y1="900" x2="822" y2="900" />
+    <circle cx="870" cy="875" r="14" />
+  </g>
+</svg>

@@ -97,6 +97,7 @@ app.get('/logo.png', (req, res, next) => {
   if (fs.existsSync(logoPath)) return res.sendFile(logoPath);
   next();
 });
+app.get('/login-bg.svg', (req, res) => res.sendFile(path.join(PUBLIC_DIR, 'login-bg.svg')));
 
 app.use(auth.requireAuth);
 
