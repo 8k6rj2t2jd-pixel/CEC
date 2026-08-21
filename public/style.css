@@ -241,11 +241,16 @@ main { padding: 16px; max-width: 720px; margin: 0 auto; }
     gap: 24px;
   }
   .btn-logout { margin-top: auto; }
-  .tabs { flex-direction: column; border-bottom: none; gap: 4px; }
+  .tabs { flex-direction: column; border-bottom: none; gap: 14px; }
   .tab-btn {
-    text-align: left; border-bottom: none; border-radius: 8px;
-    border-left: 3px solid transparent; padding: 10px 12px;
+    text-align: left; border-bottom: none; border-radius: 10px;
+    border: 2px solid transparent; padding: 12px 14px; font-size: 1rem;
   }
-  .tab-btn.active { background: var(--panel-2); border-left-color: var(--accent); }
+  .tab-btn.active {
+    background: rgba(255, 138, 30, 0.1);
+    border-color: #ff8a1e;
+    color: var(--text);
+    font-weight: 600;
+  }
   main { flex: 1; }
 }
