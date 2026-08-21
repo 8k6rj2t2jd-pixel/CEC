@@ -15,6 +15,7 @@ const store = require('./lib/store');
 const images = require('./lib/images');
 const { readLabel } = require('./lib/ocr');
 const auth = require('./lib/auth');
+const { buildPartsFromStockFile } = require('./lib/stockImport');
 
 const PORT = process.env.PORT || 3000;
 const DATA_DIR = process.env.DATA_DIR || path.join(__dirname, 'data');
@@ -290,6 +291,35 @@ app.delete('/api/parts/:id', async (req, res) => {
   }
 
   res.json({ ok: true });
+});
+
+// Rota temporaria para importar em massa o stock antigo (scripts/stock-
+// import-data.json), sem fotos - alternativa ao Shell do Render (que exige
+// plano pago). Recusa correr outra vez se ja houver pecas com a nota de
+// importacao, para nao duplicar tudo sem querer.
+app.post('/api/admin/import-stock', async (req, res) => {
+  try {
+    const existing = await store.listParts();
+    const alreadyImported = existing.some((p) => (p.notes || '').includes('Importado do stock antigo'));
+    if (alreadyImported) {
+      return res.status(409).json({
+        error: 'Já existem peças importadas do stock antigo no catálogo. Para evitar duplicar tudo, não repeti a importação automaticamente.',
+      });
+    }
+
+    const { parts, skipped } = buildPartsFromStockFile();
+    let created = 0;
+    let withManufacturer = 0;
+    for (const part of parts) {
+      await store.createPart(part);
+      created += 1;
+      if (part.manufacturer) withManufacturer += 1;
+    }
+    res.json({ created, withManufacturer, skipped });
+  } catch (err) {
+    console.error('[import-stock] falha:', err);
+    res.status(500).json({ error: `Falha na importação (${err.message || err}).` });
+  }
 });
 
 app.get('/api/export.xlsx', async (req, res) => {

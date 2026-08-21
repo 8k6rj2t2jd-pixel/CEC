@@ -673,6 +673,28 @@ document.getElementById('btn-export-excel').addEventListener('click', () => {
   window.location.href = '/api/export.xlsx';
 });
 
+const importStockStatus = document.getElementById('import-stock-status');
+document.getElementById('btn-import-stock').addEventListener('click', async () => {
+  if (!confirm('Isto acrescenta ao catálogo todas as peças do stock antigo (sem fotos). Só deve fazer isto uma vez. Continuar?')) return;
+
+  importStockStatus.hidden = false;
+  importStockStatus.classList.remove('error');
+  importStockStatus.textContent = 'A importar, pode demorar um bocado…';
+
+  try {
+    const resp = await fetch('/api/admin/import-stock', { method: 'POST' });
+    const data = await resp.json();
+    if (!resp.ok) throw new Error(data.error || 'Falha na importação.');
+    importStockStatus.textContent =
+      `Importação concluída: ${data.created} peças adicionadas ` +
+      `(${data.withManufacturer} com fabricante identificado automaticamente).`;
+    await loadParts();
+  } catch (err) {
+    importStockStatus.classList.add('error');
+    importStockStatus.textContent = err.message;
+  }
+});
+
 document.getElementById('btn-logout').addEventListener('click', async () => {
   await fetch('/api/logout', { method: 'POST' });
   window.location.href = '/login';
