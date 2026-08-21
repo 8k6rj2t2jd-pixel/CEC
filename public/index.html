@@ -238,31 +238,41 @@
       <button type="button" id="edit-close" class="btn lightbox-close-inline">✕</button>
     </div>
 
+    <p class="edit-section-title">Categoria</p>
     <div class="category-toggle" id="edit-category-toggle">
       <button type="button" class="category-btn active" data-category="centralina">Centralina</button>
       <button type="button" class="category-btn" data-category="quadrante">Quadrante</button>
     </div>
     <input type="hidden" id="edit-field-category" value="centralina" />
 
-    <div class="thumbs">
-      <div class="thumb-box">
+    <p class="edit-section-title">Fotos</p>
+    <p class="edit-photos-hint">Toque numa foto para tirar ou escolher uma nova. As fotos que já lá estão só mudam se enviar uma foto nova para esse espaço.</p>
+    <div class="edit-photo-grid">
+      <label class="edit-photo-slot">
         <img id="edit-thumb-front" alt="Frente" hidden />
-        <span class="thumb-caption">Frente</span>
-      </div>
-      <div class="thumb-box">
+        <span class="edit-photo-placeholder">📷</span>
+        <span class="edit-photo-new-badge" id="edit-badge-front" hidden>Nova</span>
+        <span class="edit-photo-caption">Frente</span>
+        <input type="file" accept="image/*" capture="environment" data-slot="front" hidden />
+      </label>
+      <label class="edit-photo-slot">
         <img id="edit-thumb-back" alt="Trás" hidden />
-        <span class="thumb-caption">Trás</span>
-      </div>
-      <div class="thumb-box">
+        <span class="edit-photo-placeholder">📷</span>
+        <span class="edit-photo-new-badge" id="edit-badge-back" hidden>Nova</span>
+        <span class="edit-photo-caption">Trás</span>
+        <input type="file" accept="image/*" capture="environment" data-slot="back" hidden />
+      </label>
+      <label class="edit-photo-slot">
         <img id="edit-thumb-label" alt="Etiqueta" hidden />
-        <span class="thumb-caption">Etiqueta</span>
-      </div>
+        <span class="edit-photo-placeholder">📷</span>
+        <span class="edit-photo-new-badge" id="edit-badge-label" hidden>Nova</span>
+        <span class="edit-photo-caption">Etiqueta</span>
+        <input type="file" accept="image/*" capture="environment" data-slot="label" hidden />
+      </label>
     </div>
-    <div class="edit-photo-inputs">
-      <label class="edit-photo-input">Frente<input type="file" accept="image/*" capture="environment" data-slot="front" /></label>
-      <label class="edit-photo-input">Trás<input type="file" accept="image/*" capture="environment" data-slot="back" /></label>
-      <label class="edit-photo-input">Etiqueta<input type="file" accept="image/*" capture="environment" data-slot="label" /></label>
-    </div>
+
+    <hr class="edit-divider" />
+    <p class="edit-section-title">Dados da peça</p>
 
     <label>
       Tipo de peça

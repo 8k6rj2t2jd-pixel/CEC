@@ -214,11 +214,32 @@ main { padding: 16px; max-width: 720px; margin: 0 auto; }
 .edit-card-head { display: flex; align-items: center; justify-content: space-between; }
 .edit-card-head h2 { margin: 0; font-size: 1.1rem; }
 .lightbox-close-inline { background: none; border: none; font-size: 1.1rem; cursor: pointer; }
-.edit-photo-inputs { display: flex; gap: 8px; margin-top: -8px; }
-.edit-photo-input {
-  flex: 1; font-size: 0.75rem; color: var(--muted); display: flex; flex-direction: column; gap: 4px;
+
+.edit-section-title {
+  margin: 0; font-size: 0.75rem; font-weight: 700; color: var(--muted);
+  text-transform: uppercase; letter-spacing: 0.04em;
 }
-.edit-photo-input input { font-size: 0.75rem; }
+.edit-divider { border: none; border-top: 1px solid var(--border); margin: 0; }
+
+.edit-photos-hint { margin: -8px 0 0; font-size: 0.78rem; color: var(--muted); }
+.edit-photo-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.edit-photo-slot {
+  position: relative; aspect-ratio: 4/3; border-radius: 8px; overflow: hidden;
+  border: 1px dashed var(--border); background: var(--panel-2); cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+}
+.edit-photo-slot:active { opacity: 0.85; }
+.edit-photo-slot img { width: 100%; height: 100%; object-fit: cover; }
+.edit-photo-placeholder { font-size: 1.5rem; }
+.edit-photo-slot img:not([hidden]) ~ .edit-photo-placeholder { display: none; }
+.edit-photo-caption {
+  position: absolute; left: 0; right: 0; bottom: 0; text-align: center;
+  font-size: 0.68rem; color: white; background: rgba(0, 0, 0, 0.55); padding: 3px 2px;
+}
+.edit-photo-new-badge {
+  position: absolute; top: 4px; right: 4px; background: #ff8a1e; color: white;
+  font-size: 0.62rem; font-weight: 700; padding: 2px 6px; border-radius: 999px;
+}
 
 /* Em ecrãs largos (computador/tablet), a barra do topo passa a barra
    lateral fixa. Em telemóvel (a maioria do uso real desta app) mantém-se

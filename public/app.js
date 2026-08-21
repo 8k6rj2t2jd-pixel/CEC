@@ -551,10 +551,24 @@ wireCategoryToggle(editCategoryToggle, (category) => {
 });
 
 let editingPartId = null;
+const editBadges = {
+  front: document.getElementById('edit-badge-front'),
+  back: document.getElementById('edit-badge-back'),
+  label: document.getElementById('edit-badge-label'),
+};
+const editPendingPreviewUrls = {};
+
+function clearEditPendingPreviews() {
+  for (const key of Object.keys(editPendingPreviewUrls)) {
+    URL.revokeObjectURL(editPendingPreviewUrls[key]);
+    delete editPendingPreviewUrls[key];
+  }
+}
 
 function openEditModal(part) {
   editingPartId = part.id;
   editError.hidden = true;
+  clearEditPendingPreviews();
 
   editFields.partType.value = part.partType || '';
   editFields.manufacturer.value = part.manufacturer || '';
@@ -579,6 +593,7 @@ function openEditModal(part) {
       img.src = '';
       img.hidden = true;
     }
+    editBadges[key].hidden = true;
   }
   editForm.querySelectorAll('input[type=file]').forEach((input) => {
     input.value = '';
@@ -590,10 +605,25 @@ function openEditModal(part) {
 function closeEditModal() {
   editOverlay.hidden = true;
   editingPartId = null;
+  clearEditPendingPreviews();
 }
 
 document.getElementById('edit-close').addEventListener('click', closeEditModal);
 document.getElementById('edit-cancel').addEventListener('click', closeEditModal);
+
+editForm.querySelectorAll('input[type=file]').forEach((input) => {
+  input.addEventListener('change', () => {
+    const slot = input.dataset.slot;
+    const file = input.files[0];
+    if (!file) return;
+    if (editPendingPreviewUrls[slot]) URL.revokeObjectURL(editPendingPreviewUrls[slot]);
+    const url = URL.createObjectURL(file);
+    editPendingPreviewUrls[slot] = url;
+    editThumbs[slot].src = url;
+    editThumbs[slot].hidden = false;
+    editBadges[slot].hidden = false;
+  });
+});
 
 editForm.addEventListener('submit', async (e) => {
   e.preventDefault();
