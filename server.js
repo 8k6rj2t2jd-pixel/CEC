@@ -99,6 +99,8 @@ app.get('/logo.png', (req, res, next) => {
   next();
 });
 app.get('/login-bg.svg', (req, res) => res.sendFile(path.join(PUBLIC_DIR, 'login-bg.svg')));
+app.get('/favicon.ico', (req, res) => res.sendFile(path.join(PUBLIC_DIR, 'favicon.ico')));
+app.get('/favicon.png', (req, res) => res.sendFile(path.join(PUBLIC_DIR, 'favicon.png')));
 
 app.use(auth.requireAuth);
 
