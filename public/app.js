@@ -356,6 +356,7 @@ const searchInput = document.getElementById('search-input');
 const filterPartType = document.getElementById('filter-partType');
 const filterManufacturer = document.getElementById('filter-manufacturer');
 const filterModel = document.getElementById('filter-model');
+const filterPhoto = document.getElementById('filter-photo');
 
 const statTotal = document.getElementById('stat-total');
 const statStock = document.getElementById('stat-stock');
@@ -412,17 +413,24 @@ function fillSelect(select, values, placeholder) {
   select.value = current;
 }
 
+function partHasPhoto(part) {
+  return Boolean(part.images && (part.images.front || part.images.back || part.images.label));
+}
+
 function renderParts() {
   const q = searchInput.value.trim().toLowerCase();
   const typeFilter = filterPartType.value;
   const manufacturerFilter = filterManufacturer.value;
   const modelFilter = filterModel.value;
+  const photoFilter = filterPhoto.value;
 
   const filtered = allParts.filter((p) => {
     if (categoryFilter && partCategory(p) !== categoryFilter) return false;
     if (typeFilter && p.partType !== typeFilter) return false;
     if (manufacturerFilter && p.manufacturer !== manufacturerFilter) return false;
     if (modelFilter && p.model !== modelFilter) return false;
+    if (photoFilter === 'com' && !partHasPhoto(p)) return false;
+    if (photoFilter === 'sem' && partHasPhoto(p)) return false;
     if (q) {
       const haystack = [p.ref1, p.ref2, p.manufacturer, p.brand, p.model, p.partType, p.notes]
         .filter(Boolean)
@@ -445,13 +453,19 @@ function renderPartCard(part) {
   const card = document.createElement('div');
   card.className = 'part-card';
 
-  const frontUrl = part.images && part.images.front && part.images.front.url;
-  if (frontUrl) {
+  const photoKeys = ['front', 'back', 'label'].filter((key) => part.images && part.images[key] && part.images[key].url);
+  if (photoKeys.length) {
     const img = document.createElement('img');
-    img.src = frontUrl;
+    img.src = part.images[photoKeys[0]].url;
     img.alt = part.partType;
-    img.addEventListener('click', () => openLightbox(img.src));
+    img.addEventListener('click', () => openLightbox(part));
     card.appendChild(img);
+    if (photoKeys.length > 1) {
+      const badge = document.createElement('span');
+      badge.className = 'photo-count-badge';
+      badge.textContent = `📷 ${photoKeys.length}`;
+      card.appendChild(badge);
+    }
   } else {
     const placeholder = document.createElement('div');
     placeholder.className = 'no-photo';
@@ -680,20 +694,63 @@ searchInput.addEventListener('input', renderParts);
 filterPartType.addEventListener('change', renderParts);
 filterManufacturer.addEventListener('change', renderParts);
 filterModel.addEventListener('change', renderParts);
+filterPhoto.addEventListener('change', renderParts);
 
 // ---------------------------------------------------------------------------
 // Lightbox
 // ---------------------------------------------------------------------------
 const lightbox = document.getElementById('lightbox');
 const lightboxImg = document.getElementById('lightbox-img');
+const lightboxPrev = document.getElementById('lightbox-prev');
+const lightboxNext = document.getElementById('lightbox-next');
+const lightboxCaption = document.getElementById('lightbox-caption');
 document.getElementById('lightbox-close').addEventListener('click', () => (lightbox.hidden = true));
 lightbox.addEventListener('click', (e) => {
   if (e.target === lightbox) lightbox.hidden = true;
 });
-function openLightbox(src) {
-  lightboxImg.src = src;
+
+const PHOTO_SLOT_LABELS = { front: 'Frente', back: 'Trás', label: 'Etiqueta' };
+let lightboxPhotos = [];
+let lightboxIndex = 0;
+
+function showLightboxPhoto(index) {
+  lightboxIndex = index;
+  lightboxImg.src = lightboxPhotos[index].url;
+  const showNav = lightboxPhotos.length > 1;
+  lightboxPrev.hidden = !showNav;
+  lightboxNext.hidden = !showNav;
+  if (showNav) {
+    lightboxCaption.hidden = false;
+    lightboxCaption.textContent = `${lightboxPhotos[index].label} (${index + 1}/${lightboxPhotos.length})`;
+  } else {
+    lightboxCaption.hidden = true;
+  }
+}
+
+// Aceita ou um URL unico (ex: pre-visualizacao avulsa) ou uma peca inteira,
+// para se poder navegar por todas as fotos que ela tiver (Frente/Trás/Etiqueta).
+function openLightbox(srcOrPart) {
+  if (typeof srcOrPart === 'string') {
+    lightboxPhotos = [{ url: srcOrPart, label: '' }];
+  } else {
+    const part = srcOrPart;
+    lightboxPhotos = ['front', 'back', 'label']
+      .filter((key) => part.images && part.images[key] && part.images[key].url)
+      .map((key) => ({ url: part.images[key].url, label: PHOTO_SLOT_LABELS[key] }));
+  }
+  if (!lightboxPhotos.length) return;
+  showLightboxPhoto(0);
   lightbox.hidden = false;
 }
+
+lightboxPrev.addEventListener('click', (e) => {
+  e.stopPropagation();
+  showLightboxPhoto((lightboxIndex - 1 + lightboxPhotos.length) % lightboxPhotos.length);
+});
+lightboxNext.addEventListener('click', (e) => {
+  e.stopPropagation();
+  showLightboxPhoto((lightboxIndex + 1) % lightboxPhotos.length);
+});
 
 // ---------------------------------------------------------------------------
 // Verificar peça (foto avulsa: câmara ou upload de foto externa, ex. de um

@@ -213,6 +213,11 @@
       <select id="filter-partType"><option value="">Todos os tipos</option></select>
       <select id="filter-manufacturer"><option value="">Todos os fabricantes</option></select>
       <select id="filter-model"><option value="">Todos os modelos</option></select>
+      <select id="filter-photo">
+        <option value="">Com ou sem foto</option>
+        <option value="com">Só com foto</option>
+        <option value="sem">Só sem foto</option>
+      </select>
     </div>
     <div class="backup-row">
       <button id="btn-export-excel" class="btn">📊 Transformar catálogo em Excel</button>
@@ -227,7 +232,10 @@
 
 <div id="lightbox" class="lightbox" hidden>
   <button id="lightbox-close" class="btn lightbox-close">✕</button>
+  <button type="button" id="lightbox-prev" class="btn lightbox-nav lightbox-prev" hidden>‹</button>
   <img id="lightbox-img" alt="" />
+  <button type="button" id="lightbox-next" class="btn lightbox-nav lightbox-next" hidden>›</button>
+  <span id="lightbox-caption" class="lightbox-caption" hidden></span>
 </div>
 
 <!-- ==================== EDITAR PEÇA ==================== -->

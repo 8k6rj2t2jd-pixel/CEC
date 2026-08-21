@@ -171,12 +171,17 @@ main { padding: 16px; max-width: 720px; margin: 0 auto; }
 
 .parts-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 12px; }
 .part-card {
+  position: relative;
   background: var(--panel); border-radius: var(--radius); overflow: hidden; border: 1px solid var(--border);
 }
 .part-card img { width: 100%; aspect-ratio: 4/3; object-fit: cover; cursor: zoom-in; }
 .no-photo {
   width: 100%; aspect-ratio: 4/3; display: flex; align-items: center; justify-content: center;
   background: var(--panel-2); color: var(--muted); font-size: 0.8rem;
+}
+.photo-count-badge {
+  position: absolute; top: 8px; right: 8px; background: rgba(0, 0, 0, 0.65); color: white;
+  font-size: 0.7rem; font-weight: 600; padding: 3px 7px; border-radius: 999px; pointer-events: none;
 }
 .part-card .body { padding: 10px; font-size: 0.82rem; }
 .part-card .title { font-weight: 600; margin-bottom: 4px; }
@@ -204,6 +209,17 @@ main { padding: 16px; max-width: 720px; margin: 0 auto; }
 .lightbox img { max-width: 92vw; max-height: 92vh; border-radius: 8px; }
 .lightbox-close {
   position: absolute; top: 16px; right: 16px; font-size: 1.1rem;
+}
+.lightbox-nav {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  font-size: 1.6rem; line-height: 1; padding: 10px 14px; z-index: 1;
+}
+.lightbox-prev { left: 12px; }
+.lightbox-next { right: 12px; }
+.lightbox-caption {
+  position: absolute; bottom: 16px; left: 50%; transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.65); color: white; font-size: 0.8rem;
+  padding: 5px 14px; border-radius: 999px;
 }
 
 .edit-card {
