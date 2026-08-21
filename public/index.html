@@ -9,16 +9,16 @@
 <body>
 <div class="app-shell">
 <header class="topbar" id="sidebar">
-  <div class="topbar-row">
-    <h1><img id="logo-img" src="/logo.png" alt="" onerror="this.remove()" />🔧 Catálogo de Peças</h1>
-    <button id="btn-logout" class="btn btn-logout">Sair</button>
+  <div class="topbar-top">
+    <img id="logo-img" class="logo-standalone" src="/logo.png" alt="Centralinas &amp; Companhia" onerror="this.remove()" />
+    <h1 class="welcome-msg">Olá Centralinas &amp; Companhia! 👋</h1>
+    <nav class="tabs">
+      <button class="tab-btn active" data-tab="novo">+ Nova peça</button>
+      <button class="tab-btn" data-tab="verificar">🔍 Verificar peça</button>
+      <button class="tab-btn" data-tab="catalogo">Catálogo</button>
+    </nav>
   </div>
-  <p class="welcome-msg">Olá Equipa da Centralinas &amp; Companhia! 👋</p>
-  <nav class="tabs">
-    <button class="tab-btn active" data-tab="novo">+ Nova peça</button>
-    <button class="tab-btn" data-tab="verificar">🔍 Verificar peça</button>
-    <button class="tab-btn" data-tab="catalogo">Catálogo</button>
-  </nav>
+  <button id="btn-logout" class="btn-logout">Sair</button>
 </header>
 
 <main>

@@ -22,17 +22,24 @@ body {
 }
 
 .topbar {
-  padding: 14px 16px 0;
+  padding: 14px 16px;
   position: sticky;
   top: 0;
   background: var(--bg);
   z-index: 10;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
 }
-.topbar h1 { font-size: 1.15rem; margin: 0; display: flex; align-items: center; gap: 8px; }
-.topbar-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
-.welcome-msg { margin: 0 0 12px; font-size: 0.85rem; color: var(--muted); }
-.topbar h1 img { height: 28px; width: auto; border-radius: 4px; }
-.btn-logout { font-size: 0.8rem; padding: 6px 12px; }
+.topbar-top { display: flex; flex-direction: column; gap: 6px; }
+.logo-standalone { height: 44px; width: auto; border-radius: 4px; }
+.welcome-msg { margin: 4px 0 8px; font-size: 1.4rem; font-weight: 700; }
+.btn-logout {
+  align-self: flex-start;
+  background: none; border: none; color: #c62828;
+  font-size: 0.85rem; font-weight: 600; padding: 4px 0; cursor: pointer;
+  text-decoration: underline;
+}
 .backup-row { margin-bottom: 14px; display: flex; gap: 8px; flex-wrap: wrap; }
 
 .check-results { display: flex; flex-direction: column; gap: 14px; margin-top: 16px; }
@@ -186,8 +193,7 @@ main { padding: 16px; max-width: 720px; margin: 0 auto; }
     flex-direction: column;
     gap: 24px;
   }
-  .topbar-row { flex-direction: column; align-items: flex-start; gap: 12px; margin-bottom: 0; }
-  .btn-logout { width: 100%; }
+  .btn-logout { margin-top: auto; }
   .tabs { flex-direction: column; border-bottom: none; gap: 4px; }
   .tab-btn {
     text-align: left; border-bottom: none; border-radius: 8px;
