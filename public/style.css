@@ -154,7 +154,7 @@ main { padding: 16px; max-width: 720px; margin: 0 auto; }
   padding: 8px 16px; font-size: 0.85rem; cursor: pointer;
 }
 .category-btn + .category-btn { border-left: 1px solid var(--border); }
-.category-btn.active { background: var(--accent); color: white; font-weight: 600; }
+.category-btn.active { background: #ff8a1e; color: white; font-weight: 600; }
 
 .skip-photos-row { margin-top: 8px; }
 .btn-link {
