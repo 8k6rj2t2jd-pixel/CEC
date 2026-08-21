@@ -1,5 +1,8 @@
 'use strict';
 
+const logoImg = document.getElementById('logo-img');
+if (logoImg) logoImg.addEventListener('error', () => logoImg.remove(), { once: true });
+
 // ---------------------------------------------------------------------------
 // Tabs
 // ---------------------------------------------------------------------------

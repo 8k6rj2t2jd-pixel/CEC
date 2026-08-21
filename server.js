@@ -10,6 +10,8 @@ const session = require('express-session');
 const { MongoStore } = require('connect-mongo');
 const multer = require('multer');
 const ExcelJS = require('exceljs');
+const helmet = require('helmet');
+const rateLimit = require('express-rate-limit');
 
 const store = require('./lib/store');
 const images = require('./lib/images');
@@ -39,7 +41,52 @@ const SESSION_SECRET = process.env.SESSION_SECRET || crypto.randomBytes(32).toSt
 
 const app = express();
 app.set('trust proxy', 1);
+app.disable('x-powered-by');
+
+// Cabecalhos de seguranca (CSP, no-sniff, sem referrer para fora, etc.) - a
+// app so usa scripts/estilos dos seus proprios ficheiros (nada de CDNs nem
+// inline), por isso a CSP pode ser estrita.
+app.use(
+  helmet({
+    contentSecurityPolicy: {
+      directives: {
+        defaultSrc: ["'self'"],
+        scriptSrc: ["'self'"],
+        styleSrc: ["'self'"],
+        imgSrc: ["'self'", 'data:', 'blob:', 'https://res.cloudinary.com'],
+        connectSrc: ["'self'"],
+        objectSrc: ["'none'"],
+        baseUri: ["'self'"],
+        frameAncestors: ["'none'"],
+        upgradeInsecureRequests: IS_PRODUCTION ? [] : null,
+      },
+    },
+    crossOriginEmbedderPolicy: false,
+  })
+);
+
 app.use(express.json());
+
+// Trava geral contra abuso/DoS na API (para alem do bloqueio especifico do
+// login, abaixo). Generosa o suficiente para uso normal da app.
+app.use(
+  '/api',
+  rateLimit({
+    windowMs: 60 * 1000,
+    max: 120,
+    standardHeaders: true,
+    legacyHeaders: false,
+    message: { error: 'Demasiados pedidos. Tente novamente daqui a pouco.' },
+  })
+);
+
+const loginRateLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 30,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { error: 'Demasiadas tentativas de login. Tente novamente mais tarde.' },
+});
 
 // Sem isto, as sessoes ficam so em memoria - qualquer reinicio do servidor
 // (ex: o plano gratuito do Render "adormece" com inatividade e acorda como
@@ -70,7 +117,7 @@ app.use(session(sessionConfig));
 // ---------------------------------------------------------------------------
 app.get('/login', (req, res) => res.sendFile(path.join(PUBLIC_DIR, 'login.html')));
 
-app.post('/api/login', async (req, res) => {
+app.post('/api/login', loginRateLimiter, async (req, res) => {
   const ip = req.ip;
   if (auth.isLocked(ip)) {
     return res.status(429).json({ error: 'Demasiadas tentativas. Tente novamente dentro de 1 minuto.' });
@@ -82,17 +129,31 @@ app.post('/api/login', async (req, res) => {
     return res.status(401).json({ error: 'Utilizador ou senha incorretos.' });
   }
   auth.registerSuccess(ip);
-  req.session.authenticated = true;
-  req.session.username = username;
-  res.json({ ok: true });
+  // Gera uma sessao nova (em vez de reaproveitar a atual) para nao correr o
+  // risco de "session fixation" - um atacante que tivesse conseguido definir
+  // antecipadamente o cookie de sessao de alguem nao ganha nada com o login.
+  req.session.regenerate((err) => {
+    if (err) {
+      console.error('[login] falha ao gerar nova sessao:', err);
+      return res.status(500).json({ error: 'Falha ao iniciar sessao. Tente novamente.' });
+    }
+    req.session.authenticated = true;
+    req.session.username = username;
+    req.session.save(() => res.json({ ok: true }));
+  });
 });
 
 app.post('/api/logout', (req, res) => {
-  req.session.destroy(() => res.json({ ok: true }));
+  req.session.destroy(() => {
+    res.clearCookie('connect.sid');
+    res.json({ ok: true });
+  });
 });
 
 // Ficheiros que a pagina de login precisa mesmo sem sessao (imagens/estilo).
 app.get('/style.css', (req, res) => res.sendFile(path.join(PUBLIC_DIR, 'style.css')));
+app.get('/login.css', (req, res) => res.sendFile(path.join(PUBLIC_DIR, 'login.css')));
+app.get('/login.js', (req, res) => res.sendFile(path.join(PUBLIC_DIR, 'login.js')));
 app.get('/logo.png', (req, res, next) => {
   const logoPath = path.join(PUBLIC_DIR, 'logo.png');
   if (fs.existsSync(logoPath)) return res.sendFile(logoPath);
@@ -107,6 +168,8 @@ app.use(auth.requireAuth);
 app.use(express.static(PUBLIC_DIR));
 app.use('/storage', express.static(STORAGE_DIR));
 
+const ALLOWED_IMAGE_TYPES = new Set(['image/jpeg', 'image/png', 'image/webp', 'image/heic', 'image/heif']);
+
 const upload = multer({
   storage: multer.diskStorage({
     destination: (req, file, cb) => cb(null, TMP_DIR),
@@ -116,7 +179,24 @@ const upload = multer({
     },
   }),
   limits: { fileSize: 15 * 1024 * 1024 },
+  // So aceita fotos a serio - impede o envio de ficheiros disfarcados
+  // (ex: .svg ou .html com script la dentro) atraves dos campos de foto.
+  fileFilter: (req, file, cb) => {
+    if (!ALLOWED_IMAGE_TYPES.has(file.mimetype)) {
+      return cb(new Error('Só são permitidas fotos (JPEG, PNG, WEBP ou HEIC).'));
+    }
+    cb(null, true);
+  },
 });
+
+function handleUpload(middleware) {
+  return (req, res, next) => {
+    middleware(req, res, (err) => {
+      if (err) return res.status(400).json({ error: err.message || 'Falha ao enviar o ficheiro.' });
+      next();
+    });
+  };
+}
 
 function slugify(value) {
   return String(value || 'diverso')
@@ -131,7 +211,7 @@ function slugify(value) {
 // candidatas e texto em bruto, para pre-preencher o formulario. O tipo de
 // peca e a marca/modelo do veiculo ficam sempre a cargo do utilizador,
 // porque normalmente nao vem impresso na etiqueta.
-app.post('/api/ocr', upload.single('label'), async (req, res) => {
+app.post('/api/ocr', handleUpload(upload.single('label')), async (req, res) => {
   if (!req.file) return res.status(400).json({ error: 'Falta a foto da etiqueta.' });
   const startedAt = Date.now();
   console.log(`[OCR] a processar ${req.file.originalname} (${Math.round(req.file.size / 1024)}KB)...`);
@@ -179,11 +259,13 @@ app.get('/api/parts/:id', async (req, res) => {
 
 app.post(
   '/api/parts',
-  upload.fields([
-    { name: 'front', maxCount: 1 },
-    { name: 'back', maxCount: 1 },
-    { name: 'label', maxCount: 1 },
-  ]),
+  handleUpload(
+    upload.fields([
+      { name: 'front', maxCount: 1 },
+      { name: 'back', maxCount: 1 },
+      { name: 'label', maxCount: 1 },
+    ])
+  ),
   async (req, res) => {
     const files = req.files || {};
     const providedKeys = ['front', 'back', 'label'].filter((key) => files[key]);
@@ -231,7 +313,7 @@ app.post(
     } catch (err) {
       console.error('[parts] falha ao enviar as fotos:', err);
       cleanupTmp();
-      return res.status(500).json({ error: `Falha ao guardar as fotos (${err.message || err}).` });
+      return res.status(500).json({ error: 'Falha ao guardar as fotos. Tente novamente.' });
     }
 
     const part = {
@@ -254,7 +336,7 @@ app.post(
       res.status(201).json(part);
     } catch (err) {
       console.error('[parts] falha ao gravar na base de dados:', err);
-      res.status(500).json({ error: `Falha ao gravar na base de dados (${err.message || err}).` });
+      res.status(500).json({ error: 'Falha ao gravar na base de dados. Tente novamente.' });
     }
   }
 );
@@ -279,11 +361,13 @@ app.patch('/api/parts/:id', async (req, res) => {
 // estavam.
 app.post(
   '/api/parts/:id/photos',
-  upload.fields([
-    { name: 'front', maxCount: 1 },
-    { name: 'back', maxCount: 1 },
-    { name: 'label', maxCount: 1 },
-  ]),
+  handleUpload(
+    upload.fields([
+      { name: 'front', maxCount: 1 },
+      { name: 'back', maxCount: 1 },
+      { name: 'label', maxCount: 1 },
+    ])
+  ),
   async (req, res) => {
     const files = req.files || {};
     const providedKeys = ['front', 'back', 'label'].filter((key) => files[key]);
@@ -335,7 +419,7 @@ app.post(
     } catch (err) {
       console.error('[parts] falha ao enviar fotos adicionais:', err);
       cleanupTmp();
-      return res.status(500).json({ error: `Falha ao guardar as fotos (${err.message || err}).` });
+      return res.status(500).json({ error: 'Falha ao guardar as fotos. Tente novamente.' });
     }
 
     const updated = await store.updatePart(part.id, { images: partImages });
@@ -392,9 +476,17 @@ app.post('/api/admin/import-stock', async (req, res) => {
     res.json({ created, withManufacturer, skipped });
   } catch (err) {
     console.error('[import-stock] falha:', err);
-    res.status(500).json({ error: `Falha na importação (${err.message || err}).` });
+    res.status(500).json({ error: 'Falha na importação. Tente novamente.' });
   }
 });
+
+// Evita que um valor guardado (referencia, notas, etc.) comecado por
+// =, +, -, @ seja interpretado como formula ao abrir o Excel gerado
+// ("CSV/Excel injection") - poe uma plica a frente para forcar texto.
+function sanitizeForExcel(value) {
+  const str = String(value == null ? '' : value);
+  return /^[=+\-@\t\r]/.test(str) ? `'${str}` : str;
+}
 
 app.get('/api/export.xlsx', async (req, res) => {
   try {
@@ -419,14 +511,14 @@ app.get('/api/export.xlsx', async (req, res) => {
       const part = parts[i];
       const rowIndex = i + 2;
       sheet.addRow({
-        partType: part.partType,
-        manufacturer: part.manufacturer,
-        brand: part.brand,
-        model: part.model,
-        ref1: part.ref1,
-        ref2: part.ref2,
+        partType: sanitizeForExcel(part.partType),
+        manufacturer: sanitizeForExcel(part.manufacturer),
+        brand: sanitizeForExcel(part.brand),
+        model: sanitizeForExcel(part.model),
+        ref1: sanitizeForExcel(part.ref1),
+        ref2: sanitizeForExcel(part.ref2),
         quantity: part.quantity,
-        notes: part.notes,
+        notes: sanitizeForExcel(part.notes),
       });
       sheet.getRow(rowIndex).height = 70;
 

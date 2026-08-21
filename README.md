@@ -81,6 +81,33 @@ WhatsApp) e só quer saber rapidamente o que fazer com ela — sem passar pelas
   marca/modelo e quantidade de cada peça.
 - Espaço para o **logótipo da empresa** — ver secção "Logótipo" abaixo.
 
+### Segurança
+
+Para proteger o catálogo e as fotos contra acessos indevidos, a app tem:
+
+- **Senhas nunca guardadas em texto** — só uma hash (ver secção seguinte).
+- **Bloqueio de tentativas de login**: 5 senhas erradas seguidas bloqueiam
+  esse acesso durante 1 minuto, e há também um limite mais alargado por
+  IP para travar ataques mais lentos.
+- **Limite de pedidos por minuto** em toda a API, para travar tentativas de
+  sobrecarregar o servidor.
+- **Cookies de sessão protegidas** (`HttpOnly`, `Secure` em produção),
+  invalidadas e renovadas a cada novo login.
+- **Cabeçalhos de segurança do browser** (Content-Security-Policy,
+  proteção contra clickjacking, etc.) em todas as páginas.
+- **Só aceita fotos a sério** (JPEG/PNG/WEBP/HEIC) nos campos de upload —
+  recusa qualquer outro tipo de ficheiro disfarçado de foto.
+- **Exportação para Excel protegida** contra "fórmulas maliciosas" que
+  por vezes se escondem em referências ou notas.
+- Mensagens de erro mostradas ao utilizador nunca revelam detalhes
+  internos do servidor ou da base de dados.
+
+Para manter tudo isto eficaz: defina sempre `SESSION_SECRET` no hosting
+(uma frase longa e aleatória, só sua) e escolha uma senha de acesso forte
+com `scripts/set-password.js`. Sem `SESSION_SECRET` definido, o servidor
+continua a funcionar, mas todas as sessões são fechadas sempre que
+reiniciar.
+
 ### Definir a senha de acesso
 
 A senha nunca fica escrita no código (por segurança) — gera-se uma "hash"
