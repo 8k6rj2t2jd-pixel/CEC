@@ -7,43 +7,68 @@
         <feMergeNode in="SourceGraphic" />
       </feMerge>
     </filter>
-    <radialGradient id="vignette" cx="50%" cy="48%" r="70%">
-      <stop offset="0%" stop-color="#181818" />
-      <stop offset="100%" stop-color="#050505" />
+    <radialGradient id="vignette" cx="50%" cy="48%" r="72%">
+      <stop offset="0%" stop-color="#1c1c1c" />
+      <stop offset="100%" stop-color="#040404" />
     </radialGradient>
   </defs>
 
+  <style>
+    .pulse { animation: pulse 3.2s ease-in-out infinite; }
+    .pulse-slow { animation: pulse 4.5s ease-in-out infinite; animation-delay: -1.5s; }
+    .flow { stroke-dasharray: 14 10; animation: flow 2.4s linear infinite; }
+    .blink { animation: blink 2.6s ease-in-out infinite; }
+    .blink-b { animation: blink 3.4s ease-in-out infinite; animation-delay: -1.2s; }
+    @keyframes pulse { 0%, 100% { opacity: 0.85; } 50% { opacity: 0.4; } }
+    @keyframes flow { to { stroke-dashoffset: -240; } }
+    @keyframes blink { 0%, 100% { opacity: 0.9; } 50% { opacity: 0.2; } }
+  </style>
+
   <rect width="1000" height="1000" fill="url(#vignette)" />
 
+  <!-- malha densa de traços ortogonais, estilo placa de circuito -->
+  <g stroke="#ff8a1e" stroke-width="1.5" fill="none" opacity="0.3">
+    <path d="M0,100 H60 V180 H160" /><path d="M0,320 H40" /><path d="M0,680 H40" /><path d="M0,900 H60 V820 H160" />
+    <path d="M1000,100 H940 V180 H840" /><path d="M1000,320 H960" /><path d="M1000,680 H960" /><path d="M1000,900 H940 V820 H840" />
+    <path d="M60,0 V50 H140 V0" /><path d="M860,0 V50 H940 V0" />
+    <path d="M60,1000 V950 H140 V1000" /><path d="M860,1000 V950 H940 V1000" />
+    <path d="M200,60 H320" /><path d="M680,60 H800" /><path d="M200,940 H320" /><path d="M680,940 H800" />
+  </g>
+
   <g stroke="#ff8a1e" stroke-width="2" fill="none" opacity="0.55" filter="url(#glow)">
-    <!-- traços a irradiar da moldura para os cantos, estilo placa de circuito -->
-    <path d="M330,260 L330,120 L130,120" />
+    <!-- traços a irradiar da moldura para os cantos -->
+    <path class="flow" d="M330,260 L330,120 L130,120" />
     <path d="M420,260 L420,60" />
-    <path d="M500,260 L500,20" />
+    <path class="flow" d="M500,260 L500,20" />
     <path d="M670,260 L670,120 L870,120" />
     <path d="M580,260 L580,60" />
-    <path d="M260,360 L100,360 L100,180" />
+    <path class="flow" d="M260,360 L100,360 L100,180" />
     <path d="M260,500 L30,500" />
     <path d="M260,640 L100,640 L100,850" />
-    <path d="M740,360 L900,360 L900,180" />
+    <path class="flow" d="M740,360 L900,360 L900,180" />
     <path d="M740,500 L970,500" />
     <path d="M740,640 L900,640 L900,850" />
     <path d="M330,740 L330,880 L150,880" />
-    <path d="M500,740 L500,960" />
+    <path class="flow" d="M500,740 L500,960" />
     <path d="M670,740 L670,880 L860,880" />
+    <!-- diagonais nos cantos -->
+    <path d="M180,180 L60,60" /><path d="M820,180 L940,60" />
+    <path d="M180,820 L60,940" /><path d="M820,820 L940,940" />
   </g>
 
   <g fill="#ff8a1e" opacity="0.85">
-    <circle cx="130" cy="120" r="5" />
-    <circle cx="870" cy="120" r="5" />
+    <circle class="blink" cx="130" cy="120" r="5" />
+    <circle class="blink-b" cx="870" cy="120" r="5" />
     <circle cx="100" cy="180" r="4" />
-    <circle cx="30" cy="500" r="5" />
-    <circle cx="970" cy="500" r="5" />
+    <circle class="blink" cx="30" cy="500" r="5" />
+    <circle class="blink-b" cx="970" cy="500" r="5" />
     <circle cx="100" cy="850" r="4" />
     <circle cx="150" cy="880" r="5" />
-    <circle cx="860" cy="880" r="5" />
+    <circle class="blink" cx="860" cy="880" r="5" />
     <circle cx="500" cy="20" r="4" />
-    <circle cx="500" cy="960" r="4" />
+    <circle class="blink-b" cx="500" cy="960" r="4" />
+    <circle cx="60" cy="60" r="4" /><circle cx="940" cy="60" r="4" />
+    <circle cx="60" cy="940" r="4" /><circle cx="940" cy="940" r="4" />
   </g>
 
   <!-- pontos soltos, textura de placa de circuito -->
@@ -53,22 +78,36 @@
     <circle cx="70" cy="720" r="2.5" /><circle cx="120" cy="750" r="2" />
     <circle cx="930" cy="720" r="2.5" /><circle cx="880" cy="750" r="2" />
     <circle cx="380" cy="920" r="2" /><circle cx="620" cy="920" r="2" />
+    <circle cx="380" cy="80" r="2" /><circle cx="620" cy="80" r="2" />
+    <circle cx="220" cy="420" r="2" /><circle cx="220" cy="580" r="2" />
+    <circle cx="780" cy="420" r="2" /><circle cx="780" cy="580" r="2" />
   </g>
 
   <!-- moldura octogonal central -->
   <path
+    class="pulse"
     d="M330,260 L670,260 L740,330 L740,670 L670,740 L330,740 L260,670 L260,330 Z"
-    stroke="#ff9d33" stroke-width="5" fill="none" opacity="0.9" filter="url(#glow)"
+    stroke="#ff9d33" stroke-width="5" fill="none" filter="url(#glow)"
   />
   <path
     d="M330,260 L670,260 L740,330 L740,670 L670,740 L330,740 L260,670 L260,330 Z"
     stroke="#3a1f08" stroke-width="16" fill="none" opacity="0.4"
   />
 
-  <!-- pequenos "componentes" decorativos no canto inferior direito -->
+  <!-- componentes decorativos nos 4 cantos -->
   <g stroke="#ff8a1e" stroke-width="2.5" fill="none" opacity="0.7" filter="url(#glow)">
-    <circle cx="800" cy="900" r="22" />
+    <circle class="pulse-slow" cx="800" cy="900" r="22" />
     <line x1="778" y1="900" x2="822" y2="900" />
     <circle cx="870" cy="875" r="14" />
+
+    <circle class="pulse-slow" cx="200" cy="100" r="18" />
+    <line x1="182" y1="100" x2="218" y2="100" />
+    <circle cx="130" cy="125" r="11" />
+
+    <circle cx="880" cy="140" r="12" />
+    <line x1="868" y1="140" x2="892" y2="140" />
+
+    <circle cx="120" cy="860" r="12" />
+    <line x1="108" y1="860" x2="132" y2="860" />
   </g>
 </svg>

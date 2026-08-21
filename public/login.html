@@ -25,6 +25,13 @@
     padding: 10px; border-radius: 8px; font-size: 0.95rem;
   }
   .login-card button { width: 100%; margin-top: 6px; }
+  #login-error[hidden] { display: none; }
+  #login-error {
+    display: flex; align-items: center; gap: 8px;
+    background: #fdecea; border: 1px solid #f1a9a0; color: #b3261e;
+    border-radius: 8px; padding: 10px 12px; margin-top: 14px;
+    font-size: 0.85rem; font-weight: 600;
+  }
 </style>
 </head>
 <body>
@@ -40,12 +47,13 @@
       <input id="password" name="password" type="password" autocomplete="current-password" required />
     </label>
     <button type="submit" class="btn btn-primary">Entrar</button>
-    <p id="login-error" class="error" hidden></p>
+    <p id="login-error" hidden><span aria-hidden="true">⚠️</span> <span id="login-error-text"></span></p>
   </form>
 </div>
 <script>
   const form = document.getElementById('login-form');
   const errorEl = document.getElementById('login-error');
+  const errorText = document.getElementById('login-error-text');
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
     errorEl.hidden = true;
@@ -58,11 +66,11 @@
         body: JSON.stringify({ username, password }),
       });
       const data = await resp.json();
-      if (!resp.ok) throw new Error(data.error || 'Erro ao entrar.');
+      if (!resp.ok) throw new Error(data.error || 'Utilizador ou senha incorretos.');
       window.location.href = '/';
     } catch (err) {
+      errorText.textContent = err.message;
       errorEl.hidden = false;
-      errorEl.textContent = err.message;
     }
   });
 </script>
