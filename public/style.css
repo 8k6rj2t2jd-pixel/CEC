@@ -90,6 +90,8 @@ main { padding: 16px; max-width: 720px; margin: 0 auto; }
 }
 .btn:active { transform: scale(0.98); }
 .btn-primary { background: var(--accent); border-color: var(--accent-2); color: white; font-weight: 600; }
+.btn-shipment-add { background: #ff8a1e; border-color: #ff8a1e; color: white; font-weight: 600; }
+.shipment-search-row { margin-top: 22px; }
 
 .hint { color: var(--muted); font-size: 0.85rem; margin-top: 10px; }
 .error { color: var(--danger); font-size: 0.85rem; font-weight: 600; }
