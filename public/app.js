@@ -4,6 +4,38 @@ const logoImg = document.getElementById('logo-img');
 if (logoImg) logoImg.addEventListener('error', () => logoImg.remove(), { once: true });
 
 // ---------------------------------------------------------------------------
+// Redimensionar fotos antes de enviar - poupa espaço na cloud (Cloudinary)
+// sem perda visível de qualidade para ver no catálogo. Não se aplica aos
+// ficheiros do repositório de etiquetas (podem ser PDFs de impressão, que
+// precisam de ficar tal como estão).
+// ---------------------------------------------------------------------------
+const MAX_PHOTO_DIMENSION = 1600;
+const PHOTO_JPEG_QUALITY = 0.82;
+
+async function resizeImageFile(file, maxDimension = MAX_PHOTO_DIMENSION, quality = PHOTO_JPEG_QUALITY) {
+  if (!file || !file.type || !file.type.startsWith('image/')) return file;
+  try {
+    const bitmap = await createImageBitmap(file);
+    let { width, height } = bitmap;
+    if (Math.max(width, height) > maxDimension) {
+      const scale = maxDimension / Math.max(width, height);
+      width = Math.round(width * scale);
+      height = Math.round(height * scale);
+    }
+    const canvas = document.createElement('canvas');
+    canvas.width = width;
+    canvas.height = height;
+    canvas.getContext('2d').drawImage(bitmap, 0, 0, width, height);
+    if (bitmap.close) bitmap.close();
+    const blob = await new Promise((resolve) => canvas.toBlob(resolve, 'image/jpeg', quality));
+    return blob || file;
+  } catch (err) {
+    console.error('Falha ao redimensionar a foto, a enviar o original:', err);
+    return file;
+  }
+}
+
+// ---------------------------------------------------------------------------
 // Tabs
 // ---------------------------------------------------------------------------
 const tabButtons = document.querySelectorAll('.tab-btn');
@@ -144,8 +176,13 @@ function runOcr(blob) {
 }
 
 btnShoot.addEventListener('click', () => {
-  const w = video.videoWidth || 1280;
-  const h = video.videoHeight || 960;
+  const nativeW = video.videoWidth || 1280;
+  const nativeH = video.videoHeight || 960;
+  // Tira a foto já no tamanho reduzido (poupa espaço na cloud, sem perda
+  // visível de qualidade para ver no catálogo).
+  const scale = Math.min(1, MAX_PHOTO_DIMENSION / Math.max(nativeW, nativeH));
+  const w = Math.round(nativeW * scale);
+  const h = Math.round(nativeH * scale);
   canvas.width = w;
   canvas.height = h;
   canvas.getContext('2d').drawImage(video, 0, 0, w, h);
@@ -171,7 +208,7 @@ btnShoot.addEventListener('click', () => {
       }
     },
     'image/jpeg',
-    0.9
+    PHOTO_JPEG_QUALITY
   );
 });
 
@@ -575,12 +612,14 @@ const editBadges = {
   label: document.getElementById('edit-badge-label'),
 };
 const editPendingPreviewUrls = {};
+const editResizedFiles = {};
 
 function clearEditPendingPreviews() {
   for (const key of Object.keys(editPendingPreviewUrls)) {
     URL.revokeObjectURL(editPendingPreviewUrls[key]);
     delete editPendingPreviewUrls[key];
   }
+  for (const key of Object.keys(editResizedFiles)) delete editResizedFiles[key];
 }
 
 function openEditModal(part) {
@@ -630,12 +669,14 @@ document.getElementById('edit-close').addEventListener('click', closeEditModal);
 document.getElementById('edit-cancel').addEventListener('click', closeEditModal);
 
 editForm.querySelectorAll('input[type=file]').forEach((input) => {
-  input.addEventListener('change', () => {
+  input.addEventListener('change', async () => {
     const slot = input.dataset.slot;
     const file = input.files[0];
     if (!file) return;
+    const resized = await resizeImageFile(file);
+    editResizedFiles[slot] = resized;
     if (editPendingPreviewUrls[slot]) URL.revokeObjectURL(editPendingPreviewUrls[slot]);
-    const url = URL.createObjectURL(file);
+    const url = URL.createObjectURL(resized);
     editPendingPreviewUrls[slot] = url;
     editThumbs[slot].src = url;
     editThumbs[slot].hidden = false;
@@ -671,7 +712,10 @@ editForm.addEventListener('submit', async (e) => {
     const photoInputs = Array.from(editForm.querySelectorAll('input[type=file]')).filter((i) => i.files[0]);
     if (photoInputs.length) {
       const fd = new FormData();
-      photoInputs.forEach((input) => fd.append(input.dataset.slot, input.files[0]));
+      photoInputs.forEach((input) => {
+        const slot = input.dataset.slot;
+        fd.append(slot, editResizedFiles[slot] || input.files[0], `${slot}.jpg`);
+      });
       const photoResp = await fetch(`/api/parts/${editingPartId}/photos`, { method: 'POST', body: fd });
       const photoData = await photoResp.json();
       if (!photoResp.ok) throw new Error(photoData.error || 'Erro ao guardar as fotos.');
