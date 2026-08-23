@@ -528,7 +528,7 @@ app.post('/api/labels', handleUpload(labelUpload.single('file')), async (req, re
 
   try {
     if (images.useCloud) {
-      const uploaded = await images.uploadLabelFile(req.file.path, id);
+      const uploaded = await images.uploadLabelFile(req.file.path, id, req.file.mimetype);
       fileUrl = uploaded.url;
       publicId = uploaded.publicId;
       resourceType = uploaded.resourceType;
