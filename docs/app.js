@@ -48,8 +48,9 @@ function extractReferences(rawText) {
   for (const m of boschMatches) refs.add(m.replace(/[\s.]+/g, ' ').trim());
 
   // VAG/Audi/VW/Seat/Skoda: "038 906 018 BA" ou "03G 906 018" (1o grupo pode
-  // ter uma letra, ex: 1K0, 8V0)
-  const vagMatches = text.match(/\b[0-9][0-9A-Z]{1,2}[\s.]\d{3}[\s.]\d{3}(?:[\s.]?[A-Z]{1,2})?\b/g) || [];
+  // ter uma letra, ex: 1K0, 8V0). "(?<!0[\s.])" evita apanhar o final de
+  // uma referencia Bosch ja detetada acima (mesma estrutura 3-3-3).
+  const vagMatches = text.match(/(?<!0[\s.])\b[0-9][0-9A-Z]{1,2}[\s.]\d{3}[\s.]\d{3}(?:[\s.]?[A-Z]{1,2})?\b/g) || [];
   for (const m of vagMatches) refs.add(m.replace(/[\s.]+/g, ' ').trim());
 
   // Mercedes: "A 000 446 89 06" (comeca por "A", 4 grupos de dígitos)
