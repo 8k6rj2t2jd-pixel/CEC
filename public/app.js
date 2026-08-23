@@ -343,6 +343,7 @@ partForm.addEventListener('submit', async (e) => {
   fd.append('ref1', fieldRef1.value.trim());
   fd.append('ref2', fieldRef2.value.trim());
   fd.append('quantity', document.getElementById('field-quantity').value || '1');
+  fd.append('box', document.getElementById('field-box').value.trim());
   fd.append('notes', document.getElementById('field-notes').value.trim());
 
   try {
@@ -470,7 +471,7 @@ function renderParts() {
     if (photoFilter === 'com' && !partHasPhoto(p)) return false;
     if (photoFilter === 'sem' && partHasPhoto(p)) return false;
     if (q) {
-      const haystack = [p.ref1, p.ref2, p.manufacturer, p.brand, p.model, p.partType, p.notes]
+      const haystack = [p.ref1, p.ref2, p.manufacturer, p.brand, p.model, p.partType, p.box, p.notes]
         .filter(Boolean)
         .join(' ')
         .toLowerCase();
@@ -520,6 +521,7 @@ function renderPartCard(part) {
       ${part.ref1 ? `<div>Ref1: ${escapeHtml(part.ref1)}</div>` : ''}
       ${part.ref2 ? `<div>Ref2: ${escapeHtml(part.ref2)}</div>` : ''}
     </div>
+    ${part.box ? `<div class="box-badge">📦 Caixa ${escapeHtml(part.box)}</div>` : ''}
   `;
 
   const qtyRow = document.createElement('div');
@@ -598,6 +600,7 @@ const editFields = {
   ref1: document.getElementById('edit-field-ref1'),
   ref2: document.getElementById('edit-field-ref2'),
   quantity: document.getElementById('edit-field-quantity'),
+  box: document.getElementById('edit-field-box'),
   notes: document.getElementById('edit-field-notes'),
 };
 
@@ -634,6 +637,7 @@ function openEditModal(part) {
   editFields.ref1.value = part.ref1 || '';
   editFields.ref2.value = part.ref2 || '';
   editFields.quantity.value = part.quantity || 0;
+  editFields.box.value = part.box || '';
   editFields.notes.value = part.notes || '';
 
   const category = partCategory(part);
@@ -697,6 +701,7 @@ editForm.addEventListener('submit', async (e) => {
     ref1: editFields.ref1.value.trim(),
     ref2: editFields.ref2.value.trim(),
     quantity: Number(editFields.quantity.value) || 0,
+    box: editFields.box.value.trim(),
     notes: editFields.notes.value.trim(),
   };
 
@@ -992,6 +997,24 @@ document.getElementById('btn-import-stock').addEventListener('click', async () =
   } catch (err) {
     importStockStatus.classList.add('error');
     importStockStatus.textContent = err.message;
+  }
+});
+
+const migrateBoxStatus = document.getElementById('migrate-box-status');
+document.getElementById('btn-migrate-box').addEventListener('click', async () => {
+  migrateBoxStatus.hidden = false;
+  migrateBoxStatus.classList.remove('error');
+  migrateBoxStatus.textContent = 'A mover números de caixa das notas…';
+
+  try {
+    const resp = await fetch('/api/admin/migrate-box-from-notes', { method: 'POST' });
+    const data = await resp.json();
+    if (!resp.ok) throw new Error(data.error || 'Falha ao mover o número da caixa.');
+    migrateBoxStatus.textContent = `Concluído: ${data.migrated} peças atualizadas com o número da caixa.`;
+    await loadParts();
+  } catch (err) {
+    migrateBoxStatus.classList.add('error');
+    migrateBoxStatus.textContent = err.message;
   }
 });
 

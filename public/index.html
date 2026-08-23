@@ -149,10 +149,15 @@
           <input id="field-quantity" name="quantity" type="number" min="0" value="1" />
         </label>
         <label>
-          Notas
-          <input id="field-notes" name="notes" placeholder="Opcional" />
+          Caixa
+          <input id="field-box" name="box" placeholder="Ex: 12" />
         </label>
       </div>
+
+      <label>
+        Notas
+        <input id="field-notes" name="notes" placeholder="Opcional" />
+      </label>
 
       <div class="form-actions">
         <button type="button" id="btn-cancel" class="btn">Cancelar</button>
@@ -223,8 +228,10 @@
     <div class="backup-row">
       <button id="btn-export-excel" class="btn">📊 Transformar catálogo em Excel</button>
       <button id="btn-import-stock" class="btn btn-import-stock">⚠️ Importar stock antigo (só uma vez)</button>
+      <button id="btn-migrate-box" class="btn">📦 Mover nº da caixa das notas</button>
     </div>
     <p id="import-stock-status" class="hint" hidden></p>
+    <p id="migrate-box-status" class="hint" hidden></p>
     <div id="parts-grid" class="parts-grid"></div>
     <p id="empty-state" class="hint" hidden>Ainda não há peças guardadas.</p>
   </section>
@@ -382,10 +389,14 @@
         <input id="edit-field-quantity" type="number" min="0" />
       </label>
       <label>
-        Notas
-        <input id="edit-field-notes" />
+        Caixa
+        <input id="edit-field-box" placeholder="Ex: 12" />
       </label>
     </div>
+    <label>
+      Notas
+      <input id="edit-field-notes" />
+    </label>
 
     <div class="form-actions">
       <button type="button" id="edit-cancel" class="btn">Cancelar</button>

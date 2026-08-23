@@ -187,6 +187,10 @@ main { padding: 16px; max-width: 720px; margin: 0 auto; }
 .part-card .title { font-weight: 600; margin-bottom: 4px; }
 .part-card .muted { color: var(--muted); }
 .part-card .refs { margin: 6px 0; word-break: break-word; }
+.box-badge {
+  display: inline-block; background: var(--panel-2); color: var(--text);
+  font-size: 0.75rem; font-weight: 600; padding: 3px 8px; border-radius: 6px; margin-top: 2px;
+}
 .qty-row { display: flex; align-items: center; gap: 8px; margin-top: 8px; }
 .qty-row button {
   width: 28px; height: 28px; border-radius: 6px; border: 1px solid var(--border);

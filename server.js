@@ -301,7 +301,7 @@ app.post(
       }
     };
 
-    const { category, partType, manufacturer, brand, model, ref1, ref2, quantity, notes } = req.body;
+    const { category, partType, manufacturer, brand, model, ref1, ref2, quantity, box, notes } = req.body;
     if (!partType || !manufacturer) {
       cleanupTmp();
       return res.status(400).json({ error: 'Tipo de peca e fabricante sao obrigatorios.' });
@@ -352,6 +352,7 @@ app.post(
       ref1: ref1 || '',
       ref2: ref2 || '',
       quantity: Number.isFinite(Number(quantity)) ? Math.max(0, Math.trunc(Number(quantity))) : 1,
+      box: box || '',
       notes: notes || '',
       images: partImages,
       createdAt: new Date().toISOString(),
@@ -368,7 +369,7 @@ app.post(
 );
 
 app.patch('/api/parts/:id', async (req, res) => {
-  const allowed = ['category', 'partType', 'manufacturer', 'brand', 'model', 'ref1', 'ref2', 'quantity', 'notes'];
+  const allowed = ['category', 'partType', 'manufacturer', 'brand', 'model', 'ref1', 'ref2', 'quantity', 'box', 'notes'];
   const patch = {};
   for (const key of allowed) {
     if (key in req.body) patch[key] = req.body[key];
@@ -503,6 +504,44 @@ app.post('/api/admin/import-stock', async (req, res) => {
   } catch (err) {
     console.error('[import-stock] falha:', err);
     res.status(500).json({ error: 'Falha na importação. Tente novamente.' });
+  }
+});
+
+// Retira o numero da caixa que ficou escrito dentro das notas (formato
+// "Importado do stock antigo (Caixa X...)") e poe-o no campo "Caixa"
+// proprio, para as pecas importadas antes desse campo existir. Seguro de
+// correr mais do que uma vez - so mexe em pecas que ainda nao tem "box"
+// preenchido.
+function extractBoxFromNotes(notes) {
+  const match = String(notes || '').match(/Caixa\s+([^\s,()]+)/i);
+  if (!match) return null;
+  const box = match[1];
+  const cleanedNotes = String(notes)
+    .replace(/Caixa\s+[^\s,()]+,\s*/i, '')
+    .replace(/,\s*Caixa\s+[^\s,()]+/i, '')
+    .replace(/\(\s*Caixa\s+[^\s,()]+\s*\)/i, '')
+    .replace(/\(\s*\)/g, '')
+    .replace(/\s+\./g, '.')
+    .replace(/\s{2,}/g, ' ')
+    .trim();
+  return { box, notes: cleanedNotes };
+}
+
+app.post('/api/admin/migrate-box-from-notes', async (req, res) => {
+  try {
+    const parts = await store.listParts();
+    let migrated = 0;
+    for (const part of parts) {
+      if (part.box) continue;
+      const extracted = extractBoxFromNotes(part.notes);
+      if (!extracted) continue;
+      await store.updatePart(part.id, { box: extracted.box, notes: extracted.notes });
+      migrated += 1;
+    }
+    res.json({ migrated, total: parts.length });
+  } catch (err) {
+    console.error('[migrate-box] falha:', err);
+    res.status(500).json({ error: 'Falha ao mover o número da caixa. Tente novamente.' });
   }
 });
 
@@ -662,6 +701,7 @@ app.get('/api/export.xlsx', async (req, res) => {
       { header: 'Referência 1', key: 'ref1', width: 18 },
       { header: 'Referência 2', key: 'ref2', width: 20 },
       { header: 'Quantidade', key: 'quantity', width: 12 },
+      { header: 'Caixa', key: 'box', width: 10 },
       { header: 'Notas', key: 'notes', width: 24 },
     ];
     sheet.getRow(1).font = { bold: true };
@@ -677,6 +717,7 @@ app.get('/api/export.xlsx', async (req, res) => {
         ref1: sanitizeForExcel(part.ref1),
         ref2: sanitizeForExcel(part.ref2),
         quantity: part.quantity,
+        box: sanitizeForExcel(part.box),
         notes: sanitizeForExcel(part.notes),
       });
       sheet.getRow(rowIndex).height = 70;
