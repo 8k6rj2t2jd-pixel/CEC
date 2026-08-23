@@ -53,6 +53,10 @@ body {
   border-bottom: 2px solid transparent; white-space: nowrap; flex-shrink: 0;
 }
 .tab-btn.active { color: var(--text); border-bottom-color: var(--accent); }
+.tab-subnav { display: contents; }
+.tab-subnav[hidden] { display: none; }
+.tab-subbtn { font-size: 0.74rem; }
+.tab-subbtn::before { content: '↳ '; opacity: 0.55; }
 
 main { padding: 16px; max-width: 720px; margin: 0 auto; }
 
@@ -211,6 +215,26 @@ main { padding: 16px; max-width: 720px; margin: 0 auto; }
   background: none; border: none; cursor: pointer;
 }
 .card-actions button.card-delete { color: var(--danger); }
+.card-files-btn {
+  display: block; width: 100%; margin-top: 8px;
+  background: #ff8a1e; color: white; border: none; border-radius: 8px;
+  padding: 8px; font-size: 0.8rem; font-weight: 600; cursor: pointer;
+}
+
+.files-catalog-list { display: flex; flex-direction: column; gap: 8px; }
+.files-catalog-item {
+  display: flex; align-items: center; justify-content: space-between; gap: 10px;
+  width: 100%; text-align: left; cursor: pointer;
+  background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 12px 14px; font: inherit; color: var(--text);
+}
+.files-catalog-item-main { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.files-catalog-item-ref { font-weight: 700; }
+.files-catalog-item-sub { font-size: 0.8rem; color: var(--muted); }
+.files-catalog-item-count {
+  flex-shrink: 0; font-size: 0.72rem; font-weight: 600; color: var(--muted);
+  background: var(--panel-2); padding: 4px 8px; border-radius: 999px;
+}
 
 .lightbox {
   position: fixed; inset: 0; background: rgba(0,0,0,0.9);
@@ -412,5 +436,6 @@ main { padding: 16px; max-width: 720px; margin: 0 auto; }
     color: var(--text);
     font-weight: 600;
   }
+  .tab-subbtn { padding-left: 28px; font-size: 0.88rem; }
   main { flex: 1; }
 }

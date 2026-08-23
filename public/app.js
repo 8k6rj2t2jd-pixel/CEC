@@ -40,11 +40,22 @@ async function resizeImageFile(file, maxDimension = MAX_PHOTO_DIMENSION, quality
 // ---------------------------------------------------------------------------
 const tabButtons = document.querySelectorAll('.tab-btn');
 const tabPanels = document.querySelectorAll('.tab-panel');
+const catalogoGroupBtn = document.getElementById('catalogo-group-btn');
+const catalogoSubnav = document.getElementById('catalogo-subnav');
 
 function switchToTab(name) {
-  tabButtons.forEach((b) => b.classList.toggle('active', b.dataset.tab === name));
+  const inCatalogoGroup = name === 'catalogo' || name === 'catalogo-ficheiros';
+
+  tabButtons.forEach((b) => {
+    if (b === catalogoGroupBtn) return; // tratado à parte, em baixo
+    b.classList.toggle('active', b.dataset.tab === name);
+  });
+  catalogoGroupBtn.classList.toggle('active', inCatalogoGroup);
+  catalogoSubnav.hidden = !inCatalogoGroup;
+
   tabPanels.forEach((p) => p.classList.toggle('active', p.id === `tab-${name}`));
-  if (name === 'catalogo') loadParts();
+
+  if (inCatalogoGroup) loadParts();
   if (name === 'etiquetas') loadLabels();
   if (name === 'envios') loadShipments();
 }
@@ -447,6 +458,7 @@ async function loadParts() {
   populateFilterOptions();
   updateStats();
   renderParts();
+  renderFilesCatalog();
 }
 
 function updateStats() {
@@ -578,6 +590,13 @@ function renderPartCard(part) {
   actions.appendChild(delBtn);
   body.appendChild(actions);
 
+  const filesBtn = document.createElement('button');
+  filesBtn.type = 'button';
+  filesBtn.className = 'card-files-btn';
+  filesBtn.textContent = '📁 Ficheiros';
+  filesBtn.addEventListener('click', () => openFilesModal(part));
+  body.appendChild(filesBtn);
+
   card.appendChild(body);
   return card;
 }
@@ -629,9 +648,6 @@ const editFields = {
   box: document.getElementById('edit-field-box'),
   notes: document.getElementById('edit-field-notes'),
 };
-const editFilesList = document.getElementById('edit-files-list');
-const editFileInput = document.getElementById('edit-file-input');
-const editFileStatus = document.getElementById('edit-file-status');
 
 wireCategoryToggle(editCategoryToggle, (category) => {
   editFieldCategory.value = category;
@@ -691,10 +707,6 @@ function openEditModal(part) {
     input.value = '';
   });
 
-  renderEditFiles(part.files || []);
-  editFileInput.value = '';
-  editFileStatus.hidden = true;
-
   editOverlay.hidden = false;
 }
 
@@ -706,8 +718,17 @@ function closeEditModal() {
 }
 
 // ---------------------------------------------------------------------------
-// Ficheiros anexados à peça (manuais, faturas, esquemas...)
+// Ficheiros anexados a uma peça (manuais, faturas, esquemas...) - modal
+// próprio, aberto tanto pelo botão "Ficheiros" de cada peça no Catálogo
+// simples como a partir do Catálogo de ficheiros.
 // ---------------------------------------------------------------------------
+const filesOverlay = document.getElementById('files-overlay');
+const filesModalTitle = document.getElementById('files-modal-title');
+const filesModalList = document.getElementById('files-modal-list');
+const filesModalInput = document.getElementById('files-modal-input');
+const filesModalStatus = document.getElementById('files-modal-status');
+let filesModalPart = null;
+
 const FILE_ICONS = {
   'application/pdf': '📄',
   'application/zip': '🗜️',
@@ -729,13 +750,13 @@ function formatFileSize(bytes) {
   return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
 }
 
-function renderEditFiles(files) {
-  editFilesList.innerHTML = '';
+function renderFilesModalList(files) {
+  filesModalList.innerHTML = '';
   if (!files.length) {
     const empty = document.createElement('p');
     empty.className = 'hint';
     empty.textContent = 'Ainda não há ficheiros anexados a esta peça.';
-    editFilesList.appendChild(empty);
+    filesModalList.appendChild(empty);
     return;
   }
   files.forEach((file) => {
@@ -763,46 +784,99 @@ function renderEditFiles(files) {
     delBtn.title = 'Eliminar ficheiro';
     delBtn.addEventListener('click', async () => {
       if (!confirm(`Eliminar "${file.fileName}"?`)) return;
-      const resp = await fetch(`/api/parts/${editingPartId}/files/${file.id}`, { method: 'DELETE' });
+      const resp = await fetch(`/api/parts/${filesModalPart.id}/files/${file.id}`, { method: 'DELETE' });
       const data = await resp.json();
       if (!resp.ok) {
         alert(data.error || 'Falha ao eliminar o ficheiro.');
         return;
       }
-      editingPart.files = data.files || [];
-      renderEditFiles(editingPart.files);
+      filesModalPart.files = data.files || [];
+      renderFilesModalList(filesModalPart.files);
+      renderFilesCatalog();
     });
     row.appendChild(delBtn);
 
-    editFilesList.appendChild(row);
+    filesModalList.appendChild(row);
   });
 }
 
-editFileInput.addEventListener('change', async () => {
-  const file = editFileInput.files[0];
-  if (!file || !editingPartId) return;
+function openFilesModal(part) {
+  filesModalPart = part;
+  filesModalTitle.textContent = `Ficheiros — ${part.ref1 || part.ref2 || part.partType || 'peça'}`;
+  filesModalInput.value = '';
+  filesModalStatus.hidden = true;
+  renderFilesModalList(part.files || []);
+  filesOverlay.hidden = false;
+}
+function closeFilesModal() {
+  filesOverlay.hidden = true;
+  filesModalPart = null;
+}
+document.getElementById('files-modal-close').addEventListener('click', closeFilesModal);
+filesOverlay.addEventListener('click', (e) => {
+  if (e.target === filesOverlay) closeFilesModal();
+});
 
-  editFileStatus.hidden = false;
-  editFileStatus.classList.remove('error');
-  editFileStatus.textContent = 'A enviar…';
+filesModalInput.addEventListener('change', async () => {
+  const file = filesModalInput.files[0];
+  if (!file || !filesModalPart) return;
+
+  filesModalStatus.hidden = false;
+  filesModalStatus.classList.remove('error');
+  filesModalStatus.textContent = 'A enviar…';
 
   const fd = new FormData();
   fd.append('file', file);
 
   try {
-    const resp = await fetch(`/api/parts/${editingPartId}/files`, { method: 'POST', body: fd });
+    const resp = await fetch(`/api/parts/${filesModalPart.id}/files`, { method: 'POST', body: fd });
     const data = await resp.json();
     if (!resp.ok) throw new Error(data.error || 'Falha ao enviar o ficheiro.');
-    editingPart.files = data.files || [];
-    renderEditFiles(editingPart.files);
-    editFileStatus.hidden = true;
+    filesModalPart.files = data.files || [];
+    renderFilesModalList(filesModalPart.files);
+    renderFilesCatalog();
+    filesModalStatus.hidden = true;
   } catch (err) {
-    editFileStatus.classList.add('error');
-    editFileStatus.textContent = err.message;
+    filesModalStatus.classList.add('error');
+    filesModalStatus.textContent = err.message;
   } finally {
-    editFileInput.value = '';
+    filesModalInput.value = '';
   }
 });
+
+// ---------------------------------------------------------------------------
+// Catálogo de ficheiros - lista as peças que já têm ficheiros anexados
+// ---------------------------------------------------------------------------
+const filesCatalogSearch = document.getElementById('files-catalog-search');
+const filesCatalogList = document.getElementById('files-catalog-list');
+const filesCatalogEmpty = document.getElementById('files-catalog-empty');
+
+function renderFilesCatalog() {
+  const q = filesCatalogSearch.value.trim().toLowerCase();
+  const withFiles = allParts.filter((p) => p.files && p.files.length);
+  const filtered = q
+    ? withFiles.filter((p) => [p.ref1, p.ref2].filter(Boolean).some((r) => r.toLowerCase().includes(q)))
+    : withFiles;
+
+  filesCatalogList.innerHTML = '';
+  filesCatalogEmpty.hidden = filtered.length > 0;
+
+  filtered.forEach((part) => {
+    const row = document.createElement('button');
+    row.type = 'button';
+    row.className = 'files-catalog-item';
+    row.innerHTML = `
+      <span class="files-catalog-item-main">
+        <span class="files-catalog-item-ref">${escapeHtml(part.ref1 || part.ref2 || part.partType || 'Sem referência')}</span>
+        <span class="files-catalog-item-sub">${escapeHtml(part.manufacturer)}${part.brand ? ` · ${escapeHtml(part.brand)}` : ''}</span>
+      </span>
+      <span class="files-catalog-item-count">${part.files.length} ${part.files.length === 1 ? 'ficheiro' : 'ficheiros'}</span>
+    `;
+    row.addEventListener('click', () => openFilesModal(part));
+    filesCatalogList.appendChild(row);
+  });
+}
+filesCatalogSearch.addEventListener('input', renderFilesCatalog);
 
 document.getElementById('edit-close').addEventListener('click', closeEditModal);
 document.getElementById('edit-cancel').addEventListener('click', closeEditModal);

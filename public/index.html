@@ -16,7 +16,11 @@
     <h1 class="welcome-msg">Olá Centralinas &amp; Companhia! 👋</h1>
     <nav class="tabs">
       <button class="tab-btn active" data-tab="novo">➕ Nova peça</button>
-      <button class="tab-btn" data-tab="catalogo">📦 Catálogo</button>
+      <button class="tab-btn" id="catalogo-group-btn" data-tab="catalogo">📦 Catálogo</button>
+      <div class="tab-subnav" id="catalogo-subnav" hidden>
+        <button class="tab-btn tab-subbtn" data-tab="catalogo">Catálogo simples</button>
+        <button class="tab-btn tab-subbtn" data-tab="catalogo-ficheiros">Catálogo de ficheiros</button>
+      </div>
       <button class="tab-btn" data-tab="etiquetas">🏷️ Etiquetas</button>
       <button class="tab-btn" data-tab="envios">🚚 Envios</button>
     </nav>
@@ -220,6 +224,16 @@
     </div>
     <div id="parts-grid" class="parts-grid"></div>
     <p id="empty-state" class="hint" hidden>Ainda não há peças guardadas.</p>
+  </section>
+
+  <!-- ==================== CATÁLOGO DE FICHEIROS ==================== -->
+  <section id="tab-catalogo-ficheiros" class="tab-panel">
+    <p class="hint">Peças com ficheiros anexados. Toque numa para ver, descarregar ou eliminar os ficheiros.</p>
+    <div class="filters">
+      <input id="files-catalog-search" type="search" placeholder="Pesquisar por referência…" />
+    </div>
+    <div id="files-catalog-list" class="files-catalog-list"></div>
+    <p id="files-catalog-empty" class="hint" hidden>Ainda não há peças com ficheiros anexados.</p>
   </section>
 
   <!-- ==================== REPOSITÓRIO DE ETIQUETAS ==================== -->
@@ -437,22 +451,29 @@
       <input id="edit-field-notes" />
     </label>
 
-    <hr class="edit-divider" />
-    <p class="edit-section-title">Ficheiros</p>
-    <p class="edit-photos-hint">Manuais, faturas, esquemas ou outros documentos desta peça.</p>
-    <div id="edit-files-list" class="edit-files-list"></div>
-    <label class="btn edit-files-upload-btn">
-      📎 Adicionar ficheiro
-      <input type="file" id="edit-file-input" hidden />
-    </label>
-    <p id="edit-file-status" class="hint" hidden></p>
-
     <div class="form-actions">
       <button type="button" id="edit-cancel" class="btn">Cancelar</button>
       <button type="submit" class="btn btn-primary">Guardar alterações</button>
     </div>
     <p id="edit-error" class="error" hidden></p>
   </form>
+</div>
+
+<!-- ==================== FICHEIROS DA PEÇA ==================== -->
+<div id="files-overlay" class="lightbox" hidden>
+  <div class="edit-card">
+    <div class="edit-card-head">
+      <h2 id="files-modal-title">Ficheiros</h2>
+      <button type="button" id="files-modal-close" class="btn lightbox-close-inline">✕</button>
+    </div>
+
+    <div id="files-modal-list" class="edit-files-list"></div>
+    <label class="btn edit-files-upload-btn">
+      📎 Adicionar ficheiro
+      <input type="file" id="files-modal-input" hidden />
+    </label>
+    <p id="files-modal-status" class="hint" hidden></p>
+  </div>
 </div>
 
 <script src="app.js"></script>
