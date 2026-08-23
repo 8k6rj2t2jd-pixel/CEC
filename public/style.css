@@ -299,6 +299,18 @@ main { padding: 16px; max-width: 720px; margin: 0 auto; }
   font-size: 0.7rem; line-height: 20px; padding: 0; cursor: pointer;
 }
 
+.pdf-viewer-card {
+  background: var(--panel); border-radius: var(--radius); padding: 16px;
+  width: 100%; max-width: 640px; max-height: 92vh;
+  display: flex; flex-direction: column; gap: 12px;
+}
+.pdf-viewer-body {
+  overflow-y: auto; display: flex; flex-direction: column; align-items: center; gap: 12px;
+  background: var(--panel-2); border-radius: 8px; padding: 12px; min-height: 200px;
+}
+.pdf-viewer-page { max-width: 100%; border-radius: 4px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15); }
+.pdf-viewer-fallback { color: var(--muted); font-size: 0.85rem; text-align: center; }
+
 /* Em ecrãs largos (computador/tablet), a barra do topo passa a barra
    lateral fixa. Em telemóvel (a maioria do uso real desta app) mantém-se
    como está - uma barra lateral fixa desperdiçaria espaço precioso num

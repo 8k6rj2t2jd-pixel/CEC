@@ -54,7 +54,11 @@ app.use(
         scriptSrc: ["'self'"],
         styleSrc: ["'self'"],
         imgSrc: ["'self'", 'data:', 'blob:', 'https://res.cloudinary.com'],
-        connectSrc: ["'self'"],
+        // O visualizador de PDF (pdf.js) tem de conseguir ir buscar o
+        // ficheiro - inclui o Cloudinary porque e la que os PDFs ficam
+        // guardados em produção.
+        connectSrc: ["'self'", 'https://res.cloudinary.com'],
+        workerSrc: ["'self'"],
         objectSrc: ["'none'"],
         baseUri: ["'self'"],
         frameAncestors: ["'none'"],

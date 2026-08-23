@@ -1099,6 +1099,76 @@ function renderLabels() {
   labelsEmptyState.hidden = anyShown;
 }
 
+// ---------------------------------------------------------------------------
+// Ver PDF de uma etiqueta numa janela dentro da própria app (em vez de
+// depender do visualizador do browser, que varia muito de telemóvel para
+// telemóvel e por vezes nem abre).
+// ---------------------------------------------------------------------------
+const pdfViewerOverlay = document.getElementById('pdf-viewer-overlay');
+const pdfViewerBody = document.getElementById('pdf-viewer-body');
+const pdfViewerTitle = document.getElementById('pdf-viewer-title');
+
+function closePdfViewer() {
+  pdfViewerOverlay.hidden = true;
+  pdfViewerBody.innerHTML = '';
+}
+document.getElementById('pdf-viewer-close').addEventListener('click', closePdfViewer);
+pdfViewerOverlay.addEventListener('click', (e) => {
+  if (e.target === pdfViewerOverlay) closePdfViewer();
+});
+
+async function openPdfViewer(url, fileName) {
+  pdfViewerTitle.textContent = fileName || 'Etiqueta';
+  pdfViewerBody.innerHTML = '';
+  const status = document.createElement('p');
+  status.className = 'hint';
+  status.textContent = 'A abrir o PDF…';
+  pdfViewerBody.appendChild(status);
+  pdfViewerOverlay.hidden = false;
+
+  try {
+    const pdfjsLib = await import('/pdfjs/pdf.min.mjs');
+    pdfjsLib.GlobalWorkerOptions.workerSrc = '/pdfjs/pdf.worker.min.mjs';
+    const pdf = await pdfjsLib.getDocument({ url }).promise;
+    pdfViewerBody.innerHTML = '';
+
+    const maxPages = Math.min(pdf.numPages, 10);
+    const targetWidth = Math.min(pdfViewerBody.clientWidth || 560, 560);
+    for (let i = 1; i <= maxPages; i++) {
+      const page = await pdf.getPage(i);
+      const baseViewport = page.getViewport({ scale: 1 });
+      const viewport = page.getViewport({ scale: targetWidth / baseViewport.width });
+      const canvas = document.createElement('canvas');
+      canvas.className = 'pdf-viewer-page';
+      canvas.width = Math.round(viewport.width);
+      canvas.height = Math.round(viewport.height);
+      pdfViewerBody.appendChild(canvas);
+      await page.render({ canvasContext: canvas.getContext('2d'), viewport }).promise;
+    }
+    if (pdf.numPages > maxPages) {
+      const more = document.createElement('p');
+      more.className = 'pdf-viewer-fallback';
+      more.textContent = `A mostrar as primeiras ${maxPages} de ${pdf.numPages} páginas.`;
+      pdfViewerBody.appendChild(more);
+    }
+  } catch (err) {
+    console.error('Falha ao abrir o PDF:', err);
+    pdfViewerBody.innerHTML = '';
+    const errMsg = document.createElement('p');
+    errMsg.className = 'error';
+    errMsg.textContent = 'Não foi possível abrir este PDF.';
+    pdfViewerBody.appendChild(errMsg);
+  }
+
+  const fallbackLink = document.createElement('a');
+  fallbackLink.href = url;
+  fallbackLink.target = '_blank';
+  fallbackLink.rel = 'noopener';
+  fallbackLink.className = 'btn-link';
+  fallbackLink.textContent = 'Abrir o ficheiro original numa aba nova ↗';
+  pdfViewerBody.appendChild(fallbackLink);
+}
+
 function renderLabelCard(label) {
   const card = document.createElement('div');
   card.className = label.isTemplate ? 'label-card label-template-card' : 'label-card';
@@ -1107,6 +1177,12 @@ function renderLabelCard(label) {
   link.href = label.fileUrl;
   link.target = '_blank';
   link.rel = 'noopener';
+  if (label.fileType === 'application/pdf') {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      openPdfViewer(label.fileUrl, label.fileName);
+    });
+  }
 
   if (label.thumbnailUrl || /^image\//.test(label.fileType || '')) {
     const img = document.createElement('img');
