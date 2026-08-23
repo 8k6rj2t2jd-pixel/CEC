@@ -41,7 +41,6 @@ body {
   text-decoration: underline;
 }
 .backup-row { margin-bottom: 14px; display: flex; gap: 8px; flex-wrap: wrap; }
-.btn-import-stock { border-color: #c62828; color: #c62828; }
 .check-results .form-actions { justify-content: flex-start; }
 
 .tabs {

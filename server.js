@@ -18,7 +18,6 @@ const store = require('./lib/store');
 const images = require('./lib/images');
 const { readLabel } = require('./lib/ocr');
 const auth = require('./lib/auth');
-const { buildShipmentsToImport } = require('./lib/shipmentImport');
 
 const PORT = process.env.PORT || 3000;
 const DATA_DIR = process.env.DATA_DIR || path.join(__dirname, 'data');
@@ -806,23 +805,6 @@ app.delete('/api/shipments/:id', async (req, res) => {
   const removed = await store.deleteShipment(req.params.id);
   if (!removed) return res.status(404).json({ error: 'Envio não encontrado.' });
   res.json({ ok: true });
-});
-
-// Importa de uma vez os envios que vinham numa planilha Excel entregue pelo
-// utilizador (lib/shipmentImport.js). Seguro de correr mais do que uma vez -
-// salta qualquer envio que já exista (mesmo cliente + mesma data).
-app.post('/api/admin/import-shipments', async (req, res) => {
-  try {
-    const existing = await store.listShipments();
-    const { toCreate, skipped } = buildShipmentsToImport(existing);
-    for (const shipment of toCreate) {
-      await store.createShipment(shipment);
-    }
-    res.json({ created: toCreate.length, skipped });
-  } catch (err) {
-    console.error('[import-shipments] falha:', err);
-    res.status(500).json({ error: 'Falha na importação. Tente novamente.' });
-  }
 });
 
 // Evita que um valor guardado (referencia, notas, etc.) comecado por
