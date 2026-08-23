@@ -270,7 +270,7 @@ main { padding: 16px; max-width: 720px; margin: 0 auto; }
 .label-template-heading { font-size: 0.85rem; font-weight: 700; color: #8a6d1d; margin-bottom: 8px; }
 .label-template-empty { margin: 0; font-size: 0.8rem; color: #8a6d1d; }
 .label-template-grid, .labels-grid {
-  display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 10px;
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(72px, 1fr)); gap: 8px;
 }
 
 .label-others-heading { font-size: 0.8rem; font-weight: 600; color: var(--muted); margin: 4px 0 8px; }
@@ -278,6 +278,7 @@ main { padding: 16px; max-width: 720px; margin: 0 auto; }
 .label-card {
   position: relative; background: var(--panel); border: 1px solid var(--border);
   border-radius: 10px; overflow: hidden;
+  max-width: 96px; justify-self: start;
 }
 .label-template-card { border-color: #e8c565; box-shadow: 0 0 0 1px #e8c565 inset; }
 .label-card a { display: block; }
@@ -286,10 +287,10 @@ main { padding: 16px; max-width: 720px; margin: 0 auto; }
 }
 .label-file-icon {
   width: 100%; aspect-ratio: 1/1; display: flex; align-items: center; justify-content: center;
-  font-size: 2rem; background: var(--panel-2);
+  font-size: 1.4rem; background: var(--panel-2);
 }
 .label-caption {
-  padding: 6px 8px; font-size: 0.72rem; color: var(--text);
+  padding: 4px 6px; font-size: 0.65rem; color: var(--text);
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
 .label-delete {
