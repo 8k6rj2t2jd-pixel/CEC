@@ -300,7 +300,7 @@ app.post(
       }
     };
 
-    const { category, partType, manufacturer, brand, model, ref1, ref2, quantity, box, itemNumber, notes } = req.body;
+    const { category, partType, manufacturer, brand, model, ref1, ref2, quantity, box, notes } = req.body;
     if (!partType || !manufacturer) {
       cleanupTmp();
       return res.status(400).json({ error: 'Tipo de peca e fabricante sao obrigatorios.' });
@@ -352,7 +352,6 @@ app.post(
       ref2: ref2 || '',
       quantity: Number.isFinite(Number(quantity)) ? Math.max(0, Math.trunc(Number(quantity))) : 1,
       box: box || '',
-      itemNumber: itemNumber || '',
       notes: notes || '',
       images: partImages,
       createdAt: new Date().toISOString(),
@@ -369,7 +368,7 @@ app.post(
 );
 
 app.patch('/api/parts/:id', async (req, res) => {
-  const allowed = ['category', 'partType', 'manufacturer', 'brand', 'model', 'ref1', 'ref2', 'quantity', 'box', 'itemNumber', 'notes'];
+  const allowed = ['category', 'partType', 'manufacturer', 'brand', 'model', 'ref1', 'ref2', 'quantity', 'box', 'notes'];
   const patch = {};
   for (const key of allowed) {
     if (key in req.body) patch[key] = req.body[key];
@@ -611,6 +610,59 @@ app.delete('/api/labels/:id', async (req, res) => {
   res.json({ ok: true });
 });
 
+// ---------------------------------------------------------------------------
+// Envios - registo simples de encomendas enviadas (data, cliente, peso e
+// dimensoes). Guardados como lista plana; o agrupamento por ano/mes e feito
+// no browser a partir do campo "date" (nao ha pastas fisicas a gerir aqui).
+// ---------------------------------------------------------------------------
+app.get('/api/shipments', async (req, res) => {
+  const shipments = await store.listShipments();
+  res.json(shipments);
+});
+
+app.post('/api/shipments', async (req, res) => {
+  const { date, client, weight, length, width, height } = req.body;
+  if (!date || !client) {
+    return res.status(400).json({ error: 'Data de envio e cliente são obrigatórios.' });
+  }
+  const toNumber = (v) => (Number.isFinite(Number(v)) && Number(v) >= 0 ? Number(v) : null);
+
+  const shipment = {
+    id: crypto.randomUUID(),
+    date: String(date),
+    client: String(client).trim(),
+    weight: toNumber(weight),
+    length: toNumber(length),
+    width: toNumber(width),
+    height: toNumber(height),
+    createdAt: new Date().toISOString(),
+  };
+
+  await store.createShipment(shipment);
+  res.status(201).json(shipment);
+});
+
+app.patch('/api/shipments/:id', async (req, res) => {
+  const allowed = ['date', 'client', 'weight', 'length', 'width', 'height'];
+  const patch = {};
+  for (const key of allowed) {
+    if (key in req.body) patch[key] = req.body[key];
+  }
+  if ('client' in patch) patch.client = String(patch.client).trim();
+  for (const key of ['weight', 'length', 'width', 'height']) {
+    if (key in patch) patch[key] = Number.isFinite(Number(patch[key])) && Number(patch[key]) >= 0 ? Number(patch[key]) : null;
+  }
+  const updated = await store.updateShipment(req.params.id, patch);
+  if (!updated) return res.status(404).json({ error: 'Envio não encontrado.' });
+  res.json(updated);
+});
+
+app.delete('/api/shipments/:id', async (req, res) => {
+  const removed = await store.deleteShipment(req.params.id);
+  if (!removed) return res.status(404).json({ error: 'Envio não encontrado.' });
+  res.json({ ok: true });
+});
+
 // Evita que um valor guardado (referencia, notas, etc.) comecado por
 // =, +, -, @ seja interpretado como formula ao abrir o Excel gerado
 // ("CSV/Excel injection") - poe uma plica a frente para forcar texto.
@@ -635,7 +687,6 @@ app.get('/api/export.xlsx', async (req, res) => {
       { header: 'Referência 2', key: 'ref2', width: 20 },
       { header: 'Quantidade', key: 'quantity', width: 12 },
       { header: 'Caixa', key: 'box', width: 10 },
-      { header: 'Nº na caixa', key: 'itemNumber', width: 12 },
       { header: 'Notas', key: 'notes', width: 24 },
     ];
     sheet.getRow(1).font = { bold: true };
@@ -652,7 +703,6 @@ app.get('/api/export.xlsx', async (req, res) => {
         ref2: sanitizeForExcel(part.ref2),
         quantity: part.quantity,
         box: sanitizeForExcel(part.box),
-        itemNumber: sanitizeForExcel(part.itemNumber),
         notes: sanitizeForExcel(part.notes),
       });
       sheet.getRow(rowIndex).height = 70;

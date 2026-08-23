@@ -46,6 +46,7 @@ function switchToTab(name) {
   tabPanels.forEach((p) => p.classList.toggle('active', p.id === `tab-${name}`));
   if (name === 'catalogo') loadParts();
   if (name === 'etiquetas') loadLabels();
+  if (name === 'envios') loadShipments();
 }
 
 tabButtons.forEach((btn) => {
@@ -344,7 +345,6 @@ partForm.addEventListener('submit', async (e) => {
   fd.append('ref2', fieldRef2.value.trim());
   fd.append('quantity', document.getElementById('field-quantity').value || '1');
   fd.append('box', document.getElementById('field-box').value.trim());
-  fd.append('itemNumber', document.getElementById('field-item-number').value.trim());
   fd.append('notes', document.getElementById('field-notes').value.trim());
 
   try {
@@ -379,37 +379,26 @@ function resetCaptureFlow() {
 }
 
 // ---------------------------------------------------------------------------
-// Carregar fotos já tiradas (alternativa a usar a câmara) - se a foto
-// "Etiqueta" for carregada aqui, a leitura automática (OCR) corre à mesma
-// quando se avança para o formulário.
+// Carregar fotos já tiradas (alternativa a usar a câmara, direto em cada
+// caixa de foto) - se a foto "Etiqueta" for carregada aqui, a leitura
+// automática (OCR) corre à mesma quando se avança para o formulário.
 // ---------------------------------------------------------------------------
-const uploadThumbs = {
-  front: document.getElementById('upload-thumb-front'),
-  back: document.getElementById('upload-thumb-back'),
-  label: document.getElementById('upload-thumb-label'),
-};
 const btnContinueUpload = document.getElementById('btn-continue-upload');
 
 function resetUploadExistingBlock() {
-  document.querySelectorAll('.upload-existing-block input[type=file]').forEach((input) => {
+  document.querySelectorAll('.thumbs input[type=file]').forEach((input) => {
     input.value = '';
-  });
-  Object.values(uploadThumbs).forEach((img) => {
-    img.src = '';
-    img.hidden = true;
   });
   btnContinueUpload.hidden = true;
 }
 
-document.querySelectorAll('.upload-existing-block input[type=file]').forEach((input) => {
+document.querySelectorAll('.thumbs input[type=file]').forEach((input) => {
   input.addEventListener('change', async () => {
     const slot = input.dataset.slot;
     const file = input.files[0];
     if (!file) return;
     const resized = await resizeImageFile(file);
     shots[slot] = resized;
-    uploadThumbs[slot].src = URL.createObjectURL(resized);
-    uploadThumbs[slot].hidden = false;
     setThumb(slot, resized);
     setStepUi();
     btnContinueUpload.hidden = false;
@@ -508,7 +497,7 @@ function renderParts() {
     if (photoFilter === 'com' && !partHasPhoto(p)) return false;
     if (photoFilter === 'sem' && partHasPhoto(p)) return false;
     if (q) {
-      const haystack = [p.ref1, p.ref2, p.manufacturer, p.brand, p.model, p.partType, p.box, p.itemNumber, p.notes]
+      const haystack = [p.ref1, p.ref2, p.manufacturer, p.brand, p.model, p.partType, p.box, p.notes]
         .filter(Boolean)
         .join(' ')
         .toLowerCase();
@@ -558,7 +547,7 @@ function renderPartCard(part) {
       ${part.ref1 ? `<div>Ref1: ${escapeHtml(part.ref1)}</div>` : ''}
       ${part.ref2 ? `<div>Ref2: ${escapeHtml(part.ref2)}</div>` : ''}
     </div>
-    ${part.box ? `<div class="box-badge">📦 Caixa ${escapeHtml(part.box)}${part.itemNumber ? ` · Nº ${escapeHtml(part.itemNumber)}` : ''}</div>` : ''}
+    ${part.box ? `<div class="box-badge">📦 Caixa ${escapeHtml(part.box)}</div>` : ''}
   `;
 
   const qtyRow = document.createElement('div');
@@ -638,7 +627,6 @@ const editFields = {
   ref2: document.getElementById('edit-field-ref2'),
   quantity: document.getElementById('edit-field-quantity'),
   box: document.getElementById('edit-field-box'),
-  itemNumber: document.getElementById('edit-field-item-number'),
   notes: document.getElementById('edit-field-notes'),
 };
 
@@ -676,7 +664,6 @@ function openEditModal(part) {
   editFields.ref2.value = part.ref2 || '';
   editFields.quantity.value = part.quantity || 0;
   editFields.box.value = part.box || '';
-  editFields.itemNumber.value = part.itemNumber || '';
   editFields.notes.value = part.notes || '';
 
   const category = partCategory(part);
@@ -741,7 +728,6 @@ editForm.addEventListener('submit', async (e) => {
     ref2: editFields.ref2.value.trim(),
     quantity: Number(editFields.quantity.value) || 0,
     box: editFields.box.value.trim(),
-    itemNumber: editFields.itemNumber.value.trim(),
     notes: editFields.notes.value.trim(),
   };
 
@@ -1162,6 +1148,155 @@ labelUploadForm.addEventListener('submit', async (e) => {
   } finally {
     submitBtn.disabled = false;
     submitBtn.textContent = originalBtnText;
+  }
+});
+
+// ---------------------------------------------------------------------------
+// Envios - registo de encomendas enviadas, organizado por ano/mês (pastas)
+// a partir da data de envio de cada registo.
+// ---------------------------------------------------------------------------
+let allShipments = [];
+
+const shipmentForm = document.getElementById('shipment-form');
+const shipmentError = document.getElementById('shipment-error');
+const shipmentsFolders = document.getElementById('shipments-folders');
+const shipmentsEmptyState = document.getElementById('shipments-empty-state');
+
+const MONTH_NAMES_PT = [
+  'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
+  'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro',
+];
+
+async function loadShipments() {
+  const resp = await fetch('/api/shipments');
+  allShipments = await resp.json();
+  renderShipments();
+}
+
+function formatDatePt(dateStr) {
+  const [y, m, d] = String(dateStr || '').split('-');
+  if (!y || !m || !d) return dateStr || '';
+  return `${d}/${m}/${y}`;
+}
+
+function formatDimensions(s) {
+  const parts = [s.length, s.width, s.height].filter((v) => v !== null && v !== undefined);
+  if (!parts.length) return '—';
+  return `${s.length ?? '—'} × ${s.width ?? '—'} × ${s.height ?? '—'} cm`;
+}
+
+function renderShipments() {
+  shipmentsFolders.innerHTML = '';
+  shipmentsEmptyState.hidden = allShipments.length > 0;
+  if (!allShipments.length) return;
+
+  const byYear = new Map();
+  allShipments.forEach((s) => {
+    const [y, m] = String(s.date || '').split('-');
+    const year = y || '—';
+    const month = m ? Number(m) : null;
+    if (!byYear.has(year)) byYear.set(year, new Map());
+    const byMonth = byYear.get(year);
+    if (!byMonth.has(month)) byMonth.set(month, []);
+    byMonth.get(month).push(s);
+  });
+
+  const years = Array.from(byYear.keys()).sort((a, b) => Number(b) - Number(a));
+
+  years.forEach((year, yearIdx) => {
+    const byMonth = byYear.get(year);
+    const months = Array.from(byMonth.keys()).sort((a, b) => (b ?? 0) - (a ?? 0));
+    const yearTotal = months.reduce((sum, m) => sum + byMonth.get(m).length, 0);
+
+    const yearFolder = document.createElement('details');
+    yearFolder.className = 'shipment-folder shipment-folder-year';
+    if (yearIdx === 0) yearFolder.open = true;
+
+    const yearSummary = document.createElement('summary');
+    yearSummary.textContent = `📁 ${year} (${yearTotal} ${yearTotal === 1 ? 'envio' : 'envios'})`;
+    yearFolder.appendChild(yearSummary);
+
+    months.forEach((month, monthIdx) => {
+      const entries = byMonth.get(month).slice().sort((a, b) => (a.date < b.date ? 1 : -1));
+      const monthLabel = month ? MONTH_NAMES_PT[month - 1] : 'Sem data';
+
+      const monthFolder = document.createElement('details');
+      monthFolder.className = 'shipment-folder shipment-folder-month';
+      if (yearIdx === 0 && monthIdx === 0) monthFolder.open = true;
+
+      const monthSummary = document.createElement('summary');
+      monthSummary.textContent = `📂 ${monthLabel} (${entries.length})`;
+      monthFolder.appendChild(monthSummary);
+
+      const table = document.createElement('table');
+      table.className = 'shipment-table';
+      table.innerHTML = `
+        <thead>
+          <tr><th>Data</th><th>Cliente</th><th>Peso</th><th>Dimensões (C×L×A)</th><th></th></tr>
+        </thead>
+        <tbody></tbody>
+      `;
+      const tbody = table.querySelector('tbody');
+      entries.forEach((s) => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${escapeHtml(formatDatePt(s.date))}</td>
+          <td>${escapeHtml(s.client)}</td>
+          <td>${s.weight !== null && s.weight !== undefined ? `${s.weight} kg` : '—'}</td>
+          <td>${formatDimensions(s)}</td>
+          <td></td>
+        `;
+        const delBtn = document.createElement('button');
+        delBtn.type = 'button';
+        delBtn.className = 'btn-link shipment-delete';
+        delBtn.textContent = '✕';
+        delBtn.title = 'Eliminar envio';
+        delBtn.addEventListener('click', async () => {
+          if (!confirm('Eliminar este envio?')) return;
+          const resp = await fetch(`/api/shipments/${s.id}`, { method: 'DELETE' });
+          if (resp.ok) {
+            allShipments = allShipments.filter((item) => item.id !== s.id);
+            renderShipments();
+          }
+        });
+        tr.lastElementChild.appendChild(delBtn);
+        tbody.appendChild(tr);
+      });
+      monthFolder.appendChild(table);
+      yearFolder.appendChild(monthFolder);
+    });
+
+    shipmentsFolders.appendChild(yearFolder);
+  });
+}
+
+shipmentForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  shipmentError.hidden = true;
+
+  const payload = {
+    date: document.getElementById('shipment-field-date').value,
+    client: document.getElementById('shipment-field-client').value.trim(),
+    weight: document.getElementById('shipment-field-weight').value,
+    length: document.getElementById('shipment-field-length').value,
+    width: document.getElementById('shipment-field-width').value,
+    height: document.getElementById('shipment-field-height').value,
+  };
+
+  try {
+    const resp = await fetch('/api/shipments', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    });
+    const data = await resp.json();
+    if (!resp.ok) throw new Error(data.error || 'Falha ao guardar o envio.');
+    allShipments.unshift(data);
+    shipmentForm.reset();
+    renderShipments();
+  } catch (err) {
+    shipmentError.hidden = false;
+    shipmentError.textContent = err.message;
   }
 });
 
