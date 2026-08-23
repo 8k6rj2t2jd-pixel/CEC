@@ -128,6 +128,12 @@ node scripts/set-password.js "a-senha-que-quiser"
 Isto imprime uma linha `ADMIN_PASSWORD_HASH=...` — copie esse valor, vai
 precisar dele já a seguir.
 
+> Se já tinha uma `ADMIN_PASSWORD_HASH` definida antes de agosto de 2026,
+> vale a pena correr este comando outra vez e atualizar a variável no
+> hosting: as hashes mais antigas usavam um custo mais alto, o que podia
+> tornar a entrada no site visivelmente lenta em hosting gratuito com
+> pouco CPU (como o Render free tier).
+
 ### Pôr a app disponível na internet, de graça (hospedagem)
 
 Como esta versão tem um servidor a sério (para o login funcionar de verdade),

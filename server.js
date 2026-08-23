@@ -12,6 +12,7 @@ const multer = require('multer');
 const ExcelJS = require('exceljs');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
+const compression = require('compression');
 
 const store = require('./lib/store');
 const images = require('./lib/images');
@@ -41,6 +42,11 @@ const SESSION_SECRET = process.env.SESSION_SECRET || crypto.randomBytes(32).toSt
 const app = express();
 app.set('trust proxy', 1);
 app.disable('x-powered-by');
+
+// Comprime as respostas (HTML/CSS/JS/JSON) antes de enviar - torna a
+// entrada no site e a navegação bem mais rápidas em ligações móveis, sem
+// custo de CPU relevante para esta escala de aplicação.
+app.use(compression());
 
 // Cabecalhos de seguranca (CSP, no-sniff, sem referrer para fora, etc.) - a
 // app so usa scripts/estilos dos seus proprios ficheiros (nada de CDNs nem
@@ -153,23 +159,38 @@ app.post('/api/logout', (req, res) => {
   });
 });
 
+// Cache curto para ficheiros que mudam com cada deploy (nao tem nomes com
+// hash), longo para os que praticamente nunca mudam - reduz pedidos
+// repetidos ao navegar na app sem arriscar servir codigo desatualizado
+// por muito tempo depois de um deploy.
+const SHORT_CACHE_MS = 5 * 60 * 1000;
+const LONG_CACHE_MS = 24 * 60 * 60 * 1000;
+
 // Ficheiros que a pagina de login precisa mesmo sem sessao (imagens/estilo).
-app.get('/style.css', (req, res) => res.sendFile(path.join(PUBLIC_DIR, 'style.css')));
-app.get('/login.css', (req, res) => res.sendFile(path.join(PUBLIC_DIR, 'login.css')));
-app.get('/login.js', (req, res) => res.sendFile(path.join(PUBLIC_DIR, 'login.js')));
+app.get('/style.css', (req, res) => res.sendFile(path.join(PUBLIC_DIR, 'style.css'), { maxAge: SHORT_CACHE_MS }));
+app.get('/login.css', (req, res) => res.sendFile(path.join(PUBLIC_DIR, 'login.css'), { maxAge: SHORT_CACHE_MS }));
+app.get('/login.js', (req, res) => res.sendFile(path.join(PUBLIC_DIR, 'login.js'), { maxAge: SHORT_CACHE_MS }));
 app.get('/logo.png', (req, res, next) => {
   const logoPath = path.join(PUBLIC_DIR, 'logo.png');
-  if (fs.existsSync(logoPath)) return res.sendFile(logoPath);
+  if (fs.existsSync(logoPath)) return res.sendFile(logoPath, { maxAge: LONG_CACHE_MS });
   next();
 });
-app.get('/login-bg.svg', (req, res) => res.sendFile(path.join(PUBLIC_DIR, 'login-bg.svg')));
-app.get('/favicon.ico', (req, res) => res.sendFile(path.join(PUBLIC_DIR, 'favicon.ico')));
-app.get('/favicon.png', (req, res) => res.sendFile(path.join(PUBLIC_DIR, 'favicon.png')));
+app.get('/login-bg.svg', (req, res) => res.sendFile(path.join(PUBLIC_DIR, 'login-bg.svg'), { maxAge: LONG_CACHE_MS }));
+app.get('/favicon.ico', (req, res) => res.sendFile(path.join(PUBLIC_DIR, 'favicon.ico'), { maxAge: LONG_CACHE_MS }));
+app.get('/favicon.png', (req, res) => res.sendFile(path.join(PUBLIC_DIR, 'favicon.png'), { maxAge: LONG_CACHE_MS }));
 
 app.use(auth.requireAuth);
 
-app.use(express.static(PUBLIC_DIR));
-app.use('/storage', express.static(STORAGE_DIR));
+app.use(express.static(PUBLIC_DIR, {
+  maxAge: SHORT_CACHE_MS,
+  setHeaders: (res, filePath) => {
+    // O pdf.js vendorizado (pdfjs-dist) e ficheiros dentro de /pdfjs so
+    // mudam se alguem atualizar a dependencia a serio - podem ficar em
+    // cache por muito mais tempo que o resto.
+    if (filePath.includes(`${path.sep}pdfjs${path.sep}`)) res.setHeader('Cache-Control', `public, max-age=${LONG_CACHE_MS / 1000}`);
+  },
+}));
+app.use('/storage', express.static(STORAGE_DIR, { maxAge: LONG_CACHE_MS }));
 
 const ALLOWED_IMAGE_TYPES = new Set(['image/jpeg', 'image/png', 'image/webp', 'image/heic', 'image/heif']);
 

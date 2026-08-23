@@ -15,7 +15,10 @@ if (password.length < 6) {
   process.exit(1);
 }
 
-const hash = bcrypt.hashSync(password, 12);
+// Custo 10: equilibra segurança com velocidade de login, sobretudo em
+// hosting gratuito com pouco CPU (ex: Render free tier), onde um custo
+// mais alto (12) podia levar vários segundos a cada tentativa de entrada.
+const hash = bcrypt.hashSync(password, 10);
 console.log('\nDefina esta variavel de ambiente no seu servidor/hosting:\n');
 console.log(`ADMIN_PASSWORD_HASH=${hash}`);
 console.log('\n(Opcionalmente tambem ADMIN_USER=o-nome-de-utilizador-que-quiser, por omissao "admin")\n');
