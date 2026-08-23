@@ -1288,6 +1288,28 @@ function renderShipments() {
 
 shipmentSearchInput.addEventListener('input', renderShipments);
 
+const importShipmentsStatus = document.getElementById('import-shipments-status');
+document.getElementById('btn-import-shipments').addEventListener('click', async () => {
+  if (!confirm('Isto acrescenta os envios da planilha entregue (maio a julho de 2026). Só deve fazer isto uma vez. Continuar?')) return;
+
+  importShipmentsStatus.hidden = false;
+  importShipmentsStatus.classList.remove('error');
+  importShipmentsStatus.textContent = 'A importar…';
+
+  try {
+    const resp = await fetch('/api/admin/import-shipments', { method: 'POST' });
+    const data = await resp.json();
+    if (!resp.ok) throw new Error(data.error || 'Falha na importação.');
+    importShipmentsStatus.textContent =
+      `Importação concluída: ${data.created} envios adicionados` +
+      (data.skipped ? ` (${data.skipped} já existiam e foram ignorados).` : '.');
+    await loadShipments();
+  } catch (err) {
+    importShipmentsStatus.classList.add('error');
+    importShipmentsStatus.textContent = err.message;
+  }
+});
+
 shipmentForm.addEventListener('submit', async (e) => {
   e.preventDefault();
   shipmentError.hidden = true;
