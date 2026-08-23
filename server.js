@@ -245,6 +245,43 @@ const labelUpload = multer({
   },
 });
 
+// Ficheiros diversos anexados a uma peça (manuais, faturas, esquemas,
+// certificados...) - além de fotos e PDF, também documentos de escritório
+// comuns e ficheiros comprimidos. Fica de fora tudo o que possa conter
+// código a correr no browser (HTML, SVG) ou ser executável, pelo mesmo
+// motivo de segurança dos outros campos de upload da app.
+const ALLOWED_PART_FILE_TYPES = new Set([
+  ...ALLOWED_IMAGE_TYPES,
+  'application/pdf',
+  'application/msword',
+  'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+  'application/vnd.ms-excel',
+  'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+  'application/vnd.ms-powerpoint',
+  'application/vnd.openxmlformats-officedocument.presentationml.presentation',
+  'text/plain',
+  'text/csv',
+  'application/zip',
+  'application/x-zip-compressed',
+]);
+
+const partFileUpload = multer({
+  storage: multer.diskStorage({
+    destination: (req, file, cb) => cb(null, TMP_DIR),
+    filename: (req, file, cb) => {
+      const ext = path.extname(file.originalname) || '';
+      cb(null, `${crypto.randomUUID()}${ext}`);
+    },
+  }),
+  limits: { fileSize: 20 * 1024 * 1024 },
+  fileFilter: (req, file, cb) => {
+    if (!ALLOWED_PART_FILE_TYPES.has(file.mimetype)) {
+      return cb(new Error('Tipo de ficheiro não permitido.'));
+    }
+    cb(null, true);
+  },
+});
+
 function slugify(value) {
   return String(value || 'diverso')
     .normalize('NFD')
@@ -475,6 +512,80 @@ app.post(
   }
 );
 
+// Ficheiros diversos anexados a uma peça (manuais, faturas, esquemas...) -
+// aparecem na aba "Ficheiros" ao editar a peça. Vários ficheiros por peça,
+// cada um com o seu próprio id para poder apagar individualmente.
+app.post('/api/parts/:id/files', handleUpload(partFileUpload.single('file')), async (req, res) => {
+  const file = req.file;
+  if (!file) return res.status(400).json({ error: 'Falta o ficheiro.' });
+  const cleanupTmp = () => fs.unlink(file.path, () => {});
+
+  const part = await store.getPart(req.params.id);
+  if (!part) {
+    cleanupTmp();
+    return res.status(404).json({ error: 'Peca nao encontrada.' });
+  }
+
+  const fileId = crypto.randomUUID();
+  let fileUrl;
+  let publicId = null;
+  let resourceType = null;
+
+  try {
+    if (images.useCloud) {
+      const uploaded = await images.uploadPartFile(file.path, part.id, fileId, file.mimetype);
+      fileUrl = uploaded.url;
+      publicId = uploaded.publicId;
+      resourceType = uploaded.resourceType;
+      cleanupTmp();
+    } else {
+      const folder = path.join(STORAGE_DIR, 'pecas-ficheiros', part.id);
+      fs.mkdirSync(folder, { recursive: true });
+      const ext = path.extname(file.originalname) || '';
+      const destName = `${fileId}${ext}`;
+      fs.renameSync(file.path, path.join(folder, destName));
+      fileUrl = `/storage/pecas-ficheiros/${part.id}/${destName}`;
+    }
+  } catch (err) {
+    console.error('[parts] falha ao guardar ficheiro:', err);
+    cleanupTmp();
+    return res.status(500).json({ error: 'Falha ao guardar o ficheiro. Tente novamente.' });
+  }
+
+  const newFile = {
+    id: fileId,
+    fileName: file.originalname,
+    fileType: file.mimetype,
+    size: file.size,
+    url: fileUrl,
+    publicId,
+    resourceType,
+    createdAt: new Date().toISOString(),
+  };
+  const partFiles = [...(part.files || []), newFile];
+  const updated = await store.updatePart(part.id, { files: partFiles });
+  res.status(201).json(updated);
+});
+
+app.delete('/api/parts/:id/files/:fileId', async (req, res) => {
+  const part = await store.getPart(req.params.id);
+  if (!part) return res.status(404).json({ error: 'Peca nao encontrada.' });
+
+  const target = (part.files || []).find((f) => f.id === req.params.fileId);
+  if (!target) return res.status(404).json({ error: 'Ficheiro não encontrado.' });
+
+  if (images.useCloud) {
+    if (target.publicId) await images.deletePartFile(target.publicId, target.resourceType);
+  } else if (target.url) {
+    const rel = target.url.replace(/^\/storage\//, '');
+    fs.unlink(path.join(STORAGE_DIR, rel), () => {});
+  }
+
+  const partFiles = (part.files || []).filter((f) => f.id !== req.params.fileId);
+  const updated = await store.updatePart(part.id, { files: partFiles });
+  res.json(updated);
+});
+
 app.delete('/api/parts/:id', async (req, res) => {
   const removed = await store.deletePart(req.params.id);
   if (!removed) return res.status(404).json({ error: 'Peca nao encontrada.' });
@@ -483,6 +594,9 @@ app.delete('/api/parts/:id', async (req, res) => {
   if (images.useCloud) {
     for (const img of imgs) {
       if (img && img.publicId) await images.deleteImage(img.publicId);
+    }
+    for (const file of removed.files || []) {
+      if (file && file.publicId) await images.deletePartFile(file.publicId, file.resourceType);
     }
   } else {
     const firstUrl = (imgs[0] && imgs[0].url) || '';
@@ -494,6 +608,7 @@ app.delete('/api/parts/:id', async (req, res) => {
       const folder = path.join(STORAGE_DIR, path.dirname(rel));
       fs.rm(folder, { recursive: true, force: true }, () => {});
     }
+    fs.rm(path.join(STORAGE_DIR, 'pecas-ficheiros', removed.id), { recursive: true, force: true }, () => {});
   }
 
   res.json({ ok: true });

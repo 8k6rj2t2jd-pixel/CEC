@@ -629,12 +629,16 @@ const editFields = {
   box: document.getElementById('edit-field-box'),
   notes: document.getElementById('edit-field-notes'),
 };
+const editFilesList = document.getElementById('edit-files-list');
+const editFileInput = document.getElementById('edit-file-input');
+const editFileStatus = document.getElementById('edit-file-status');
 
 wireCategoryToggle(editCategoryToggle, (category) => {
   editFieldCategory.value = category;
 });
 
 let editingPartId = null;
+let editingPart = null;
 const editBadges = {
   front: document.getElementById('edit-badge-front'),
   back: document.getElementById('edit-badge-back'),
@@ -653,6 +657,7 @@ function clearEditPendingPreviews() {
 
 function openEditModal(part) {
   editingPartId = part.id;
+  editingPart = part;
   editError.hidden = true;
   clearEditPendingPreviews();
 
@@ -682,9 +687,13 @@ function openEditModal(part) {
     }
     editBadges[key].hidden = true;
   }
-  editForm.querySelectorAll('input[type=file]').forEach((input) => {
+  editForm.querySelectorAll('.edit-photo-grid input[type=file]').forEach((input) => {
     input.value = '';
   });
+
+  renderEditFiles(part.files || []);
+  editFileInput.value = '';
+  editFileStatus.hidden = true;
 
   editOverlay.hidden = false;
 }
@@ -692,13 +701,113 @@ function openEditModal(part) {
 function closeEditModal() {
   editOverlay.hidden = true;
   editingPartId = null;
+  editingPart = null;
   clearEditPendingPreviews();
 }
+
+// ---------------------------------------------------------------------------
+// Ficheiros anexados à peça (manuais, faturas, esquemas...)
+// ---------------------------------------------------------------------------
+const FILE_ICONS = {
+  'application/pdf': '📄',
+  'application/zip': '🗜️',
+  'application/x-zip-compressed': '🗜️',
+  'text/plain': '📝',
+  'text/csv': '📊',
+};
+function fileIconFor(fileType) {
+  if (fileType && fileType.startsWith('image/')) return '🖼️';
+  if (fileType && fileType.includes('word')) return '📝';
+  if (fileType && (fileType.includes('sheet') || fileType.includes('excel'))) return '📊';
+  if (fileType && (fileType.includes('presentation') || fileType.includes('powerpoint'))) return '📊';
+  return FILE_ICONS[fileType] || '📎';
+}
+function formatFileSize(bytes) {
+  if (!Number.isFinite(bytes)) return '';
+  if (bytes < 1024) return `${bytes} B`;
+  if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(0)} KB`;
+  return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
+}
+
+function renderEditFiles(files) {
+  editFilesList.innerHTML = '';
+  if (!files.length) {
+    const empty = document.createElement('p');
+    empty.className = 'hint';
+    empty.textContent = 'Ainda não há ficheiros anexados a esta peça.';
+    editFilesList.appendChild(empty);
+    return;
+  }
+  files.forEach((file) => {
+    const row = document.createElement('div');
+    row.className = 'edit-file-row';
+
+    const link = document.createElement('a');
+    link.href = file.url;
+    link.target = '_blank';
+    link.rel = 'noopener noreferrer';
+    link.className = 'edit-file-link';
+    link.innerHTML = `
+      <span class="edit-file-icon">${fileIconFor(file.fileType)}</span>
+      <span class="edit-file-info">
+        <span class="edit-file-name">${escapeHtml(file.fileName || 'Ficheiro')}</span>
+        <span class="edit-file-size">${formatFileSize(file.size)}</span>
+      </span>
+    `;
+    row.appendChild(link);
+
+    const delBtn = document.createElement('button');
+    delBtn.type = 'button';
+    delBtn.className = 'edit-file-delete';
+    delBtn.textContent = '✕';
+    delBtn.title = 'Eliminar ficheiro';
+    delBtn.addEventListener('click', async () => {
+      if (!confirm(`Eliminar "${file.fileName}"?`)) return;
+      const resp = await fetch(`/api/parts/${editingPartId}/files/${file.id}`, { method: 'DELETE' });
+      const data = await resp.json();
+      if (!resp.ok) {
+        alert(data.error || 'Falha ao eliminar o ficheiro.');
+        return;
+      }
+      editingPart.files = data.files || [];
+      renderEditFiles(editingPart.files);
+    });
+    row.appendChild(delBtn);
+
+    editFilesList.appendChild(row);
+  });
+}
+
+editFileInput.addEventListener('change', async () => {
+  const file = editFileInput.files[0];
+  if (!file || !editingPartId) return;
+
+  editFileStatus.hidden = false;
+  editFileStatus.classList.remove('error');
+  editFileStatus.textContent = 'A enviar…';
+
+  const fd = new FormData();
+  fd.append('file', file);
+
+  try {
+    const resp = await fetch(`/api/parts/${editingPartId}/files`, { method: 'POST', body: fd });
+    const data = await resp.json();
+    if (!resp.ok) throw new Error(data.error || 'Falha ao enviar o ficheiro.');
+    editingPart.files = data.files || [];
+    renderEditFiles(editingPart.files);
+    editFileStatus.hidden = true;
+  } catch (err) {
+    editFileStatus.classList.add('error');
+    editFileStatus.textContent = err.message;
+  } finally {
+    editFileInput.value = '';
+  }
+});
 
 document.getElementById('edit-close').addEventListener('click', closeEditModal);
 document.getElementById('edit-cancel').addEventListener('click', closeEditModal);
 
-editForm.querySelectorAll('input[type=file]').forEach((input) => {
+editForm.querySelectorAll('.edit-photo-grid input[type=file]').forEach((input) => {
   input.addEventListener('change', async () => {
     const slot = input.dataset.slot;
     const file = input.files[0];
@@ -740,7 +849,7 @@ editForm.addEventListener('submit', async (e) => {
     const data = await resp.json();
     if (!resp.ok) throw new Error(data.error || 'Erro ao guardar alterações.');
 
-    const photoInputs = Array.from(editForm.querySelectorAll('input[type=file]')).filter((i) => i.files[0]);
+    const photoInputs = Array.from(editForm.querySelectorAll('.edit-photo-grid input[type=file]')).filter((i) => i.files[0]);
     if (photoInputs.length) {
       const fd = new FormData();
       photoInputs.forEach((input) => {
