@@ -513,62 +513,96 @@ app.get('/api/labels', async (req, res) => {
   res.json(labels);
 });
 
-app.post('/api/labels', handleUpload(labelUpload.single('file')), async (req, res) => {
-  if (!req.file) return res.status(400).json({ error: 'Falta o ficheiro da etiqueta.' });
-  const cleanupTmp = () => fs.unlink(req.file.path, () => {});
+app.post(
+  '/api/labels',
+  handleUpload(
+    labelUpload.fields([
+      { name: 'file', maxCount: 1 },
+      { name: 'thumbnail', maxCount: 1 },
+    ])
+  ),
+  async (req, res) => {
+    const file = req.files && req.files.file && req.files.file[0];
+    // Capa opcional (gerada no browser a partir da 1ª página, quando o
+    // ficheiro é um PDF) - so para se poder identificar o template de
+    // relance, nao substitui o ficheiro original.
+    const thumbnailFile = req.files && req.files.thumbnail && req.files.thumbnail[0];
+    if (!file) return res.status(400).json({ error: 'Falta o ficheiro da etiqueta.' });
+    const cleanupTmp = () => {
+      fs.unlink(file.path, () => {});
+      if (thumbnailFile) fs.unlink(thumbnailFile.path, () => {});
+    };
 
-  const manufacturer = (req.body.manufacturer || '').trim();
-  const reference = (req.body.reference || '').trim();
-  const isTemplate = req.body.isTemplate === 'true' || req.body.isTemplate === 'on';
+    const manufacturer = (req.body.manufacturer || '').trim();
+    const reference = (req.body.reference || '').trim();
+    const isTemplate = req.body.isTemplate === 'true' || req.body.isTemplate === 'on';
 
-  const id = crypto.randomUUID();
-  let fileUrl;
-  let publicId = null;
-  let resourceType = null;
+    const id = crypto.randomUUID();
+    let fileUrl;
+    let publicId = null;
+    let resourceType = null;
+    let thumbnailUrl = null;
+    let thumbnailPublicId = null;
 
-  try {
-    if (images.useCloud) {
-      const uploaded = await images.uploadLabelFile(req.file.path, id, req.file.mimetype);
-      fileUrl = uploaded.url;
-      publicId = uploaded.publicId;
-      resourceType = uploaded.resourceType;
+    try {
+      if (images.useCloud) {
+        const uploaded = await images.uploadLabelFile(file.path, id, file.mimetype);
+        fileUrl = uploaded.url;
+        publicId = uploaded.publicId;
+        resourceType = uploaded.resourceType;
+        fs.unlink(file.path, () => {});
+
+        if (thumbnailFile) {
+          const uploadedThumb = await images.uploadLabelFile(thumbnailFile.path, `${id}-capa`, thumbnailFile.mimetype);
+          thumbnailUrl = uploadedThumb.url;
+          thumbnailPublicId = uploadedThumb.publicId;
+          fs.unlink(thumbnailFile.path, () => {});
+        }
+      } else {
+        const folder = path.join(STORAGE_DIR, 'etiquetas', slugify(manufacturer || 'indiferenciadas'), id);
+        fs.mkdirSync(folder, { recursive: true });
+        const ext = path.extname(file.originalname) || '';
+        const destName = `ficheiro${ext}`;
+        fs.renameSync(file.path, path.join(folder, destName));
+        const rel = path.relative(STORAGE_DIR, path.join(folder, destName)).split(path.sep).join('/');
+        fileUrl = `/storage/${rel}`;
+
+        if (thumbnailFile) {
+          fs.renameSync(thumbnailFile.path, path.join(folder, 'capa.jpg'));
+          const thumbRel = path.relative(STORAGE_DIR, path.join(folder, 'capa.jpg')).split(path.sep).join('/');
+          thumbnailUrl = `/storage/${thumbRel}`;
+        }
+      }
+    } catch (err) {
+      console.error('[labels] falha ao guardar o ficheiro:', err);
       cleanupTmp();
-    } else {
-      const folder = path.join(STORAGE_DIR, 'etiquetas', slugify(manufacturer || 'indiferenciadas'), id);
-      fs.mkdirSync(folder, { recursive: true });
-      const ext = path.extname(req.file.originalname) || '';
-      const destName = `ficheiro${ext}`;
-      fs.renameSync(req.file.path, path.join(folder, destName));
-      const rel = path.relative(STORAGE_DIR, path.join(folder, destName)).split(path.sep).join('/');
-      fileUrl = `/storage/${rel}`;
+      return res.status(500).json({ error: 'Falha ao guardar a etiqueta. Tente novamente.' });
     }
-  } catch (err) {
-    console.error('[labels] falha ao guardar o ficheiro:', err);
-    cleanupTmp();
-    return res.status(500).json({ error: 'Falha ao guardar a etiqueta. Tente novamente.' });
-  }
 
-  const label = {
-    id,
-    manufacturer,
-    reference,
-    isTemplate,
-    fileUrl,
-    fileName: req.file.originalname,
-    fileType: req.file.mimetype,
-    publicId,
-    resourceType,
-    createdAt: new Date().toISOString(),
-  };
+    const label = {
+      id,
+      manufacturer,
+      reference,
+      isTemplate,
+      fileUrl,
+      fileName: file.originalname,
+      fileType: file.mimetype,
+      publicId,
+      resourceType,
+      thumbnailUrl,
+      thumbnailPublicId,
+      createdAt: new Date().toISOString(),
+    };
 
-  try {
-    await store.createLabel(label);
-    res.status(201).json(label);
-  } catch (err) {
-    console.error('[labels] falha ao gravar na base de dados:', err);
-    res.status(500).json({ error: 'Falha ao gravar a etiqueta. Tente novamente.' });
+    try {
+      await store.createLabel(label);
+      res.status(201).json(label);
+    } catch (err) {
+      console.error('[labels] falha ao gravar na base de dados:', err);
+      res.status(500).json({ error: 'Falha ao gravar a etiqueta. Tente novamente.' });
+    }
   }
-});
+);
 
 app.patch('/api/labels/:id', async (req, res) => {
   const allowed = ['manufacturer', 'reference', 'isTemplate'];
@@ -588,6 +622,7 @@ app.delete('/api/labels/:id', async (req, res) => {
 
   if (images.useCloud) {
     if (removed.publicId) await images.deleteLabelFile(removed.publicId, removed.resourceType);
+    if (removed.thumbnailPublicId) await images.deleteLabelFile(removed.thumbnailPublicId, 'image');
   } else if (removed.fileUrl) {
     // So apaga a pasta se houver mesmo um caminho local guardado (mesma
     // proteção usada para as fotos das peças, para nunca apagar o

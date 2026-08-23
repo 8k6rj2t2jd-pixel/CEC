@@ -1108,9 +1108,9 @@ function renderLabelCard(label) {
   link.target = '_blank';
   link.rel = 'noopener';
 
-  if (/^image\//.test(label.fileType || '')) {
+  if (label.thumbnailUrl || /^image\//.test(label.fileType || '')) {
     const img = document.createElement('img');
-    img.src = label.fileUrl;
+    img.src = label.thumbnailUrl || label.fileUrl;
     img.alt = label.fileName || '';
     link.appendChild(img);
   } else {
@@ -1161,24 +1161,63 @@ function closeLabelUpload() {
 document.getElementById('label-upload-close').addEventListener('click', closeLabelUpload);
 document.getElementById('label-upload-cancel').addEventListener('click', closeLabelUpload);
 
+// Gera uma imagem da 1ª página do PDF (ex: um template) para se poder ver
+// qual é de relance no repositório, sem ter de abrir cada ficheiro. Carrega
+// o pdf.js só quando é mesmo preciso (ficheiro é PDF), para não pesar a app
+// nos casos normais (foto).
+async function generatePdfThumbnail(file) {
+  try {
+    const pdfjsLib = await import('/pdfjs/pdf.min.mjs');
+    pdfjsLib.GlobalWorkerOptions.workerSrc = '/pdfjs/pdf.worker.min.mjs';
+    const buffer = await file.arrayBuffer();
+    const pdf = await pdfjsLib.getDocument({ data: buffer }).promise;
+    const page = await pdf.getPage(1);
+    const targetWidth = 500;
+    const baseViewport = page.getViewport({ scale: 1 });
+    const scale = targetWidth / baseViewport.width;
+    const viewport = page.getViewport({ scale });
+    const canvas = document.createElement('canvas');
+    canvas.width = Math.round(viewport.width);
+    canvas.height = Math.round(viewport.height);
+    await page.render({ canvasContext: canvas.getContext('2d'), viewport }).promise;
+    return await new Promise((resolve) => canvas.toBlob(resolve, 'image/jpeg', 0.85));
+  } catch (err) {
+    console.error('Falha ao gerar a capa do PDF, a guardar sem pré-visualização:', err);
+    return null;
+  }
+}
+
 labelUploadForm.addEventListener('submit', async (e) => {
   e.preventDefault();
   labelUploadError.hidden = true;
 
   const fileInput = document.getElementById('label-file-input');
-  if (!fileInput.files[0]) {
+  const file = fileInput.files[0];
+  if (!file) {
     labelUploadError.hidden = false;
     labelUploadError.textContent = 'Escolha um ficheiro.';
     return;
   }
 
+  const submitBtn = labelUploadForm.querySelector('button[type=submit]');
+  const originalBtnText = submitBtn.textContent;
+
   const fd = new FormData();
-  fd.append('file', fileInput.files[0]);
+  fd.append('file', file);
   fd.append('manufacturer', document.getElementById('label-field-manufacturer').value.trim());
   fd.append('reference', document.getElementById('label-field-reference').value.trim());
   fd.append('isTemplate', document.getElementById('label-field-template').checked ? 'true' : 'false');
 
+  if (file.type === 'application/pdf') {
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'A preparar capa…';
+    const thumbnail = await generatePdfThumbnail(file);
+    if (thumbnail) fd.append('thumbnail', thumbnail, 'capa.jpg');
+    submitBtn.textContent = originalBtnText;
+  }
+
   try {
+    submitBtn.disabled = true;
     const resp = await fetch('/api/labels', { method: 'POST', body: fd });
     const data = await resp.json();
     if (!resp.ok) throw new Error(data.error || 'Falha ao enviar a etiqueta.');
@@ -1188,6 +1227,9 @@ labelUploadForm.addEventListener('submit', async (e) => {
   } catch (err) {
     labelUploadError.hidden = false;
     labelUploadError.textContent = err.message;
+  } finally {
+    submitBtn.disabled = false;
+    submitBtn.textContent = originalBtnText;
   }
 });
 
