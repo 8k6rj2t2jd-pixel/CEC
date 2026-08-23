@@ -374,27 +374,54 @@ function resetCaptureFlow() {
   partForm.hidden = true;
   saveSuccess.hidden = true;
   captureStage.hidden = false;
+  resetUploadExistingBlock();
   startCamera();
 }
 
-// Chamado a partir da "Verificar peça" quando se quer adicionar como peça
-// nova: aproveita a foto que já foi tirada/enviada (fica logo como a foto
-// da etiqueta) e os dados que o OCR já tinha lido dessa foto, para não
-// obrigar a repetir tudo. Os campos ficam preenchidos automaticamente mas
-// continuam totalmente editáveis antes de guardar.
-function startNewPartFromCheck(file, data) {
-  switchToTab('novo');
-  resetCaptureFlow();
+// ---------------------------------------------------------------------------
+// Carregar fotos já tiradas (alternativa a usar a câmara) - se a foto
+// "Etiqueta" for carregada aqui, a leitura automática (OCR) corre à mesma
+// quando se avança para o formulário.
+// ---------------------------------------------------------------------------
+const uploadThumbs = {
+  front: document.getElementById('upload-thumb-front'),
+  back: document.getElementById('upload-thumb-back'),
+  label: document.getElementById('upload-thumb-label'),
+};
+const btnContinueUpload = document.getElementById('btn-continue-upload');
+
+function resetUploadExistingBlock() {
+  document.querySelectorAll('.upload-existing-block input[type=file]').forEach((input) => {
+    input.value = '';
+  });
+  Object.values(uploadThumbs).forEach((img) => {
+    img.src = '';
+    img.hidden = true;
+  });
+  btnContinueUpload.hidden = true;
+}
+
+document.querySelectorAll('.upload-existing-block input[type=file]').forEach((input) => {
+  input.addEventListener('change', async () => {
+    const slot = input.dataset.slot;
+    const file = input.files[0];
+    if (!file) return;
+    const resized = await resizeImageFile(file);
+    shots[slot] = resized;
+    uploadThumbs[slot].src = URL.createObjectURL(resized);
+    uploadThumbs[slot].hidden = false;
+    setThumb(slot, resized);
+    setStepUi();
+    btnContinueUpload.hidden = false;
+  });
+});
+
+btnContinueUpload.addEventListener('click', async () => {
   stopCamera();
-
-  shots.label = file;
-  setThumb('label', file);
-  ocrPromise = Promise.resolve({ ok: true, data: data || {} });
-
   captureStage.hidden = true;
   setStepUi();
-  showForm();
-}
+  await showForm();
+});
 
 // ---------------------------------------------------------------------------
 // Catálogo
@@ -816,219 +843,10 @@ lightboxNext.addEventListener('click', (e) => {
 });
 
 // ---------------------------------------------------------------------------
-// Verificar peça (foto avulsa: câmara ou upload de foto externa, ex. de um
-// cliente) — lê a etiqueta e diz se a peça já está no catálogo.
-// ---------------------------------------------------------------------------
-const checkInput = document.getElementById('check-photo-input');
-const checkPreview = document.getElementById('check-preview');
-const checkStatus = document.getElementById('check-status');
-const checkResults = document.getElementById('check-results');
-
-function normalizeRef(ref) {
-  return String(ref || '').replace(/\s+/g, '').toUpperCase();
-}
-
-function findMatches(parts, referenceCandidates) {
-  const normalizedCandidates = referenceCandidates.map(normalizeRef).filter(Boolean);
-  if (!normalizedCandidates.length) return [];
-  return parts.filter((p) => {
-    const partRefs = [normalizeRef(p.ref1), normalizeRef(p.ref2)].filter(Boolean);
-    return partRefs.some((r) => normalizedCandidates.includes(r));
-  });
-}
-
-document.getElementById('btn-check-photo').addEventListener('click', () => checkInput.click());
-
-checkInput.addEventListener('change', async () => {
-  const file = checkInput.files[0];
-  if (!file) return;
-
-  checkPreview.src = URL.createObjectURL(file);
-  checkPreview.hidden = false;
-  checkResults.innerHTML = '';
-  checkStatus.hidden = false;
-  checkStatus.textContent = 'A ler a foto…';
-
-  try {
-    const { ok, data } = await runOcr(file);
-    checkStatus.hidden = true;
-    if (!ok) {
-      renderCheckError('Não foi possível ler esta foto.');
-      return;
-    }
-    const referenceCandidates = Array.isArray(data.referenceCandidates) ? data.referenceCandidates : [];
-    const partsResp = await fetch('/api/parts');
-    const parts = await partsResp.json();
-    const matches = findMatches(parts, referenceCandidates);
-    renderCheckResults(file, data, matches);
-  } catch (err) {
-    console.error(err);
-    checkStatus.hidden = true;
-    renderCheckError('Ocorreu um erro ao verificar esta foto.');
-  } finally {
-    checkInput.value = '';
-  }
-});
-
-function renderCheckError(message) {
-  checkResults.innerHTML = '';
-  const p = document.createElement('p');
-  p.className = 'error';
-  p.textContent = message;
-  checkResults.appendChild(p);
-}
-
-function renderCheckResults(file, data, matches) {
-  checkResults.innerHTML = '';
-
-  if (data.rawText) {
-    const raw = document.createElement('p');
-    raw.className = 'ocr-raw';
-    raw.textContent = `Texto lido: ${data.rawText}`;
-    checkResults.appendChild(raw);
-  }
-
-  if (matches.length) {
-    const heading = document.createElement('p');
-    heading.textContent =
-      matches.length === 1
-        ? 'Esta peça já existe no catálogo:'
-        : `Encontradas ${matches.length} peças com estas referências:`;
-    checkResults.appendChild(heading);
-
-    matches.forEach((part) => {
-      const card = document.createElement('div');
-      card.className = 'part-card';
-
-      const frontUrl = part.images && part.images.front && part.images.front.url;
-      if (frontUrl) {
-        const img = document.createElement('img');
-        img.src = frontUrl;
-        img.alt = part.partType;
-        card.appendChild(img);
-      } else {
-        const placeholder = document.createElement('div');
-        placeholder.className = 'no-photo';
-        placeholder.textContent = 'Sem foto';
-        card.appendChild(placeholder);
-      }
-
-      const body = document.createElement('div');
-      body.className = 'body';
-      body.innerHTML = `
-        <div class="title">${escapeHtml(part.partType)}</div>
-        <div class="muted">${escapeHtml(part.manufacturer)} · ${escapeHtml(part.brand)} ${escapeHtml(part.model)}</div>
-        <div class="refs">
-          ${part.ref1 ? `<div>Ref1: ${escapeHtml(part.ref1)}</div>` : ''}
-          ${part.ref2 ? `<div>Ref2: ${escapeHtml(part.ref2)}</div>` : ''}
-        </div>
-        <div class="muted">Em stock: <strong class="check-qty">${part.quantity}</strong></div>
-      `;
-
-      const actions = document.createElement('div');
-      actions.className = 'form-actions';
-      const addOneBtn = document.createElement('button');
-      addOneBtn.type = 'button';
-      addOneBtn.className = 'btn btn-primary';
-      addOneBtn.textContent = '+1 ao stock';
-      addOneBtn.addEventListener('click', async () => {
-        const qtyEl = body.querySelector('.check-qty');
-        await changeQuantity(part, 1, qtyEl);
-        addOneBtn.textContent = 'Adicionado ✓';
-        addOneBtn.disabled = true;
-      });
-      const viewBtn = document.createElement('button');
-      viewBtn.type = 'button';
-      viewBtn.className = 'btn';
-      viewBtn.textContent = 'Ver no catálogo';
-      viewBtn.addEventListener('click', () => {
-        switchToTab('catalogo');
-        searchInput.value = part.ref1 || part.ref2 || '';
-        renderParts();
-      });
-      actions.append(addOneBtn, viewBtn);
-      body.appendChild(actions);
-
-      card.appendChild(body);
-      checkResults.appendChild(card);
-    });
-  } else {
-    const p = document.createElement('p');
-    p.textContent =
-      data.referenceCandidates && data.referenceCandidates.length
-        ? `Não encontrei nenhuma peça no catálogo com a(s) referência(s) ${data.referenceCandidates.join(', ')}.`
-        : 'Não consegui ler nenhuma referência nesta foto.';
-    checkResults.appendChild(p);
-  }
-
-  const bottomActions = document.createElement('div');
-  bottomActions.className = 'form-actions';
-
-  const addNewBtn = document.createElement('button');
-  addNewBtn.type = 'button';
-  addNewBtn.className = 'btn btn-primary';
-  addNewBtn.textContent = '➕ Adicionar como peça nova';
-  addNewBtn.addEventListener('click', () => startNewPartFromCheck(file, data));
-
-  const searchBtn = document.createElement('button');
-  searchBtn.type = 'button';
-  searchBtn.className = 'btn';
-  searchBtn.textContent = '🔎 Procurar no catálogo';
-  searchBtn.addEventListener('click', () => {
-    switchToTab('catalogo');
-    searchInput.value = ((data.referenceCandidates && data.referenceCandidates[0]) || '').replace(/\s+/g, '');
-    renderParts();
-  });
-
-  bottomActions.append(addNewBtn, searchBtn);
-  checkResults.appendChild(bottomActions);
-}
-
-// ---------------------------------------------------------------------------
 // Excel + logout
 // ---------------------------------------------------------------------------
 document.getElementById('btn-export-excel').addEventListener('click', () => {
   window.location.href = '/api/export.xlsx';
-});
-
-const importStockStatus = document.getElementById('import-stock-status');
-document.getElementById('btn-import-stock').addEventListener('click', async () => {
-  if (!confirm('Isto acrescenta ao catálogo todas as peças do stock antigo (sem fotos). Só deve fazer isto uma vez. Continuar?')) return;
-
-  importStockStatus.hidden = false;
-  importStockStatus.classList.remove('error');
-  importStockStatus.textContent = 'A importar, pode demorar um bocado…';
-
-  try {
-    const resp = await fetch('/api/admin/import-stock', { method: 'POST' });
-    const data = await resp.json();
-    if (!resp.ok) throw new Error(data.error || 'Falha na importação.');
-    importStockStatus.textContent =
-      `Importação concluída: ${data.created} peças adicionadas ` +
-      `(${data.withManufacturer} com fabricante identificado automaticamente).`;
-    await loadParts();
-  } catch (err) {
-    importStockStatus.classList.add('error');
-    importStockStatus.textContent = err.message;
-  }
-});
-
-const migrateBoxStatus = document.getElementById('migrate-box-status');
-document.getElementById('btn-migrate-box').addEventListener('click', async () => {
-  migrateBoxStatus.hidden = false;
-  migrateBoxStatus.classList.remove('error');
-  migrateBoxStatus.textContent = 'A mover a caixa e o número das notas…';
-
-  try {
-    const resp = await fetch('/api/admin/migrate-box-from-notes', { method: 'POST' });
-    const data = await resp.json();
-    if (!resp.ok) throw new Error(data.error || 'Falha ao mover a caixa/número.');
-    migrateBoxStatus.textContent = `Concluído: ${data.migrated} peças atualizadas com a caixa e/ou o número.`;
-    await loadParts();
-  } catch (err) {
-    migrateBoxStatus.classList.add('error');
-    migrateBoxStatus.textContent = err.message;
-  }
 });
 
 document.getElementById('btn-logout').addEventListener('click', async () => {

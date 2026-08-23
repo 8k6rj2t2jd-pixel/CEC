@@ -16,7 +16,6 @@
     <h1 class="welcome-msg">Olá Centralinas &amp; Companhia! 👋</h1>
     <nav class="tabs">
       <button class="tab-btn active" data-tab="novo">➕ Nova peça</button>
-      <button class="tab-btn" data-tab="verificar">🔍 Verificar peça</button>
       <button class="tab-btn" data-tab="catalogo">📦 Catálogo</button>
       <button class="tab-btn" data-tab="etiquetas">🏷️ Etiquetas</button>
     </nav>
@@ -50,6 +49,33 @@
         <span class="thumb-caption">Etiqueta</span>
       </div>
     </div>
+
+    <!-- ==================== CARREGAR FOTOS JÁ TIRADAS ==================== -->
+    <div class="upload-existing-block">
+      <p class="hint">📤 Já tem fotos tiradas? Carregue-as aqui em vez de usar a câmara:</p>
+      <div class="edit-photo-grid">
+        <label class="edit-photo-slot">
+          <img id="upload-thumb-front" alt="Frente" hidden />
+          <span class="edit-photo-placeholder">📤</span>
+          <span class="edit-photo-caption">Frente</span>
+          <input type="file" accept="image/*" data-slot="front" hidden />
+        </label>
+        <label class="edit-photo-slot">
+          <img id="upload-thumb-back" alt="Trás" hidden />
+          <span class="edit-photo-placeholder">📤</span>
+          <span class="edit-photo-caption">Trás</span>
+          <input type="file" accept="image/*" data-slot="back" hidden />
+        </label>
+        <label class="edit-photo-slot">
+          <img id="upload-thumb-label" alt="Etiqueta" hidden />
+          <span class="edit-photo-placeholder">📤</span>
+          <span class="edit-photo-caption">Etiqueta</span>
+          <input type="file" accept="image/*" data-slot="label" hidden />
+        </label>
+      </div>
+      <button type="button" id="btn-continue-upload" class="btn btn-primary" hidden>Continuar com estas fotos →</button>
+    </div>
+    <hr class="edit-divider" />
 
     <div id="capture-stage" class="capture-stage">
       <video id="camera-video" autoplay playsinline muted></video>
@@ -176,23 +202,6 @@
     </div>
   </section>
 
-  <!-- ==================== VERIFICAR PEÇA ==================== -->
-  <section id="tab-verificar" class="tab-panel">
-    <p class="hint">
-      Tire uma foto ou carregue uma foto já existente (ex: enviada por um
-      cliente) — a app lê a etiqueta e diz se a peça já está no catálogo.
-      Aproxime-se bem da etiqueta (texto a ocupar o máximo da foto) para
-      melhores resultados.
-    </p>
-    <input type="file" id="check-photo-input" accept="image/*" hidden />
-    <div class="capture-actions">
-      <button id="btn-check-photo" class="btn btn-primary">📤 Escolher ou tirar foto</button>
-    </div>
-    <img id="check-preview" class="shot-preview" hidden alt="Foto para verificar" />
-    <p id="check-status" class="ocr-status" hidden>A ler a foto…</p>
-    <div id="check-results" class="check-results"></div>
-  </section>
-
   <!-- ==================== CATALOGO ==================== -->
   <section id="tab-catalogo" class="tab-panel">
     <div id="stats-strip" class="stats-strip">
@@ -231,11 +240,7 @@
     </div>
     <div class="backup-row">
       <button id="btn-export-excel" class="btn">📊 Transformar catálogo em Excel</button>
-      <button id="btn-import-stock" class="btn btn-import-stock">⚠️ Importar stock antigo (só uma vez)</button>
-      <button id="btn-migrate-box" class="btn">📦 Mover caixa/nº das notas</button>
     </div>
-    <p id="import-stock-status" class="hint" hidden></p>
-    <p id="migrate-box-status" class="hint" hidden></p>
     <div id="parts-grid" class="parts-grid"></div>
     <p id="empty-state" class="hint" hidden>Ainda não há peças guardadas.</p>
   </section>

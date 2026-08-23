@@ -17,7 +17,6 @@ const store = require('./lib/store');
 const images = require('./lib/images');
 const { readLabel } = require('./lib/ocr');
 const auth = require('./lib/auth');
-const { buildPartsFromStockFile } = require('./lib/stockImport');
 
 const PORT = process.env.PORT || 3000;
 const DATA_DIR = process.env.DATA_DIR || path.join(__dirname, 'data');
@@ -477,100 +476,6 @@ app.delete('/api/parts/:id', async (req, res) => {
   }
 
   res.json({ ok: true });
-});
-
-// Rota temporaria para importar em massa o stock antigo (scripts/stock-
-// import-data.json), sem fotos - alternativa ao Shell do Render (que exige
-// plano pago). Recusa correr outra vez se ja houver pecas com a nota de
-// importacao, para nao duplicar tudo sem querer.
-app.post('/api/admin/import-stock', async (req, res) => {
-  try {
-    const existing = await store.listParts();
-    const alreadyImported = existing.some((p) => (p.notes || '').includes('Importado do stock antigo'));
-    if (alreadyImported) {
-      return res.status(409).json({
-        error: 'Já existem peças importadas do stock antigo no catálogo. Para evitar duplicar tudo, não repeti a importação automaticamente.',
-      });
-    }
-
-    const { parts, skipped } = buildPartsFromStockFile();
-    let created = 0;
-    let withManufacturer = 0;
-    for (const part of parts) {
-      await store.createPart(part);
-      created += 1;
-      if (part.manufacturer) withManufacturer += 1;
-    }
-    res.json({ created, withManufacturer, skipped });
-  } catch (err) {
-    console.error('[import-stock] falha:', err);
-    res.status(500).json({ error: 'Falha na importação. Tente novamente.' });
-  }
-});
-
-// Retira o numero da caixa e/ou o numero da peca dentro da caixa que
-// ficaram escritos dentro das notas (formato "Importado do stock antigo
-// (Caixa X, Nº Y)") e poe-os nos campos proprios, para as pecas importadas
-// antes desses campos existirem. Seguro de correr mais do que uma vez - so
-// mexe no que ainda estiver por preencher.
-function extractLocationFromNotes(notes, { skipBox, skipItemNumber } = {}) {
-  let text = String(notes || '');
-  const result = {};
-
-  if (!skipBox) {
-    const boxMatch = text.match(/Caixa\s+([^\s,()]+)/i);
-    if (boxMatch) {
-      result.box = boxMatch[1];
-      text = text
-        .replace(/Caixa\s+[^\s,()]+,\s*/i, '')
-        .replace(/,\s*Caixa\s+[^\s,()]+/i, '')
-        .replace(/\(\s*Caixa\s+[^\s,()]+\s*\)/i, '');
-    }
-  }
-
-  if (!skipItemNumber) {
-    const numMatch = text.match(/Nº\s*([^\s,()]+)/i);
-    if (numMatch) {
-      result.itemNumber = numMatch[1];
-      text = text
-        .replace(/Nº\s*[^\s,()]+,\s*/i, '')
-        .replace(/,\s*Nº\s*[^\s,()]+/i, '')
-        .replace(/\(\s*Nº\s*[^\s,()]+\s*\)/i, '');
-    }
-  }
-
-  if (!('box' in result) && !('itemNumber' in result)) return null;
-
-  const cleanedNotes = text
-    .replace(/\(\s*\)/g, '')
-    .replace(/\s+\./g, '.')
-    .replace(/\s{2,}/g, ' ')
-    .trim();
-
-  return { ...result, notes: cleanedNotes };
-}
-
-app.post('/api/admin/migrate-box-from-notes', async (req, res) => {
-  try {
-    const parts = await store.listParts();
-    let migrated = 0;
-    for (const part of parts) {
-      const needsBox = !part.box;
-      const needsItemNumber = !part.itemNumber;
-      if (!needsBox && !needsItemNumber) continue;
-      const extracted = extractLocationFromNotes(part.notes, { skipBox: !needsBox, skipItemNumber: !needsItemNumber });
-      if (!extracted) continue;
-      const patch = { notes: extracted.notes };
-      if ('box' in extracted) patch.box = extracted.box;
-      if ('itemNumber' in extracted) patch.itemNumber = extracted.itemNumber;
-      await store.updatePart(part.id, patch);
-      migrated += 1;
-    }
-    res.json({ migrated, total: parts.length });
-  } catch (err) {
-    console.error('[migrate-box] falha:', err);
-    res.status(500).json({ error: 'Falha ao mover a caixa/número das notas. Tente novamente.' });
-  }
 });
 
 // ---------------------------------------------------------------------------
