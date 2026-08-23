@@ -301,7 +301,7 @@ app.post(
       }
     };
 
-    const { category, partType, manufacturer, brand, model, ref1, ref2, quantity, box, notes } = req.body;
+    const { category, partType, manufacturer, brand, model, ref1, ref2, quantity, box, itemNumber, notes } = req.body;
     if (!partType || !manufacturer) {
       cleanupTmp();
       return res.status(400).json({ error: 'Tipo de peca e fabricante sao obrigatorios.' });
@@ -353,6 +353,7 @@ app.post(
       ref2: ref2 || '',
       quantity: Number.isFinite(Number(quantity)) ? Math.max(0, Math.trunc(Number(quantity))) : 1,
       box: box || '',
+      itemNumber: itemNumber || '',
       notes: notes || '',
       images: partImages,
       createdAt: new Date().toISOString(),
@@ -369,7 +370,7 @@ app.post(
 );
 
 app.patch('/api/parts/:id', async (req, res) => {
-  const allowed = ['category', 'partType', 'manufacturer', 'brand', 'model', 'ref1', 'ref2', 'quantity', 'box', 'notes'];
+  const allowed = ['category', 'partType', 'manufacturer', 'brand', 'model', 'ref1', 'ref2', 'quantity', 'box', 'itemNumber', 'notes'];
   const patch = {};
   for (const key of allowed) {
     if (key in req.body) patch[key] = req.body[key];
@@ -507,24 +508,46 @@ app.post('/api/admin/import-stock', async (req, res) => {
   }
 });
 
-// Retira o numero da caixa que ficou escrito dentro das notas (formato
-// "Importado do stock antigo (Caixa X...)") e poe-o no campo "Caixa"
-// proprio, para as pecas importadas antes desse campo existir. Seguro de
-// correr mais do que uma vez - so mexe em pecas que ainda nao tem "box"
-// preenchido.
-function extractBoxFromNotes(notes) {
-  const match = String(notes || '').match(/Caixa\s+([^\s,()]+)/i);
-  if (!match) return null;
-  const box = match[1];
-  const cleanedNotes = String(notes)
-    .replace(/Caixa\s+[^\s,()]+,\s*/i, '')
-    .replace(/,\s*Caixa\s+[^\s,()]+/i, '')
-    .replace(/\(\s*Caixa\s+[^\s,()]+\s*\)/i, '')
+// Retira o numero da caixa e/ou o numero da peca dentro da caixa que
+// ficaram escritos dentro das notas (formato "Importado do stock antigo
+// (Caixa X, Nº Y)") e poe-os nos campos proprios, para as pecas importadas
+// antes desses campos existirem. Seguro de correr mais do que uma vez - so
+// mexe no que ainda estiver por preencher.
+function extractLocationFromNotes(notes, { skipBox, skipItemNumber } = {}) {
+  let text = String(notes || '');
+  const result = {};
+
+  if (!skipBox) {
+    const boxMatch = text.match(/Caixa\s+([^\s,()]+)/i);
+    if (boxMatch) {
+      result.box = boxMatch[1];
+      text = text
+        .replace(/Caixa\s+[^\s,()]+,\s*/i, '')
+        .replace(/,\s*Caixa\s+[^\s,()]+/i, '')
+        .replace(/\(\s*Caixa\s+[^\s,()]+\s*\)/i, '');
+    }
+  }
+
+  if (!skipItemNumber) {
+    const numMatch = text.match(/Nº\s*([^\s,()]+)/i);
+    if (numMatch) {
+      result.itemNumber = numMatch[1];
+      text = text
+        .replace(/Nº\s*[^\s,()]+,\s*/i, '')
+        .replace(/,\s*Nº\s*[^\s,()]+/i, '')
+        .replace(/\(\s*Nº\s*[^\s,()]+\s*\)/i, '');
+    }
+  }
+
+  if (!('box' in result) && !('itemNumber' in result)) return null;
+
+  const cleanedNotes = text
     .replace(/\(\s*\)/g, '')
     .replace(/\s+\./g, '.')
     .replace(/\s{2,}/g, ' ')
     .trim();
-  return { box, notes: cleanedNotes };
+
+  return { ...result, notes: cleanedNotes };
 }
 
 app.post('/api/admin/migrate-box-from-notes', async (req, res) => {
@@ -532,16 +555,21 @@ app.post('/api/admin/migrate-box-from-notes', async (req, res) => {
     const parts = await store.listParts();
     let migrated = 0;
     for (const part of parts) {
-      if (part.box) continue;
-      const extracted = extractBoxFromNotes(part.notes);
+      const needsBox = !part.box;
+      const needsItemNumber = !part.itemNumber;
+      if (!needsBox && !needsItemNumber) continue;
+      const extracted = extractLocationFromNotes(part.notes, { skipBox: !needsBox, skipItemNumber: !needsItemNumber });
       if (!extracted) continue;
-      await store.updatePart(part.id, { box: extracted.box, notes: extracted.notes });
+      const patch = { notes: extracted.notes };
+      if ('box' in extracted) patch.box = extracted.box;
+      if ('itemNumber' in extracted) patch.itemNumber = extracted.itemNumber;
+      await store.updatePart(part.id, patch);
       migrated += 1;
     }
     res.json({ migrated, total: parts.length });
   } catch (err) {
     console.error('[migrate-box] falha:', err);
-    res.status(500).json({ error: 'Falha ao mover o número da caixa. Tente novamente.' });
+    res.status(500).json({ error: 'Falha ao mover a caixa/número das notas. Tente novamente.' });
   }
 });
 
@@ -702,6 +730,7 @@ app.get('/api/export.xlsx', async (req, res) => {
       { header: 'Referência 2', key: 'ref2', width: 20 },
       { header: 'Quantidade', key: 'quantity', width: 12 },
       { header: 'Caixa', key: 'box', width: 10 },
+      { header: 'Nº na caixa', key: 'itemNumber', width: 12 },
       { header: 'Notas', key: 'notes', width: 24 },
     ];
     sheet.getRow(1).font = { bold: true };
@@ -718,6 +747,7 @@ app.get('/api/export.xlsx', async (req, res) => {
         ref2: sanitizeForExcel(part.ref2),
         quantity: part.quantity,
         box: sanitizeForExcel(part.box),
+        itemNumber: sanitizeForExcel(part.itemNumber),
         notes: sanitizeForExcel(part.notes),
       });
       sheet.getRow(rowIndex).height = 70;

@@ -153,6 +153,10 @@
           <input id="field-box" name="box" placeholder="Ex: 12" />
         </label>
       </div>
+      <label>
+        Nº na caixa
+        <input id="field-item-number" name="itemNumber" placeholder="Ex: 3" />
+      </label>
 
       <label>
         Notas
@@ -228,7 +232,7 @@
     <div class="backup-row">
       <button id="btn-export-excel" class="btn">📊 Transformar catálogo em Excel</button>
       <button id="btn-import-stock" class="btn btn-import-stock">⚠️ Importar stock antigo (só uma vez)</button>
-      <button id="btn-migrate-box" class="btn">📦 Mover nº da caixa das notas</button>
+      <button id="btn-migrate-box" class="btn">📦 Mover caixa/nº das notas</button>
     </div>
     <p id="import-stock-status" class="hint" hidden></p>
     <p id="migrate-box-status" class="hint" hidden></p>
@@ -393,6 +397,10 @@
         <input id="edit-field-box" placeholder="Ex: 12" />
       </label>
     </div>
+    <label>
+      Nº na caixa
+      <input id="edit-field-item-number" placeholder="Ex: 3" />
+    </label>
     <label>
       Notas
       <input id="edit-field-notes" />
