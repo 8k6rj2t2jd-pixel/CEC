@@ -377,13 +377,22 @@ function resetCaptureFlow() {
 }
 
 // Chamado a partir da "Verificar peça" quando se quer adicionar como peça
-// nova. Começa sempre do zero (as 3 fotos, formulário em branco) - não
-// reaproveita a foto verificada nem os dados que o OCR tinha lido nessa
-// altura, para nunca assumir uma referência ou fabricante sem o
-// utilizador confirmar.
-function startNewPartFromCheck() {
+// nova: aproveita a foto que já foi tirada/enviada (fica logo como a foto
+// da etiqueta) e os dados que o OCR já tinha lido dessa foto, para não
+// obrigar a repetir tudo. Os campos ficam preenchidos automaticamente mas
+// continuam totalmente editáveis antes de guardar.
+function startNewPartFromCheck(file, data) {
   switchToTab('novo');
   resetCaptureFlow();
+  stopCamera();
+
+  shots.label = file;
+  setThumb('label', file);
+  ocrPromise = Promise.resolve({ ok: true, data: data || {} });
+
+  captureStage.hidden = true;
+  setStepUi();
+  showForm();
 }
 
 // ---------------------------------------------------------------------------
@@ -955,7 +964,7 @@ function renderCheckResults(file, data, matches) {
   addNewBtn.type = 'button';
   addNewBtn.className = 'btn btn-primary';
   addNewBtn.textContent = '➕ Adicionar como peça nova';
-  addNewBtn.addEventListener('click', () => startNewPartFromCheck());
+  addNewBtn.addEventListener('click', () => startNewPartFromCheck(file, data));
 
   const searchBtn = document.createElement('button');
   searchBtn.type = 'button';
