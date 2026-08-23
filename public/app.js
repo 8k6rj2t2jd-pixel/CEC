@@ -1161,6 +1161,8 @@ const shipmentForm = document.getElementById('shipment-form');
 const shipmentError = document.getElementById('shipment-error');
 const shipmentsFolders = document.getElementById('shipments-folders');
 const shipmentsEmptyState = document.getElementById('shipments-empty-state');
+const shipmentsNoMatch = document.getElementById('shipments-no-match');
+const shipmentSearchInput = document.getElementById('shipment-search');
 
 const MONTH_NAMES_PT = [
   'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
@@ -1185,13 +1187,27 @@ function formatDimensions(s) {
   return `${s.length ?? '—'} × ${s.width ?? '—'} × ${s.height ?? '—'} cm`;
 }
 
+function matchesShipmentSearch(s, q) {
+  if (!q) return true;
+  const haystack = [s.client, s.date, formatDatePt(s.date)].filter(Boolean).join(' ').toLowerCase();
+  return haystack.includes(q);
+}
+
 function renderShipments() {
   shipmentsFolders.innerHTML = '';
   shipmentsEmptyState.hidden = allShipments.length > 0;
-  if (!allShipments.length) return;
+  if (!allShipments.length) {
+    shipmentsNoMatch.hidden = true;
+    return;
+  }
+
+  const q = shipmentSearchInput.value.trim().toLowerCase();
+  const visible = allShipments.filter((s) => matchesShipmentSearch(s, q));
+  shipmentsNoMatch.hidden = visible.length > 0;
+  if (!visible.length) return;
 
   const byYear = new Map();
-  allShipments.forEach((s) => {
+  visible.forEach((s) => {
     const [y, m] = String(s.date || '').split('-');
     const year = y || '—';
     const month = m ? Number(m) : null;
@@ -1210,7 +1226,7 @@ function renderShipments() {
 
     const yearFolder = document.createElement('details');
     yearFolder.className = 'shipment-folder shipment-folder-year';
-    if (yearIdx === 0) yearFolder.open = true;
+    if (q || yearIdx === 0) yearFolder.open = true;
 
     const yearSummary = document.createElement('summary');
     yearSummary.textContent = `📁 ${year} (${yearTotal} ${yearTotal === 1 ? 'envio' : 'envios'})`;
@@ -1222,7 +1238,7 @@ function renderShipments() {
 
       const monthFolder = document.createElement('details');
       monthFolder.className = 'shipment-folder shipment-folder-month';
-      if (yearIdx === 0 && monthIdx === 0) monthFolder.open = true;
+      if (q || (yearIdx === 0 && monthIdx === 0)) monthFolder.open = true;
 
       const monthSummary = document.createElement('summary');
       monthSummary.textContent = `📂 ${monthLabel} (${entries.length})`;
@@ -1269,6 +1285,8 @@ function renderShipments() {
     shipmentsFolders.appendChild(yearFolder);
   });
 }
+
+shipmentSearchInput.addEventListener('input', renderShipments);
 
 shipmentForm.addEventListener('submit', async (e) => {
   e.preventDefault();

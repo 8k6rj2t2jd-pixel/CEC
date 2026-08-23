@@ -625,7 +625,10 @@ app.post('/api/shipments', async (req, res) => {
   if (!date || !client) {
     return res.status(400).json({ error: 'Data de envio e cliente são obrigatórios.' });
   }
-  const toNumber = (v) => (Number.isFinite(Number(v)) && Number(v) >= 0 ? Number(v) : null);
+  const toNumber = (v) => {
+    if (v === undefined || v === null || String(v).trim() === '') return null;
+    return Number.isFinite(Number(v)) && Number(v) >= 0 ? Number(v) : null;
+  };
 
   const shipment = {
     id: crypto.randomUUID(),
@@ -650,7 +653,12 @@ app.patch('/api/shipments/:id', async (req, res) => {
   }
   if ('client' in patch) patch.client = String(patch.client).trim();
   for (const key of ['weight', 'length', 'width', 'height']) {
-    if (key in patch) patch[key] = Number.isFinite(Number(patch[key])) && Number(patch[key]) >= 0 ? Number(patch[key]) : null;
+    if (key in patch) {
+      const v = patch[key];
+      patch[key] = v === undefined || v === null || String(v).trim() === ''
+        ? null
+        : (Number.isFinite(Number(v)) && Number(v) >= 0 ? Number(v) : null);
+    }
   }
   const updated = await store.updateShipment(req.params.id, patch);
   if (!updated) return res.status(404).json({ error: 'Envio não encontrado.' });
