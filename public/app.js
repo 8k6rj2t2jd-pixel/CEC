@@ -1178,8 +1178,10 @@ function renderLabelCard(label) {
   link.target = '_blank';
   link.rel = 'noopener';
   if (label.fileType === 'application/pdf') {
-    link.addEventListener('click', (e) => {
-      e.preventDefault();
+    // Não faz preventDefault - deixa o link abrir o ficheiro original numa
+    // aba nova (comportamento normal do target=_blank, sempre fiável) e ao
+    // mesmo tempo mostra a pré-visualização aqui na app.
+    link.addEventListener('click', () => {
       openPdfViewer(label.fileUrl, label.fileName);
     });
   }
