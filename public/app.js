@@ -773,7 +773,9 @@ function renderFilesModalList(files) {
     row.className = 'edit-file-row';
 
     const link = document.createElement('a');
-    link.href = file.url;
+    // Sempre através do próprio site: assim o ficheiro só chega a quem tem
+    // sessão iniciada, e nunca circula um endereço que funcione sozinho.
+    link.href = `/api/parts/${filesModalPart.id}/files/${file.id}/download`;
     link.target = '_blank';
     link.rel = 'noopener noreferrer';
     link.className = 'edit-file-link';

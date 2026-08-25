@@ -701,11 +701,18 @@ app.post('/api/parts/:id/files', uploadRateLimiter, handleUpload(partFileUpload.
       let publicId = null;
       let resourceType = null;
 
+      let deliveryType = null;
+
       if (images.useCloud) {
         const uploaded = await images.uploadPartFile(file.path, part.id, fileId, file.mimetype);
-        fileUrl = uploaded.url;
+        // De proposito NAO se guarda o endereco do Cloudinary como "url": os
+        // ficheiros das pecas passam a ser servidos sempre pelo proprio site
+        // (ver a rota /download), para nunca sair daqui um endereco que
+        // funcione sozinho.
+        fileUrl = null;
         publicId = uploaded.publicId;
         resourceType = uploaded.resourceType;
+        deliveryType = uploaded.deliveryType;
         fs.unlink(file.path, () => {});
       } else {
         const folder = path.join(STORAGE_DIR, 'pecas-ficheiros', part.id);
@@ -724,6 +731,7 @@ app.post('/api/parts/:id/files', uploadRateLimiter, handleUpload(partFileUpload.
         url: fileUrl,
         publicId,
         resourceType,
+        deliveryType,
         createdAt: new Date().toISOString(),
       });
     }
@@ -738,6 +746,51 @@ app.post('/api/parts/:id/files', uploadRateLimiter, handleUpload(partFileUpload.
   res.status(201).json({ ...updated, skipped: skipped.length, added: newFiles.length });
 });
 
+// Unica porta de entrada para os ficheiros de uma peça. Como toda a API
+// exige sessao iniciada, isto garante que ninguem chega a um dump de
+// centralina sem entrar no site - nem sequer com o endereco na mao.
+app.get('/api/parts/:id/files/:fileId/download', async (req, res) => {
+  const part = await store.getPart(req.params.id);
+  if (!part) return res.status(404).json({ error: 'Peca nao encontrada.' });
+
+  const target = (part.files || []).find((f) => f.id === req.params.fileId);
+  if (!target) return res.status(404).json({ error: 'Ficheiro não encontrado.' });
+
+  // O nome original e usado so para a transferencia sair com um nome
+  // reconhecivel - limpo de barras e aspas para nao poder alterar o
+  // cabecalho da resposta.
+  const safeName = String(target.fileName || 'ficheiro').replace(/[\\/"\r\n]/g, '_').slice(0, 200);
+
+  // Ficheiro guardado em disco (modo local, sem Cloudinary).
+  if (!target.publicId) {
+    const safePath = target.url && resolveInsideStorage(target.url.replace(/^\/storage\//, ''));
+    if (!safePath || !fs.existsSync(safePath)) {
+      return res.status(404).json({ error: 'Ficheiro não encontrado.' });
+    }
+    return res.download(safePath, safeName);
+  }
+
+  // Ficheiro no Cloudinary: o servidor gera um link assinado de curta
+  // duracao (so ele tem a chave), vai buscar o ficheiro e entrega-o. O
+  // browser nunca chega a ver o endereco do Cloudinary.
+  try {
+    const signed = images.signedUrlFor(target.publicId, target.resourceType, target.deliveryType);
+    const upstream = await fetch(signed);
+    if (!upstream.ok) {
+      console.error('[files] Cloudinary respondeu', upstream.status, 'para', target.publicId);
+      return res.status(502).json({ error: 'Não foi possível obter o ficheiro. Tente novamente.' });
+    }
+    res.setHeader('Content-Type', target.fileType || 'application/octet-stream');
+    res.setHeader('Content-Disposition', `attachment; filename="${safeName}"`);
+    res.setHeader('Cache-Control', 'private, no-store');
+    const buffer = Buffer.from(await upstream.arrayBuffer());
+    return res.send(buffer);
+  } catch (err) {
+    console.error('[files] falha ao obter o ficheiro:', err);
+    return res.status(502).json({ error: 'Não foi possível obter o ficheiro. Tente novamente.' });
+  }
+});
+
 app.delete('/api/parts/:id/files/:fileId', async (req, res) => {
   const part = await store.getPart(req.params.id);
   if (!part) return res.status(404).json({ error: 'Peca nao encontrada.' });
@@ -746,7 +799,7 @@ app.delete('/api/parts/:id/files/:fileId', async (req, res) => {
   if (!target) return res.status(404).json({ error: 'Ficheiro não encontrado.' });
 
   if (images.useCloud) {
-    if (target.publicId) await images.deletePartFile(target.publicId, target.resourceType);
+    if (target.publicId) await images.deletePartFile(target.publicId, target.resourceType, target.deliveryType);
   } else if (target.url) {
     const safePath = resolveInsideStorage(target.url.replace(/^\/storage\//, ''));
     if (safePath) fs.unlink(safePath, () => {});
@@ -767,7 +820,7 @@ app.delete('/api/parts/:id', async (req, res) => {
       if (img && img.publicId) await images.deleteImage(img.publicId);
     }
     for (const file of removed.files || []) {
-      if (file && file.publicId) await images.deletePartFile(file.publicId, file.resourceType);
+      if (file && file.publicId) await images.deletePartFile(file.publicId, file.resourceType, file.deliveryType);
     }
   } else {
     const firstUrl = (imgs[0] && imgs[0].url) || '';
