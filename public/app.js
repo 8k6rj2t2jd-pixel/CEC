@@ -777,6 +777,7 @@ function renderFilesModalList(files) {
     link.target = '_blank';
     link.rel = 'noopener noreferrer';
     link.className = 'edit-file-link';
+    link.title = file.fileName || '';
     link.innerHTML = `
       <span class="edit-file-icon">${fileIconFor(file.fileType, file.fileName)}</span>
       <span class="edit-file-info">
@@ -826,14 +827,31 @@ filesOverlay.addEventListener('click', (e) => {
   if (e.target === filesOverlay) closeFilesModal();
 });
 
-const MAX_FILES_PER_UPLOAD = 30;
+const MAX_FILES_PER_UPLOAD = 60;
+
+// Ao escolher uma pasta, o browser inclui tambem o lixo que o sistema
+// operativo la deixa (.DS_Store no Mac, Thumbs.db no Windows) - nao vale a
+// pena mandar isso para o servidor so para ser recusado.
+function isJunkFile(file) {
+  const name = (file.name || '').toLowerCase();
+  return name.startsWith('.') || name === 'thumbs.db' || name === 'desktop.ini';
+}
 
 async function uploadPartFiles(input) {
-  const files = Array.from(input.files || []);
-  if (!files.length || !filesModalPart) return;
+  const chosen = Array.from(input.files || []);
+  if (!chosen.length || !filesModalPart) return;
+
+  const files = chosen.filter((f) => !isJunkFile(f));
 
   filesModalStatus.hidden = false;
   filesModalStatus.classList.remove('error');
+
+  if (!files.length) {
+    filesModalStatus.classList.add('error');
+    filesModalStatus.textContent = 'Essa pasta não tem ficheiros que se possam guardar.';
+    input.value = '';
+    return;
+  }
 
   if (files.length > MAX_FILES_PER_UPLOAD) {
     filesModalStatus.classList.add('error');
@@ -845,7 +863,9 @@ async function uploadPartFiles(input) {
   filesModalStatus.textContent = files.length === 1 ? 'A enviar…' : `A enviar ${files.length} ficheiros…`;
 
   const fd = new FormData();
-  files.forEach((file) => fd.append('file', file, file.name));
+  // Numa pasta, guarda-se o caminho relativo como nome (ex: "dumps/flash.bin")
+  // para nao se perder de que subpasta veio cada ficheiro.
+  files.forEach((file) => fd.append('file', file, file.webkitRelativePath || file.name));
 
   try {
     const resp = await fetch(`/api/parts/${filesModalPart.id}/files`, { method: 'POST', body: fd });
@@ -854,7 +874,12 @@ async function uploadPartFiles(input) {
     filesModalPart.files = data.files || [];
     renderFilesModalList(filesModalPart.files);
     renderFilesCatalog();
-    filesModalStatus.hidden = true;
+    if (data.skipped) {
+      filesModalStatus.textContent =
+        `${data.added} guardado(s). ${data.skipped} ficheiro(s) ignorado(s) por não serem de um tipo permitido.`;
+    } else {
+      filesModalStatus.hidden = true;
+    }
   } catch (err) {
     filesModalStatus.classList.add('error');
     filesModalStatus.textContent = err.message;

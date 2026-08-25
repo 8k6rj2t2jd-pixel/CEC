@@ -17,6 +17,23 @@ body {
   padding: 10px; border-radius: 8px; font-size: 0.95rem;
 }
 .login-card button { width: 100%; margin-top: 6px; }
+
+/* Campo da senha com o "olhinho" para a mostrar/esconder */
+.password-field { position: relative; display: block; }
+.password-field input { width: 100%; padding-right: 44px; }
+.login-card .password-eye {
+  position: absolute; top: 0; right: 0; bottom: 0;
+  width: 40px; margin: 0; padding: 0;
+  background: none; border: none; cursor: pointer;
+  font-size: 1rem; line-height: 1;
+}
+
+/* "Relembra-me" - fica na horizontal, ao contrario dos outros campos */
+.login-card label.remember-row {
+  flex-direction: row; align-items: center; gap: 8px;
+  font-size: 0.82rem; cursor: pointer; margin-bottom: 16px;
+}
+.login-card label.remember-row input { width: auto; padding: 0; }
 #login-error[hidden] { display: none; }
 #login-error {
   display: flex; align-items: center; gap: 8px;

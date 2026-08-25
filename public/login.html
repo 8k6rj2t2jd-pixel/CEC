@@ -19,7 +19,14 @@
     </label>
     <label>
       Senha
-      <input id="password" name="password" type="password" autocomplete="current-password" required />
+      <span class="password-field">
+        <input id="password" name="password" type="password" autocomplete="current-password" required />
+        <button type="button" id="toggle-password" class="password-eye" aria-label="Mostrar senha" title="Mostrar senha">👁️</button>
+      </span>
+    </label>
+    <label class="remember-row">
+      <input type="checkbox" id="remember-me" />
+      <span>Relembra-me neste dispositivo</span>
     </label>
     <button type="submit" class="btn btn-primary">Entrar</button>
     <p id="login-error" hidden><span aria-hidden="true">⚠️</span> <span id="login-error-text"></span></p>

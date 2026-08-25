@@ -290,10 +290,18 @@ const partFileUpload = multer({
       cb(null, `${crypto.randomUUID()}${ext}`);
     },
   }),
-  limits: { fileSize: 20 * 1024 * 1024, files: 30 },
+  limits: { fileSize: 20 * 1024 * 1024, files: 60 },
+  // Ao enviar uma pasta inteira vem sempre lixo do sistema pelo meio
+  // (.DS_Store no Mac, Thumbs.db no Windows) e por vezes ficheiros de
+  // configuracao das ferramentas. Recusar o pedido todo por causa de um
+  // deles deitava fora os dumps bons que vinham no mesmo envio - por isso
+  // salta-se o que nao serve e guarda-se o resto, dizendo no fim quantos
+  // ficaram de fora.
   fileFilter: (req, file, cb) => {
     if (!isAllowedPartFile(file)) {
-      return cb(new Error('Tipo de ficheiro não permitido.'));
+      req.skippedFiles = req.skippedFiles || [];
+      req.skippedFiles.push(file.originalname);
+      return cb(null, false);
     }
     cb(null, true);
   },
@@ -534,7 +542,17 @@ app.post(
 // cada um com o seu próprio id para poder apagar individualmente.
 app.post('/api/parts/:id/files', handleUpload(partFileUpload.array('file', 30)), async (req, res) => {
   const files = req.files || [];
-  if (!files.length) return res.status(400).json({ error: 'Falta o ficheiro.' });
+  const skipped = req.skippedFiles || [];
+  if (!files.length) {
+    if (skipped.length) {
+      return res.status(400).json({
+        error: skipped.length === 1
+          ? 'Tipo de ficheiro não permitido.'
+          : `Nenhum dos ${skipped.length} ficheiros é de um tipo permitido.`,
+      });
+    }
+    return res.status(400).json({ error: 'Falta o ficheiro.' });
+  }
   const cleanupTmp = () => files.forEach((f) => fs.unlink(f.path, () => {}));
 
   const part = await store.getPart(req.params.id);
@@ -586,7 +604,7 @@ app.post('/api/parts/:id/files', handleUpload(partFileUpload.array('file', 30)),
 
   const partFiles = [...(part.files || []), ...newFiles];
   const updated = await store.updatePart(part.id, { files: partFiles });
-  res.status(201).json(updated);
+  res.status(201).json({ ...updated, skipped: skipped.length, added: newFiles.length });
 });
 
 app.delete('/api/parts/:id/files/:fileId', async (req, res) => {
