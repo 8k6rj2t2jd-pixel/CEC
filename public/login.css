@@ -34,6 +34,9 @@ body {
   font-size: 0.82rem; cursor: pointer; margin-bottom: 16px;
 }
 .login-card label.remember-row input { width: auto; padding: 0; }
+.remember-warning {
+  margin: -10px 0 14px; font-size: 0.72rem; color: var(--muted); line-height: 1.4;
+}
 #login-error[hidden] { display: none; }
 #login-error {
   display: flex; align-items: center; gap: 8px;

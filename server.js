@@ -74,7 +74,40 @@ app.use(
   })
 );
 
-app.use(express.json());
+// Limite explicito ao tamanho do JSON aceite - os formularios da app enviam
+// poucos KB, por isso nao ha razao para aceitar corpos grandes (seria so
+// mais uma forma de gastar memoria do servidor de borla).
+app.use(express.json({ limit: '64kb' }));
+
+// ---------------------------------------------------------------------------
+// Protecao contra CSRF (pedidos disparados a partir de outro site com o
+// cookie de sessao de quem esta autenticado). O cookie ja e SameSite=Strict,
+// o que sozinho ja trava a maior parte destes ataques nos browsers atuais;
+// isto e a segunda tranca: qualquer pedido que altere dados tem de vir
+// mesmo do proprio site.
+// ---------------------------------------------------------------------------
+const SAFE_METHODS = new Set(['GET', 'HEAD', 'OPTIONS']);
+
+function sameOrigin(req) {
+  const origin = req.get('origin') || req.get('referer');
+  // Sem Origin nem Referer nao da para provar a proveniencia. Os browsers
+  // enviam sempre pelo menos um deles em pedidos deste tipo, por isso
+  // recusa-se por precaucao.
+  if (!origin) return false;
+  try {
+    const url = new URL(origin);
+    const expectedHost = req.get('host');
+    return url.host === expectedHost;
+  } catch {
+    return false;
+  }
+}
+
+app.use((req, res, next) => {
+  if (SAFE_METHODS.has(req.method)) return next();
+  if (sameOrigin(req)) return next();
+  return res.status(403).json({ error: 'Pedido bloqueado por segurança. Recarregue a página e tente de novo.' });
+});
 
 // Trava geral contra abuso/DoS na API (para alem do bloqueio especifico do
 // login, abaixo). Generosa o suficiente para uso normal da app.
@@ -97,6 +130,26 @@ const loginRateLimiter = rateLimit({
   message: { error: 'Demasiadas tentativas de login. Tente novamente mais tarde.' },
 });
 
+// Enviar ficheiros e correr o OCR sao as operacoes que mais gastam disco e
+// CPU. O limite geral da API (120/min) e generoso demais para elas: 120
+// envios de 20 MB encheriam o disco do plano gratuito num minuto. Estes
+// limites continuam muito acima do uso normal de uma pessoa a trabalhar.
+const uploadRateLimiter = rateLimit({
+  windowMs: 60 * 1000,
+  max: 20,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { error: 'Demasiados envios seguidos. Espere um pouco e tente de novo.' },
+});
+
+const ocrRateLimiter = rateLimit({
+  windowMs: 60 * 1000,
+  max: 15,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { error: 'Demasiadas leituras seguidas. Espere um pouco e tente de novo.' },
+});
+
 // Sem isto, as sessoes ficam so em memoria - qualquer reinicio do servidor
 // (ex: o plano gratuito do Render "adormece" com inatividade e acorda como
 // processo novo) apaga todas as sessoes, desligando quem tinha a sessao
@@ -106,10 +159,17 @@ const sessionConfig = {
   secret: SESSION_SECRET,
   resave: false,
   saveUninitialized: false,
+  name: 'cec.sid', // nao anuncia que e Express, ao contrario do "connect.sid"
   cookie: {
     httpOnly: true,
-    sameSite: 'lax',
-    secure: IS_PRODUCTION,
+    // "strict": o cookie nunca acompanha pedidos vindos de outro site, nem
+    // sequer ao clicar num link - a defesa mais forte contra CSRF. A app so
+    // se navega por dentro, por isso nao perde nada com isto.
+    sameSite: 'strict',
+    // "auto" marca o cookie como Secure sempre que a ligacao e HTTPS, em vez
+    // de depender de a variavel NODE_ENV estar bem definida no hosting - se
+    // alguem se esquecesse dela, o cookie seguia sem protecao.
+    secure: 'auto',
     maxAge: 30 * 24 * 60 * 60 * 1000,
   },
 };
@@ -154,7 +214,7 @@ app.post('/api/login', loginRateLimiter, async (req, res) => {
 
 app.post('/api/logout', (req, res) => {
   req.session.destroy(() => {
-    res.clearCookie('connect.sid');
+    res.clearCookie('cec.sid');
     res.json({ ok: true });
   });
 });
@@ -190,7 +250,24 @@ app.use(express.static(PUBLIC_DIR, {
     if (filePath.includes(`${path.sep}pdfjs${path.sep}`)) res.setHeader('Cache-Control', `public, max-age=${LONG_CACHE_MS / 1000}`);
   },
 }));
-app.use('/storage', express.static(STORAGE_DIR, { maxAge: LONG_CACHE_MS }));
+// Ficheiros guardados (fotos, etiquetas, dumps). Tudo o que nao seja uma
+// foto ou PDF e servido como transferencia forcada: mesmo que alguem
+// conseguisse la por um ficheiro com conteudo HTML, o browser guardava-o em
+// vez de o abrir como pagina do proprio site (o que permitiria correr
+// scripts com a sessao de quem estivesse autenticado).
+const INLINE_SAFE_EXTENSIONS = new Set(['.jpg', '.jpeg', '.png', '.webp', '.gif', '.pdf']);
+
+app.use(
+  '/storage',
+  express.static(STORAGE_DIR, {
+    maxAge: LONG_CACHE_MS,
+    setHeaders: (res, filePath) => {
+      if (!INLINE_SAFE_EXTENSIONS.has(path.extname(filePath).toLowerCase())) {
+        res.setHeader('Content-Disposition', 'attachment');
+      }
+    },
+  })
+);
 
 const ALLOWED_IMAGE_TYPES = new Set(['image/jpeg', 'image/png', 'image/webp', 'image/heic', 'image/heif']);
 
@@ -198,8 +275,7 @@ const upload = multer({
   storage: multer.diskStorage({
     destination: (req, file, cb) => cb(null, TMP_DIR),
     filename: (req, file, cb) => {
-      const ext = path.extname(file.originalname) || '.jpg';
-      cb(null, `${crypto.randomUUID()}${ext}`);
+      cb(null, `${crypto.randomUUID()}${safeExtension(file.originalname, '.jpg')}`);
     },
   }),
   limits: { fileSize: 15 * 1024 * 1024 },
@@ -231,8 +307,7 @@ const labelUpload = multer({
   storage: multer.diskStorage({
     destination: (req, file, cb) => cb(null, TMP_DIR),
     filename: (req, file, cb) => {
-      const ext = path.extname(file.originalname) || '';
-      cb(null, `${crypto.randomUUID()}${ext}`);
+      cb(null, `${crypto.randomUUID()}${safeExtension(file.originalname)}`);
     },
   }),
   limits: { fileSize: 20 * 1024 * 1024 },
@@ -286,11 +361,13 @@ const partFileUpload = multer({
   storage: multer.diskStorage({
     destination: (req, file, cb) => cb(null, TMP_DIR),
     filename: (req, file, cb) => {
-      const ext = path.extname(file.originalname) || '';
-      cb(null, `${crypto.randomUUID()}${ext}`);
+      cb(null, `${crypto.randomUUID()}${safeExtension(file.originalname)}`);
     },
   }),
-  limits: { fileSize: 20 * 1024 * 1024, files: 60 },
+  // "files" limita quantos ficheiros por envio; "fileSize" limita cada um.
+  // Juntos travam o pior caso (um so pedido a tentar escrever gigabytes no
+  // disco do servidor).
+  limits: { fileSize: 20 * 1024 * 1024, files: 25, fields: 10, parts: 40 },
   // Ao enviar uma pasta inteira vem sempre lixo do sistema pelo meio
   // (.DS_Store no Mac, Thumbs.db no Windows) e por vezes ficheiros de
   // configuracao das ferramentas. Recusar o pedido todo por causa de um
@@ -307,6 +384,45 @@ const partFileUpload = multer({
   },
 });
 
+// ---------------------------------------------------------------------------
+// Validacao dos dados que chegam em JSON
+// ---------------------------------------------------------------------------
+// Sem isto, um pedido feito a mao podia enviar um objeto (ex: {"$ne": null})
+// ou um texto enorme onde a app espera uma linha de texto, e isso ia parar
+// tal e qual a base de dados. Aqui garante-se que so entra texto simples e
+// de tamanho razoavel.
+const MAX_FIELD_LENGTH = 300;
+const MAX_NOTES_LENGTH = 2000;
+
+function cleanText(value, maxLength = MAX_FIELD_LENGTH) {
+  if (value === undefined || value === null) return '';
+  if (typeof value === 'object') return ''; // recusa objetos/arrays
+  return String(value)
+    // Tira caracteres de controlo (incluindo os que "partem" linhas em
+    // ficheiros exportados), mantendo acentos e simbolos normais.
+    .replace(/[\x00-\x1F\x7F]/g, '')
+    .trim()
+    .slice(0, maxLength);
+}
+
+// So aceita caminhos que fiquem mesmo dentro da pasta de armazenamento -
+// segunda tranca para nunca se apagar nada fora dela por causa de um valor
+// estranho guardado na base de dados.
+function resolveInsideStorage(relativePath) {
+  const resolved = path.resolve(STORAGE_DIR, relativePath);
+  const root = path.resolve(STORAGE_DIR);
+  if (resolved !== root && !resolved.startsWith(root + path.sep)) return null;
+  return resolved;
+}
+
+// Extensao segura para o nome com que o ficheiro fica gravado em disco. O
+// nome em si e sempre um UUID gerado por nos; isto so garante que a extensao
+// vinda do cliente nao traz caracteres estranhos.
+function safeExtension(originalName, fallback = '') {
+  const ext = path.extname(String(originalName || '')).toLowerCase();
+  return /^\.[a-z0-9]{1,10}$/.test(ext) ? ext : fallback;
+}
+
 function slugify(value) {
   return String(value || 'diverso')
     .normalize('NFD')
@@ -320,7 +436,7 @@ function slugify(value) {
 // candidatas e texto em bruto, para pre-preencher o formulario. O tipo de
 // peca e a marca/modelo do veiculo ficam sempre a cargo do utilizador,
 // porque normalmente nao vem impresso na etiqueta.
-app.post('/api/ocr', handleUpload(upload.single('label')), async (req, res) => {
+app.post('/api/ocr', ocrRateLimiter, handleUpload(upload.single('label')), async (req, res) => {
   if (!req.file) return res.status(400).json({ error: 'Falta a foto da etiqueta.' });
   const startedAt = Date.now();
   console.log(`[OCR] a processar ${req.file.originalname} (${Math.round(req.file.size / 1024)}KB)...`);
@@ -368,6 +484,7 @@ app.get('/api/parts/:id', async (req, res) => {
 
 app.post(
   '/api/parts',
+  uploadRateLimiter,
   handleUpload(
     upload.fields([
       { name: 'front', maxCount: 1 },
@@ -384,7 +501,18 @@ app.post(
       }
     };
 
-    const { category, partType, manufacturer, brand, model, ref1, ref2, quantity, box, notes } = req.body;
+    const body = req.body || {};
+    const category = cleanText(body.category);
+    const partType = cleanText(body.partType);
+    const manufacturer = cleanText(body.manufacturer);
+    const brand = cleanText(body.brand);
+    const model = cleanText(body.model);
+    const ref1 = cleanText(body.ref1);
+    const ref2 = cleanText(body.ref2);
+    const box = cleanText(body.box);
+    const notes = cleanText(body.notes, MAX_NOTES_LENGTH);
+    const quantity = body.quantity;
+
     if (!partType || !manufacturer) {
       cleanupTmp();
       return res.status(400).json({ error: 'Tipo de peca e fabricante sao obrigatorios.' });
@@ -452,13 +580,15 @@ app.post(
 );
 
 app.patch('/api/parts/:id', async (req, res) => {
-  const allowed = ['category', 'partType', 'manufacturer', 'brand', 'model', 'ref1', 'ref2', 'quantity', 'box', 'notes'];
+  const allowed = ['category', 'partType', 'manufacturer', 'brand', 'model', 'ref1', 'ref2', 'box', 'notes'];
+  const body = req.body || {};
   const patch = {};
   for (const key of allowed) {
-    if (key in req.body) patch[key] = req.body[key];
+    if (key in body) patch[key] = cleanText(body[key], key === 'notes' ? MAX_NOTES_LENGTH : MAX_FIELD_LENGTH);
   }
-  if ('quantity' in patch) {
-    patch.quantity = Math.max(0, Math.trunc(Number(patch.quantity) || 0));
+  if ('category' in patch) patch.category = patch.category === 'quadrante' ? 'quadrante' : 'centralina';
+  if ('quantity' in body) {
+    patch.quantity = Math.max(0, Math.trunc(Number(body.quantity) || 0));
   }
   const updated = await store.updatePart(req.params.id, patch);
   if (!updated) return res.status(404).json({ error: 'Peca nao encontrada.' });
@@ -471,6 +601,7 @@ app.patch('/api/parts/:id', async (req, res) => {
 // estavam.
 app.post(
   '/api/parts/:id/photos',
+  uploadRateLimiter,
   handleUpload(
     upload.fields([
       { name: 'front', maxCount: 1 },
@@ -540,7 +671,7 @@ app.post(
 // Ficheiros diversos anexados a uma peça (manuais, faturas, esquemas...) -
 // aparecem na aba "Ficheiros" ao editar a peça. Vários ficheiros por peça,
 // cada um com o seu próprio id para poder apagar individualmente.
-app.post('/api/parts/:id/files', handleUpload(partFileUpload.array('file', 30)), async (req, res) => {
+app.post('/api/parts/:id/files', uploadRateLimiter, handleUpload(partFileUpload.array('file', 25)), async (req, res) => {
   const files = req.files || [];
   const skipped = req.skippedFiles || [];
   if (!files.length) {
@@ -617,8 +748,8 @@ app.delete('/api/parts/:id/files/:fileId', async (req, res) => {
   if (images.useCloud) {
     if (target.publicId) await images.deletePartFile(target.publicId, target.resourceType);
   } else if (target.url) {
-    const rel = target.url.replace(/^\/storage\//, '');
-    fs.unlink(path.join(STORAGE_DIR, rel), () => {});
+    const safePath = resolveInsideStorage(target.url.replace(/^\/storage\//, ''));
+    if (safePath) fs.unlink(safePath, () => {});
   }
 
   const partFiles = (part.files || []).filter((f) => f.id !== req.params.fileId);
@@ -645,10 +776,15 @@ app.delete('/api/parts/:id', async (req, res) => {
     // pasta STORAGE_DIR inteira (todas as fotos de todas as pecas).
     if (firstUrl) {
       const rel = firstUrl.replace(/^\/storage\//, '');
-      const folder = path.join(STORAGE_DIR, path.dirname(rel));
-      fs.rm(folder, { recursive: true, force: true }, () => {});
+      const folder = resolveInsideStorage(path.dirname(rel));
+      // "resolveInsideStorage" devolve null se o caminho tentasse sair da
+      // pasta de armazenamento, e nunca se apaga a raiz por engano.
+      if (folder && folder !== path.resolve(STORAGE_DIR)) {
+        fs.rm(folder, { recursive: true, force: true }, () => {});
+      }
     }
-    fs.rm(path.join(STORAGE_DIR, 'pecas-ficheiros', removed.id), { recursive: true, force: true }, () => {});
+    const filesFolder = resolveInsideStorage(path.join('pecas-ficheiros', removed.id));
+    if (filesFolder) fs.rm(filesFolder, { recursive: true, force: true }, () => {});
   }
 
   res.json({ ok: true });
@@ -667,6 +803,7 @@ app.get('/api/labels', async (req, res) => {
 
 app.post(
   '/api/labels',
+  uploadRateLimiter,
   handleUpload(
     labelUpload.fields([
       { name: 'file', maxCount: 1 },
@@ -685,8 +822,8 @@ app.post(
       if (thumbnailFile) fs.unlink(thumbnailFile.path, () => {});
     };
 
-    const manufacturer = (req.body.manufacturer || '').trim();
-    const reference = (req.body.reference || '').trim();
+    const manufacturer = cleanText(req.body.manufacturer);
+    const reference = cleanText(req.body.reference);
     const isTemplate = req.body.isTemplate === 'true' || req.body.isTemplate === 'on';
 
     const id = crypto.randomUUID();
@@ -757,12 +894,12 @@ app.post(
 );
 
 app.patch('/api/labels/:id', async (req, res) => {
-  const allowed = ['manufacturer', 'reference', 'isTemplate'];
+  const body = req.body || {};
   const patch = {};
-  for (const key of allowed) {
-    if (key in req.body) patch[key] = req.body[key];
+  for (const key of ['manufacturer', 'reference']) {
+    if (key in body) patch[key] = cleanText(body[key]);
   }
-  if ('isTemplate' in patch) patch.isTemplate = patch.isTemplate === true || patch.isTemplate === 'true';
+  if ('isTemplate' in body) patch.isTemplate = body.isTemplate === true || body.isTemplate === 'true';
   const updated = await store.updateLabel(req.params.id, patch);
   if (!updated) return res.status(404).json({ error: 'Etiqueta não encontrada.' });
   res.json(updated);
@@ -780,8 +917,10 @@ app.delete('/api/labels/:id', async (req, res) => {
     // proteção usada para as fotos das peças, para nunca apagar o
     // repositorio inteiro por engano).
     const rel = removed.fileUrl.replace(/^\/storage\//, '');
-    const folder = path.join(STORAGE_DIR, path.dirname(rel));
-    fs.rm(folder, { recursive: true, force: true }, () => {});
+    const folder = resolveInsideStorage(path.dirname(rel));
+    if (folder && folder !== path.resolve(STORAGE_DIR)) {
+      fs.rm(folder, { recursive: true, force: true }, () => {});
+    }
   }
 
   res.json({ ok: true });
@@ -798,8 +937,13 @@ app.get('/api/shipments', async (req, res) => {
 });
 
 app.post('/api/shipments', async (req, res) => {
-  const { date, client, weight, length, width, height } = req.body;
-  if (!date || !client) {
+  const body = req.body || {};
+  const { weight, length, width, height } = body;
+  // A data tem de vir mesmo no formato AAAA-MM-DD - e o que o agrupamento
+  // por ano/mes no browser espera; qualquer outra coisa estragaria as pastas.
+  const date = cleanText(body.date, 10);
+  const client = cleanText(body.client);
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(date) || !client) {
     return res.status(400).json({ error: 'Data de envio e cliente são obrigatórios.' });
   }
   const toNumber = (v) => {
@@ -809,8 +953,8 @@ app.post('/api/shipments', async (req, res) => {
 
   const shipment = {
     id: crypto.randomUUID(),
-    date: String(date),
-    client: String(client).trim(),
+    date,
+    client,
     weight: toNumber(weight),
     length: toNumber(length),
     width: toNumber(width),
@@ -823,16 +967,20 @@ app.post('/api/shipments', async (req, res) => {
 });
 
 app.patch('/api/shipments/:id', async (req, res) => {
-  const allowed = ['date', 'client', 'weight', 'length', 'width', 'height'];
+  const body = req.body || {};
   const patch = {};
-  for (const key of allowed) {
-    if (key in req.body) patch[key] = req.body[key];
+  if ('client' in body) patch.client = cleanText(body.client);
+  if ('date' in body) {
+    const date = cleanText(body.date, 10);
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) {
+      return res.status(400).json({ error: 'Data de envio inválida.' });
+    }
+    patch.date = date;
   }
-  if ('client' in patch) patch.client = String(patch.client).trim();
   for (const key of ['weight', 'length', 'width', 'height']) {
-    if (key in patch) {
-      const v = patch[key];
-      patch[key] = v === undefined || v === null || String(v).trim() === ''
+    if (key in body) {
+      const v = body[key];
+      patch[key] = v === undefined || v === null || typeof v === 'object' || String(v).trim() === ''
         ? null
         : (Number.isFinite(Number(v)) && Number(v) >= 0 ? Number(v) : null);
     }
@@ -901,8 +1049,8 @@ app.get('/api/export.xlsx', async (req, res) => {
             const resp = await fetch(front.url);
             if (resp.ok) buffer = Buffer.from(await resp.arrayBuffer());
           } else {
-            const localPath = path.join(STORAGE_DIR, front.url.replace(/^\/storage\//, ''));
-            if (fs.existsSync(localPath)) {
+            const localPath = resolveInsideStorage(front.url.replace(/^\/storage\//, ''));
+            if (localPath && fs.existsSync(localPath)) {
               buffer = fs.readFileSync(localPath);
               ext = path.extname(localPath).slice(1).toLowerCase() || 'jpeg';
             }
