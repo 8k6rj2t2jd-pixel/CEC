@@ -468,10 +468,17 @@
     </div>
 
     <div id="files-modal-list" class="edit-files-list"></div>
-    <label class="btn edit-files-upload-btn">
-      📎 Adicionar ficheiro
-      <input type="file" id="files-modal-input" hidden />
-    </label>
+    <div class="files-upload-row">
+      <label class="btn edit-files-upload-btn">
+        📎 Adicionar ficheiros
+        <input type="file" id="files-modal-input" multiple hidden />
+      </label>
+      <label class="btn edit-files-upload-btn files-folder-btn" id="files-folder-label" hidden>
+        📁 Adicionar pasta
+        <input type="file" id="files-modal-folder-input" webkitdirectory directory multiple hidden />
+      </label>
+    </div>
+    <p class="hint files-upload-hint">Pode escolher vários de uma vez. No telemóvel, escolha os ficheiros dentro da pasta.</p>
     <p id="files-modal-status" class="hint" hidden></p>
   </div>
 </div>

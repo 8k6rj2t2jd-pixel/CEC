@@ -323,6 +323,10 @@ main { padding: 16px; max-width: 720px; margin: 0 auto; }
   font-size: 0.95rem; padding: 4px 6px; flex-shrink: 0;
 }
 .edit-files-upload-btn { display: block; text-align: center; cursor: pointer; }
+.files-upload-row { display: flex; gap: 8px; }
+.files-upload-row .edit-files-upload-btn { flex: 1; }
+.files-upload-row .edit-files-upload-btn[hidden] { display: none; }
+.files-upload-hint { margin: -6px 0 0; font-size: 0.75rem; }
 
 .label-template-check { display: flex; flex-direction: row; align-items: center; gap: 8px; }
 

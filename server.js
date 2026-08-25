@@ -264,6 +264,24 @@ const ALLOWED_PART_FILE_TYPES = new Set([
   'application/x-zip-compressed',
 ]);
 
+// Dumps de centralinas (leituras de flash/EEPROM feitas pelas ferramentas de
+// programacao) chegam quase sempre como "application/octet-stream", um tipo
+// generico demais para se aceitar em bruto - qualquer ficheiro pode alegar
+// ser isso. Por isso aceita-se esse tipo apenas quando a extensao e mesmo
+// uma das usadas por estas ferramentas.
+const ALLOWED_DUMP_EXTENSIONS = new Set([
+  '.bin', '.hex', '.ori', '.mod', '.eep', '.eeprom', '.frf', '.s19', '.dam', '.kp', '.a2l',
+]);
+const GENERIC_BINARY_TYPES = new Set(['application/octet-stream', 'application/x-binary', '']);
+
+function isAllowedPartFile(file) {
+  if (ALLOWED_PART_FILE_TYPES.has(file.mimetype)) return true;
+  if (GENERIC_BINARY_TYPES.has(file.mimetype || '')) {
+    return ALLOWED_DUMP_EXTENSIONS.has(path.extname(file.originalname || '').toLowerCase());
+  }
+  return false;
+}
+
 const partFileUpload = multer({
   storage: multer.diskStorage({
     destination: (req, file, cb) => cb(null, TMP_DIR),
@@ -272,9 +290,9 @@ const partFileUpload = multer({
       cb(null, `${crypto.randomUUID()}${ext}`);
     },
   }),
-  limits: { fileSize: 20 * 1024 * 1024 },
+  limits: { fileSize: 20 * 1024 * 1024, files: 30 },
   fileFilter: (req, file, cb) => {
-    if (!ALLOWED_PART_FILE_TYPES.has(file.mimetype)) {
+    if (!isAllowedPartFile(file)) {
       return cb(new Error('Tipo de ficheiro não permitido.'));
     }
     cb(null, true);
@@ -514,10 +532,10 @@ app.post(
 // Ficheiros diversos anexados a uma peça (manuais, faturas, esquemas...) -
 // aparecem na aba "Ficheiros" ao editar a peça. Vários ficheiros por peça,
 // cada um com o seu próprio id para poder apagar individualmente.
-app.post('/api/parts/:id/files', handleUpload(partFileUpload.single('file')), async (req, res) => {
-  const file = req.file;
-  if (!file) return res.status(400).json({ error: 'Falta o ficheiro.' });
-  const cleanupTmp = () => fs.unlink(file.path, () => {});
+app.post('/api/parts/:id/files', handleUpload(partFileUpload.array('file', 30)), async (req, res) => {
+  const files = req.files || [];
+  if (!files.length) return res.status(400).json({ error: 'Falta o ficheiro.' });
+  const cleanupTmp = () => files.forEach((f) => fs.unlink(f.path, () => {}));
 
   const part = await store.getPart(req.params.id);
   if (!part) {
@@ -525,25 +543,40 @@ app.post('/api/parts/:id/files', handleUpload(partFileUpload.single('file')), as
     return res.status(404).json({ error: 'Peca nao encontrada.' });
   }
 
-  const fileId = crypto.randomUUID();
-  let fileUrl;
-  let publicId = null;
-  let resourceType = null;
+  const newFiles = [];
 
   try {
-    if (images.useCloud) {
-      const uploaded = await images.uploadPartFile(file.path, part.id, fileId, file.mimetype);
-      fileUrl = uploaded.url;
-      publicId = uploaded.publicId;
-      resourceType = uploaded.resourceType;
-      cleanupTmp();
-    } else {
-      const folder = path.join(STORAGE_DIR, 'pecas-ficheiros', part.id);
-      fs.mkdirSync(folder, { recursive: true });
-      const ext = path.extname(file.originalname) || '';
-      const destName = `${fileId}${ext}`;
-      fs.renameSync(file.path, path.join(folder, destName));
-      fileUrl = `/storage/pecas-ficheiros/${part.id}/${destName}`;
+    for (const file of files) {
+      const fileId = crypto.randomUUID();
+      let fileUrl;
+      let publicId = null;
+      let resourceType = null;
+
+      if (images.useCloud) {
+        const uploaded = await images.uploadPartFile(file.path, part.id, fileId, file.mimetype);
+        fileUrl = uploaded.url;
+        publicId = uploaded.publicId;
+        resourceType = uploaded.resourceType;
+        fs.unlink(file.path, () => {});
+      } else {
+        const folder = path.join(STORAGE_DIR, 'pecas-ficheiros', part.id);
+        fs.mkdirSync(folder, { recursive: true });
+        const ext = path.extname(file.originalname) || '';
+        const destName = `${fileId}${ext}`;
+        fs.renameSync(file.path, path.join(folder, destName));
+        fileUrl = `/storage/pecas-ficheiros/${part.id}/${destName}`;
+      }
+
+      newFiles.push({
+        id: fileId,
+        fileName: file.originalname,
+        fileType: file.mimetype,
+        size: file.size,
+        url: fileUrl,
+        publicId,
+        resourceType,
+        createdAt: new Date().toISOString(),
+      });
     }
   } catch (err) {
     console.error('[parts] falha ao guardar ficheiro:', err);
@@ -551,17 +584,7 @@ app.post('/api/parts/:id/files', handleUpload(partFileUpload.single('file')), as
     return res.status(500).json({ error: 'Falha ao guardar o ficheiro. Tente novamente.' });
   }
 
-  const newFile = {
-    id: fileId,
-    fileName: file.originalname,
-    fileType: file.mimetype,
-    size: file.size,
-    url: fileUrl,
-    publicId,
-    resourceType,
-    createdAt: new Date().toISOString(),
-  };
-  const partFiles = [...(part.files || []), newFile];
+  const partFiles = [...(part.files || []), ...newFiles];
   const updated = await store.updatePart(part.id, { files: partFiles });
   res.status(201).json(updated);
 });

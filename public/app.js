@@ -726,8 +726,16 @@ const filesOverlay = document.getElementById('files-overlay');
 const filesModalTitle = document.getElementById('files-modal-title');
 const filesModalList = document.getElementById('files-modal-list');
 const filesModalInput = document.getElementById('files-modal-input');
+const filesModalFolderInput = document.getElementById('files-modal-folder-input');
+const filesFolderLabel = document.getElementById('files-folder-label');
 const filesModalStatus = document.getElementById('files-modal-status');
 let filesModalPart = null;
+
+// A escolha de uma pasta inteira so existe em browsers de computador; nos
+// telemoveis o botao seria so uma armadilha (abre e nao deixa escolher nada).
+if ('webkitdirectory' in document.createElement('input')) {
+  filesFolderLabel.hidden = false;
+}
 
 const FILE_ICONS = {
   'application/pdf': '📄',
@@ -736,11 +744,12 @@ const FILE_ICONS = {
   'text/plain': '📝',
   'text/csv': '📊',
 };
-function fileIconFor(fileType) {
+function fileIconFor(fileType, fileName) {
   if (fileType && fileType.startsWith('image/')) return '🖼️';
   if (fileType && fileType.includes('word')) return '📝';
   if (fileType && (fileType.includes('sheet') || fileType.includes('excel'))) return '📊';
   if (fileType && (fileType.includes('presentation') || fileType.includes('powerpoint'))) return '📊';
+  if (/\.(bin|hex|ori|mod|eep|eeprom|frf|s19|dam|kp|a2l)$/i.test(fileName || '')) return '💾';
   return FILE_ICONS[fileType] || '📎';
 }
 function formatFileSize(bytes) {
@@ -769,7 +778,7 @@ function renderFilesModalList(files) {
     link.rel = 'noopener noreferrer';
     link.className = 'edit-file-link';
     link.innerHTML = `
-      <span class="edit-file-icon">${fileIconFor(file.fileType)}</span>
+      <span class="edit-file-icon">${fileIconFor(file.fileType, file.fileName)}</span>
       <span class="edit-file-info">
         <span class="edit-file-name">${escapeHtml(file.fileName || 'Ficheiro')}</span>
         <span class="edit-file-size">${formatFileSize(file.size)}</span>
@@ -817,16 +826,26 @@ filesOverlay.addEventListener('click', (e) => {
   if (e.target === filesOverlay) closeFilesModal();
 });
 
-filesModalInput.addEventListener('change', async () => {
-  const file = filesModalInput.files[0];
-  if (!file || !filesModalPart) return;
+const MAX_FILES_PER_UPLOAD = 30;
+
+async function uploadPartFiles(input) {
+  const files = Array.from(input.files || []);
+  if (!files.length || !filesModalPart) return;
 
   filesModalStatus.hidden = false;
   filesModalStatus.classList.remove('error');
-  filesModalStatus.textContent = 'A enviar…';
+
+  if (files.length > MAX_FILES_PER_UPLOAD) {
+    filesModalStatus.classList.add('error');
+    filesModalStatus.textContent = `Escolha no máximo ${MAX_FILES_PER_UPLOAD} ficheiros de cada vez.`;
+    input.value = '';
+    return;
+  }
+
+  filesModalStatus.textContent = files.length === 1 ? 'A enviar…' : `A enviar ${files.length} ficheiros…`;
 
   const fd = new FormData();
-  fd.append('file', file);
+  files.forEach((file) => fd.append('file', file, file.name));
 
   try {
     const resp = await fetch(`/api/parts/${filesModalPart.id}/files`, { method: 'POST', body: fd });
@@ -840,9 +859,12 @@ filesModalInput.addEventListener('change', async () => {
     filesModalStatus.classList.add('error');
     filesModalStatus.textContent = err.message;
   } finally {
-    filesModalInput.value = '';
+    input.value = '';
   }
-});
+}
+
+filesModalInput.addEventListener('change', () => uploadPartFiles(filesModalInput));
+filesModalFolderInput.addEventListener('change', () => uploadPartFiles(filesModalFolderInput));
 
 // ---------------------------------------------------------------------------
 // Catálogo de ficheiros - lista as peças que já têm ficheiros anexados
