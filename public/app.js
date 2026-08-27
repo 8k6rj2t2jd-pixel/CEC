@@ -4,6 +4,56 @@ const logoImg = document.getElementById('logo-img');
 if (logoImg) logoImg.addEventListener('error', () => logoImg.remove(), { once: true });
 
 // ---------------------------------------------------------------------------
+// Ícones
+// ---------------------------------------------------------------------------
+// Desenhos em SVG em vez de emojis: aparecem exatamente iguais em todos os
+// telemóveis e computadores (os emojis mudam de forma conforme o sistema) e
+// herdam a cor e o tamanho do texto à volta. Ficam aqui dentro da app, sem
+// depender de nenhum site externo - o que também respeita as regras de
+// segurança (CSP) que impedem carregar seja o que for de fora.
+const ICON_PATHS = {
+  close: '<path d="M18 6 6 18M6 6l12 12"/>',
+  check: '<path d="M20 6 9 17l-5-5"/>',
+  box: '<path d="M21 8v8a2 2 0 0 1-1 1.7l-7 4a2 2 0 0 1-2 0l-7-4A2 2 0 0 1 3 16V8a2 2 0 0 1 1-1.7l7-4a2 2 0 0 1 2 0l7 4A2 2 0 0 1 21 8Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/>',
+  folder: '<path d="M4 20h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.7-.9L9.9 3.9A2 2 0 0 0 8.2 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/>',
+  folderOpen: '<path d="m6 14 1.5-2.9A2 2 0 0 1 9.2 10H22a2 2 0 0 1 1.9 2.7l-2.3 7A2 2 0 0 1 19.7 21H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4.2a2 2 0 0 1 1.7.9l.8 1.2a2 2 0 0 0 1.7.9H18a2 2 0 0 1 2 2v2"/>',
+  file: '<path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/>',
+  fileText: '<path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M8 13h8M8 17h8M8 9h2"/>',
+  sheet: '<path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M8 12h8M8 16h8M12 12v8"/>',
+  image: '<rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="1.6"/><path d="m21 15-4.5-4.5L5 21"/>',
+  archive: '<rect x="2" y="4" width="20" height="5" rx="1"/><path d="M4 9v10a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1V9"/><path d="M10 13h4"/>',
+  drive: '<rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 13h20"/><circle cx="6.5" cy="16.5" r="1"/><path d="M10 16.5h8"/>',
+  paperclip: '<path d="M21.4 11.1 12.3 20a5.5 5.5 0 0 1-7.8-7.8l9.2-9.1a3.7 3.7 0 0 1 5.2 5.2l-9.2 9.1a1.8 1.8 0 0 1-2.6-2.6l8.5-8.4"/>',
+  star: '<path d="m12 2.8 2.8 5.7 6.3.9-4.6 4.4 1.1 6.2-5.6-3-5.6 3 1.1-6.2L3 9.4l6.3-.9Z"/>',
+  externalLink: '<path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>',
+  download: '<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/><path d="M12 15V3"/>',
+  eye: '<path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/>',
+  eyeOff: '<path d="M10.7 5.1A10 10 0 0 1 12 5c6.4 0 10 7 10 7a18 18 0 0 1-2.7 3.7M6.6 6.6A18 18 0 0 0 2 12s3.6 7 10 7a10 10 0 0 0 4.5-1"/><path d="M9.9 9.9a3 3 0 0 0 4.2 4.2"/><path d="m2 2 20 20"/>',
+  warning: '<path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/><path d="M12 9v4M12 17h.01"/>',
+  camera: '<path d="M14.5 4h-5L8 6H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-4Z"/><circle cx="12" cy="13" r="3.5"/>',
+};
+
+// Devolve o SVG do ícone como texto, para se poder usar tanto em innerHTML
+// como a criar elementos. "size" em pixéis; a cor vem sempre do texto à volta.
+function icon(name, size = 16) {
+  const d = ICON_PATHS[name];
+  if (!d) return '';
+  return (
+    `<svg class="icon" width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" ` +
+    `stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ` +
+    `aria-hidden="true" focusable="false">${d}</svg>`
+  );
+}
+
+// Versão para quando é preciso um elemento a sério (ex: appendChild).
+function iconEl(name, size = 16) {
+  const span = document.createElement('span');
+  span.className = 'icon-wrap';
+  span.innerHTML = icon(name, size);
+  return span.firstChild;
+}
+
+// ---------------------------------------------------------------------------
 // Redimensionar fotos antes de enviar - poupa espaço na cloud (Cloudinary)
 // sem perda visível de qualidade para ver no catálogo. Não se aplica aos
 // ficheiros do repositório de etiquetas (podem ser PDFs de impressão, que
@@ -540,7 +590,7 @@ function renderPartCard(part) {
     if (photoKeys.length > 1) {
       const badge = document.createElement('span');
       badge.className = 'photo-count-badge';
-      badge.textContent = `📷 ${photoKeys.length}`;
+      badge.innerHTML = `${icon('camera', 12)} ${photoKeys.length}`;
       card.appendChild(badge);
     }
   } else {
@@ -559,7 +609,7 @@ function renderPartCard(part) {
       ${part.ref1 ? `<div>Ref1: ${escapeHtml(part.ref1)}</div>` : ''}
       ${part.ref2 ? `<div>Ref2: ${escapeHtml(part.ref2)}</div>` : ''}
     </div>
-    ${part.box ? `<div class="box-badge">📦 Caixa ${escapeHtml(part.box)}</div>` : ''}
+    ${part.box ? `<div class="box-badge">${icon('box', 13)} Caixa ${escapeHtml(part.box)}</div>` : ''}
   `;
 
   const qtyRow = document.createElement('div');
@@ -593,7 +643,7 @@ function renderPartCard(part) {
   const filesBtn = document.createElement('button');
   filesBtn.type = 'button';
   filesBtn.className = 'card-files-btn';
-  filesBtn.textContent = '📁 Ficheiros';
+  filesBtn.innerHTML = `${icon('folder', 14)} Ficheiros`;
   filesBtn.addEventListener('click', () => openFilesModal(part));
   body.appendChild(filesBtn);
 
@@ -738,19 +788,21 @@ if ('webkitdirectory' in document.createElement('input')) {
 }
 
 const FILE_ICONS = {
-  'application/pdf': '📄',
-  'application/zip': '🗜️',
-  'application/x-zip-compressed': '🗜️',
-  'text/plain': '📝',
-  'text/csv': '📊',
+  'application/pdf': 'file',
+  'application/zip': 'archive',
+  'application/x-zip-compressed': 'archive',
+  'text/plain': 'fileText',
+  'text/csv': 'sheet',
 };
-function fileIconFor(fileType, fileName) {
-  if (fileType && fileType.startsWith('image/')) return '🖼️';
-  if (fileType && fileType.includes('word')) return '📝';
-  if (fileType && (fileType.includes('sheet') || fileType.includes('excel'))) return '📊';
-  if (fileType && (fileType.includes('presentation') || fileType.includes('powerpoint'))) return '📊';
-  if (/\.(bin|hex|ori|mod|eep|eeprom|frf|s19|dam|kp|a2l)$/i.test(fileName || '')) return '💾';
-  return FILE_ICONS[fileType] || '📎';
+// Escolhe o desenho conforme o tipo de ficheiro, para se perceber de relance
+// o que e cada anexo (um dump de centralina, uma fatura, uma foto...).
+function fileIconNameFor(fileType, fileName) {
+  if (fileType && fileType.startsWith('image/')) return 'image';
+  if (fileType && fileType.includes('word')) return 'fileText';
+  if (fileType && (fileType.includes('sheet') || fileType.includes('excel'))) return 'sheet';
+  if (fileType && (fileType.includes('presentation') || fileType.includes('powerpoint'))) return 'sheet';
+  if (/\.(bin|hex|ori|mod|eep|eeprom|frf|s19|dam|kp|a2l)$/i.test(fileName || '')) return 'drive';
+  return FILE_ICONS[fileType] || 'paperclip';
 }
 function formatFileSize(bytes) {
   if (!Number.isFinite(bytes)) return '';
@@ -781,7 +833,7 @@ function renderFilesModalList(files) {
     link.className = 'edit-file-link';
     link.title = file.fileName || '';
     link.innerHTML = `
-      <span class="edit-file-icon">${fileIconFor(file.fileType, file.fileName)}</span>
+      <span class="edit-file-icon">${icon(fileIconNameFor(file.fileType, file.fileName), 20)}</span>
       <span class="edit-file-info">
         <span class="edit-file-name">${escapeHtml(file.fileName || 'Ficheiro')}</span>
         <span class="edit-file-size">${formatFileSize(file.size)}</span>
@@ -792,7 +844,7 @@ function renderFilesModalList(files) {
     const delBtn = document.createElement('button');
     delBtn.type = 'button';
     delBtn.className = 'edit-file-delete';
-    delBtn.textContent = '✕';
+    delBtn.innerHTML = icon('close', 14);
     delBtn.title = 'Eliminar ficheiro';
     delBtn.addEventListener('click', async () => {
       if (!confirm(`Eliminar "${file.fileName}"?`)) return;
@@ -1012,7 +1064,13 @@ const lightboxImg = document.getElementById('lightbox-img');
 const lightboxPrev = document.getElementById('lightbox-prev');
 const lightboxNext = document.getElementById('lightbox-next');
 const lightboxCaption = document.getElementById('lightbox-caption');
-document.getElementById('lightbox-close').addEventListener('click', () => (lightbox.hidden = true));
+const lightboxDownload = document.getElementById('lightbox-download');
+const lightboxCloseBtn = document.getElementById('lightbox-close');
+lightboxCloseBtn.innerHTML = icon('close', 20);
+lightboxDownload.innerHTML = icon('download', 20);
+lightboxCloseBtn.addEventListener('click', () => (lightbox.hidden = true));
+// Nao deixa o clique no botao de transferir fechar a janela por baixo.
+lightboxDownload.addEventListener('click', (e) => e.stopPropagation());
 lightbox.addEventListener('click', (e) => {
   if (e.target === lightbox) lightbox.hidden = true;
 });
@@ -1023,7 +1081,19 @@ let lightboxIndex = 0;
 
 function showLightboxPhoto(index) {
   lightboxIndex = index;
-  lightboxImg.src = lightboxPhotos[index].url;
+  const photo = lightboxPhotos[index];
+  lightboxImg.src = photo.url;
+
+  // O botao de transferir so aparece quando se sabe de que peca e a foto -
+  // e dai que vem o nome do ficheiro (a referencia da peca).
+  if (photo.downloadUrl) {
+    lightboxDownload.href = photo.downloadUrl;
+    lightboxDownload.hidden = false;
+  } else {
+    lightboxDownload.removeAttribute('href');
+    lightboxDownload.hidden = true;
+  }
+
   const showNav = lightboxPhotos.length > 1;
   lightboxPrev.hidden = !showNav;
   lightboxNext.hidden = !showNav;
@@ -1044,7 +1114,13 @@ function openLightbox(srcOrPart) {
     const part = srcOrPart;
     lightboxPhotos = ['front', 'back', 'label']
       .filter((key) => part.images && part.images[key] && part.images[key].url)
-      .map((key) => ({ url: part.images[key].url, label: PHOTO_SLOT_LABELS[key] }));
+      .map((key) => ({
+        url: part.images[key].url,
+        label: PHOTO_SLOT_LABELS[key],
+        // Passa pelo servidor para a foto ser guardada com a referencia da
+        // peca no nome, em vez do nome aleatorio com que esta na cloud.
+        downloadUrl: `/api/parts/${part.id}/photos/${key}/download`,
+      }));
   }
   if (!lightboxPhotos.length) return;
   showLightboxPhoto(0);
@@ -1138,7 +1214,7 @@ function renderLabels() {
     templateBox.className = 'label-template-box';
     const templateHeading = document.createElement('div');
     templateHeading.className = 'label-template-heading';
-    templateHeading.textContent = '⭐ Modelos template';
+    templateHeading.innerHTML = `${icon('star', 13)} Modelos template`;
     templateBox.appendChild(templateHeading);
     if (templates.length) {
       const templateGrid = document.createElement('div');
@@ -1237,7 +1313,7 @@ async function openPdfViewer(url, fileName) {
   fallbackLink.target = '_blank';
   fallbackLink.rel = 'noopener';
   fallbackLink.className = 'btn-link';
-  fallbackLink.textContent = 'Abrir o ficheiro original numa aba nova ↗';
+  fallbackLink.innerHTML = `Abrir o ficheiro original numa aba nova ${icon('externalLink', 13)}`;
   pdfViewerBody.appendChild(fallbackLink);
 }
 
@@ -1264,10 +1340,10 @@ function renderLabelCard(label) {
     img.alt = label.fileName || '';
     link.appendChild(img);
   } else {
-    const icon = document.createElement('div');
-    icon.className = 'label-file-icon';
-    icon.textContent = '📄';
-    link.appendChild(icon);
+    const fileIcon = document.createElement('div');
+    fileIcon.className = 'label-file-icon';
+    fileIcon.innerHTML = icon('file', 22);
+    link.appendChild(fileIcon);
   }
   card.appendChild(link);
 
@@ -1279,7 +1355,7 @@ function renderLabelCard(label) {
   const delBtn = document.createElement('button');
   delBtn.type = 'button';
   delBtn.className = 'label-delete';
-  delBtn.textContent = '✕';
+  delBtn.innerHTML = icon('close', 14);
   delBtn.title = 'Eliminar etiqueta';
   delBtn.addEventListener('click', async () => {
     if (!confirm('Eliminar esta etiqueta?')) return;
@@ -1461,7 +1537,7 @@ function renderShipments() {
     if (q || yearIdx === 0) yearFolder.open = true;
 
     const yearSummary = document.createElement('summary');
-    yearSummary.textContent = `📁 ${year} (${yearTotal} ${yearTotal === 1 ? 'envio' : 'envios'})`;
+    yearSummary.innerHTML = `${icon('folder', 15)} ${year} (${yearTotal} ${yearTotal === 1 ? 'envio' : 'envios'})`;
     yearFolder.appendChild(yearSummary);
 
     months.forEach((month, monthIdx) => {
@@ -1473,7 +1549,7 @@ function renderShipments() {
       if (q || (yearIdx === 0 && monthIdx === 0)) monthFolder.open = true;
 
       const monthSummary = document.createElement('summary');
-      monthSummary.textContent = `📂 ${monthLabel} (${entries.length})`;
+      monthSummary.innerHTML = `${icon('folderOpen', 14)} ${escapeHtml(monthLabel)} (${entries.length})`;
       monthFolder.appendChild(monthSummary);
 
       const table = document.createElement('table');
@@ -1497,7 +1573,7 @@ function renderShipments() {
         const delBtn = document.createElement('button');
         delBtn.type = 'button';
         delBtn.className = 'btn-link shipment-delete';
-        delBtn.textContent = '✕';
+        delBtn.innerHTML = icon('close', 14);
         delBtn.title = 'Eliminar envio';
         delBtn.addEventListener('click', async () => {
           if (!confirm('Eliminar este envio?')) return;

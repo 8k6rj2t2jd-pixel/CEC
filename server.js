@@ -423,6 +423,9 @@ function safeExtension(originalName, fallback = '') {
   return /^\.[a-z0-9]{1,10}$/.test(ext) ? ext : fallback;
 }
 
+// Como cada foto se chama no nome do ficheiro transferido.
+const PHOTO_SLOT_NAMES = { front: 'frente', back: 'tras', label: 'etiqueta' };
+
 function slugify(value) {
   return String(value || 'diverso')
     .normalize('NFD')
@@ -744,6 +747,50 @@ app.post('/api/parts/:id/files', uploadRateLimiter, handleUpload(partFileUpload.
   const partFiles = [...(part.files || []), ...newFiles];
   const updated = await store.updatePart(part.id, { files: partFiles });
   res.status(201).json({ ...updated, skipped: skipped.length, added: newFiles.length });
+});
+
+// Transfere a foto de uma peça já com um nome útil - a referência da peça em
+// vez do nome aleatorio com que ficou guardada. Passa pelo servidor porque o
+// atributo "download" do browser e ignorado quando o ficheiro vem de outro
+// dominio (o CDN), e sem isto a foto abria em vez de se guardar.
+app.get('/api/parts/:id/photos/:slot/download', async (req, res) => {
+  const slot = req.params.slot;
+  if (!['front', 'back', 'label'].includes(slot)) {
+    return res.status(400).json({ error: 'Foto inválida.' });
+  }
+
+  const part = await store.getPart(req.params.id);
+  if (!part) return res.status(404).json({ error: 'Peca nao encontrada.' });
+
+  const image = part.images && part.images[slot];
+  if (!image || !image.url) return res.status(404).json({ error: 'Foto não encontrada.' });
+
+  // Nome do ficheiro: referencia da peca + qual das fotos e.
+  const baseName = slugify(part.ref1 || part.ref2 || part.partType || 'peca');
+  const safeName = `${baseName}-${PHOTO_SLOT_NAMES[slot]}.jpg`;
+
+  try {
+    if (image.url.startsWith('/storage/')) {
+      const safePath = resolveInsideStorage(image.url.replace(/^\/storage\//, ''));
+      if (!safePath || !fs.existsSync(safePath)) {
+        return res.status(404).json({ error: 'Foto não encontrada.' });
+      }
+      return res.download(safePath, safeName);
+    }
+
+    const upstream = await fetch(image.url);
+    if (!upstream.ok) {
+      console.error('[fotos] origem respondeu', upstream.status);
+      return res.status(502).json({ error: 'Não foi possível obter a foto. Tente novamente.' });
+    }
+    res.setHeader('Content-Type', upstream.headers.get('content-type') || 'image/jpeg');
+    res.setHeader('Content-Disposition', `attachment; filename="${safeName}"`);
+    res.setHeader('Cache-Control', 'private, no-store');
+    return res.send(Buffer.from(await upstream.arrayBuffer()));
+  } catch (err) {
+    console.error('[fotos] falha ao obter a foto:', err);
+    return res.status(502).json({ error: 'Não foi possível obter a foto. Tente novamente.' });
+  }
 });
 
 // Unica porta de entrada para os ficheiros de uma peça. Como toda a API
