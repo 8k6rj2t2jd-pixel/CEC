@@ -610,7 +610,8 @@ function renderPartCard(part) {
       ${part.ref1 ? `<div>Ref1: ${escapeHtml(part.ref1)}</div>` : ''}
       ${part.ref2 ? `<div>Ref2: ${escapeHtml(part.ref2)}</div>` : ''}
     </div>
-    ${part.box || part.itemNumber ? `<div class="box-badge">${icon('box', 13)} ${part.box ? `Caixa ${escapeHtml(part.box)}` : ''}${part.box && part.itemNumber ? ' · ' : ''}${part.itemNumber ? `Nº ${escapeHtml(part.itemNumber)}` : ''}</div>` : ''}
+    ${part.box ? `<div class="box-badge">${icon('box', 13)} Caixa ${escapeHtml(part.box)}</div>` : ''}
+    ${part.itemNumber ? `<div class="num-badge">Nº ${escapeHtml(part.itemNumber)}</div>` : ''}
   `;
 
   const qtyRow = document.createElement('div');
