@@ -406,6 +406,7 @@ partForm.addEventListener('submit', async (e) => {
   fd.append('ref2', fieldRef2.value.trim());
   fd.append('quantity', document.getElementById('field-quantity').value || '1');
   fd.append('box', document.getElementById('field-box').value.trim());
+  fd.append('itemNumber', document.getElementById('field-item-number').value.trim());
   fd.append('notes', document.getElementById('field-notes').value.trim());
 
   try {
@@ -559,7 +560,7 @@ function renderParts() {
     if (photoFilter === 'com' && !partHasPhoto(p)) return false;
     if (photoFilter === 'sem' && partHasPhoto(p)) return false;
     if (q) {
-      const haystack = [p.ref1, p.ref2, p.manufacturer, p.brand, p.model, p.partType, p.box, p.notes]
+      const haystack = [p.ref1, p.ref2, p.manufacturer, p.brand, p.model, p.partType, p.box, p.itemNumber, p.notes]
         .filter(Boolean)
         .join(' ')
         .toLowerCase();
@@ -609,7 +610,7 @@ function renderPartCard(part) {
       ${part.ref1 ? `<div>Ref1: ${escapeHtml(part.ref1)}</div>` : ''}
       ${part.ref2 ? `<div>Ref2: ${escapeHtml(part.ref2)}</div>` : ''}
     </div>
-    ${part.box ? `<div class="box-badge">${icon('box', 13)} Caixa ${escapeHtml(part.box)}</div>` : ''}
+    ${part.box || part.itemNumber ? `<div class="box-badge">${icon('box', 13)} ${part.box ? `Caixa ${escapeHtml(part.box)}` : ''}${part.box && part.itemNumber ? ' · ' : ''}${part.itemNumber ? `Nº ${escapeHtml(part.itemNumber)}` : ''}</div>` : ''}
   `;
 
   const qtyRow = document.createElement('div');
@@ -696,6 +697,7 @@ const editFields = {
   ref2: document.getElementById('edit-field-ref2'),
   quantity: document.getElementById('edit-field-quantity'),
   box: document.getElementById('edit-field-box'),
+  itemNumber: document.getElementById('edit-field-item-number'),
   notes: document.getElementById('edit-field-notes'),
 };
 
@@ -735,6 +737,7 @@ function openEditModal(part) {
   editFields.ref2.value = part.ref2 || '';
   editFields.quantity.value = part.quantity || 0;
   editFields.box.value = part.box || '';
+  editFields.itemNumber.value = part.itemNumber || '';
   editFields.notes.value = part.notes || '';
 
   const category = partCategory(part);
@@ -1012,6 +1015,7 @@ editForm.addEventListener('submit', async (e) => {
     ref2: editFields.ref2.value.trim(),
     quantity: Number(editFields.quantity.value) || 0,
     box: editFields.box.value.trim(),
+    itemNumber: editFields.itemNumber.value.trim(),
     notes: editFields.notes.value.trim(),
   };
 
@@ -1139,6 +1143,33 @@ lightboxNext.addEventListener('click', (e) => {
 // ---------------------------------------------------------------------------
 // Excel + logout
 // ---------------------------------------------------------------------------
+// Preenche de uma vez o "Nº da peça" nas peças que vieram da folha de stock
+// antiga e ficaram sem número. Seguro de repetir: só mexe nas que ainda
+// estiverem por preencher.
+const fillItemNumbersStatus = document.getElementById('fill-item-numbers-status');
+document.getElementById('btn-fill-item-numbers').addEventListener('click', async () => {
+  if (!confirm('Isto procura o Nº de cada peça na folha de stock original e preenche as que ainda não o têm. Continuar?')) return;
+
+  fillItemNumbersStatus.hidden = false;
+  fillItemNumbersStatus.classList.remove('error');
+  fillItemNumbersStatus.textContent = 'A procurar e a preencher, pode demorar um bocado…';
+
+  try {
+    const resp = await fetch('/api/admin/fill-item-numbers', { method: 'POST' });
+    const data = await resp.json();
+    if (!resp.ok) throw new Error(data.error || 'Falha ao preencher os números.');
+    const partes = [`${data.updated} peças ficaram com o número preenchido`];
+    if (data.alreadyHad) partes.push(`${data.alreadyHad} já tinham`);
+    if (data.outOfStock) partes.push(`${data.outOfStock} sem lugar na caixa (fora de stock)`);
+    if (data.notFound) partes.push(`${data.notFound} sem correspondência na folha`);
+    fillItemNumbersStatus.textContent = `Concluído: ${partes.join(', ')}.`;
+    await loadParts();
+  } catch (err) {
+    fillItemNumbersStatus.classList.add('error');
+    fillItemNumbersStatus.textContent = err.message;
+  }
+});
+
 document.getElementById('btn-export-excel').addEventListener('click', () => {
   window.location.href = '/api/export.xlsx';
 });

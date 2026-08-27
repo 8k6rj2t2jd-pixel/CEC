@@ -18,6 +18,7 @@ const store = require('./lib/store');
 const images = require('./lib/images');
 const { readLabel } = require('./lib/ocr');
 const auth = require('./lib/auth');
+const { planItemNumbers } = require('./lib/itemNumbers');
 
 const PORT = process.env.PORT || 3000;
 const DATA_DIR = process.env.DATA_DIR || path.join(__dirname, 'data');
@@ -513,6 +514,7 @@ app.post(
     const ref1 = cleanText(body.ref1);
     const ref2 = cleanText(body.ref2);
     const box = cleanText(body.box);
+    const itemNumber = cleanText(body.itemNumber, 60);
     const notes = cleanText(body.notes, MAX_NOTES_LENGTH);
     const quantity = body.quantity;
 
@@ -567,6 +569,7 @@ app.post(
       ref2: ref2 || '',
       quantity: Number.isFinite(Number(quantity)) ? Math.max(0, Math.trunc(Number(quantity))) : 1,
       box: box || '',
+      itemNumber: itemNumber || '',
       notes: notes || '',
       images: partImages,
       createdAt: new Date().toISOString(),
@@ -583,7 +586,7 @@ app.post(
 );
 
 app.patch('/api/parts/:id', async (req, res) => {
-  const allowed = ['category', 'partType', 'manufacturer', 'brand', 'model', 'ref1', 'ref2', 'box', 'notes'];
+  const allowed = ['category', 'partType', 'manufacturer', 'brand', 'model', 'ref1', 'ref2', 'box', 'itemNumber', 'notes'];
   const body = req.body || {};
   const patch = {};
   for (const key of allowed) {
@@ -1026,6 +1029,33 @@ app.delete('/api/labels/:id', async (req, res) => {
   res.json({ ok: true });
 });
 
+// Preenche o "Nº da peça" nas peças que já estão no catálogo, cruzando-as com
+// a folha de stock original (scripts/stock-import-data.json - a mesma que deu
+// origem ao catálogo, e que traz a coluna "Número" que na altura não foi
+// importada). Só toca em peças que ainda não tenham número, por isso pode
+// correr-se mais do que uma vez sem estragar nada.
+app.post('/api/admin/fill-item-numbers', async (req, res) => {
+  try {
+    const parts = await store.listParts();
+    const plan = planItemNumbers(parts);
+
+    for (const update of plan.updates) {
+      await store.updatePart(update.id, { itemNumber: update.itemNumber });
+    }
+
+    res.json({
+      updated: plan.updates.length,
+      alreadyHad: plan.alreadyHad,
+      notFound: plan.notFound,
+      outOfStock: plan.outOfStock,
+      total: parts.length,
+    });
+  } catch (err) {
+    console.error('[item-numbers] falha:', err);
+    res.status(500).json({ error: 'Falha ao preencher os números. Tente novamente.' });
+  }
+});
+
 // ---------------------------------------------------------------------------
 // Envios - registo simples de encomendas enviadas (data, cliente, peso e
 // dimensoes). Guardados como lista plana; o agrupamento por ano/mes e feito
@@ -1120,6 +1150,7 @@ app.get('/api/export.xlsx', async (req, res) => {
       { header: 'Referência 2', key: 'ref2', width: 20 },
       { header: 'Quantidade', key: 'quantity', width: 12 },
       { header: 'Caixa', key: 'box', width: 10 },
+      { header: 'Nº da peça', key: 'itemNumber', width: 12 },
       { header: 'Notas', key: 'notes', width: 24 },
     ];
     sheet.getRow(1).font = { bold: true };
@@ -1136,6 +1167,7 @@ app.get('/api/export.xlsx', async (req, res) => {
         ref2: sanitizeForExcel(part.ref2),
         quantity: part.quantity,
         box: sanitizeForExcel(part.box),
+        itemNumber: sanitizeForExcel(part.itemNumber),
         notes: sanitizeForExcel(part.notes),
       });
       sheet.getRow(rowIndex).height = 70;

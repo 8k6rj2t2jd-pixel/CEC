@@ -166,6 +166,10 @@
         </label>
       </div>
       <label>
+        Nº da peça
+        <input id="field-item-number" name="itemNumber" placeholder="Ex: 3" />
+      </label>
+      <label>
         Notas
         <input id="field-notes" name="notes" placeholder="Opcional" />
       </label>
@@ -220,8 +224,10 @@
       </select>
     </div>
     <div class="backup-row">
+      <button type="button" id="btn-fill-item-numbers" class="btn"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20.5 8.4v7.2a1.8 1.8 0 0 1-.9 1.6l-6.7 3.7a1.8 1.8 0 0 1-1.8 0l-6.7-3.7a1.8 1.8 0 0 1-.9-1.6V8.4a1.8 1.8 0 0 1 .9-1.6l6.7-3.7a1.8 1.8 0 0 1 1.8 0l6.7 3.7a1.8 1.8 0 0 1 .9 1.6Z"/><path d="m3.8 7.5 8.2 4.6 8.2-4.6"/><path d="M12 21V12.1"/></svg> Preencher Nº das peças</button>
       <button id="btn-export-excel" class="btn"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M8 12h8M8 16h8M12 12v8"/></svg> Transformar catálogo em Excel</button>
     </div>
+    <p id="fill-item-numbers-status" class="hint" hidden></p>
     <div id="parts-grid" class="parts-grid"></div>
     <p id="empty-state" class="hint" hidden>Ainda não há peças guardadas.</p>
   </section>
@@ -447,6 +453,10 @@
         <input id="edit-field-box" placeholder="Ex: 12" />
       </label>
     </div>
+    <label>
+      Nº da peça
+      <input id="edit-field-item-number" placeholder="Ex: 3" />
+    </label>
     <label>
       Notas
       <input id="edit-field-notes" />
