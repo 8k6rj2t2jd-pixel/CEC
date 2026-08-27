@@ -10,18 +10,47 @@
   --ok: #1a1a1a;
   --border: #d5d5d5;
   --radius: 12px;
+  --orange: #ff8a1e;
+  /* Laranja um pouco mais fechado para quando o ícone aparece sozinho, sem
+     texto ao lado - o tom claro sobre branco ficaria difícil de ver. */
+  --orange-deep: #e8730a;
 }
 
 * { box-sizing: border-box; }
 
-/* Ícones desenhados (SVG) em vez de emojis: assumem sempre a cor do texto à
-   volta e alinham-se com ele, em vez de mudarem de forma conforme o
-   telemóvel ou o computador. */
+/* Ícones desenhados (SVG) em vez de emojis: aparecem iguais em todos os
+   aparelhos, alinham com o texto e vêm no laranja da marca. */
 .icon {
   display: inline-block;
   vertical-align: -0.15em;
   flex-shrink: 0;
+  color: var(--orange);
 }
+
+/* Ícone sozinho (sem texto ao lado) num fundo claro: tom mais fechado para
+   se ver bem. */
+.lightbox-close-inline .icon,
+.edit-file-delete .icon,
+.shipment-delete .icon,
+.password-eye .icon {
+  color: var(--orange-deep);
+}
+
+/* Onde o fundo já é escuro ou colorido, o ícone acompanha o texto para não
+   desaparecer. */
+.card-files-btn .icon,
+.lightbox-close .icon,
+.lightbox-download .icon,
+.btn-primary .icon,
+.btn-shipment-add .icon {
+  color: currentColor;
+}
+
+/* Eliminar continua a vermelho - é a cor que avisa. */
+.edit-file-delete .icon,
+.shipment-delete .icon { color: #c62828; }
+
+#login-error .icon { color: currentColor; }
 
 body {
   margin: 0;
@@ -41,7 +70,20 @@ body {
   gap: 14px;
 }
 .topbar-top { display: flex; flex-direction: column; gap: 6px; }
-.logo-standalone { height: 44px; width: auto; border-radius: 4px; }
+/* O logótipo nunca pode aparecer esticado. Como está dentro de uma coluna
+   flexível, por omissão o browser esticava-o à largura toda mantendo a
+   altura fixa - era isso que o deformava em janelas estreitas.
+   "align-self: flex-start" impede esse esticamento e "object-fit: contain"
+   garante que, mesmo que algo force uma largura, a imagem se ajusta em vez
+   de se deformar. */
+.logo-standalone {
+  height: 44px;
+  width: auto;
+  max-width: 100%;
+  align-self: flex-start;
+  object-fit: contain;
+  border-radius: 4px;
+}
 .welcome-msg { margin: 4px 0 8px; font-size: 1.4rem; font-weight: 700; }
 .btn-logout {
   align-self: flex-start;

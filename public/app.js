@@ -13,24 +13,24 @@ if (logoImg) logoImg.addEventListener('error', () => logoImg.remove(), { once: t
 // segurança (CSP) que impedem carregar seja o que for de fora.
 const ICON_PATHS = {
   close: '<path d="M18 6 6 18M6 6l12 12"/>',
-  check: '<path d="M20 6 9 17l-5-5"/>',
-  box: '<path d="M21 8v8a2 2 0 0 1-1 1.7l-7 4a2 2 0 0 1-2 0l-7-4A2 2 0 0 1 3 16V8a2 2 0 0 1 1-1.7l7-4a2 2 0 0 1 2 0l7 4A2 2 0 0 1 21 8Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/>',
-  folder: '<path d="M4 20h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.7-.9L9.9 3.9A2 2 0 0 0 8.2 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/>',
-  folderOpen: '<path d="m6 14 1.5-2.9A2 2 0 0 1 9.2 10H22a2 2 0 0 1 1.9 2.7l-2.3 7A2 2 0 0 1 19.7 21H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4.2a2 2 0 0 1 1.7.9l.8 1.2a2 2 0 0 0 1.7.9H18a2 2 0 0 1 2 2v2"/>',
-  file: '<path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/>',
-  fileText: '<path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M8 13h8M8 17h8M8 9h2"/>',
-  sheet: '<path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M8 12h8M8 16h8M12 12v8"/>',
-  image: '<rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="1.6"/><path d="m21 15-4.5-4.5L5 21"/>',
-  archive: '<rect x="2" y="4" width="20" height="5" rx="1"/><path d="M4 9v10a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1V9"/><path d="M10 13h4"/>',
-  drive: '<rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 13h20"/><circle cx="6.5" cy="16.5" r="1"/><path d="M10 16.5h8"/>',
-  paperclip: '<path d="M21.4 11.1 12.3 20a5.5 5.5 0 0 1-7.8-7.8l9.2-9.1a3.7 3.7 0 0 1 5.2 5.2l-9.2 9.1a1.8 1.8 0 0 1-2.6-2.6l8.5-8.4"/>',
-  star: '<path d="m12 2.8 2.8 5.7 6.3.9-4.6 4.4 1.1 6.2-5.6-3-5.6 3 1.1-6.2L3 9.4l6.3-.9Z"/>',
-  externalLink: '<path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>',
-  download: '<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/><path d="M12 15V3"/>',
-  eye: '<path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/>',
-  eyeOff: '<path d="M10.7 5.1A10 10 0 0 1 12 5c6.4 0 10 7 10 7a18 18 0 0 1-2.7 3.7M6.6 6.6A18 18 0 0 0 2 12s3.6 7 10 7a10 10 0 0 0 4.5-1"/><path d="M9.9 9.9a3 3 0 0 0 4.2 4.2"/><path d="m2 2 20 20"/>',
-  warning: '<path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/><path d="M12 9v4M12 17h.01"/>',
-  camera: '<path d="M14.5 4h-5L8 6H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-4Z"/><circle cx="12" cy="13" r="3.5"/>',
+  check: '<circle cx="12" cy="12" r="9"/><path d="m8.5 12.2 2.4 2.4 4.6-4.9"/>',
+  box: '<path d="M20.5 8.4v7.2a1.8 1.8 0 0 1-.9 1.6l-6.7 3.7a1.8 1.8 0 0 1-1.8 0l-6.7-3.7a1.8 1.8 0 0 1-.9-1.6V8.4a1.8 1.8 0 0 1 .9-1.6l6.7-3.7a1.8 1.8 0 0 1 1.8 0l6.7 3.7a1.8 1.8 0 0 1 .9 1.6Z"/><path d="m3.8 7.5 8.2 4.6 8.2-4.6"/><path d="M12 21V12.1"/>',
+  folder: '<path d="M3 7.5A1.5 1.5 0 0 1 4.5 6h4.2a1.5 1.5 0 0 1 1.2.6l1 1.3a1.5 1.5 0 0 0 1.2.6h6.4A1.5 1.5 0 0 1 20 10v7.5a1.5 1.5 0 0 1-1.5 1.5h-14A1.5 1.5 0 0 1 3 17.5Z"/>',
+  folderOpen: '<path d="M3 17.5V7.5A1.5 1.5 0 0 1 4.5 6h4.2a1.5 1.5 0 0 1 1.2.6l1 1.3a1.5 1.5 0 0 0 1.2.6h6.4A1.5 1.5 0 0 1 20 10v1"/><path d="m3 17.5 2-6a1.5 1.5 0 0 1 1.4-1h14a1.5 1.5 0 0 1 1.4 2l-1.8 5.5a1.5 1.5 0 0 1-1.4 1H4.5A1.5 1.5 0 0 1 3 17.5Z"/>',
+  file: '<path d="M14 3H7a1.8 1.8 0 0 0-1.8 1.8v14.4A1.8 1.8 0 0 0 7 21h10a1.8 1.8 0 0 0 1.8-1.8V7.8Z"/><path d="M13.8 3v3.8a1.4 1.4 0 0 0 1.4 1.4h3.6"/>',
+  fileText: '<path d="M14 3H7a1.8 1.8 0 0 0-1.8 1.8v14.4A1.8 1.8 0 0 0 7 21h10a1.8 1.8 0 0 0 1.8-1.8V7.8Z"/><path d="M13.8 3v3.8a1.4 1.4 0 0 0 1.4 1.4h3.6"/><path d="M8.6 13.2h6.8M8.6 16.6h4.6"/>',
+  sheet: '<rect x="4" y="4" width="16" height="16" rx="2"/><path d="M4 9.6h16M4 15.2h16M9.6 4v16"/>',
+  image: '<rect x="3.5" y="4.5" width="17" height="15" rx="2.2"/><circle cx="9" cy="9.6" r="1.5"/><path d="m4.2 17.4 4.4-4.2a1.6 1.6 0 0 1 2.2 0l3 2.9M14.4 15l1.6-1.5a1.6 1.6 0 0 1 2.2 0l1.6 1.5"/>',
+  archive: '<rect x="3" y="4" width="18" height="4.5" rx="1.2"/><path d="M4.8 8.5v10a1.5 1.5 0 0 0 1.5 1.5h11.4a1.5 1.5 0 0 0 1.5-1.5v-10"/><path d="M10.2 12.6h3.6"/>',
+  drive: '<rect x="3" y="4.5" width="18" height="15" rx="2.2"/><path d="M3 12.6h18"/><circle cx="6.9" cy="16.2" r="1"/><path d="M10.2 16.2h7.2"/><path d="M8.4 4.5v8.1M15.6 4.5v8.1"/>',
+  paperclip: '<path d="M20.5 11.6 12.4 19.7a5 5 0 0 1-7.1-7.1l8.2-8.2a3.4 3.4 0 0 1 4.8 4.8l-8.1 8.1a1.7 1.7 0 0 1-2.4-2.4l7.5-7.4"/>',
+  star: '<path d="m12 3.4 2.6 5.3 5.8.8-4.2 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8L3.6 9.5l5.8-.8Z"/>',
+  externalLink: '<path d="M14.5 3.5H20a.5.5 0 0 1 .5.5v5.5"/><path d="M20.5 3.5 12 12"/><path d="M18.5 13.6v4.9a2 2 0 0 1-2 2H5.5a2 2 0 0 1-2-2V7.5a2 2 0 0 1 2-2h4.9"/>',
+  download: '<path d="M20.5 15.4v3.1a2 2 0 0 1-2 2h-13a2 2 0 0 1-2-2v-3.1"/><path d="m7.6 10.6 4.4 4.4 4.4-4.4"/><path d="M12 15V3.5"/>',
+  eye: '<path d="M2.6 12S6 5.6 12 5.6 21.4 12 21.4 12 18 18.4 12 18.4 2.6 12 2.6 12Z"/><circle cx="12" cy="12" r="3.1"/>',
+  eyeOff: '<path d="M10.7 5.8A9.6 9.6 0 0 1 12 5.6c6 0 9.4 6.4 9.4 6.4a17.6 17.6 0 0 1-2.6 3.5M6.8 6.9A17.4 17.4 0 0 0 2.6 12s3.4 6.4 9.4 6.4a9.4 9.4 0 0 0 4.2-.9"/><path d="M10 10a2.9 2.9 0 0 0 4 4"/><path d="m3 3 18 18"/>',
+  warning: '<path d="M10.6 4.2 2.9 17.6A1.6 1.6 0 0 0 4.3 20h15.4a1.6 1.6 0 0 0 1.4-2.4L13.4 4.2a1.6 1.6 0 0 0-2.8 0Z"/><path d="M12 9.4v4M12 16.8h.01"/>',
+  camera: '<path d="M14.6 4.6H9.4L8.1 6.6H4.8a1.9 1.9 0 0 0-1.9 1.9v9.1a1.9 1.9 0 0 0 1.9 1.9h14.4a1.9 1.9 0 0 0 1.9-1.9V8.5a1.9 1.9 0 0 0-1.9-1.9h-3.3Z"/><circle cx="12" cy="13" r="3.3"/>',
 };
 
 // Devolve o SVG do ícone como texto, para se poder usar tanto em innerHTML
@@ -40,7 +40,7 @@ function icon(name, size = 16) {
   if (!d) return '';
   return (
     `<svg class="icon" width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" ` +
-    `stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ` +
+    `stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" ` +
     `aria-hidden="true" focusable="false">${d}</svg>`
   );
 }

@@ -10,7 +10,13 @@ body {
   box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5);
 }
 .login-card h1 { font-size: 1.1rem; margin: 0 0 20px; text-align: center; }
-.login-card img.logo { display: block; margin: 0 auto 16px; max-height: 60px; }
+/* Mesma regra da app: o logótipo ajusta-se sem nunca ficar deformado. */
+.login-card img.logo {
+  display: block; margin: 0 auto 16px;
+  max-height: 60px; max-width: 100%;
+  width: auto; height: auto;
+  object-fit: contain;
+}
 .login-card label { display: flex; flex-direction: column; gap: 6px; font-size: 0.85rem; color: var(--muted); margin-bottom: 14px; }
 .login-card input {
   background: var(--bg); border: 1px solid var(--border); color: var(--text);
