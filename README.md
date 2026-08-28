@@ -228,6 +228,41 @@ disco, como antes —
 Em `localhost` sem configurar `DATA_DIR`, isto fica em `data/` dentro do
 projeto.
 
+### Correr num PC da loja, sem internet
+
+Toda a app funciona sem acesso à internet: não usa tipos de letra nem
+bibliotecas externas, e o motor de leitura de etiquetas (com o dicionário
+de inglês) fica instalado localmente. Sem `MONGODB_URI` nem
+`CLOUDINARY_URL` definidos, os dados vão para `data/` e os ficheiros para
+`data/storage/`, ao lado do projeto.
+
+**A definição mais importante para a segurança:** deixe `TRUST_PROXY`
+**por definir**. Ligado, qualquer pessoa na rede pode escrever o cabeçalho
+`X-Forwarded-For` à mão e, trocando-o a cada tentativa, adivinhar a senha
+sem nunca ser bloqueada — as travas por IP deixam de valer. Só se ativa
+(`TRUST_PROXY=1`) quando há mesmo um proxy à frente, como no Render.
+
+Ao arrancar, o servidor diz em que modo está e onde está a guardar, para
+não haver dúvidas.
+
+**Pontos a ter em conta neste cenário:**
+
+- **A câmara só abre em `https://` ou em `localhost`.** No próprio PC
+  funciona; a partir de um telemóvel pela rede da loja
+  (`http://192.168.1.50:3000`) o browser bloqueia a câmara. Pode carregar
+  fotos já tiradas na mesma. Para tirar na hora é preciso um certificado
+  (ex: `mkcert`) e servir por HTTPS.
+- **Sem HTTPS, o cookie de sessão viaja em claro na rede local.** Numa rede
+  fechada da loja é um risco pequeno; numa rede partilhada com clientes,
+  não. Servir por HTTPS resolve, e é também o que faz a câmara funcionar.
+- **Não abra a porta no router.** A app é feita para uso interno. Se
+  precisar de aceder de fora, use uma VPN em vez de expor o servidor
+  diretamente à internet.
+- **As cópias de segurança passam a ser suas.** Copie a pasta `data/` com
+  regularidade — é lá que está tudo.
+- **Mantenha o sistema atualizado.** Um Windows sem suporte é a maior
+  fragilidade do conjunto, muito antes de qualquer detalhe da app.
+
 ---
 
 ## Versão simples para um telemóvel (`docs/`)

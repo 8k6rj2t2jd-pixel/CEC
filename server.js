@@ -41,7 +41,22 @@ if (!process.env.SESSION_SECRET) {
 const SESSION_SECRET = process.env.SESSION_SECRET || crypto.randomBytes(32).toString('hex');
 
 const app = express();
-app.set('trust proxy', 1);
+
+// Confiar (ou nao) no cabecalho "X-Forwarded-For" para saber de que IP vem
+// cada pedido. Isto decide se as travas por IP - o bloqueio ao fim de 5
+// tentativas de login e todos os limites de pedidos - funcionam mesmo.
+//
+//  - Atras de um proxy (Render, Nginx, Cloudflare): tem de se confiar, senao
+//    todos os pedidos parecem vir do mesmo sitio (o do proxy) e uma pessoa
+//    sozinha esgotava os limites de todos.
+//  - Ligado diretamente (um PC da loja a servir a rede): NAO se pode confiar.
+//    Quem quer que seja pode escrever esse cabecalho a mao e, trocando-o a
+//    cada tentativa, adivinhar a senha sem nunca ser bloqueado.
+//
+// Por isso o valor seguro e o de nao confiar, e so se ativa de proposito com
+// TRUST_PROXY=1 em quem esta mesmo atras de um proxy.
+const TRUST_PROXY = process.env.TRUST_PROXY === '1' || process.env.TRUST_PROXY === 'true';
+app.set('trust proxy', TRUST_PROXY ? 1 : false);
 app.disable('x-powered-by');
 
 // Comprime as respostas (HTML/CSS/JS/JSON) antes de enviar - torna a
@@ -1212,4 +1227,21 @@ app.get('/api/export.xlsx', async (req, res) => {
 
 app.listen(PORT, () => {
   console.log(`Catalogo de pecas disponivel em http://localhost:${PORT}`);
+  console.log(
+    TRUST_PROXY
+      ? 'Modo: atras de um proxy (TRUST_PROXY=1). As travas por IP usam o X-Forwarded-For.'
+      : 'Modo: ligado diretamente. As travas por IP usam a ligacao real.\n' +
+        '  Se puser isto atras de um proxy (Render, Nginx, Cloudflare), defina TRUST_PROXY=1,\n' +
+        '  senao os limites por IP contam todos os pedidos como se viessem do mesmo sitio.'
+  );
+  console.log(
+    store.useMongo
+      ? 'Dados: MongoDB.'
+      : `Dados: ficheiros locais em ${DATA_DIR} (sem MongoDB configurado).`
+  );
+  console.log(
+    images.useCloud
+      ? 'Fotos e ficheiros: Cloudinary.'
+      : `Fotos e ficheiros: pasta local ${STORAGE_DIR} (sem Cloudinary configurado).`
+  );
 });
