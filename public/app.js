@@ -13,7 +13,7 @@ if (logoImg) logoImg.addEventListener('error', () => logoImg.remove(), { once: t
 // segurança (CSP) que impedem carregar seja o que for de fora.
 const ICON_PATHS = {
   close: '<path d="M18 6 6 18M6 6l12 12"/>',
-  check: '<circle cx="12" cy="12" r="9"/><path d="m8.5 12.2 2.4 2.4 4.6-4.9"/>',
+  check: '<path d="M20 6.5 9.2 17.3 4 12.1"/>',
   box: '<path d="M20.5 8.4v7.2a1.8 1.8 0 0 1-.9 1.6l-6.7 3.7a1.8 1.8 0 0 1-1.8 0l-6.7-3.7a1.8 1.8 0 0 1-.9-1.6V8.4a1.8 1.8 0 0 1 .9-1.6l6.7-3.7a1.8 1.8 0 0 1 1.8 0l6.7 3.7a1.8 1.8 0 0 1 .9 1.6Z"/><path d="m3.8 7.5 8.2 4.6 8.2-4.6"/><path d="M12 21V12.1"/>',
   folder: '<path d="M3 7.5A1.5 1.5 0 0 1 4.5 6h4.2a1.5 1.5 0 0 1 1.2.6l1 1.3a1.5 1.5 0 0 0 1.2.6h6.4A1.5 1.5 0 0 1 20 10v7.5a1.5 1.5 0 0 1-1.5 1.5h-14A1.5 1.5 0 0 1 3 17.5Z"/>',
   folderOpen: '<path d="M3 17.5V7.5A1.5 1.5 0 0 1 4.5 6h4.2a1.5 1.5 0 0 1 1.2.6l1 1.3a1.5 1.5 0 0 0 1.2.6h6.4A1.5 1.5 0 0 1 20 10v1"/><path d="m3 17.5 2-6a1.5 1.5 0 0 1 1.4-1h14a1.5 1.5 0 0 1 1.4 2l-1.8 5.5a1.5 1.5 0 0 1-1.4 1H4.5A1.5 1.5 0 0 1 3 17.5Z"/>',
@@ -610,8 +610,10 @@ function renderPartCard(part) {
       ${part.ref1 ? `<div>Ref1: ${escapeHtml(part.ref1)}</div>` : ''}
       ${part.ref2 ? `<div>Ref2: ${escapeHtml(part.ref2)}</div>` : ''}
     </div>
-    ${part.box ? `<div class="box-badge">${icon('box', 13)} Caixa ${escapeHtml(part.box)}</div>` : ''}
-    ${part.itemNumber ? `<div class="num-badge">Nº ${escapeHtml(part.itemNumber)}</div>` : ''}
+    ${part.box || part.itemNumber ? `<div class="part-badges">
+      ${part.box ? `<span class="box-badge">${icon('box', 13)} Caixa ${escapeHtml(part.box)}</span>` : ''}
+      ${part.itemNumber ? `<span class="box-badge num-badge">Nº ${escapeHtml(part.itemNumber)}</span>` : ''}
+    </div>` : ''}
   `;
 
   const qtyRow = document.createElement('div');
