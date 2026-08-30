@@ -492,6 +492,11 @@ app.get('/api/parts', async (req, res) => {
     );
   }
 
+  // "private" = so o browser de quem pediu pode guardar, nunca um servidor
+  // intermedio. "no-cache" = guarda, mas pergunta sempre ao servidor se mudou;
+  // se nao mudou vem um "304" de meia duzia de bytes em vez do catalogo todo.
+  // Nunca se mostram dados velhos e poupa-se a maior parte do trafego.
+  res.set('Cache-Control', 'private, no-cache');
   res.json(parts);
 });
 

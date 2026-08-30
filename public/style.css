@@ -234,6 +234,26 @@ main { padding: 16px; max-width: 720px; margin: 0 auto; }
 }
 .filters input { flex: 1; min-width: 180px; }
 
+/* Roda alaranjada mostrada enquanto o catalogo carrega. */
+.loading-box {
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  padding: 40px 0; color: var(--muted); font-size: 0.9rem;
+}
+.loading-box[hidden] { display: none; }
+.spinner {
+  width: 26px; height: 26px; flex-shrink: 0; border-radius: 50%;
+  border: 3px solid rgba(255, 138, 30, 0.22);
+  border-top-color: var(--orange);
+  animation: spin 0.7s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) {
+  .spinner { animation-duration: 2.4s; }
+}
+
+/* Faixa invisivel no fim da grelha: ao aparecer, desenha mais peças. */
+.parts-sentinel { height: 1px; }
+
 .parts-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 12px; }
 .part-card {
   position: relative;

@@ -503,13 +503,57 @@ function partCategory(part) {
   return part.category || 'centralina';
 }
 
-async function loadParts() {
-  const resp = await fetch('/api/parts');
-  allParts = await resp.json();
-  populateFilterOptions();
-  updateStats();
-  renderParts();
-  renderFilesCatalog();
+const catalogLoading = document.getElementById('catalog-loading');
+const filesCatalogLoading = document.getElementById('files-catalog-loading');
+
+// O catalogo fica guardado depois da primeira vez. Voltar a abrir o separador
+// mostra logo o que ja temos e vai buscar a versao nova por tras, sem roda.
+let partsCarregado = false;
+let partsAPedir = null;
+// Numera os pedidos: se dois se cruzarem, so o mais recente pode escrever no
+// catalogo. Sem isto, um pedido antigo a chegar atrasado apagava dados novos.
+let partsPedidoAtual = 0;
+
+function mostrarRoda(ligada) {
+  catalogLoading.hidden = !ligada;
+  filesCatalogLoading.hidden = !ligada;
+}
+
+async function loadParts({ forcar = false } = {}) {
+  // Ja ha um pedido a decorrer: aproveita-se esse em vez de pedir outra vez.
+  if (partsAPedir && !forcar) return partsAPedir;
+
+  const primeiraVez = !partsCarregado;
+  if (primeiraVez) mostrarRoda(true);
+
+  partsPedidoAtual += 1;
+  const meuPedido = partsPedidoAtual;
+
+  partsAPedir = (async () => {
+    try {
+      const resp = await fetch('/api/parts');
+      if (!resp.ok) throw new Error(`Resposta ${resp.status}`);
+      const dados = await resp.json();
+      if (meuPedido !== partsPedidoAtual) return; // chegou tarde, ja ha outro
+      allParts = dados;
+      partsCarregado = true;
+      populateFilterOptions();
+      updateStats();
+      renderParts();
+      renderFilesCatalog();
+    } catch (err) {
+      console.error('Falha ao carregar o catalogo:', err);
+      if (primeiraVez && meuPedido === partsPedidoAtual) {
+        emptyState.textContent = 'Nao foi possivel carregar o catalogo. Verifique a ligacao e tente de novo.';
+        emptyState.hidden = false;
+      }
+    } finally {
+      if (primeiraVez) mostrarRoda(false);
+      if (meuPedido === partsPedidoAtual) partsAPedir = null;
+    }
+  })();
+
+  return partsAPedir;
 }
 
 function updateStats() {
@@ -541,8 +585,60 @@ function fillSelect(select, values, placeholder) {
   select.value = current;
 }
 
+// No cartao do catalogo nao vale a pena descarregar a foto em tamanho real.
+// Pede-se ao Cloudinary uma versao pequena (largura 400) e no formato mais
+// leve que o telemovel aceitar. Fotos guardadas no proprio servidor ficam
+// como estao - nesse caso ja foram encolhidas antes de serem enviadas.
+function miniatura(url) {
+  if (typeof url !== 'string') return url;
+  if (!url.includes('res.cloudinary.com') || !url.includes('/image/upload/')) return url;
+  return url.replace('/image/upload/', '/image/upload/w_400,c_limit,q_auto,f_auto/');
+}
+
 function partHasPhoto(part) {
   return Boolean(part.images && (part.images.front || part.images.back || part.images.label));
+}
+
+// Quantas peças se desenham de cada vez. Com 1000+ peças, desenhar tudo de
+// uma vez prendia o telemovel varios segundos; assim aparece logo o primeiro
+// ecrã e o resto vai entrando à medida que se desliza a página.
+const PECAS_POR_BLOCO = 48;
+let pecasFiltradas = [];
+let pecasDesenhadas = 0;
+
+const partsSentinel = document.getElementById('parts-sentinel');
+const temObservador = 'IntersectionObserver' in window;
+
+function desenharMaisPecas() {
+  if (pecasDesenhadas >= pecasFiltradas.length) return false;
+  const ate = Math.min(pecasDesenhadas + PECAS_POR_BLOCO, pecasFiltradas.length);
+  // Um fragmento junta tudo fora da pagina e so encosta ao ecra uma vez.
+  const fragmento = document.createDocumentFragment();
+  for (let i = pecasDesenhadas; i < ate; i += 1) {
+    fragmento.appendChild(renderPartCard(pecasFiltradas[i]));
+  }
+  partsGrid.appendChild(fragmento);
+  pecasDesenhadas = ate;
+  return true;
+}
+
+let observadorPecas = null;
+if (temObservador) {
+  // rootMargin: começa a preparar o bloco seguinte antes de se chegar ao fim,
+  // para que a lista pareça contínua ao deslizar.
+  observadorPecas = new IntersectionObserver(
+    (entradas) => {
+      if (!entradas.some((e) => e.isIntersecting)) return;
+      if (!desenharMaisPecas()) return;
+      // A sentinela pode continuar visível (num ecrã grande, um bloco não
+      // chega para a empurrar para baixo). Voltar a observá-la força uma nova
+      // verificação; se já estiver fora do ecrã, nada acontece.
+      observadorPecas.unobserve(partsSentinel);
+      observadorPecas.observe(partsSentinel);
+    },
+    { rootMargin: '600px 0px' }
+  );
+  observadorPecas.observe(partsSentinel);
 }
 
 function renderParts() {
@@ -570,11 +666,22 @@ function renderParts() {
   });
 
   partsGrid.innerHTML = '';
+  emptyState.textContent = 'Ainda não há peças guardadas.';
   emptyState.hidden = filtered.length > 0;
 
-  filtered.forEach((part) => {
-    partsGrid.appendChild(renderPartCard(part));
-  });
+  pecasFiltradas = filtered;
+  pecasDesenhadas = 0;
+  desenharMaisPecas();
+
+  if (temObservador) {
+    // Reinicia a sentinela: se ela ficar visível depois deste primeiro bloco,
+    // o observador desenha o seguinte, e assim por diante.
+    observadorPecas.unobserve(partsSentinel);
+    observadorPecas.observe(partsSentinel);
+  } else {
+    // Navegador antigo sem IntersectionObserver: desenha tudo, como antes.
+    while (desenharMaisPecas());
+  }
 }
 
 function renderPartCard(part) {
@@ -584,8 +691,13 @@ function renderPartCard(part) {
   const photoKeys = ['front', 'back', 'label'].filter((key) => part.images && part.images[key] && part.images[key].url);
   if (photoKeys.length) {
     const img = document.createElement('img');
-    img.src = part.images[photoKeys[0]].url;
+    img.src = miniatura(part.images[photoKeys[0]].url);
     img.alt = part.partType;
+    // Só descarrega a foto quando o cartão se aproxima do ecrã.
+    img.loading = 'lazy';
+    img.decoding = 'async';
+    img.width = 320;
+    img.height = 240;
     img.addEventListener('click', () => openLightbox(part));
     card.appendChild(img);
     if (photoKeys.length > 1) {
@@ -1044,7 +1156,7 @@ editForm.addEventListener('submit', async (e) => {
     }
 
     closeEditModal();
-    await loadParts();
+    await loadParts({ forcar: true });
   } catch (err) {
     editError.hidden = false;
     editError.textContent = err.message;
@@ -1166,7 +1278,7 @@ document.getElementById('btn-fill-item-numbers').addEventListener('click', async
     if (data.outOfStock) partes.push(`${data.outOfStock} sem lugar na caixa (fora de stock)`);
     if (data.notFound) partes.push(`${data.notFound} sem correspondência na folha`);
     fillItemNumbersStatus.textContent = `Concluído: ${partes.join(', ')}.`;
-    await loadParts();
+    await loadParts({ forcar: true });
   } catch (err) {
     fillItemNumbersStatus.classList.add('error');
     fillItemNumbersStatus.textContent = err.message;
